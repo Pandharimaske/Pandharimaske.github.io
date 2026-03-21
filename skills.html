@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Skills — Pandharinath Maske</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+  .skills-intro {
+    max-width: 600px;
+    color: #8a8070;
+    font-size: 1rem;
+    margin-bottom: 4rem;
+  }
+
+  .skills-block {
+    margin-bottom: 5rem;
+  }
+
+  .skills-block-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .skills-block-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.6rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.3s;
+  }
+
+  .skill-card:hover::before { transform: scaleY(1); }
+  .skill-card:hover { border-color: rgba(232,160,32,0.3); transform: translateX(4px); }
+
+  .skill-card-name {
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+    font-weight: 400;
+  }
+
+  .skill-card-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* Big tag cloud section */
+  .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  /* Areas of interest */
+  .interests-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .interest-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1.2rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 0.85rem;
+    color: var(--text);
+    transition: all 0.25s;
+  }
+
+  .interest-pill:hover {
+    border-color: rgba(232,160,32,0.4);
+    color: var(--accent);
+  }
+
+  .interest-dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  @media (max-width: 768px) {
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">PM_</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="skills.html" class="active">Skills</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="achievements.html">Achievements</a></li>
+  </ul>
+</nav>
+
+<section class="page-section">
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <h1 class="section-title">Technical Skills</h1>
+    <div class="section-line"></div>
+  </div>
+
+  <p class="skills-intro reveal">
+    Full-stack AI engineering — from writing optimised DSA in C++ to deploying production LLM pipelines on Docker. Here's what's in the toolkit.
+  </p>
+
+  <!-- Languages -->
+  <div class="skills-block">
+    <div class="skills-block-title reveal">Languages</div>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-card-name">Python</div>
+        <div class="skill-card-sub">Primary · ML, APIs, scripting</div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-name">C++</div>
+        <div class="skill-card-sub">DSA, competitive programming</div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-name">C</div>
+        <div class="skill-card-sub">Systems, low-level</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ML / DL -->
+  <div class="skills-block">
+    <div class="skills-block-title reveal">ML / DL Frameworks</div>
+    <div class="tag-cloud reveal">
+      <span class="tag">PyTorch</span>
+      <span class="tag">TensorFlow</span>
+      <span class="tag">Scikit-learn</span>
+      <span class="tag">HuggingFace Transformers</span>
+    </div>
+  </div>
+
+  <!-- LLM & Agentic AI -->
+  <div class="skills-block">
+    <div class="skills-block-title reveal">LLM & Agentic AI</div>
+    <div class="tag-cloud reveal">
+      <span class="tag">LangChain</span>
+      <span class="tag">LangGraph</span>
+      <span class="tag">LlamaIndex</span>
+      <span class="tag">RAG</span>
+      <span class="tag">Multi-Agent Systems</span>
+      <span class="tag">Prompt Engineering</span>
+      <span class="tag">n8n</span>
+    </div>
+  </div>
+
+  <!-- Vector DBs -->
+  <div class="skills-block">
+    <div class="skills-block-title reveal">Vector Databases</div>
+    <div class="tag-cloud reveal">
+      <span class="tag">Pinecone</span>
+      <span class="tag">ChromaDB</span>
+      <span class="tag">FAISS</span>
+    </div>
+  </div>
+
+  <!-- APIs & Frameworks -->
+  <div class="skills-block">
+    <div class="skills-block-title reveal">APIs & Frameworks</div>
+    <div class="tag-cloud reveal">
+      <span class="tag">FastAPI</span>
+      <span class="tag">REST APIs</span>
+      <span class="tag">Gradio</span>
+    </div>
+  </div>
+
+  <!-- Databases -->
+  <div class="skills-block">
+    <div class="skills-block-title reveal">Databases</div>
+    <div class="tag-cloud reveal">
+      <span class="tag">MySQL</span>
+      <span class="tag">MongoDB</span>
+      <span class="tag">Supabase</span>
+    </div>
+  </div>
+
+  <!-- MLOps & Tools -->
+  <div class="skills-block">
+    <div class="skills-block-title reveal">MLOps & Tools</div>
+    <div class="tag-cloud reveal">
+      <span class="tag">Docker</span>
+      <span class="tag">Git</span>
+      <span class="tag">MLflow</span>
+      <span class="tag">Weights & Biases</span>
+      <span class="tag">Render</span>
+      <span class="tag">AWS (basics)</span>
+    </div>
+  </div>
+
+  <!-- Areas of Interest -->
+  <div class="skills-block">
+    <div class="skills-block-title reveal">Areas of Interest</div>
+    <div class="interests-row reveal">
+      <div class="interest-pill"><span class="interest-dot"></span>Large Language Models</div>
+      <div class="interest-pill"><span class="interest-dot"></span>Retrieval-Augmented Generation</div>
+      <div class="interest-pill"><span class="interest-dot"></span>Multi-Agent Systems</div>
+      <div class="interest-pill"><span class="interest-dot"></span>MLOps</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-name">Pandharinath Maske</div>
+  <div class="footer-contact">
+    <a href="mailto:pandharinath1437@gmail.com">pandharinath1437@gmail.com</a>
+    &nbsp;·&nbsp; +91-8010922929
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

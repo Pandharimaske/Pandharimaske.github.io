@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pandharinath Maske — AI Engineer</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-text {
+    position: absolute;
+    right: -60px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 22vw;
+    font-weight: 900;
+    font-style: italic;
+    color: rgba(232,160,32,0.03);
+    line-height: 1;
+    pointer-events: none;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  .hero-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--accent);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.2s;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.2rem, 7.5vw, 7rem);
+    font-weight: 900;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.4s;
+  }
+
+  .hero-name .line2 {
+    display: block;
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .hero-desc {
+    max-width: 560px;
+    font-size: 1.05rem;
+    color: #a09880;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.6s;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.8s;
+  }
+
+  .hero-meta {
+    position: absolute;
+    bottom: 3.5rem;
+    left: 4rem;
+    display: flex;
+    gap: 3.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 1s;
+  }
+
+  .meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
+
+  .meta-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--muted);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .meta-value { font-size: 0.95rem; color: var(--text); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 3rem;
+    right: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 1.2s;
+  }
+
+  .scroll-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    writing-mode: vertical-rl;
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  /* About strip */
+  .about-strip {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 5rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .about-left h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    line-height: 1.2;
+  }
+
+  .about-left h2 em { color: var(--accent); font-style: italic; }
+
+  .about-left p {
+    color: #8a8070;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .quick-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.4rem 1.6rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s;
+    group: true;
+  }
+
+  .quick-link:hover {
+    border-color: rgba(232,160,32,0.4);
+    transform: translateY(-3px);
+  }
+
+  .ql-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .ql-title {
+    font-size: 1rem;
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  .ql-arrow {
+    font-size: 1.2rem;
+    color: var(--accent);
+    transition: transform 0.25s;
+  }
+
+  .quick-link:hover .ql-arrow { transform: translate(3px, -3px); }
+
+  @media (max-width: 768px) {
+    #hero { padding: 0 1.5rem; }
+    .hero-meta { left: 1.5rem; gap: 1.5rem; bottom: 5rem; }
+    .hero-scroll { display: none; }
+    .about-strip { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 2rem; }
+    .about-right { grid-template-columns: 1fr; }
+    .hero-bg-text { font-size: 40vw; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">PM_</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="achievements.html">Achievements</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg-text">AI</div>
+  <div class="hero-tag">Available for Opportunities &nbsp;·&nbsp; Pune, India</div>
+  <h1 class="hero-name">
+    Pandharinath
+    <span class="line2">Maske.</span>
+  </h1>
+  <p class="hero-desc">
+    Building intelligent systems at the intersection of LLMs, multi-agent architectures, and RAG pipelines. CS (AI) student at VIIT Pune · Published researcher · LeetCode 1647.
+  </p>
+  <div class="hero-btns">
+    <a href="https://github.com/YOUR_GITHUB" class="btn btn-primary" target="_blank">↗ GitHub</a>
+    <a href="https://linkedin.com/in/YOUR_LINKEDIN" class="btn btn-ghost" target="_blank">LinkedIn</a>
+    <a href="https://leetcode.com/YOUR_LEETCODE" class="btn btn-ghost" target="_blank">LeetCode</a>
+    <a href="mailto:pandharinath1437@gmail.com" class="btn btn-ghost">Email</a>
+  </div>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="meta-label">Degree</span>
+      <span class="meta-value">B.Tech CS (AI)</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">CGPA</span>
+      <span class="meta-value">7.76 / 10</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Batch</span>
+      <span class="meta-value">2023 – 2027</span>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span class="scroll-label">Scroll</span>
+  </div>
+</section>
+
+<div class="about-strip">
+  <div class="about-left reveal">
+    <h2>Engineer. Researcher. <em>Builder.</em></h2>
+    <p>I work at the frontier of LLMs and agentic AI — designing systems that don't just respond, but reason, retrieve, and act.</p>
+    <p>From multi-agent orchestration with LangGraph to semantic search and RAG pipelines, I build things end-to-end — from architecture to Docker deployment.</p>
+    <p>Presented research at ETFI-2026 on AI-powered interview preparation systems.</p>
+  </div>
+  <div class="about-right reveal">
+    <a href="skills.html" class="quick-link">
+      <div>
+        <div class="ql-label">Section 01</div>
+        <div class="ql-title">Skills</div>
+      </div>
+      <span class="ql-arrow">↗</span>
+    </a>
+    <a href="projects.html" class="quick-link">
+      <div>
+        <div class="ql-label">Section 02</div>
+        <div class="ql-title">Projects</div>
+      </div>
+      <span class="ql-arrow">↗</span>
+    </a>
+    <a href="achievements.html" class="quick-link">
+      <div>
+        <div class="ql-label">Section 03</div>
+        <div class="ql-title">Achievements</div>
+      </div>
+      <span class="ql-arrow">↗</span>
+    </a>
+    <a href="mailto:pandharinath1437@gmail.com" class="quick-link">
+      <div>
+        <div class="ql-label">Get in touch</div>
+        <div class="ql-title">Contact</div>
+      </div>
+      <span class="ql-arrow">↗</span>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-name">Pandharinath Maske</div>
+  <div class="footer-contact">
+    <a href="mailto:pandharinath1437@gmail.com">pandharinath1437@gmail.com</a>
+    &nbsp;·&nbsp; +91-8010922929
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 100);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

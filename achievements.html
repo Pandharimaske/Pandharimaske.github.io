@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Achievements — Pandharinath Maske</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+  .achieve-intro {
+    max-width: 600px;
+    color: #8a8070;
+    font-size: 1rem;
+    margin-bottom: 4rem;
+  }
+
+  /* Stats row */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 5rem;
+  }
+
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    transform: scaleX(0);
+    transition: transform 0.4s;
+  }
+
+  .stat-card:hover::before { transform: scaleX(1); }
+  .stat-card:hover { border-color: rgba(232,160,32,0.35); transform: translateY(-4px); }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .stat-sub {
+    font-size: 0.8rem;
+    color: #6a6050;
+    margin-top: 0.4rem;
+  }
+
+  /* Block title */
+  .block-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .block-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Certs grid */
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-bottom: 5rem;
+  }
+
+  .cert-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem 1.6rem;
+    transition: all 0.25s;
+  }
+
+  .cert-card:hover {
+    border-color: rgba(232,160,32,0.3);
+    transform: translateY(-3px);
+  }
+
+  .cert-issuer {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .cert-name {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  /* Interest tags */
+  .interests-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 5rem;
+  }
+
+  .interest-item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.8rem 1.4rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 0.88rem;
+    color: var(--text);
+    transition: all 0.25s;
+  }
+
+  .interest-item:hover {
+    border-color: rgba(232,160,32,0.4);
+    color: var(--accent);
+  }
+
+  .interest-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; flex-shrink: 0; }
+
+  /* Contact strip */
+  .contact-strip {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-left h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-left h2 em { color: var(--accent); font-style: italic; }
+
+  .contact-left p {
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+
+  .contact-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  @media (max-width: 768px) {
+    .stats-row { grid-template-columns: 1fr; }
+    .certs-grid { grid-template-columns: 1fr; }
+    .contact-strip { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">PM_</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="achievements.html" class="active">Achievements</a></li>
+  </ul>
+</nav>
+
+<section class="page-section">
+  <div class="section-header reveal">
+    <span class="section-num">03</span>
+    <h1 class="section-title">Achievements</h1>
+    <div class="section-line"></div>
+  </div>
+
+  <p class="achieve-intro reveal">
+    Numbers that tell the story — competitive programming, published research, and learning that never stopped.
+  </p>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-card reveal">
+      <div class="stat-number">700+</div>
+      <div class="stat-label">LeetCode Problems</div>
+      <div class="stat-sub">Solved across all difficulty levels</div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-number">1647</div>
+      <div class="stat-label">Highest Rating</div>
+      <div class="stat-sub">40+ contests participated</div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-number">ETFI</div>
+      <div class="stat-label">Published Paper</div>
+      <div class="stat-sub">International Conference 2026</div>
+    </div>
+  </div>
+
+  <!-- Certifications -->
+  <div class="block-title reveal">Certifications</div>
+  <div class="certs-grid">
+    <div class="cert-card reveal">
+      <div class="cert-issuer">Andrew Ng · Stanford</div>
+      <div class="cert-name">Machine Learning Specialization</div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-issuer">Andrew Ng · DeepLearning.AI</div>
+      <div class="cert-name">Deep Learning Specialization</div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-issuer">Hugging Face</div>
+      <div class="cert-name">AI Agents Fundamentals</div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-issuer">LangChain Academy</div>
+      <div class="cert-name">Introduction to LangGraph</div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-issuer">Hugging Face</div>
+      <div class="cert-name">Fundamentals of MCP</div>
+    </div>
+  </div>
+
+  <!-- Areas of Interest -->
+  <div class="block-title reveal">Areas of Interest</div>
+  <div class="interests-grid reveal">
+    <div class="interest-item"><span class="interest-dot"></span>Large Language Models</div>
+    <div class="interest-item"><span class="interest-dot"></span>Retrieval-Augmented Generation</div>
+    <div class="interest-item"><span class="interest-dot"></span>Multi-Agent Systems</div>
+    <div class="interest-item"><span class="interest-dot"></span>MLOps</div>
+    <div class="interest-item"><span class="interest-dot"></span>Competitive Programming</div>
+  </div>
+
+  <!-- Contact CTA -->
+  <div class="contact-strip reveal">
+    <div class="contact-left">
+      <h2>Let's <em>connect.</em></h2>
+      <p>Open to internships, collaborations, and interesting problems.</p>
+    </div>
+    <div class="contact-btns">
+      <a href="mailto:pandharinath1437@gmail.com" class="btn btn-primary">↗ Email Me</a>
+      <a href="https://linkedin.com/in/YOUR_LINKEDIN" class="btn btn-ghost" target="_blank">LinkedIn</a>
+      <a href="https://github.com/YOUR_GITHUB" class="btn btn-ghost" target="_blank">GitHub</a>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <div class="footer-name">Pandharinath Maske</div>
+  <div class="footer-contact">
+    <a href="mailto:pandharinath1437@gmail.com">pandharinath1437@gmail.com</a>
+    &nbsp;·&nbsp; +91-8010922929
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 100);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

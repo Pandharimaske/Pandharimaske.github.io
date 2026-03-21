@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Projects — Pandharinath Maske</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+  .projects-intro {
+    max-width: 600px;
+    color: #8a8070;
+    font-size: 1rem;
+    margin-bottom: 4rem;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 2rem;
+    margin-bottom: 5rem;
+  }
+
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2.4rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s ease;
+  }
+
+  .project-card:hover::after { transform: scaleX(1); }
+  .project-card:hover { border-color: rgba(232,160,32,0.35); transform: translateY(-6px); }
+
+  .project-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 900;
+    font-style: italic;
+    color: rgba(232,160,32,0.08);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    user-select: none;
+  }
+
+  .project-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.14em;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+  }
+
+  .project-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 1.2rem;
+    color: var(--text);
+  }
+
+  .project-highlights {
+    list-style: none;
+    margin-bottom: 1.5rem;
+    flex: 1;
+  }
+
+  .project-highlights li {
+    font-size: 0.85rem;
+    color: #8a8070;
+    padding: 0.4rem 0;
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.6;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .project-highlights li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.7rem;
+  }
+
+  .project-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+  }
+
+  .project-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(232,160,32,0.2);
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .project-link:hover {
+    background: rgba(232,160,32,0.08);
+    border-color: rgba(232,160,32,0.5);
+  }
+
+  /* Research section */
+  .research-section-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .research-section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .research-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2.5rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 3rem;
+    align-items: start;
+    transition: all 0.3s;
+  }
+
+  .research-card:hover {
+    border-color: rgba(232,160,32,0.35);
+  }
+
+  .research-badge {
+    background: rgba(232,160,32,0.08);
+    border: 1px solid rgba(232,160,32,0.25);
+    border-radius: 4px;
+    padding: 1.2rem 1.8rem;
+    text-align: center;
+    min-width: 110px;
+  }
+
+  .research-badge .year {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .research-badge .badge-type {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    color: var(--muted);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-top: 0.4rem;
+  }
+
+  .research-venue {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.7rem;
+  }
+
+  .research-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+  }
+
+  .research-desc {
+    font-size: 0.88rem;
+    color: #8a8070;
+    margin-bottom: 1rem;
+    line-height: 1.7;
+  }
+
+  .research-authors {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 768px) {
+    .projects-grid { grid-template-columns: 1fr; }
+    .research-card { grid-template-columns: 1fr; gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">PM_</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="achievements.html">Achievements</a></li>
+  </ul>
+</nav>
+
+<section class="page-section">
+  <div class="section-header reveal">
+    <span class="section-num">02</span>
+    <h1 class="section-title">Projects</h1>
+    <div class="section-line"></div>
+  </div>
+
+  <p class="projects-intro reveal">
+    Production-grade AI systems — from multi-agent orchestration to semantic search. Every project deployed, not just built.
+  </p>
+
+  <div class="projects-grid">
+
+    <div class="project-card reveal">
+      <div class="project-num">01</div>
+      <div class="project-date">June 2025</div>
+      <div class="project-title">Multi-Agent Conversational AI System with Agentic RAG</div>
+      <ul class="project-highlights">
+        <li>Production-ready multi-agent system using LangGraph orchestrating specialized agents for order processing and menu queries</li>
+        <li>Agentic RAG pipeline with Pinecone vector DB for accurate retrieval from structured knowledge base</li>
+        <li>Dual-memory architecture — short-term conversation history + persistent user profiles in Supabase</li>
+        <li>FastAPI backend with real-time streaming, Docker containerized, deployed on Render</li>
+      </ul>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">LangGraph</span>
+        <span class="stack-tag">FastAPI</span>
+        <span class="stack-tag">Pinecone</span>
+        <span class="stack-tag">Docker</span>
+        <span class="stack-tag">Supabase</span>
+        <span class="stack-tag">Render</span>
+      </div>
+      <div class="project-links">
+        <a href="YOUR_GITHUB_LINK" class="project-link" target="_blank">↗ GitHub</a>
+        <a href="YOUR_LIVE_DEMO_LINK" class="project-link" target="_blank">↗ Live Demo</a>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-num">02</div>
+      <div class="project-date">May 2025</div>
+      <div class="project-title">Semantic Search Engine for Book Recommendations</div>
+      <ul class="project-highlights">
+        <li>Transformer-based embeddings for semantic understanding of natural language queries</li>
+        <li>ChromaDB with cosine distance metrics for vector similarity search</li>
+        <li>Interactive Gradio interface with real-time ranked recommendations and similarity scores</li>
+      </ul>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">LangChain</span>
+        <span class="stack-tag">ChromaDB</span>
+        <span class="stack-tag">Gradio</span>
+        <span class="stack-tag">Transformers</span>
+      </div>
+      <div class="project-links">
+        <a href="YOUR_GITHUB_LINK" class="project-link" target="_blank">↗ GitHub</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Research -->
+  <div class="research-section-title reveal">Research & Publications</div>
+  <div class="research-card reveal">
+    <div class="research-badge">
+      <div class="year">2026</div>
+      <div class="badge-type">Paper</div>
+    </div>
+    <div>
+      <div class="research-venue">ETFI-2026 · DES Pune University · International Conference on Emerging Technologies & Future Innovations</div>
+      <div class="research-title">Agentic AI for Interview Preparation</div>
+      <p class="research-desc">
+        Proposed an AI-powered interview preparation system integrating resume analysis, multi-turn simulations, and personalized feedback loops. Demonstrated how agentic architectures can adapt dynamically to candidate knowledge gaps.
+      </p>
+      <div class="research-authors">
+        Co-authored with Shubham Dahane, Aayush Bokde, Pranav Dhebe, Pranjal Pandit &nbsp;·&nbsp; Guided by Dr. Anuradha Yenkikar
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <div class="footer-name">Pandharinath Maske</div>
+  <div class="footer-contact">
+    <a href="mailto:pandharinath1437@gmail.com">pandharinath1437@gmail.com</a>
+    &nbsp;·&nbsp; +91-8010922929
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 100);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
