@@ -11,14 +11,21 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23e8a020'>P</text></svg>"/>
 <title>Projects — Pandharinath Maske</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="style.css"/>
 <script>
-  // Initialize theme before rendering
+  // Initialize theme BEFORE any rendering
   (function() {
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+    function getTheme() {
+      const saved = localStorage.getItem('theme');
+      if (saved) return saved;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    
+    const theme = getTheme();
     document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.classList.toggle('dark', theme === 'dark');
   })();
 </script>
 <style>
@@ -301,7 +308,7 @@
     <li><a href="blog.html">Blog</a></li>
     <li><a href="achievements.html">Achievements</a></li>
   </ul>
-  <button class="theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="Toggle dark/light theme">🌙</button>
+  <button class="theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="Toggle dark/light theme"><i class="fas fa-moon"></i></button>
 </nav>
 
 <section class="page-section">
@@ -421,11 +428,11 @@
     &nbsp;·&nbsp; +91-8010922929
   </div>
   <div class="footer-socials">
-    <a href="https://github.com/Pandharimaske" target="_blank" rel="noopener noreferrer" title="GitHub">🐙</a>
-    <a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener noreferrer" title="LinkedIn">💼</a>
-    <a href="https://x.com/PMaske20171" target="_blank" rel="noopener noreferrer" title="X / Twitter">𝕏</a>
-    <a href="https://www.instagram.com/pandhari__7/" target="_blank" rel="noopener noreferrer" title="Instagram">📸</a>
-    <a href="https://leetcode.com/u/PandhariMaske1437/" target="_blank" rel="noopener noreferrer" title="LeetCode">💻</a>
+    <a href="https://github.com/Pandharimaske" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    <a href="https://x.com/PMaske20171" target="_blank" rel="noopener noreferrer" title="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+    <a href="https://www.instagram.com/pandhari__7/" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="https://leetcode.com/u/PandhariMaske1437/" target="_blank" rel="noopener noreferrer" title="LeetCode"><i class="fas fa-code"></i></a>
   </div>
 </footer>
 

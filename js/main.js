@@ -2,19 +2,46 @@
 const themeToggle = document.getElementById('theme-toggle');
 const htmlElement = document.documentElement;
 
-function setTheme(theme) {
-  htmlElement.setAttribute('data-theme', theme);
-  localStorage.setItem('theme', theme);
-  if (themeToggle) {
-    themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+function updateThemeIcon(theme) {
+  if (!themeToggle) return;
+  const icon = themeToggle.querySelector('i');
+  if (icon) {
+    if (theme === 'dark') {
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+    } else {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    }
   }
 }
 
-themeToggle?.addEventListener('click', () => {
-  const currentTheme = htmlElement.getAttribute('data-theme') || 'dark';
-  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  setTheme(newTheme);
-});
+function setTheme(theme) {
+  htmlElement.setAttribute('data-theme', theme);
+  htmlElement.classList.toggle('dark', theme === 'dark');
+  localStorage.setItem('theme', theme);
+  updateThemeIcon(theme);
+  console.log('Theme changed to:', theme); // Debug
+}
+
+// Initialize icon on page load
+function initializeThemeIcon() {
+  const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
+  updateThemeIcon(currentTheme);
+}
+
+if (themeToggle) {
+  themeToggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    console.log('Toggling theme from', currentTheme, 'to', newTheme); // Debug
+    setTheme(newTheme);
+  });
+  
+  // Initialize icon after short delay to ensure DOM is ready
+  setTimeout(initializeThemeIcon, 100);
+}
 
 // Scroll reveal
 const revealObserver = new IntersectionObserver((entries) => {
