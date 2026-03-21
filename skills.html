@@ -3,67 +3,122 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="Technical skills of Pandharinath Maske — LangGraph, RAG, PyTorch, FastAPI, Docker and more."/>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%23f0a500' font-family='serif' font-style='italic'>P</text></svg>"/>
 <title>Skills — Pandharinath Maske</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%23f0a500' font-family='serif' font-style='italic'>P</text></svg>"/>
 <link rel="stylesheet" href="css/style.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <script>(function(){const t=localStorage.getItem('pm-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
 <style>
-.skills-intro { max-width: 560px; color: var(--text2); font-size: 0.97rem; margin-bottom: 4rem; line-height: 1.85; }
-.skill-block { margin-bottom: 4.5rem; }
+.skills-intro { max-width:580px; color:var(--text2); font-size:0.97rem; margin-bottom:1.5rem; line-height:1.85; }
 
-/* Confidence bar cards */
-.conf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1rem; }
-
-.conf-card {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 1.4rem 1.6rem; transition: all 0.3s;
+/* ── NETWORK LEGEND ── */
+.net-legend {
+  display:flex; gap:1.5rem; flex-wrap:wrap;
+  margin-bottom:1.5rem;
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.62rem; color:var(--muted); letter-spacing:0.08em;
 }
-.conf-card:hover { border-color: var(--border2); transform: translateY(-3px); box-shadow: 0 8px 24px var(--glow); }
+.net-legend-item { display:flex; align-items:center; gap:0.5rem; }
+.nl-dot { width:10px;height:10px;border-radius:50%; }
 
-.conf-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.7rem; }
-.conf-name { font-size: 0.9rem; color: var(--text); }
-.conf-score { font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--gold); font-weight:500; }
-
-.conf-bar-bg { height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow:hidden; margin-bottom:0.4rem; }
-html[data-theme="light"] .conf-bar-bg { background: rgba(0,0,0,0.08); }
-.conf-bar-fill { height:100%; background: linear-gradient(90deg, var(--purple), var(--gold), var(--gold2)); border-radius:2px; width:0%; transition: width 1.3s cubic-bezier(0.4,0,0.2,1); }
-
-.conf-sub { font-family:'JetBrains Mono',monospace; font-size:0.58rem; color:var(--muted); letter-spacing:0.06em; }
-
-/* Lang cards */
-.lang-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 1rem; }
-
-.lang-card {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 1.6rem; transition: all 0.3s; position: relative; overflow: hidden;
+/* ── MAIN NETWORK CANVAS ── */
+#skill-net-wrap {
+  position:relative;
+  width:100%; height:520px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  margin-bottom:2rem;
 }
-.lang-card::before {
-  content:''; position:absolute; left:0; top:0; bottom:0; width:3px;
-  background: linear-gradient(to bottom, var(--gold), var(--purple));
-  transform:scaleY(0); transform-origin:top; transition:transform 0.35s;
+
+#skill-canvas { width:100%; height:100%; }
+
+/* Floating tooltip */
+#skill-tooltip {
+  position:absolute;
+  background: rgba(8,8,14,0.95);
+  border:1px solid var(--border2);
+  border-radius:var(--radius);
+  padding:0.8rem 1.1rem;
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.68rem;
+  color:var(--text);
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 0.2s;
+  max-width:220px;
+  z-index:10;
+  line-height:1.6;
+  backdrop-filter:blur(12px);
 }
-.lang-card:hover::before { transform:scaleY(1); }
-.lang-card:hover { border-color: var(--border2); transform: translateX(5px); }
 
-.lang-icon { font-size:1.4rem; margin-bottom:0.7rem; }
-.lang-name { font-size:0.9rem; color:var(--text); margin-bottom:0.2rem; }
-.lang-use  { font-family:'JetBrains Mono',monospace; font-size:0.58rem; color:var(--muted); letter-spacing:0.06em; }
+#skill-tooltip .tt-name { color:var(--gold); font-size:0.78rem; font-weight:600; margin-bottom:0.3rem; }
+#skill-tooltip .tt-layer { color:var(--purple2); font-size:0.6rem; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:0.4rem; }
+#skill-tooltip .tt-conf { display:flex; align-items:center; gap:0.5rem; margin-top:0.4rem; }
+#skill-tooltip .tt-bar { flex:1; height:3px; background:rgba(255,255,255,0.08); border-radius:2px; overflow:hidden; }
+#skill-tooltip .tt-fill { height:100%; background:linear-gradient(90deg,var(--purple),var(--gold)); border-radius:2px; }
 
-.tag-cloud { display:flex; flex-wrap:wrap; gap:0.6rem; }
+/* ── LAYER LABELS ── */
+.layer-labels {
+  display:flex; justify-content:space-around;
+  margin-bottom:3rem;
+  padding:0 1rem;
+}
 
-.interest-row { display:flex; flex-wrap:wrap; gap:0.8rem; }
-.int-pill {
+.layer-lbl {
+  display:flex; flex-direction:column; align-items:center; gap:0.4rem;
+  text-align:center;
+}
+
+.ll-num { font-family:'JetBrains Mono',monospace; font-size:0.55rem; color:var(--gold); letter-spacing:0.18em; }
+.ll-name { font-size:0.82rem; color:var(--text2); }
+.ll-count { font-family:'JetBrains Mono',monospace; font-size:0.58rem; color:var(--muted); }
+
+/* ── SELECTED SKILL PANEL ── */
+#skill-panel {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:1.8rem 2rem;
+  display:none;
+  margin-bottom:2rem;
+  animation:fadeUp 0.3s ease;
+}
+
+#skill-panel.visible { display:flex; gap:2rem; align-items:flex-start; flex-wrap:wrap; }
+
+.sp-left { flex:1; min-width:200px; }
+.sp-name { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; color:var(--gold); margin-bottom:0.3rem; }
+.sp-layer { font-family:'JetBrains Mono',monospace; font-size:0.62rem; color:var(--purple2); letter-spacing:0.16em; text-transform:uppercase; margin-bottom:0.8rem; }
+.sp-desc { font-size:0.88rem; color:var(--text2); line-height:1.75; margin-bottom:1rem; }
+.sp-conf-row { display:flex; align-items:center; gap:1rem; }
+.sp-conf-label { font-family:'JetBrains Mono',monospace; font-size:0.62rem; color:var(--muted); width:80px; }
+.sp-conf-bar { flex:1; height:5px; background:rgba(255,255,255,0.06); border-radius:3px; overflow:hidden; }
+.sp-conf-fill { height:100%; background:linear-gradient(90deg,var(--purple),var(--gold),var(--gold2)); border-radius:3px; transition:width 0.8s cubic-bezier(0.4,0,0.2,1); }
+.sp-conf-val { font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:var(--gold); font-weight:600; }
+
+.sp-right { display:flex; flex-direction:column; gap:0.6rem; min-width:180px; }
+.sp-used-label { font-family:'JetBrains Mono',monospace; font-size:0.58rem; color:var(--muted); letter-spacing:0.14em; text-transform:uppercase; margin-bottom:0.2rem; }
+.sp-project-pill {
   display:flex; align-items:center; gap:0.6rem;
-  padding:0.65rem 1.3rem;
-  background:var(--card); border:1px solid var(--border);
-  border-radius:100px; font-size:0.85rem; color:var(--text); transition:all 0.25s;
+  padding:0.55rem 0.9rem;
+  background:rgba(240,165,0,0.06);
+  border:1px solid rgba(240,165,0,0.15);
+  border-radius:var(--radius);
+  font-size:0.78rem; color:var(--text2);
+  text-decoration:none; transition:all 0.2s;
 }
-.int-pill:hover { border-color:var(--border2); color:var(--gold); }
-.int-dot { width:5px; height:5px; background:var(--gold); border-radius:50%; box-shadow:0 0 6px var(--gold); }
+.sp-project-pill:hover { border-color:var(--gold); color:var(--gold); }
+.sp-project-pill i { font-size:0.7rem; color:var(--gold); }
 
-@media(max-width:600px){ .conf-grid{grid-template-columns:1fr} .lang-grid{grid-template-columns:1fr 1fr} }
+.sp-close {
+  background:transparent; border:1px solid var(--border);
+  color:var(--muted); border-radius:var(--radius);
+  padding:0.3rem 0.7rem; font-family:'JetBrains Mono',monospace;
+  font-size:0.6rem; cursor:none; transition:all 0.2s; letter-spacing:0.08em;
+}
+.sp-close:hover { border-color:var(--gold); color:var(--gold); }
 </style>
 </head>
 <body>
@@ -87,72 +142,62 @@ html[data-theme="light"] .conf-bar-bg { background: rgba(0,0,0,0.08); }
 <section class="page-section">
   <div class="section-header reveal">
     <span class="section-num">01</span>
-    <h1 class="section-title">Technical Skills</h1>
+    <h1 class="section-title">Skills Network</h1>
     <div class="section-line"></div>
   </div>
 
-  <p class="skills-intro reveal">Full-stack AI engineering — from optimised DSA in C++ to deploying production LLM pipelines. Confidence scores reflect project depth and real-world usage.</p>
+  <p class="skills-intro reveal">Each node is a skill. Each layer is a category. Connections show how they work together in my projects. <strong style="color:var(--gold)">Click any node</strong> to explore depth, confidence, and where I've used it.</p>
 
-  <div class="skill-block reveal">
-    <div class="block-label">Languages</div>
-    <div class="lang-grid">
-      <div class="lang-card"><div class="lang-icon">🐍</div><div class="lang-name">Python</div><div class="lang-use">ML · APIs · Scripting</div></div>
-      <div class="lang-card"><div class="lang-icon">⚡</div><div class="lang-name">C++</div><div class="lang-use">DSA · Competitive</div></div>
-      <div class="lang-card"><div class="lang-icon">🔧</div><div class="lang-name">C</div><div class="lang-use">Systems · Low-level</div></div>
+  <div class="net-legend reveal">
+    <div class="net-legend-item"><span class="nl-dot" style="background:#f472b6"></span> Languages</div>
+    <div class="net-legend-item"><span class="nl-dot" style="background:#f0a500"></span> LLM & Agentic AI</div>
+    <div class="net-legend-item"><span class="nl-dot" style="background:#a855f7"></span> ML / DL</div>
+    <div class="net-legend-item"><span class="nl-dot" style="background:#67e8f9"></span> Vector DB & APIs</div>
+    <div class="net-legend-item"><span class="nl-dot" style="background:#22c55e"></span> Infra & MLOps</div>
+  </div>
+
+  <!-- Selected skill panel -->
+  <div id="skill-panel">
+    <div class="sp-left">
+      <div class="sp-name" id="sp-name">—</div>
+      <div class="sp-layer" id="sp-layer">—</div>
+      <div class="sp-desc" id="sp-desc">—</div>
+      <div class="sp-conf-row">
+        <span class="sp-conf-label">Confidence</span>
+        <div class="sp-conf-bar"><div class="sp-conf-fill" id="sp-fill" style="width:0%"></div></div>
+        <span class="sp-conf-val" id="sp-val">—</span>
+      </div>
+    </div>
+    <div class="sp-right">
+      <div class="sp-used-label">Used in</div>
+      <div id="sp-projects"></div>
+      <button class="sp-close" id="sp-close" style="margin-top:0.5rem">✕ Close</button>
     </div>
   </div>
 
-  <div class="skill-block">
-    <div class="block-label reveal">LLM & Agentic AI</div>
-    <div class="conf-grid skill-conf-group">
-      <div class="conf-card"><div class="conf-header"><span class="conf-name">LangGraph</span><span class="conf-score">0.97</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="97"></div></div><div class="conf-sub">Multi-agent · State machines · Routing</div></div>
-      <div class="conf-card"><div class="conf-header"><span class="conf-name">LangChain</span><span class="conf-score">0.95</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="95"></div></div><div class="conf-sub">Chains · Tools · Memory</div></div>
-      <div class="conf-card"><div class="conf-header"><span class="conf-name">RAG Pipelines</span><span class="conf-score">0.94</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="94"></div></div><div class="conf-sub">Semantic retrieval · Reranking · Eval</div></div>
-      <div class="conf-card"><div class="conf-header"><span class="conf-name">LlamaIndex</span><span class="conf-score">0.88</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="88"></div></div><div class="conf-sub">Data indexing · Query engines</div></div>
-      <div class="conf-card"><div class="conf-header"><span class="conf-name">Prompt Engineering</span><span class="conf-score">0.92</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="92"></div></div><div class="conf-sub">CoT · Few-shot · System design</div></div>
-      <div class="conf-card"><div class="conf-header"><span class="conf-name">n8n Automation</span><span class="conf-score">0.82</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="82"></div></div><div class="conf-sub">Workflow automation · AI agents</div></div>
+  <!-- Network canvas -->
+  <div id="skill-net-wrap" class="reveal">
+    <canvas id="skill-canvas"></canvas>
+    <div id="skill-tooltip">
+      <div class="tt-name" id="tt-name"></div>
+      <div class="tt-layer" id="tt-layer"></div>
+      <div id="tt-desc" style="margin-bottom:0.3rem"></div>
+      <div class="tt-conf">
+        <span style="color:var(--muted);font-size:0.6rem">conf</span>
+        <div class="tt-bar"><div class="tt-fill" id="tt-fill"></div></div>
+        <span id="tt-val" style="color:var(--gold)"></span>
+      </div>
     </div>
   </div>
 
-  <div class="skill-block">
-    <div class="block-label reveal">ML / DL Frameworks</div>
-    <div class="conf-grid skill-conf-group">
-      <div class="conf-card"><div class="conf-header"><span class="conf-name">PyTorch</span><span class="conf-score">0.91</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="91"></div></div><div class="conf-sub">Neural nets · Training loops · Custom models</div></div>
-      <div class="conf-card"><div class="conf-header"><span class="conf-name">Scikit-learn</span><span class="conf-score">0.93</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="93"></div></div><div class="conf-sub">Classical ML · Pipelines · Eval</div></div>
-      <div class="conf-card"><div class="conf-header"><span class="conf-name">HuggingFace</span><span class="conf-score">0.89</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="89"></div></div><div class="conf-sub">Transformers · Embeddings · Fine-tuning</div></div>
-      <div class="conf-card"><div class="conf-header"><span class="conf-name">TensorFlow</span><span class="conf-score">0.80</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="80"></div></div><div class="conf-sub">Model building · Keras API</div></div>
-    </div>
+  <div class="layer-labels reveal">
+    <div class="layer-lbl"><span class="ll-num">L1</span><span class="ll-name">Languages</span><span class="ll-count">3 nodes</span></div>
+    <div class="layer-lbl"><span class="ll-num">L2</span><span class="ll-name">LLM & Agents</span><span class="ll-count">7 nodes</span></div>
+    <div class="layer-lbl"><span class="ll-num">L3</span><span class="ll-name">ML / DL</span><span class="ll-count">4 nodes</span></div>
+    <div class="layer-lbl"><span class="ll-num">L4</span><span class="ll-name">Vector & APIs</span><span class="ll-count">5 nodes</span></div>
+    <div class="layer-lbl"><span class="ll-num">L5</span><span class="ll-name">Infra & MLOps</span><span class="ll-count">5 nodes</span></div>
   </div>
 
-  <div class="skill-block reveal">
-    <div class="block-label">Vector Databases</div>
-    <div class="tag-cloud">
-      <span class="tag">Pinecone</span>
-      <span class="tag">ChromaDB</span>
-      <span class="tag">FAISS</span>
-    </div>
-  </div>
-
-  <div class="skill-block">
-    <div class="block-label reveal">APIs, Infra & MLOps</div>
-    <div class="conf-grid skill-conf-group">
-      <div class="conf-card"><div class="conf-header"><span class="conf-name">FastAPI</span><span class="conf-score">0.93</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="93"></div></div><div class="conf-sub">REST · Async · Streaming · SSE</div></div>
-      <div class="conf-card"><div class="conf-header"><span class="conf-name">Docker</span><span class="conf-score">0.89</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="89"></div></div><div class="conf-sub">Containers · Compose · Render deploy</div></div>
-      <div class="conf-card"><div class="conf-header"><span class="conf-name">Supabase / Postgres</span><span class="conf-score">0.85</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="85"></div></div><div class="conf-sub">Auth · Realtime · Storage · RLS</div></div>
-      <div class="conf-card"><div class="conf-header"><span class="conf-name">MLflow + W&B</span><span class="conf-score">0.83</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="83"></div></div><div class="conf-sub">Experiment tracking · Versioning · Viz</div></div>
-    </div>
-  </div>
-
-  <div class="skill-block reveal">
-    <div class="block-label">Research Interests</div>
-    <div class="interest-row">
-      <div class="int-pill"><span class="int-dot"></span>Large Language Models</div>
-      <div class="int-pill"><span class="int-dot"></span>Retrieval-Augmented Generation</div>
-      <div class="int-pill"><span class="int-dot"></span>Multi-Agent Systems</div>
-      <div class="int-pill"><span class="int-dot"></span>MLOps & Deployment</div>
-      <div class="int-pill"><span class="int-dot"></span>Competitive Programming</div>
-    </div>
-  </div>
 </section>
 
 <footer>
@@ -173,19 +218,281 @@ html[data-theme="light"] .conf-bar-bg { background: rgba(0,0,0,0.08); }
 <button id="btt"><i class="fas fa-arrow-up"></i></button>
 <script src="js/main.js"></script>
 <script>
-(function(){
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.querySelectorAll('.conf-bar-fill').forEach((bar, i) => {
-          setTimeout(() => { bar.style.width = bar.dataset.w + '%'; }, i * 110);
-        });
-        obs.unobserve(entry.target);
-      }
+// ── SKILL DATA ──────────────────────────────
+const SKILLS = [
+  // Layer 0 — Languages
+  { id:'python',    label:'Python',     layer:0, conf:0.97, color:'#f472b6', desc:'Primary language for all ML, API, and scripting work. Every project I build starts here.', projects:['Coffee Shop AI','Book Recommender','MLOps Pipeline'] },
+  { id:'cpp',       label:'C++',        layer:0, conf:0.88, color:'#f472b6', desc:'Used for DSA, competitive programming. LeetCode 1647 rating built in C++.', projects:['LeetCode 700+'] },
+  { id:'c',         label:'C',          layer:0, conf:0.78, color:'#f472b6', desc:'Systems programming and low-level concepts from coursework.', projects:[] },
+
+  // Layer 1 — LLM & Agents
+  { id:'langgraph',  label:'LangGraph',      layer:1, conf:0.97, color:'#f0a500', desc:'State machine orchestration for multi-agent systems. Core of my Coffee Shop AI project.', projects:['Coffee Shop AI'] },
+  { id:'langchain',  label:'LangChain',      layer:1, conf:0.95, color:'#f0a500', desc:'Chains, tools, memory abstractions. Used in both RAG projects.', projects:['Coffee Shop AI','Book Recommender'] },
+  { id:'rag',        label:'RAG',            layer:1, conf:0.94, color:'#f0a500', desc:'Full retrieval-augmented generation pipelines from scratch — chunking, embedding, retrieval, generation.', projects:['Coffee Shop AI','Book Recommender'] },
+  { id:'llama',      label:'LlamaIndex',     layer:1, conf:0.88, color:'#f0a500', desc:'Data indexing and query engines for complex document retrieval tasks.', projects:[] },
+  { id:'prompt',     label:'Prompting',      layer:1, conf:0.92, color:'#f0a500', desc:'System prompt design, CoT, few-shot, structured output, ReAct patterns.', projects:['Coffee Shop AI','ETFI Paper'] },
+  { id:'n8n',        label:'n8n',            layer:1, conf:0.82, color:'#f0a500', desc:'Workflow automation and AI agent pipelines without code.', projects:[] },
+  { id:'mcp',        label:'MCP',            layer:1, conf:0.80, color:'#f0a500', desc:'Model Context Protocol for connecting AI models to external tools and data sources.', projects:[] },
+
+  // Layer 2 — ML/DL
+  { id:'pytorch',    label:'PyTorch',    layer:2, conf:0.91, color:'#a855f7', desc:'Neural network building, custom training loops, model fine-tuning.', projects:['ETFI Paper'] },
+  { id:'sklearn',    label:'Sklearn',    layer:2, conf:0.93, color:'#a855f7', desc:'Classical ML — pipelines, cross-validation, feature engineering, evaluation.', projects:['MLOps Pipeline'] },
+  { id:'hf',         label:'HuggingFace',layer:2, conf:0.89, color:'#a855f7', desc:'Transformers, tokenizers, sentence-transformers for embeddings in RAG.', projects:['Book Recommender','Coffee Shop AI'] },
+  { id:'tf',         label:'TensorFlow', layer:2, conf:0.80, color:'#a855f7', desc:'Keras API for model prototyping and deep learning coursework.', projects:[] },
+
+  // Layer 3 — Vector & APIs
+  { id:'pinecone',   label:'Pinecone',   layer:3, conf:0.93, color:'#67e8f9', desc:'Production vector database. Used for semantic retrieval in Coffee Shop AI RAG pipeline.', projects:['Coffee Shop AI'] },
+  { id:'chromadb',   label:'ChromaDB',   layer:3, conf:0.90, color:'#67e8f9', desc:'Local vector store for Book Recommender semantic search.', projects:['Book Recommender'] },
+  { id:'faiss',      label:'FAISS',      layer:3, conf:0.82, color:'#67e8f9', desc:'Facebook AI similarity search for fast in-memory vector retrieval.', projects:[] },
+  { id:'fastapi',    label:'FastAPI',    layer:3, conf:0.93, color:'#67e8f9', desc:'Async REST API backend with SSE streaming for real-time chat in Coffee Shop AI.', projects:['Coffee Shop AI'] },
+  { id:'gradio',     label:'Gradio',     layer:3, conf:0.88, color:'#67e8f9', desc:'Rapid ML interface for Book Recommender demo — ranked results with similarity scores.', projects:['Book Recommender'] },
+
+  // Layer 4 — Infra & MLOps
+  { id:'docker',     label:'Docker',     layer:4, conf:0.89, color:'#22c55e', desc:'Containerised all deployments. Coffee Shop AI runs fully Dockerized on Render.', projects:['Coffee Shop AI','MLOps Pipeline'] },
+  { id:'supabase',   label:'Supabase',   layer:4, conf:0.85, color:'#22c55e', desc:'Persistent user profiles and long-term memory storage in Coffee Shop AI.', projects:['Coffee Shop AI'] },
+  { id:'mlflow',     label:'MLflow',     layer:4, conf:0.83, color:'#22c55e', desc:'Experiment tracking, model versioning, artifact management in MLOps pipeline.', projects:['MLOps Pipeline'] },
+  { id:'wandb',      label:'W&B',        layer:4, conf:0.81, color:'#22c55e', desc:'Training visualisation, hyperparameter tracking, gradient monitoring.', projects:['MLOps Pipeline'] },
+  { id:'git',        label:'Git',        layer:4, conf:0.94, color:'#22c55e', desc:'Version control across all projects. GitHub profile: Pandharimaske.', projects:['All Projects'] },
+];
+
+// Edges — which skills activate together
+const EDGES = [
+  ['python','langgraph'],['python','langchain'],['python','rag'],['python','fastapi'],
+  ['python','pytorch'],['python','sklearn'],['python','hf'],
+  ['cpp','python'],
+  ['langgraph','rag'],['langgraph','fastapi'],['langgraph','supabase'],['langgraph','pinecone'],
+  ['langchain','rag'],['langchain','chromadb'],['langchain','hf'],
+  ['rag','pinecone'],['rag','chromadb'],['rag','faiss'],['rag','hf'],
+  ['prompt','langgraph'],['prompt','rag'],
+  ['mcp','langgraph'],
+  ['pytorch','hf'],['pytorch','mlflow'],['pytorch','wandb'],
+  ['sklearn','mlflow'],['sklearn','wandb'],
+  ['hf','chromadb'],['hf','pinecone'],
+  ['fastapi','docker'],['fastapi','supabase'],
+  ['docker','mlflow'],['docker','supabase'],
+  ['mlflow','wandb'],
+  ['gradio','chromadb'],['gradio','hf'],
+  ['llama','rag'],['llama','pinecone'],
+];
+
+// ── CANVAS LAYOUT ──────────────────────────────
+const wrap    = document.getElementById('skill-net-wrap');
+const canvas  = document.getElementById('skill-canvas');
+const ctx     = canvas.getContext('2d');
+const tooltip = document.getElementById('skill-tooltip');
+const panel   = document.getElementById('skill-panel');
+
+let W, H, nodes = {}, hoveredId = null, selectedId = null, animT = 0, raf;
+
+const LAYER_COUNT = 5;
+const NODE_R = 10;
+
+function layoutNodes() {
+  W = canvas.width  = wrap.offsetWidth;
+  H = canvas.height = wrap.offsetHeight;
+
+  const layerX = (li) => (W / (LAYER_COUNT + 1)) * (li + 1);
+
+  SKILLS.forEach(s => {
+    const sameLayer = SKILLS.filter(x => x.layer === s.layer);
+    const ni = sameLayer.indexOf(s);
+    const count = sameLayer.length;
+    const x = layerX(s.layer);
+    const y = H * (ni + 1) / (count + 1);
+    nodes[s.id] = {
+      ...s, x, y,
+      vx: 0, vy: 0,
+      phase: Math.random() * Math.PI * 2,
+    };
+  });
+}
+
+function getConnected(id) {
+  const set = new Set();
+  EDGES.forEach(([a, b]) => {
+    if (a === id) set.add(b);
+    if (b === id) set.add(a);
+  });
+  return set;
+}
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+  animT += 0.012;
+
+  const hov = hoveredId;
+  const sel = selectedId;
+  const activeId = sel || hov;
+  const connected = activeId ? getConnected(activeId) : new Set();
+
+  // ── EDGES ──
+  EDGES.forEach(([a, b]) => {
+    const na = nodes[a], nb = nodes[b];
+    if (!na || !nb) return;
+
+    const isActive = activeId && (a === activeId || b === activeId);
+    const fade = activeId && !isActive ? 0.03 : (isActive ? 0.7 : 0.08);
+
+    ctx.beginPath();
+    ctx.moveTo(na.x, na.y);
+    ctx.lineTo(nb.x, nb.y);
+    ctx.strokeStyle = isActive
+      ? `rgba(240,165,0,${fade})`
+      : `rgba(255,255,255,${fade})`;
+    ctx.lineWidth = isActive ? 1.5 : 0.7;
+    if (isActive) { ctx.shadowBlur = 6; ctx.shadowColor = 'rgba(240,165,0,0.4)'; }
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    // animated signal on active edges
+    if (isActive) {
+      const prog = ((animT * 0.8 + SKILLS.findIndex(s=>s.id===a)*0.3) % 1);
+      const sx = na.x + (nb.x - na.x) * prog;
+      const sy = na.y + (nb.y - na.y) * prog;
+      ctx.beginPath(); ctx.arc(sx, sy, 2.5, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(240,165,0,0.9)`;
+      ctx.shadowBlur = 8; ctx.shadowColor = '#f0a500';
+      ctx.fill(); ctx.shadowBlur = 0;
+    }
+  });
+
+  // ── NODES ──
+  SKILLS.forEach(s => {
+    const n = nodes[s.id];
+    const pulse = (Math.sin(animT * 1.5 + n.phase) + 1) / 2;
+    const isHov = s.id === hov;
+    const isSel = s.id === sel;
+    const isConn = connected.has(s.id);
+    const isDim  = activeId && !isHov && !isSel && !isConn;
+
+    const r = isSel ? NODE_R + 5 : isHov ? NODE_R + 3 : NODE_R;
+    const alpha = isDim ? 0.2 : (isSel || isHov ? 1 : 0.7 + pulse * 0.3);
+
+    // Glow halo
+    if (!isDim) {
+      const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 3.5);
+      grd.addColorStop(0, `${s.color}${Math.round((isSel?0.35:0.15)*255).toString(16).padStart(2,'0')}`);
+      grd.addColorStop(1, `${s.color}00`);
+      ctx.beginPath(); ctx.arc(n.x, n.y, r * 3.5, 0, Math.PI*2);
+      ctx.fillStyle = grd; ctx.fill();
+    }
+
+    // Core circle
+    ctx.beginPath(); ctx.arc(n.x, n.y, r, 0, Math.PI*2);
+    ctx.fillStyle = isDim ? '#111' : `${s.color}${Math.round(alpha*255).toString(16).padStart(2,'0')}`;
+    ctx.strokeStyle = isDim ? 'rgba(255,255,255,0.06)' : s.color;
+    ctx.lineWidth = isSel ? 2.5 : 1.5;
+    if (isSel) { ctx.shadowBlur = 18; ctx.shadowColor = s.color; }
+    ctx.fill(); ctx.stroke(); ctx.shadowBlur = 0;
+
+    // Label
+    if (!isDim || isConn) {
+      ctx.font = `${isSel||isHov?600:400} ${isSel?11:10}px DM Sans, sans-serif`;
+      ctx.fillStyle = isDim ? 'rgba(255,255,255,0.2)' : (isSel ? s.color : 'rgba(232,224,213,0.85)');
+      ctx.textAlign = 'center';
+      ctx.fillText(s.label, n.x, n.y + r + 13);
+    }
+  });
+
+  raf = requestAnimationFrame(draw);
+}
+
+// ── INTERACTION ──────────────────────────────
+function getNodeAt(mx, my) {
+  for (const s of SKILLS) {
+    const n = nodes[s.id];
+    const dist = Math.hypot(mx - n.x, my - n.y);
+    if (dist <= NODE_R + 6) return s;
+  }
+  return null;
+}
+
+canvas.addEventListener('mousemove', (e) => {
+  const r = canvas.getBoundingClientRect();
+  const mx = (e.clientX - r.left) * (W / r.width);
+  const my = (e.clientY - r.top)  * (H / r.height);
+  const hit = getNodeAt(mx, my);
+
+  hoveredId = hit ? hit.id : null;
+
+  if (hit) {
+    canvas.style.cursor = 'none';
+    document.getElementById('tt-name').textContent  = hit.label;
+    document.getElementById('tt-layer').textContent = ['Languages','LLM & Agents','ML / DL','Vector & APIs','Infra & MLOps'][hit.layer];
+    document.getElementById('tt-desc').textContent  = hit.desc;
+    document.getElementById('tt-fill').style.width  = (hit.conf * 100) + '%';
+    document.getElementById('tt-val').textContent   = hit.conf.toFixed(2);
+    tooltip.style.opacity = '1';
+
+    // Position tooltip avoiding edges
+    let tx = e.clientX - r.left + 16;
+    let ty = e.clientY - r.top  - 10;
+    if (tx + 230 > W) tx = e.clientX - r.left - 230;
+    if (ty + 120 > H) ty = H - 130;
+    tooltip.style.left = tx + 'px';
+    tooltip.style.top  = ty + 'px';
+  } else {
+    tooltip.style.opacity = '0';
+  }
+});
+
+canvas.addEventListener('mouseleave', () => {
+  hoveredId = null;
+  tooltip.style.opacity = '0';
+});
+
+canvas.addEventListener('click', (e) => {
+  const r = canvas.getBoundingClientRect();
+  const mx = (e.clientX - r.left) * (W / r.width);
+  const my = (e.clientY - r.top)  * (H / r.height);
+  const hit = getNodeAt(mx, my);
+
+  if (!hit) { selectedId = null; panel.classList.remove('visible'); return; }
+  if (selectedId === hit.id) { selectedId = null; panel.classList.remove('visible'); return; }
+
+  selectedId = hit.id;
+  tooltip.style.opacity = '0';
+
+  // Populate panel
+  document.getElementById('sp-name').textContent  = hit.label;
+  document.getElementById('sp-layer').textContent = ['L1 · Languages','L2 · LLM & Agents','L3 · ML / DL','L4 · Vector & APIs','L5 · Infra & MLOps'][hit.layer];
+  document.getElementById('sp-desc').textContent  = hit.desc;
+  document.getElementById('sp-val').textContent   = hit.conf.toFixed(2);
+  setTimeout(() => {
+    document.getElementById('sp-fill').style.width = (hit.conf * 100) + '%';
+  }, 50);
+
+  const projWrap = document.getElementById('sp-projects');
+  projWrap.innerHTML = '';
+  if (hit.projects.length === 0) {
+    projWrap.innerHTML = '<span style="font-size:0.78rem;color:var(--muted)">Coursework & exploration</span>';
+  } else {
+    hit.projects.forEach(p => {
+      const a = document.createElement('div');
+      a.className = 'sp-project-pill';
+      a.innerHTML = `<i class="fas fa-circle-dot"></i> ${p}`;
+      projWrap.appendChild(a);
     });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.skill-conf-group').forEach(g => obs.observe(g));
-})();
+  }
+
+  panel.classList.add('visible');
+  panel.scrollIntoView({ behavior:'smooth', block:'nearest' });
+});
+
+document.getElementById('sp-close').addEventListener('click', () => {
+  selectedId = null;
+  panel.classList.remove('visible');
+});
+
+// ── INIT ──────────────────────────────────────
+function init() {
+  layoutNodes();
+  cancelAnimationFrame(raf);
+  draw();
+}
+
+window.addEventListener('resize', init);
+init();
 </script>
 </body>
 </html>

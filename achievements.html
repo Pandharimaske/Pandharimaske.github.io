@@ -3,127 +3,255 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="Achievements of Pandharinath Maske — LeetCode 1647, 700+ problems, ETFI-2026 publication, certifications."/>
-<meta property="og:title" content="Achievements — Pandharinath Maske"/>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%23e8a020' font-family='serif' font-style='italic'>P</text></svg>"/>
 <title>Achievements — Pandharinath Maske</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%23f0a500' font-family='serif' font-style='italic'>P</text></svg>"/>
 <link rel="stylesheet" href="css/style.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <script>(function(){const t=localStorage.getItem('pm-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
 <style>
-.achieve-intro { max-width: 560px; color: var(--muted); font-size: 0.98rem; margin-bottom: 4rem; line-height: 1.8; }
+.achieve-intro { max-width:580px; color:var(--text2); font-size:0.97rem; margin-bottom:3rem; line-height:1.85; }
 
-.block-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem; color: var(--accent);
-  letter-spacing: 0.22em; text-transform: uppercase;
-  margin-bottom: 1.4rem;
-  display: flex; align-items: center; gap: 1rem;
-}
-.block-label::after { content:''; flex:1; height:1px; background:var(--border); }
-
-/* Stats */
-.stats-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem; margin-bottom: 5rem;
+/* ── TRAINING RUN CARD ── */
+.training-card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  margin-bottom:2.5rem;
 }
 
-.stat-card {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 2.5rem 2rem; text-align: center;
-  transition: all 0.3s; position: relative; overflow: hidden;
+.tc-header {
+  padding:1.4rem 2rem;
+  border-bottom:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;
 }
 
-.stat-card::before {
-  content: '';
-  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  transform: scaleX(0); transition: transform 0.4s;
+.tc-title-wrap { display:flex; flex-direction:column; gap:0.3rem; }
+.tc-label { font-family:'JetBrains Mono',monospace; font-size:0.58rem; color:var(--gold); letter-spacing:0.2em; text-transform:uppercase; }
+.tc-title { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; }
+
+.tc-metrics { display:flex; gap:1rem; flex-wrap:wrap; }
+
+.tc-metric {
+  display:flex; flex-direction:column; align-items:center; gap:0.15rem;
+  padding:0.6rem 1rem;
+  background:rgba(240,165,0,0.05);
+  border:1px solid rgba(240,165,0,0.12);
+  border-radius:var(--radius);
+  min-width:70px;
 }
 
-.stat-card:hover::before { transform: scaleX(1); }
-.stat-card:hover { border-color: rgba(232,160,32,0.35); transform: translateY(-4px); }
+.tm-val { font-family:'JetBrains Mono',monospace; font-size:1.1rem; color:var(--gold); font-weight:600; line-height:1; }
+.tm-lbl { font-family:'JetBrains Mono',monospace; font-size:0.5rem; color:var(--muted); letter-spacing:0.14em; text-transform:uppercase; text-align:center; }
 
-.stat-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 3.2rem; font-weight: 900; color: var(--accent);
-  line-height: 1; margin-bottom: 0.5rem;
+.tc-body { padding:1.5rem 2rem; }
+
+/* ── JOURNEY CHART (the main showpiece) ── */
+#journey-wrap {
+  position:relative;
+  width:100%; height:340px;
+  margin-bottom:1rem;
 }
 
-.stat-lbl {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.62rem; color: var(--muted);
-  letter-spacing: 0.18em; text-transform: uppercase;
+#journey-canvas { width:100%; height:100%; }
+
+.journey-legend {
+  display:flex; gap:1.5rem; flex-wrap:wrap;
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.6rem; color:var(--muted); letter-spacing:0.08em;
+  margin-bottom:1.5rem;
 }
 
-.stat-sub { font-size: 0.78rem; color: var(--muted); margin-top: 0.35rem; opacity: 0.8; }
+.jl-item { display:flex; align-items:center; gap:0.4rem; }
+.jl-line { width:20px; height:2px; border-radius:1px; }
 
-/* Certs */
-.certs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: 1rem; margin-bottom: 5rem;
+/* Hover tooltip on chart */
+#journey-tooltip {
+  position:absolute;
+  background:rgba(8,8,14,0.95);
+  border:1px solid var(--border2);
+  border-radius:var(--radius);
+  padding:0.7rem 1rem;
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.66rem;
+  color:var(--text);
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 0.15s;
+  z-index:10;
+  backdrop-filter:blur(10px);
+  min-width:160px;
 }
 
-.cert-card {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 1.4rem 1.6rem;
-  transition: all 0.25s;
+.jt-title { color:var(--gold); font-size:0.72rem; font-weight:600; margin-bottom:0.4rem; }
+.jt-row { display:flex; justify-content:space-between; gap:1.5rem; margin-bottom:0.15rem; }
+.jt-key { color:var(--muted); }
+.jt-val { color:var(--text); }
+
+/* ── CHECKPOINTS (milestone events on timeline) ── */
+.checkpoints {
+  display:flex; gap:0; margin-bottom:3rem;
+  position:relative;
 }
 
-.cert-card:hover { border-color: rgba(232,160,32,0.3); transform: translateY(-3px); }
-
-.cert-issuer {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem; color: var(--accent);
-  letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.45rem;
+.checkpoints::before {
+  content:'';
+  position:absolute;
+  left:0; right:0; top:18px;
+  height:1px;
+  background:linear-gradient(90deg, transparent, var(--border2), transparent);
 }
 
-.cert-name { font-size: 0.88rem; color: var(--text); line-height: 1.4; }
-
-/* Interests */
-.interests-row { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 5rem; }
-
-.int-pill {
-  display: flex; align-items: center; gap: 0.6rem;
-  padding: 0.7rem 1.3rem;
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 100px; font-size: 0.85rem; color: var(--text);
-  transition: all 0.25s;
+.checkpoint {
+  flex:1; display:flex; flex-direction:column; align-items:center; gap:0.6rem;
+  position:relative;
+  cursor:none;
 }
 
-.int-pill:hover { border-color: rgba(232,160,32,0.4); color: var(--accent); }
-.int-dot { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; }
+.cp-dot {
+  width:36px; height:36px;
+  border-radius:50%;
+  background:var(--card);
+  border:2px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.9rem;
+  transition:all 0.3s;
+  position:relative; z-index:1;
+}
+
+.checkpoint:hover .cp-dot {
+  border-color:var(--gold);
+  background:rgba(240,165,0,0.12);
+  transform:scale(1.2);
+  box-shadow:0 0 16px rgba(240,165,0,0.3);
+}
+
+.cp-label {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.58rem; color:var(--muted); letter-spacing:0.1em;
+  text-transform:uppercase; text-align:center;
+  transition:color 0.3s;
+}
+
+.checkpoint:hover .cp-label { color:var(--gold); }
+
+.cp-date {
+  font-size:0.75rem; color:var(--text2); text-align:center;
+  font-weight:500;
+}
+
+/* ── STAT CARDS (styled as model eval metrics) ── */
+.eval-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
+  gap:1rem;
+  margin-bottom:3rem;
+}
+
+.eval-card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:1.6rem 1.8rem;
+  transition:all 0.3s;
+  position:relative; overflow:hidden;
+}
+
+.eval-card::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg, var(--purple), var(--gold));
+  transform:scaleX(0); transform-origin:left;
+  transition:transform 0.4s;
+}
+
+.eval-card:hover::before { transform:scaleX(1); }
+.eval-card:hover { border-color:var(--border2); transform:translateY(-3px); }
+
+.ec-metric {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.56rem; color:var(--gold); letter-spacing:0.18em;
+  text-transform:uppercase; margin-bottom:0.4rem;
+}
+
+.ec-val {
+  font-family:'Playfair Display',serif;
+  font-size:2.2rem; font-weight:900; color:var(--text);
+  line-height:1; margin-bottom:0.3rem;
+}
+
+.ec-desc { font-size:0.78rem; color:var(--muted); line-height:1.5; }
+
+/* ── CERTS (as training data sources) ── */
+.training-data-label {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.6rem; color:var(--gold);
+  letter-spacing:0.22em; text-transform:uppercase;
+  margin-bottom:1.2rem;
+  display:flex; align-items:center; gap:1rem;
+}
+.training-data-label::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,var(--border2),transparent); }
+
+.cert-rows { display:flex; flex-direction:column; gap:0.7rem; margin-bottom:3rem; }
+
+.cert-row {
+  display:flex; align-items:center; gap:1rem;
+  padding:1rem 1.4rem;
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius); transition:all 0.25s;
+}
+
+.cert-row:hover { border-color:var(--border2); transform:translateX(4px); }
+
+.cr-icon {
+  width:32px; height:32px;
+  background:rgba(240,165,0,0.08);
+  border:1px solid rgba(240,165,0,0.18);
+  border-radius:var(--radius);
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.8rem; color:var(--gold); flex-shrink:0;
+}
+
+.cr-info { flex:1; }
+.cr-name { font-size:0.88rem; color:var(--text); margin-bottom:0.15rem; }
+.cr-issuer { font-family:'JetBrains Mono',monospace; font-size:0.6rem; color:var(--muted); letter-spacing:0.06em; }
+
+.cr-badge {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.55rem; color:var(--green);
+  background:rgba(34,197,94,0.08);
+  border:1px solid rgba(34,197,94,0.2);
+  border-radius:100px; padding:0.2rem 0.6rem;
+  letter-spacing:0.1em; text-transform:uppercase; white-space:nowrap;
+}
 
 /* CTA */
 .cta-strip {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 3rem;
-  display: flex; justify-content: space-between; align-items: center;
-  gap: 2rem; flex-wrap: wrap;
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius); padding:2.5rem 2rem;
+  display:flex; justify-content:space-between; align-items:center;
+  gap:2rem; flex-wrap:wrap;
 }
 
-.cta-h {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.6rem; font-weight: 700; margin-bottom: 0.4rem;
-}
-.cta-h em { color: var(--accent); font-style: italic; }
-.cta-sub { font-size: 0.88rem; color: var(--muted); }
-.cta-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+.cta-h { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; margin-bottom:0.4rem; }
+.cta-h em { color:var(--gold); font-style:italic; }
+.cta-sub { font-size:0.88rem; color:var(--text2); }
+.cta-btns { display:flex; gap:1rem; flex-wrap:wrap; }
 
-@media (max-width: 700px) {
-  .stats-row { grid-template-columns: 1fr; }
-  .certs-grid { grid-template-columns: 1fr 1fr; }
-  .cta-strip { flex-direction: column; align-items: flex-start; }
+@media(max-width:700px){
+  .eval-grid{grid-template-columns:1fr 1fr}
+  .cta-strip{flex-direction:column;align-items:flex-start}
+  .tc-header{flex-direction:column;align-items:flex-start}
+  .checkpoints{flex-wrap:wrap;gap:1rem}
+  .checkpoints::before{display:none}
 }
 </style>
 </head>
 <body>
+<div id="cursor"></div><div id="cursor-ring"></div><div id="scroll-progress"></div>
 
 <nav>
-  <a class="nav-logo" href="index.html">PM_</a>
+  <a class="nav-logo" href="index.html"><span class="nav-logo-dot"></span>PM_</a>
   <ul class="nav-center">
     <li><a href="index.html">Home</a></li>
     <li><a href="skills.html">Skills</a></li>
@@ -133,94 +261,319 @@
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div class="nav-right">
-    <button class="theme-btn" id="theme-btn" title="Toggle theme"><i class="fas fa-moon"></i></button>
+    <button class="theme-btn" id="theme-btn"><i class="fas fa-moon"></i></button>
   </div>
 </nav>
 
 <section class="page-section">
   <div class="section-header reveal">
     <span class="section-num">03</span>
-    <h1 class="section-title">Achievements</h1>
+    <h1 class="section-title">Training Run</h1>
     <div class="section-line"></div>
   </div>
 
-  <p class="achieve-intro reveal">Numbers that tell the story — competitive programming, published research, and learning that never stopped.</p>
+  <p class="achieve-intro reveal">Every career is a training run. This one started in 2023 and is still converging. Hover the chart to read the checkpoints.</p>
 
-  <div class="stats-row reveal-stagger">
-    <div class="stat-card">
-      <div class="stat-num">700+</div>
-      <div class="stat-lbl">LeetCode Problems</div>
-      <div class="stat-sub">All difficulty levels</div>
+  <!-- ── JOURNEY TRAINING CHART ── -->
+  <div class="training-card reveal">
+    <div class="tc-header">
+      <div class="tc-title-wrap">
+        <span class="tc-label">model: pandharinath_maske · optimizer: curiosity · epochs: 3yrs</span>
+        <span class="tc-title">Learning Curve — 2023 → 2026</span>
+      </div>
+      <div class="tc-metrics">
+        <div class="tc-metric"><span class="tm-val">1647</span><span class="tm-lbl">Peak Rating</span></div>
+        <div class="tc-metric"><span class="tm-val">700+</span><span class="tm-lbl">LC Solved</span></div>
+        <div class="tc-metric"><span class="tm-val">ETFI</span><span class="tm-lbl">Published</span></div>
+        <div class="tc-metric"><span class="tm-val">3</span><span class="tm-lbl">AI Systems</span></div>
+      </div>
     </div>
-    <div class="stat-card">
-      <div class="stat-num">1647</div>
-      <div class="stat-lbl">Highest Rating</div>
-      <div class="stat-sub">40+ contests</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-num">ETFI</div>
-      <div class="stat-lbl">Published Paper</div>
-      <div class="stat-sub">International Conference 2026</div>
+    <div class="tc-body">
+      <div id="journey-wrap">
+        <canvas id="journey-canvas"></canvas>
+        <div id="journey-tooltip">
+          <div class="jt-title" id="jt-title"></div>
+          <div class="jt-row"><span class="jt-key">Skills</span><span class="jt-val" id="jt-skills"></span></div>
+          <div class="jt-row"><span class="jt-key">LeetCode</span><span class="jt-val" id="jt-lc"></span></div>
+          <div class="jt-row"><span class="jt-key">Projects</span><span class="jt-val" id="jt-proj"></span></div>
+        </div>
+      </div>
+      <div class="journey-legend">
+        <div class="jl-item"><span class="jl-line" style="background:#f0a500"></span> Skill level</div>
+        <div class="jl-item"><span class="jl-line" style="background:#a855f7"></span> LeetCode rating</div>
+        <div class="jl-item"><span class="jl-line" style="background:#22c55e;border-top:1px dashed #22c55e"></span> Project output</div>
+        <div class="jl-item"><span style="width:8px;height:8px;background:#f0a500;border-radius:50%;display:inline-block;box-shadow:0 0 6px #f0a500"></span> Checkpoint</div>
+      </div>
     </div>
   </div>
 
-  <div class="block-label reveal">Certifications</div>
-  <div class="certs-grid reveal-stagger">
-    <div class="cert-card">
-      <div class="cert-issuer">Andrew Ng · Stanford</div>
-      <div class="cert-name">Machine Learning Specialization</div>
+  <!-- ── MILESTONE CHECKPOINTS ── -->
+  <div class="checkpoints reveal-stagger">
+    <div class="checkpoint"><div class="cp-dot">🎓</div><div class="cp-date">Aug 2023</div><div class="cp-label">Enrolled<br>VIIT</div></div>
+    <div class="checkpoint"><div class="cp-dot">⚡</div><div class="cp-date">Jan 2024</div><div class="cp-label">First 100<br>LeetCode</div></div>
+    <div class="checkpoint"><div class="cp-dot">🤖</div><div class="cp-date">Jun 2024</div><div class="cp-label">First ML<br>Project</div></div>
+    <div class="checkpoint"><div class="cp-dot">📦</div><div class="cp-date">Oct 2024</div><div class="cp-label">First Docker<br>Deploy</div></div>
+    <div class="checkpoint"><div class="cp-dot">🧠</div><div class="cp-date">Feb 2025</div><div class="cp-label">LangChain<br>Deep Dive</div></div>
+    <div class="checkpoint"><div class="cp-dot">🚀</div><div class="cp-date">May 2025</div><div class="cp-label">Book Rec<br>Shipped</div></div>
+    <div class="checkpoint"><div class="cp-dot">🤝</div><div class="cp-date">Jun 2025</div><div class="cp-label">Coffee AI<br>Production</div></div>
+    <div class="checkpoint"><div class="cp-dot">📄</div><div class="cp-date">Feb 2026</div><div class="cp-label">ETFI-2026<br>Published</div></div>
+  </div>
+
+  <!-- ── EVAL METRICS ── -->
+  <div class="block-label reveal">Evaluation Metrics</div>
+  <div class="eval-grid reveal-stagger">
+    <div class="eval-card">
+      <div class="ec-metric">accuracy</div>
+      <div class="ec-val">700+</div>
+      <div class="ec-desc">LeetCode problems solved across all difficulty levels</div>
     </div>
-    <div class="cert-card">
-      <div class="cert-issuer">Andrew Ng · DeepLearning.AI</div>
-      <div class="cert-name">Deep Learning Specialization</div>
+    <div class="eval-card">
+      <div class="ec-metric">peak_score</div>
+      <div class="ec-val">1647</div>
+      <div class="ec-desc">Highest LeetCode contest rating · 40+ contests participated</div>
     </div>
-    <div class="cert-card">
-      <div class="cert-issuer">Hugging Face</div>
-      <div class="cert-name">AI Agents Fundamentals</div>
+    <div class="eval-card">
+      <div class="ec-metric">publications</div>
+      <div class="ec-val">ETFI</div>
+      <div class="ec-desc">International Conference · DES Pune University · 2026</div>
     </div>
-    <div class="cert-card">
-      <div class="cert-issuer">LangChain Academy</div>
-      <div class="cert-name">Introduction to LangGraph</div>
+    <div class="eval-card">
+      <div class="ec-metric">deployed</div>
+      <div class="ec-val">3+</div>
+      <div class="ec-desc">Production AI systems — shipped, containerized, live</div>
     </div>
-    <div class="cert-card">
-      <div class="cert-issuer">Hugging Face</div>
-      <div class="cert-name">Fundamentals of MCP</div>
+    <div class="eval-card">
+      <div class="ec-metric">cgpa</div>
+      <div class="ec-val">7.76</div>
+      <div class="ec-desc">B.Tech CS (AI) · VIIT Pune · Batch 2023–2027</div>
+    </div>
+    <div class="eval-card">
+      <div class="ec-metric">certifications</div>
+      <div class="ec-val">5</div>
+      <div class="ec-desc">Stanford, DeepLearning.AI, HuggingFace, LangChain Academy</div>
     </div>
   </div>
 
-  <div class="block-label reveal">Areas of Interest</div>
-  <div class="interests-row reveal">
-    <div class="int-pill"><span class="int-dot"></span>Large Language Models</div>
-    <div class="int-pill"><span class="int-dot"></span>Retrieval-Augmented Generation</div>
-    <div class="int-pill"><span class="int-dot"></span>Multi-Agent Systems</div>
-    <div class="int-pill"><span class="int-dot"></span>MLOps</div>
-    <div class="int-pill"><span class="int-dot"></span>Competitive Programming</div>
+  <!-- ── CERTS AS TRAINING DATA ── -->
+  <div class="training-data-label reveal">Training Data Sources</div>
+  <div class="cert-rows reveal">
+    <div class="cert-row">
+      <div class="cr-icon"><i class="fas fa-graduation-cap"></i></div>
+      <div class="cr-info">
+        <div class="cr-name">Machine Learning Specialization</div>
+        <div class="cr-issuer">Andrew Ng · Stanford University</div>
+      </div>
+      <span class="cr-badge">✓ Completed</span>
+    </div>
+    <div class="cert-row">
+      <div class="cr-icon"><i class="fas fa-brain"></i></div>
+      <div class="cr-info">
+        <div class="cr-name">Deep Learning Specialization</div>
+        <div class="cr-issuer">Andrew Ng · DeepLearning.AI</div>
+      </div>
+      <span class="cr-badge">✓ Completed</span>
+    </div>
+    <div class="cert-row">
+      <div class="cr-icon"><i class="fas fa-robot"></i></div>
+      <div class="cr-info">
+        <div class="cr-name">AI Agents Fundamentals</div>
+        <div class="cr-issuer">Hugging Face</div>
+      </div>
+      <span class="cr-badge">✓ Completed</span>
+    </div>
+    <div class="cert-row">
+      <div class="cr-icon"><i class="fas fa-diagram-project"></i></div>
+      <div class="cr-info">
+        <div class="cr-name">Introduction to LangGraph</div>
+        <div class="cr-issuer">LangChain Academy</div>
+      </div>
+      <span class="cr-badge">✓ Completed</span>
+    </div>
+    <div class="cert-row">
+      <div class="cr-icon"><i class="fas fa-plug"></i></div>
+      <div class="cr-info">
+        <div class="cr-name">Fundamentals of MCP</div>
+        <div class="cr-issuer">Hugging Face</div>
+      </div>
+      <span class="cr-badge">✓ Completed</span>
+    </div>
   </div>
 
+  <!-- CTA -->
   <div class="cta-strip reveal">
     <div>
-      <div class="cta-h">Let's <em>connect.</em></div>
-      <div class="cta-sub">Open to internships, collaborations, and interesting problems.</div>
+      <div class="cta-h">Model still <em>training.</em></div>
+      <div class="cta-sub">Open to internships, collaborations, and hard problems.</div>
     </div>
     <div class="cta-btns">
       <a href="contact.html" class="btn btn-primary"><i class="fas fa-envelope"></i> Contact Me</a>
-      <a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" class="btn btn-ghost" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> LinkedIn</a>
-      <a href="https://github.com/Pandharimaske" class="btn btn-ghost" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+      <a href="projects.html" class="btn btn-ghost"><i class="fas fa-rocket"></i> See Projects</a>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="footer-name">Pandharinath Maske © 2026</div>
+  <div class="footer-left">
+    <span class="footer-name">Pandharinath Maske © 2026</span>
+    <span class="footer-tagline">Building intelligent systems · Pune, India</span>
+  </div>
   <ul class="footer-socials">
     <li><a href="https://github.com/Pandharimaske" target="_blank" rel="noopener"><i class="fab fa-github"></i></a></li>
     <li><a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a></li>
+    <li><a href="https://x.com/PMaske20171" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a></li>
+    <li><a href="https://www.instagram.com/pandhari__7/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a></li>
     <li><a href="https://leetcode.com/u/PandhariMaske1437/" target="_blank" rel="noopener"><i class="fas fa-code"></i></a></li>
     <li><a href="mailto:pandharinath1437@gmail.com"><i class="fas fa-envelope"></i></a></li>
   </ul>
 </footer>
 
-<button id="btt" title="Back to top"><i class="fas fa-arrow-up"></i></button>
+<button id="btt"><i class="fas fa-arrow-up"></i></button>
 <script src="js/main.js"></script>
+<script>
+// ── JOURNEY CHART ─────────────────────────────
+(function(){
+  const wrap    = document.getElementById('journey-wrap');
+  const canvas  = document.getElementById('journey-canvas');
+  const ctx     = canvas.getContext('2d');
+  const tooltip = document.getElementById('journey-tooltip');
+
+  // Real data points — his actual journey
+  const EPOCHS = [
+    { label:'Aug 2023',  t:0,    skill:0.10, lc:0.05, proj:0.00, event:'Started VIIT · CS (AI)',      skills:'C, Python basics', lc_str:'—',    proj_str:'0' },
+    { label:'Oct 2023',  t:0.07, skill:0.18, lc:0.12, proj:0.00, event:'First DSA grind begins',       skills:'C++, arrays, DP',  lc_str:'~50',  proj_str:'0' },
+    { label:'Jan 2024',  t:0.14, skill:0.28, lc:0.22, proj:0.05, event:'100 LC problems hit',          skills:'Python, graphs',   lc_str:'100',  proj_str:'1' },
+    { label:'Apr 2024',  t:0.22, skill:0.38, lc:0.35, proj:0.10, event:'ML coursework (Andrew Ng)',    skills:'ML, NumPy, pandas',lc_str:'200',  proj_str:'1' },
+    { label:'Jun 2024',  t:0.30, skill:0.50, lc:0.45, proj:0.20, event:'First ML project shipped',     skills:'Sklearn, PyTorch', lc_str:'300',  proj_str:'1' },
+    { label:'Sep 2024',  t:0.40, skill:0.60, lc:0.55, proj:0.25, event:'Deep Learning Specialization', skills:'PyTorch, CNNs',    lc_str:'400',  proj_str:'2' },
+    { label:'Oct 2024',  t:0.46, skill:0.65, lc:0.62, proj:0.30, event:'First Docker deployment',      skills:'Docker, FastAPI',  lc_str:'450',  proj_str:'2' },
+    { label:'Jan 2025',  t:0.54, skill:0.74, lc:0.70, proj:0.35, event:'LangChain deep dive begins',   skills:'LangChain, HuggingFace', lc_str:'550', proj_str:'2' },
+    { label:'Feb 2025',  t:0.57, skill:0.78, lc:0.73, proj:0.40, event:'RAG pipeline first build',     skills:'RAG, Pinecone, ChromaDB', lc_str:'580', proj_str:'2' },
+    { label:'May 2025',  t:0.65, skill:0.84, lc:0.78, proj:0.60, event:'📚 Book Recommender shipped',  skills:'LangChain, Gradio, ChromaDB', lc_str:'620', proj_str:'3' },
+    { label:'Jun 2025',  t:0.72, skill:0.90, lc:0.82, proj:0.80, event:'☕ Coffee Shop AI — Production',skills:'LangGraph, Supabase, SSE', lc_str:'650', proj_str:'3' },
+    { label:'Aug 2025',  t:0.80, skill:0.92, lc:0.88, proj:0.82, event:'700+ problems milestone',      skills:'Advanced graphs, DP', lc_str:'700+', proj_str:'3' },
+    { label:'Oct 2025',  t:0.87, skill:0.94, lc:0.91, proj:0.84, event:'LeetCode rating 1647 peak',    skills:'Contest optimization', lc_str:'1647 peak', proj_str:'3' },
+    { label:'Feb 2026',  t:0.94, skill:0.96, lc:0.91, proj:0.90, event:'📄 ETFI-2026 Published',       skills:'Research writing, Agentic AI', lc_str:'1647', proj_str:'4' },
+    { label:'Mar 2026',  t:1.00, skill:0.97, lc:0.91, proj:0.93, event:'Still converging... 🔥',       skills:'MCP, n8n, advanced RAG', lc_str:'1647+', proj_str:'4+' },
+  ];
+
+  const MILESTONES = [0, 4, 5, 9, 10, 11, 13, 14];
+
+  let W, H;
+  const PAD = { top:20, right:24, bottom:38, left:44 };
+
+  function resize() {
+    W = canvas.width  = wrap.offsetWidth;
+    H = canvas.height = wrap.offsetHeight;
+    draw();
+  }
+
+  function toX(t) { return PAD.left + t * (W - PAD.left - PAD.right); }
+  function toY(v) { return PAD.top  + (1 - v) * (H - PAD.top - PAD.bottom); }
+
+  function drawCurve(data, key, color, dashed) {
+    ctx.beginPath();
+    if (dashed) ctx.setLineDash([5,4]); else ctx.setLineDash([]);
+    data.forEach((d,i) => {
+      const x = toX(d.t), y = toY(d[key]);
+      i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+    });
+    ctx.strokeStyle = color; ctx.lineWidth = 2.2;
+    ctx.shadowBlur = 6; ctx.shadowColor = color;
+    ctx.stroke(); ctx.shadowBlur = 0; ctx.setLineDash([]);
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Grid
+    for (let i=0; i<=4; i++) {
+      const y = PAD.top + i * (H - PAD.top - PAD.bottom) / 4;
+      ctx.beginPath(); ctx.moveTo(PAD.left, y); ctx.lineTo(W-PAD.right, y);
+      ctx.strokeStyle='rgba(255,255,255,0.05)'; ctx.lineWidth=1; ctx.setLineDash([3,5]); ctx.stroke(); ctx.setLineDash([]);
+      ctx.font='9px JetBrains Mono,monospace'; ctx.fillStyle='#6b6358';
+      ctx.textAlign='right'; ctx.fillText(((4-i)*25)+'%', PAD.left-5, y+3);
+    }
+
+    // Year labels
+    ['2023','2024','2025','2026'].forEach((yr,i) => {
+      const x = toX(i/3);
+      ctx.font='9px JetBrains Mono,monospace'; ctx.fillStyle='#6b6358'; ctx.textAlign='center';
+      ctx.fillText(yr, x, H-6);
+    });
+
+    // Filled area under skill curve
+    ctx.beginPath();
+    EPOCHS.forEach((d,i) => {
+      const x = toX(d.t), y = toY(d.skill);
+      i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+    });
+    ctx.lineTo(toX(1), H-PAD.bottom); ctx.lineTo(toX(0), H-PAD.bottom); ctx.closePath();
+    const grad = ctx.createLinearGradient(0, PAD.top, 0, H);
+    grad.addColorStop(0, 'rgba(240,165,0,0.12)');
+    grad.addColorStop(1, 'rgba(240,165,0,0)');
+    ctx.fillStyle = grad; ctx.fill();
+
+    // Curves
+    drawCurve(EPOCHS, 'skill', '#f0a500');
+    drawCurve(EPOCHS, 'lc',    '#a855f7');
+    drawCurve(EPOCHS, 'proj',  '#22c55e', true);
+
+    // Milestone dots
+    MILESTONES.forEach(idx => {
+      const d = EPOCHS[idx];
+      const x = toX(d.t), y = toY(d.skill);
+      ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI*2);
+      ctx.fillStyle = '#f0a500'; ctx.shadowBlur=10; ctx.shadowColor='#f0a500'; ctx.fill(); ctx.shadowBlur=0;
+      ctx.strokeStyle='#08080e'; ctx.lineWidth=2; ctx.stroke();
+    });
+  }
+
+  // Hover
+  let lastIdx = -1;
+
+  wrap.addEventListener('mousemove', e => {
+    const r = wrap.getBoundingClientRect();
+    const mx = e.clientX - r.left;
+    const my = e.clientY - r.top;
+
+    // find nearest epoch
+    let best = -1, bestDist = 999;
+    EPOCHS.forEach((d,i) => {
+      const x = toX(d.t);
+      const dist = Math.abs(mx - x);
+      if (dist < bestDist) { bestDist=dist; best=i; }
+    });
+
+    if (best !== lastIdx && bestDist < 40) {
+      lastIdx = best;
+      const d = EPOCHS[best];
+
+      document.getElementById('jt-title').textContent  = d.event;
+      document.getElementById('jt-skills').textContent = d.skills;
+      document.getElementById('jt-lc').textContent     = d.lc_str;
+      document.getElementById('jt-proj').textContent   = d.proj_str + ' projects';
+
+      tooltip.style.opacity = '1';
+      let tx = toX(d.t) + 12;
+      if (tx + 180 > W) tx = toX(d.t) - 192;
+      tooltip.style.left = tx + 'px';
+      tooltip.style.top  = (toY(d.skill) - 60) + 'px';
+
+      // Draw hover indicator
+      draw();
+      const x = toX(d.t);
+      ctx.beginPath(); ctx.moveTo(x, PAD.top); ctx.lineTo(x, H-PAD.bottom);
+      ctx.strokeStyle='rgba(240,165,0,0.25)'; ctx.lineWidth=1; ctx.setLineDash([3,4]); ctx.stroke(); ctx.setLineDash([]);
+    }
+  });
+
+  wrap.addEventListener('mouseleave', () => {
+    lastIdx=-1; tooltip.style.opacity='0'; draw();
+  });
+
+  window.addEventListener('resize', resize);
+  resize();
+})();
+</script>
 </body>
 </html>
