@@ -3,73 +3,139 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="Technical skills of Pandharinath Maske — Python, C++, LangChain, LangGraph, RAG, PyTorch, FastAPI, Docker and more."/>
-<meta property="og:title" content="Skills — Pandharinath Maske"/>
+<meta name="description" content="Technical skills of Pandharinath Maske — LangGraph, RAG, PyTorch, FastAPI, Docker and more."/>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%23e8a020' font-family='serif' font-style='italic'>P</text></svg>"/>
 <title>Skills — Pandharinath Maske</title>
 <link rel="stylesheet" href="css/style.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <script>(function(){const t=localStorage.getItem('pm-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
 <style>
-.skills-intro { max-width: 560px; color: var(--muted); font-size: 0.98rem; margin-bottom: 4rem; line-height: 1.8; }
-
-.skill-block { margin-bottom: 4rem; }
+.skills-intro { max-width: 560px; color: var(--muted); font-size: 0.97rem; margin-bottom: 4rem; line-height: 1.85; }
 
 .block-label {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem; color: var(--accent);
+  font-size: 0.63rem; color: var(--accent);
   letter-spacing: 0.22em; text-transform: uppercase;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.4rem;
   display: flex; align-items: center; gap: 1rem;
 }
 .block-label::after { content:''; flex:1; height:1px; background:var(--border); }
 
-.skill-cards {
+.skill-block { margin-bottom: 4.5rem; }
+
+/* ── Confidence bar cards ── */
+.conf-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1rem;
 }
 
-.sk-card {
+.conf-card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.4rem 1.6rem;
   transition: all 0.3s;
-  position: relative; overflow: hidden;
 }
 
-.sk-card::before {
-  content: '';
-  position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
-  background: var(--accent);
-  transform: scaleY(0); transform-origin: top;
-  transition: transform 0.3s;
+.conf-card:hover {
+  border-color: rgba(232,160,32,0.35);
+  transform: translateY(-3px);
 }
 
-.sk-card:hover::before { transform: scaleY(1); }
-.sk-card:hover { border-color: rgba(232,160,32,0.3); transform: translateX(4px); }
+.conf-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.7rem;
+}
 
-.sk-name { font-size: 0.92rem; color: var(--text); margin-bottom: 0.25rem; }
-.sk-sub { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--muted); letter-spacing: 0.06em; }
+.conf-name { font-size: 0.92rem; color: var(--text); }
 
+.conf-score {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.conf-bar-bg {
+  height: 4px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 0.4rem;
+}
+
+html[data-theme="light"] .conf-bar-bg {
+  background: rgba(0,0,0,0.08);
+}
+
+.conf-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 2px;
+  width: 0%;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.conf-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+/* ── Tag cloud ── */
 .tag-cloud { display: flex; flex-wrap: wrap; gap: 0.6rem; }
 
+/* ── Interest pills ── */
 .interest-row { display: flex; flex-wrap: wrap; gap: 0.8rem; }
 
 .int-pill {
   display: flex; align-items: center; gap: 0.6rem;
-  padding: 0.7rem 1.3rem;
+  padding: 0.65rem 1.3rem;
   background: var(--card); border: 1px solid var(--border);
   border-radius: 100px; font-size: 0.85rem; color: var(--text);
   transition: all 0.25s;
 }
-
 .int-pill:hover { border-color: rgba(232,160,32,0.4); color: var(--accent); }
 .int-dot { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; }
 
+/* ── Model spec card (language cards) ── */
+.lang-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.lang-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.6rem;
+  transition: all 0.3s;
+  position: relative; overflow: hidden;
+}
+
+.lang-card::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  background: linear-gradient(to bottom, var(--accent), var(--accent2));
+  transform: scaleY(0); transform-origin: top;
+  transition: transform 0.35s;
+}
+
+.lang-card:hover::before { transform: scaleY(1); }
+.lang-card:hover { border-color: rgba(232,160,32,0.3); transform: translateX(5px); }
+
+.lang-icon { font-size: 1.5rem; margin-bottom: 0.7rem; }
+.lang-name { font-size: 0.95rem; color: var(--text); margin-bottom: 0.2rem; }
+.lang-use  { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--muted); letter-spacing: 0.06em; }
+
 @media (max-width: 600px) {
-  .skill-cards { grid-template-columns: 1fr 1fr; }
+  .conf-grid { grid-template-columns: 1fr; }
+  .lang-grid { grid-template-columns: 1fr 1fr; }
 }
 </style>
 </head>
@@ -97,40 +163,95 @@
     <div class="section-line"></div>
   </div>
 
-  <p class="skills-intro reveal">Full-stack AI engineering — from optimised DSA in C++ to deploying production LLM pipelines on Docker. Here's the complete toolkit.</p>
+  <p class="skills-intro reveal">Full-stack AI engineering — from optimised DSA in C++ to deploying production LLM pipelines on Docker. Confidence scores based on project depth and usage frequency.</p>
 
+  <!-- Languages -->
   <div class="skill-block reveal">
     <div class="block-label">Languages</div>
-    <div class="skill-cards reveal-stagger">
-      <div class="sk-card"><div class="sk-name">Python</div><div class="sk-sub">Primary · ML, APIs, scripting</div></div>
-      <div class="sk-card"><div class="sk-name">C++</div><div class="sk-sub">DSA · Competitive programming</div></div>
-      <div class="sk-card"><div class="sk-name">C</div><div class="sk-sub">Systems · Low-level</div></div>
+    <div class="lang-grid">
+      <div class="lang-card">
+        <div class="lang-icon">🐍</div>
+        <div class="lang-name">Python</div>
+        <div class="lang-use">ML · APIs · Scripting</div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-icon">⚡</div>
+        <div class="lang-name">C++</div>
+        <div class="lang-use">DSA · Competitive</div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-icon">🔧</div>
+        <div class="lang-name">C</div>
+        <div class="lang-use">Systems · Low-level</div>
+      </div>
     </div>
   </div>
 
-  <div class="skill-block reveal">
-    <div class="block-label">ML / DL Frameworks</div>
-    <div class="tag-cloud">
-      <span class="tag">PyTorch</span>
-      <span class="tag">TensorFlow</span>
-      <span class="tag">Scikit-learn</span>
-      <span class="tag">HuggingFace Transformers</span>
-    </div>
-  </div>
-
+  <!-- LLM & Agentic AI — with confidence bars -->
   <div class="skill-block reveal">
     <div class="block-label">LLM & Agentic AI</div>
-    <div class="tag-cloud">
-      <span class="tag">LangChain</span>
-      <span class="tag">LangGraph</span>
-      <span class="tag">LlamaIndex</span>
-      <span class="tag">RAG</span>
-      <span class="tag">Multi-Agent Systems</span>
-      <span class="tag">Prompt Engineering</span>
-      <span class="tag">n8n</span>
+    <div class="conf-grid skill-conf-group">
+      <div class="conf-card" data-score="0.97">
+        <div class="conf-header"><span class="conf-name">LangGraph</span><span class="conf-score">0.97</span></div>
+        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="97"></div></div>
+        <div class="conf-sub">Multi-agent orchestration · State machines</div>
+      </div>
+      <div class="conf-card" data-score="0.95">
+        <div class="conf-header"><span class="conf-name">LangChain</span><span class="conf-score">0.95</span></div>
+        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="95"></div></div>
+        <div class="conf-sub">Chains · Tools · Memory</div>
+      </div>
+      <div class="conf-card" data-score="0.94">
+        <div class="conf-header"><span class="conf-name">RAG Pipelines</span><span class="conf-score">0.94</span></div>
+        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="94"></div></div>
+        <div class="conf-sub">Semantic retrieval · Reranking</div>
+      </div>
+      <div class="conf-card" data-score="0.88">
+        <div class="conf-header"><span class="conf-name">LlamaIndex</span><span class="conf-score">0.88</span></div>
+        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="88"></div></div>
+        <div class="conf-sub">Data indexing · Query engines</div>
+      </div>
+      <div class="conf-card" data-score="0.92">
+        <div class="conf-header"><span class="conf-name">Prompt Engineering</span><span class="conf-score">0.92</span></div>
+        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="92"></div></div>
+        <div class="conf-sub">CoT · Few-shot · System design</div>
+      </div>
+      <div class="conf-card" data-score="0.82">
+        <div class="conf-header"><span class="conf-name">n8n Automation</span><span class="conf-score">0.82</span></div>
+        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="82"></div></div>
+        <div class="conf-sub">Workflow automation · AI agents</div>
+      </div>
     </div>
   </div>
 
+  <!-- ML/DL Frameworks — confidence bars -->
+  <div class="skill-block reveal">
+    <div class="block-label">ML / DL Frameworks</div>
+    <div class="conf-grid skill-conf-group">
+      <div class="conf-card">
+        <div class="conf-header"><span class="conf-name">PyTorch</span><span class="conf-score">0.91</span></div>
+        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="91"></div></div>
+        <div class="conf-sub">Neural nets · Training loops</div>
+      </div>
+      <div class="conf-card">
+        <div class="conf-header"><span class="conf-name">Scikit-learn</span><span class="conf-score">0.93</span></div>
+        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="93"></div></div>
+        <div class="conf-sub">Classical ML · Pipelines</div>
+      </div>
+      <div class="conf-card">
+        <div class="conf-header"><span class="conf-name">HuggingFace</span><span class="conf-score">0.89</span></div>
+        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="89"></div></div>
+        <div class="conf-sub">Transformers · Embeddings</div>
+      </div>
+      <div class="conf-card">
+        <div class="conf-header"><span class="conf-name">TensorFlow</span><span class="conf-score">0.80</span></div>
+        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="80"></div></div>
+        <div class="conf-sub">Model building · Keras API</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vector DBs -->
   <div class="skill-block reveal">
     <div class="block-label">Vector Databases</div>
     <div class="tag-cloud">
@@ -140,43 +261,42 @@
     </div>
   </div>
 
+  <!-- APIs & Infra — confidence bars -->
   <div class="skill-block reveal">
-    <div class="block-label">APIs & Frameworks</div>
-    <div class="tag-cloud">
-      <span class="tag">FastAPI</span>
-      <span class="tag">REST APIs</span>
-      <span class="tag">Gradio</span>
+    <div class="block-label">APIs, Infra & Databases</div>
+    <div class="conf-grid skill-conf-group">
+      <div class="conf-card">
+        <div class="conf-header"><span class="conf-name">FastAPI</span><span class="conf-score">0.93</span></div>
+        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="93"></div></div>
+        <div class="conf-sub">REST APIs · Async · Streaming</div>
+      </div>
+      <div class="conf-card">
+        <div class="conf-header"><span class="conf-name">Docker</span><span class="conf-score">0.89</span></div>
+        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="89"></div></div>
+        <div class="conf-sub">Containers · Compose · Render</div>
+      </div>
+      <div class="conf-card">
+        <div class="conf-header"><span class="conf-name">Supabase / Postgres</span><span class="conf-score">0.85</span></div>
+        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="85"></div></div>
+        <div class="conf-sub">Auth · Realtime · Storage</div>
+      </div>
+      <div class="conf-card">
+        <div class="conf-header"><span class="conf-name">MLflow + W&B</span><span class="conf-score">0.83</span></div>
+        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="83"></div></div>
+        <div class="conf-sub">Experiment tracking · Viz</div>
+      </div>
     </div>
   </div>
 
+  <!-- Interests -->
   <div class="skill-block reveal">
-    <div class="block-label">Databases</div>
-    <div class="tag-cloud">
-      <span class="tag">MySQL</span>
-      <span class="tag">MongoDB</span>
-      <span class="tag">Supabase</span>
-    </div>
-  </div>
-
-  <div class="skill-block reveal">
-    <div class="block-label">MLOps & Cloud</div>
-    <div class="tag-cloud">
-      <span class="tag">Docker</span>
-      <span class="tag">Git</span>
-      <span class="tag">MLflow</span>
-      <span class="tag">Weights & Biases</span>
-      <span class="tag">Render</span>
-      <span class="tag">AWS (basics)</span>
-    </div>
-  </div>
-
-  <div class="skill-block reveal">
-    <div class="block-label">Areas of Interest</div>
+    <div class="block-label">Research Interests</div>
     <div class="interest-row">
       <div class="int-pill"><span class="int-dot"></span>Large Language Models</div>
       <div class="int-pill"><span class="int-dot"></span>Retrieval-Augmented Generation</div>
       <div class="int-pill"><span class="int-dot"></span>Multi-Agent Systems</div>
-      <div class="int-pill"><span class="int-dot"></span>MLOps</div>
+      <div class="int-pill"><span class="int-dot"></span>MLOps & Deployment</div>
+      <div class="int-pill"><span class="int-dot"></span>Competitive Programming</div>
     </div>
   </div>
 </section>
@@ -193,5 +313,24 @@
 
 <button id="btt" title="Back to top"><i class="fas fa-arrow-up"></i></button>
 <script src="js/main.js"></script>
+<script>
+/* Animate confidence bars on scroll */
+(function(){
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.conf-bar-fill').forEach((bar, i) => {
+          setTimeout(() => {
+            bar.style.width = bar.dataset.w + '%';
+          }, i * 120);
+        });
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.skill-conf-group, .conf-grid').forEach(g => obs.observe(g));
+})();
+</script>
 </body>
 </html>

@@ -4,126 +4,170 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content="Projects by Pandharinath Maske — Multi-Agent AI, RAG, Semantic Search, MLOps."/>
-<meta property="og:title" content="Projects — Pandharinath Maske"/>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%23e8a020' font-family='serif' font-style='italic'>P</text></svg>"/>
 <title>Projects — Pandharinath Maske</title>
 <link rel="stylesheet" href="css/style.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <script>(function(){const t=localStorage.getItem('pm-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
 <style>
-.projects-intro { max-width: 560px; color: var(--muted); font-size: 0.98rem; margin-bottom: 3rem; line-height: 1.8; }
+.projects-intro { max-width: 560px; color: var(--muted); font-size: 0.97rem; margin-bottom: 3rem; line-height: 1.85; }
 
 /* Filter bar */
-.filter-bar {
-  display: flex; gap: 0.6rem; flex-wrap: wrap;
-  margin-bottom: 3rem;
-}
+.filter-bar { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 3rem; }
 
 .filter-btn {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+  font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase;
   padding: 0.4rem 1rem;
-  background: transparent;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  color: var(--muted); cursor: pointer;
-  transition: all 0.25s;
+  background: transparent; border: 1px solid var(--border);
+  border-radius: var(--radius); color: var(--muted); cursor: pointer; transition: all 0.25s;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: rgba(232,160,32,0.1); border-color: var(--accent); color: var(--accent);
 }
 
-.filter-btn:hover,
-.filter-btn.active {
-  background: rgba(232,160,32,0.1);
-  border-color: var(--accent);
-  color: var(--accent);
-}
+/* ── MODEL CARD layout ── */
+.model-cards { display: flex; flex-direction: column; gap: 2rem; margin-bottom: 5rem; }
 
-/* Project grid */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  gap: 2rem; margin-bottom: 5rem;
-}
-
-.project-card {
+.model-card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 2.2rem;
-  position: relative; overflow: hidden;
+  overflow: hidden;
   transition: all 0.3s;
-  display: flex; flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-.project-card::after {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, var(--accent), var(--accent2), transparent);
-  transform: scaleX(0); transform-origin: left;
-  transition: transform 0.5s ease;
+.model-card:hover { border-color: rgba(232,160,32,0.4); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+
+/* Card top bar — like HuggingFace model card header */
+.mc-header {
+  padding: 1.6rem 2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
 }
 
-.project-card:hover::after { transform: scaleX(1); }
-.project-card:hover { border-color: rgba(232,160,32,0.35); transform: translateY(-6px); box-shadow: var(--shadow); }
+.mc-header-left { flex: 1; }
 
-.proj-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 3.5rem; font-weight: 900; font-style: italic;
-  color: rgba(232,160,32,0.07);
-  line-height: 1; margin-bottom: 0.4rem; user-select: none;
-}
-
-.proj-date {
+.mc-type {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.62rem; color: var(--muted);
-  letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.7rem;
+  font-size: 0.6rem; color: var(--accent);
+  letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.5rem;
+  display: flex; align-items: center; gap: 0.5rem;
 }
 
-.proj-title {
+.mc-type-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 5px var(--accent);
+}
+
+.mc-title {
   font-family: 'Playfair Display', serif;
-  font-size: 1.25rem; font-weight: 700; line-height: 1.3;
-  margin-bottom: 1rem; color: var(--text);
+  font-size: 1.35rem; font-weight: 700; line-height: 1.25;
+  color: var(--text); margin-bottom: 0.5rem;
 }
 
-.proj-bullets {
-  list-style: none; margin-bottom: 1.4rem; flex: 1;
+.mc-subtitle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem; color: var(--muted); letter-spacing: 0.06em;
 }
 
-.proj-bullets li {
+/* Metrics strip — like model card stats */
+.mc-metrics {
+  display: flex; gap: 1.5rem; flex-shrink: 0; flex-wrap: wrap;
+}
+
+.mc-metric {
+  display: flex; flex-direction: column; align-items: center; gap: 0.15rem;
+  padding: 0.7rem 1rem;
+  background: rgba(232,160,32,0.05);
+  border: 1px solid rgba(232,160,32,0.12);
+  border-radius: var(--radius); min-width: 70px;
+}
+
+.mc-metric-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem; color: var(--accent); font-weight: 500; line-height: 1;
+}
+
+.mc-metric-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.52rem; color: var(--muted);
+  letter-spacing: 0.12em; text-transform: uppercase; text-align: center;
+}
+
+/* Card body */
+.mc-body {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 0;
+}
+
+.mc-main {
+  padding: 1.8rem 2rem;
+  border-right: 1px solid var(--border);
+}
+
+.mc-desc-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem; color: var(--muted);
+  letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.8rem;
+}
+
+.mc-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.4rem; }
+
+.mc-highlights { list-style: none; margin-bottom: 1.4rem; }
+
+.mc-highlights li {
   font-size: 0.83rem; color: var(--muted);
-  padding: 0.35rem 0 0.35rem 1rem;
-  position: relative; line-height: 1.6;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
+  padding: 0.3rem 0 0.3rem 1.1rem; position: relative;
+  line-height: 1.6; border-bottom: 1px solid rgba(255,255,255,0.04);
 }
 
-.proj-bullets li::before {
-  content: '→'; position: absolute; left: 0;
-  color: var(--accent); font-size: 0.68rem;
+.mc-highlights li::before {
+  content: '▸'; position: absolute; left: 0;
+  color: var(--accent); font-size: 0.65rem; top: 0.38rem;
 }
 
-.proj-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.4rem; }
+/* Sidebar — like HF model card sidebar */
+.mc-sidebar {
+  padding: 1.8rem 1.6rem;
+  display: flex; flex-direction: column; gap: 1.4rem;
+}
 
-.proj-links { display: flex; gap: 0.8rem; margin-top: auto; }
+.mc-sb-section {}
 
-.proj-link {
+.mc-sb-label {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem; color: var(--accent);
-  text-decoration: none; letter-spacing: 0.08em;
-  display: flex; align-items: center; gap: 0.4rem;
-  padding: 0.45rem 0.9rem;
-  border: 1px solid rgba(232,160,32,0.22);
-  border-radius: var(--radius);
+  font-size: 0.56rem; color: var(--muted);
+  letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.6rem;
+}
+
+.mc-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+.mc-links { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.mc-link {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem; color: var(--accent);
+  text-decoration: none; letter-spacing: 0.06em;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid rgba(232,160,32,0.2); border-radius: var(--radius);
   transition: all 0.2s;
 }
 
-.proj-link:hover {
-  background: rgba(232,160,32,0.09);
-  border-color: rgba(232,160,32,0.5);
-}
+.mc-link:hover { background: rgba(232,160,32,0.08); border-color: rgba(232,160,32,0.45); }
 
-/* Research */
+/* Research card */
 .research-label {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem; color: var(--accent);
+  font-size: 0.63rem; color: var(--accent);
   letter-spacing: 0.22em; text-transform: uppercase;
   margin-bottom: 1.4rem;
   display: flex; align-items: center; gap: 1rem;
@@ -132,11 +176,10 @@
 
 .research-card {
   background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 2.5rem;
+  border-radius: var(--radius); padding: 2.2rem;
   display: grid; grid-template-columns: auto 1fr; gap: 2.5rem;
   align-items: start; transition: border-color 0.3s;
 }
-
 .research-card:hover { border-color: rgba(232,160,32,0.35); }
 
 .research-badge {
@@ -148,35 +191,36 @@
 
 .badge-year {
   font-family: 'Playfair Display', serif;
-  font-size: 1.9rem; font-weight: 700; color: var(--accent); line-height: 1;
+  font-size: 1.8rem; font-weight: 700; color: var(--accent); line-height: 1;
 }
 
 .badge-type {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.56rem; color: var(--muted);
+  font-size: 0.55rem; color: var(--muted);
   letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.3rem;
 }
 
 .research-venue {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.68rem; color: var(--accent);
-  letter-spacing: 0.08em; margin-bottom: 0.6rem;
+  font-size: 0.66rem; color: var(--accent); letter-spacing: 0.07em; margin-bottom: 0.6rem;
 }
 
 .research-title {
   font-family: 'Playfair Display', serif;
-  font-size: 1.3rem; font-weight: 700; margin-bottom: 0.7rem; line-height: 1.3;
+  font-size: 1.25rem; font-weight: 700; margin-bottom: 0.7rem; line-height: 1.3;
 }
 
-.research-desc { font-size: 0.86rem; color: var(--muted); margin-bottom: 0.8rem; line-height: 1.75; }
+.research-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.8rem; line-height: 1.75; }
 
 .research-authors {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.62rem; color: var(--muted); letter-spacing: 0.04em;
+  font-size: 0.6rem; color: var(--muted); letter-spacing: 0.04em;
 }
 
 @media (max-width: 900px) {
-  .projects-grid { grid-template-columns: 1fr; }
+  .mc-body { grid-template-columns: 1fr; }
+  .mc-main { border-right: none; border-bottom: 1px solid var(--border); }
+  .mc-header { flex-direction: column; gap: 1rem; }
   .research-card { grid-template-columns: 1fr; gap: 1.5rem; }
 }
 </style>
@@ -205,9 +249,8 @@
     <div class="section-line"></div>
   </div>
 
-  <p class="projects-intro reveal">Production-grade AI systems — from multi-agent orchestration to semantic search. Every project deployed, not just built.</p>
+  <p class="projects-intro reveal">Production-grade AI systems. Every project is deployed, documented, and built end-to-end.</p>
 
-  <!-- Filter -->
   <div class="filter-bar reveal">
     <button class="filter-btn active" data-filter="all">All</button>
     <button class="filter-btn" data-filter="llm">LLM & Agents</button>
@@ -215,75 +258,167 @@
     <button class="filter-btn" data-filter="mlops">MLOps</button>
   </div>
 
-  <div class="projects-grid">
+  <div class="model-cards">
 
-    <div class="project-card reveal" data-cat="llm">
-      <div class="proj-num">01</div>
-      <div class="proj-date">June 2025</div>
-      <div class="proj-title">Multi-Agent Conversational AI System with Agentic RAG</div>
-      <ul class="proj-bullets">
-        <li>LangGraph orchestrating specialized agents for order processing and menu queries</li>
-        <li>Agentic RAG pipeline with Pinecone vector DB for semantic retrieval</li>
-        <li>Dual-memory architecture — short-term history + persistent Supabase user profiles</li>
-        <li>FastAPI backend, real-time streaming, Docker + Render deployment</li>
-      </ul>
-      <div class="proj-stack">
-        <span class="stack-tag">Python</span>
-        <span class="stack-tag">LangGraph</span>
-        <span class="stack-tag">FastAPI</span>
-        <span class="stack-tag">Pinecone</span>
-        <span class="stack-tag">Docker</span>
-        <span class="stack-tag">Supabase</span>
+    <!-- Project 1 -->
+    <div class="model-card reveal" data-cat="llm">
+      <div class="mc-header">
+        <div class="mc-header-left">
+          <div class="mc-type"><span class="mc-type-dot"></span> Multi-Agent System · Coffee Shop Domain</div>
+          <div class="mc-title">Conversational AI with Agentic RAG</div>
+          <div class="mc-subtitle">Pandharimaske/Coffee_Shop_ChatBot · June 2025</div>
+        </div>
+        <div class="mc-metrics">
+          <div class="mc-metric">
+            <span class="mc-metric-val">RAG</span>
+            <span class="mc-metric-lbl">Pipeline</span>
+          </div>
+          <div class="mc-metric">
+            <span class="mc-metric-val">2</span>
+            <span class="mc-metric-lbl">Memory Layers</span>
+          </div>
+          <div class="mc-metric">
+            <span class="mc-metric-val">Live</span>
+            <span class="mc-metric-lbl">Status</span>
+          </div>
+        </div>
       </div>
-      <div class="proj-links">
-        <a href="https://github.com/Pandharimaske/Coffee_Shop_ChatBot" class="proj-link" target="_blank" rel="noopener">
-          <i class="fab fa-github"></i> GitHub
-        </a>
+      <div class="mc-body">
+        <div class="mc-main">
+          <div class="mc-desc-label">Architecture Overview</div>
+          <div class="mc-desc">Production-ready multi-agent system using LangGraph orchestrating specialized agents for order processing and menu queries with semantic retrieval over a structured knowledge base.</div>
+          <ul class="mc-highlights">
+            <li>LangGraph state machine orchestrating 3 specialized agents with dynamic routing</li>
+            <li>Agentic RAG with Pinecone vector DB — semantic embeddings over menu, pricing, policies</li>
+            <li>Dual-memory: short-term conversation history + persistent Supabase user profiles</li>
+            <li>FastAPI backend with real-time SSE streaming · Docker · deployed on Render</li>
+          </ul>
+        </div>
+        <div class="mc-sidebar">
+          <div class="mc-sb-section">
+            <div class="mc-sb-label">Stack</div>
+            <div class="mc-tags">
+              <span class="stack-tag">Python</span>
+              <span class="stack-tag">LangGraph</span>
+              <span class="stack-tag">FastAPI</span>
+              <span class="stack-tag">Pinecone</span>
+              <span class="stack-tag">Docker</span>
+              <span class="stack-tag">Supabase</span>
+              <span class="stack-tag">Render</span>
+            </div>
+          </div>
+          <div class="mc-sb-section">
+            <div class="mc-sb-label">Links</div>
+            <div class="mc-links">
+              <a href="https://github.com/Pandharimaske/Coffee_Shop_ChatBot" class="mc-link" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i> GitHub Repo
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="project-card reveal" data-cat="search">
-      <div class="proj-num">02</div>
-      <div class="proj-date">May 2025</div>
-      <div class="proj-title">Semantic Search Engine for Book Recommendations</div>
-      <ul class="proj-bullets">
-        <li>Transformer-based embeddings for semantic NL query understanding</li>
-        <li>ChromaDB vector search with cosine distance metrics</li>
-        <li>Gradio interface with real-time ranked results and similarity scores</li>
-      </ul>
-      <div class="proj-stack">
-        <span class="stack-tag">Python</span>
-        <span class="stack-tag">LangChain</span>
-        <span class="stack-tag">ChromaDB</span>
-        <span class="stack-tag">Gradio</span>
-        <span class="stack-tag">Transformers</span>
+    <!-- Project 2 -->
+    <div class="model-card reveal" data-cat="search">
+      <div class="mc-header">
+        <div class="mc-header-left">
+          <div class="mc-type"><span class="mc-type-dot"></span> Semantic Search · Book Recommendations</div>
+          <div class="mc-title">LLM-powered Book Recommendation Engine</div>
+          <div class="mc-subtitle">Pandharimaske/LLM_Book_Recomender · May 2025</div>
+        </div>
+        <div class="mc-metrics">
+          <div class="mc-metric">
+            <span class="mc-metric-val">cos</span>
+            <span class="mc-metric-lbl">Similarity</span>
+          </div>
+          <div class="mc-metric">
+            <span class="mc-metric-val">NLP</span>
+            <span class="mc-metric-lbl">Embeddings</span>
+          </div>
+        </div>
       </div>
-      <div class="proj-links">
-        <a href="https://github.com/Pandharimaske/LLM_Book_Recomender" class="proj-link" target="_blank" rel="noopener">
-          <i class="fab fa-github"></i> GitHub
-        </a>
+      <div class="mc-body">
+        <div class="mc-main">
+          <div class="mc-desc-label">Architecture Overview</div>
+          <div class="mc-desc">Recommendation engine using transformer-based semantic embeddings and ChromaDB for vector similarity search. Goes beyond keyword matching to understand query intent.</div>
+          <ul class="mc-highlights">
+            <li>Transformer embeddings for deep semantic understanding of natural language queries</li>
+            <li>ChromaDB with cosine distance metrics for high-accuracy similarity retrieval</li>
+            <li>Gradio interface with real-time ranked results and similarity scores displayed</li>
+          </ul>
+        </div>
+        <div class="mc-sidebar">
+          <div class="mc-sb-section">
+            <div class="mc-sb-label">Stack</div>
+            <div class="mc-tags">
+              <span class="stack-tag">Python</span>
+              <span class="stack-tag">LangChain</span>
+              <span class="stack-tag">ChromaDB</span>
+              <span class="stack-tag">Gradio</span>
+              <span class="stack-tag">Transformers</span>
+            </div>
+          </div>
+          <div class="mc-sb-section">
+            <div class="mc-sb-label">Links</div>
+            <div class="mc-links">
+              <a href="https://github.com/Pandharimaske/LLM_Book_Recomender" class="mc-link" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i> GitHub Repo
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="project-card reveal" data-cat="mlops">
-      <div class="proj-num">03</div>
-      <div class="proj-date">2025</div>
-      <div class="proj-title">MLOps Pipeline Project</div>
-      <ul class="proj-bullets">
-        <li>End-to-end MLOps pipeline with experiment tracking and model versioning</li>
-        <li>MLflow + Weights & Biases integration for monitoring and reproducibility</li>
-        <li>Docker containerized for consistent deployment across environments</li>
-      </ul>
-      <div class="proj-stack">
-        <span class="stack-tag">Python</span>
-        <span class="stack-tag">MLflow</span>
-        <span class="stack-tag">W&B</span>
-        <span class="stack-tag">Docker</span>
+    <!-- Project 3 -->
+    <div class="model-card reveal" data-cat="mlops">
+      <div class="mc-header">
+        <div class="mc-header-left">
+          <div class="mc-type"><span class="mc-type-dot"></span> MLOps · End-to-End Pipeline</div>
+          <div class="mc-title">MLOps Project</div>
+          <div class="mc-subtitle">Pandharimaske/MLOPs_Project · 2025</div>
+        </div>
+        <div class="mc-metrics">
+          <div class="mc-metric">
+            <span class="mc-metric-val">CI</span>
+            <span class="mc-metric-lbl">Pipeline</span>
+          </div>
+          <div class="mc-metric">
+            <span class="mc-metric-val">e2e</span>
+            <span class="mc-metric-lbl">Tracking</span>
+          </div>
+        </div>
       </div>
-      <div class="proj-links">
-        <a href="https://github.com/Pandharimaske/MLOPs_Project" class="proj-link" target="_blank" rel="noopener">
-          <i class="fab fa-github"></i> GitHub
-        </a>
+      <div class="mc-body">
+        <div class="mc-main">
+          <div class="mc-desc-label">Architecture Overview</div>
+          <div class="mc-desc">End-to-end MLOps pipeline with experiment tracking, model versioning, and containerised deployment. Demonstrates production-ready ML engineering practices.</div>
+          <ul class="mc-highlights">
+            <li>MLflow + Weights & Biases integration for full experiment reproducibility</li>
+            <li>Docker containerized for consistent environments across dev and production</li>
+            <li>Model versioning and artifact management throughout the training lifecycle</li>
+          </ul>
+        </div>
+        <div class="mc-sidebar">
+          <div class="mc-sb-section">
+            <div class="mc-sb-label">Stack</div>
+            <div class="mc-tags">
+              <span class="stack-tag">Python</span>
+              <span class="stack-tag">MLflow</span>
+              <span class="stack-tag">W&B</span>
+              <span class="stack-tag">Docker</span>
+            </div>
+          </div>
+          <div class="mc-sb-section">
+            <div class="mc-sb-label">Links</div>
+            <div class="mc-links">
+              <a href="https://github.com/Pandharimaske/MLOPs_Project" class="mc-link" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i> GitHub Repo
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -299,13 +434,10 @@
     <div>
       <div class="research-venue">ETFI-2026 · DES Pune University · International Conference on Emerging Technologies & Future Innovations</div>
       <div class="research-title">Agentic AI for Interview Preparation</div>
-      <p class="research-desc">Proposed an AI-powered interview preparation system integrating resume analysis, multi-turn simulations, and personalized feedback loops. Demonstrated how agentic architectures adapt dynamically to candidate knowledge gaps.</p>
-      <div class="research-authors">
-        Co-authored with Shubham Dahane, Aayush Bokde, Pranav Dhebe, Pranjal Pandit &nbsp;·&nbsp; Guided by Dr. Anuradha Yenkikar
-      </div>
+      <p class="research-desc">Proposed an AI-powered interview prep system integrating resume analysis, multi-turn simulations, and personalized feedback loops. Demonstrated how agentic architectures adapt dynamically to candidate knowledge gaps.</p>
+      <div class="research-authors">Co-authored with Shubham Dahane, Aayush Bokde, Pranav Dhebe, Pranjal Pandit &nbsp;·&nbsp; Guided by Dr. Anuradha Yenkikar</div>
     </div>
   </div>
-
 </section>
 
 <footer>

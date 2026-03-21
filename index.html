@@ -5,24 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content="Pandharinath Maske — AI Engineer & ML Researcher. Building intelligent systems with LLMs, multi-agent architectures, and RAG pipelines."/>
 <meta property="og:title" content="Pandharinath Maske — AI Engineer"/>
-<meta property="og:description" content="Building intelligent systems with LLMs, multi-agent architectures, and RAG pipelines. CS(AI) @ VIIT Pune."/>
+<meta property="og:description" content="Building intelligent systems with LLMs, multi-agent architectures, and RAG. CS(AI) @ VIIT Pune · LeetCode 1647 · Published at ETFI-2026."/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://pandharimaske.github.io"/>
-<meta name="twitter:card" content="summary_large_image"/>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%23e8a020' font-family='serif' font-style='italic'>P</text></svg>"/>
 <title>Pandharinath Maske — AI Engineer</title>
 <link rel="stylesheet" href="css/style.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <script>
-  // Prevent theme flash
-  (function(){
-    const t = localStorage.getItem('pm-theme') ||
-      (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
-    document.documentElement.setAttribute('data-theme', t);
-  })();
+(function(){
+  const t=localStorage.getItem('pm-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+  document.documentElement.setAttribute('data-theme',t);
+})();
 </script>
 <style>
-/* ── HERO ── */
+/* ─── NEURAL CANVAS ─── */
+#neural-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.55;
+}
+
+/* ─── HERO ─── */
 #hero {
   min-height: 100vh;
   display: flex;
@@ -33,108 +38,246 @@
   overflow: hidden;
 }
 
-.hero-watermark {
-  position: absolute;
-  right: -40px; top: 50%;
-  transform: translateY(-50%);
-  font-family: 'Playfair Display', serif;
-  font-size: 24vw; font-weight: 900; font-style: italic;
-  color: rgba(232,160,32,0.035);
-  line-height: 1; pointer-events: none;
-  white-space: nowrap; user-select: none;
+.hero-content { position: relative; z-index: 2; }
+
+/* System status bar */
+.sys-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards 0.1s;
 }
 
-.hero-eyebrow {
+.sys-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem; color: var(--accent);
-  letter-spacing: 0.24em; text-transform: uppercase;
-  margin-bottom: 1.2rem;
-  opacity: 0; animation: fadeUp 0.7s ease forwards 0.15s;
+  font-size: 0.62rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
 }
 
+.sys-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #5cb87a;
+  box-shadow: 0 0 6px #5cb87a;
+  animation: syspulse 2s ease-in-out infinite;
+}
+
+.sys-dot.amber { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+
+@keyframes syspulse {
+  0%,100% { opacity: 1; }
+  50%  { opacity: 0.4; }
+}
+
+.sys-divider {
+  width: 1px; height: 14px;
+  background: var(--border);
+}
+
+/* Terminal prompt */
+.terminal-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards 0.25s;
+}
+
+.t-prompt {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  color: #5cb87a;
+}
+
+.t-path {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  color: var(--accent);
+}
+
+.t-cmd {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  color: var(--text);
+}
+
+/* Hero name */
 .hero-name {
   font-family: 'Playfair Display', serif;
   font-size: clamp(3rem, 8vw, 7.5rem);
-  font-weight: 900; line-height: 1.02;
-  letter-spacing: -0.03em; margin-bottom: 1rem;
-  opacity: 0; animation: fadeUp 0.7s ease forwards 0.35s;
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.8rem;
+  opacity: 0;
+  animation: fadeUp 0.7s ease forwards 0.4s;
 }
 
-.hero-name .accent { display: block; color: var(--accent); font-style: italic; }
+.hero-name .accent {
+  display: block;
+  color: var(--accent);
+  font-style: italic;
+}
 
-.hero-typing-row {
-  display: flex; align-items: center; gap: 0.6rem;
+/* Token stream row */
+.token-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   margin-bottom: 1.6rem;
-  opacity: 0; animation: fadeUp 0.7s ease forwards 0.5s;
+  min-height: 1.6rem;
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards 0.6s;
 }
 
-.typing-prefix {
+.token-label {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.88rem; color: var(--muted);
+  font-size: 0.72rem;
+  color: var(--muted);
+  white-space: nowrap;
 }
 
-#typing-text {
+#token-stream {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.9rem; color: var(--accent); font-weight: 500;
+  font-size: 0.78rem;
+  color: var(--accent);
+  font-weight: 500;
+  letter-spacing: 0.04em;
 }
 
-.typing-cursor {
-  display: inline-block; width: 2px; height: 1.1em;
-  background: var(--accent); margin-left: 2px;
-  animation: blink 1s step-end infinite;
+.token-cursor {
+  display: inline-block;
+  width: 7px; height: 14px;
+  background: var(--accent);
+  margin-left: 2px;
   vertical-align: middle;
+  animation: blink 1s step-end infinite;
+  border-radius: 1px;
 }
 
 @keyframes blink { 50% { opacity: 0; } }
 
+/* Desc */
 .hero-desc {
-  max-width: 540px; font-size: 1rem; color: var(--muted);
-  margin-bottom: 2.4rem; line-height: 1.8;
-  opacity: 0; animation: fadeUp 0.7s ease forwards 0.65s;
+  max-width: 520px;
+  font-size: 0.98rem;
+  color: var(--muted);
+  margin-bottom: 2.2rem;
+  line-height: 1.85;
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards 0.75s;
 }
 
+/* Confidence badges */
+.conf-row {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards 0.88s;
+}
+
+.conf-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  background: rgba(232,160,32,0.07);
+  border: 1px solid rgba(232,160,32,0.18);
+  border-radius: 2px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+.conf-val { color: var(--accent); font-weight: 500; }
+
+/* Buttons */
 .hero-btns {
-  display: flex; gap: 0.8rem; flex-wrap: wrap;
-  opacity: 0; animation: fadeUp 0.7s ease forwards 0.8s;
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards 1s;
 }
 
+/* Meta */
 .hero-meta {
-  position: absolute; bottom: 3rem; left: 4rem;
-  display: flex; gap: 3rem;
-  opacity: 0; animation: fadeUp 0.7s ease forwards 1s;
+  position: absolute;
+  bottom: 3rem; left: 4rem;
+  display: flex;
+  gap: 3rem;
+  z-index: 2;
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards 1.1s;
 }
 
 .meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
 
 .meta-label {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem; color: var(--muted);
-  letter-spacing: 0.2em; text-transform: uppercase;
+  font-size: 0.58rem;
+  color: var(--muted);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
 
-.meta-val { font-size: 0.9rem; color: var(--text); }
+.meta-val { font-size: 0.88rem; color: var(--text); }
 
-.hero-scroll-hint {
-  position: absolute; bottom: 3rem; right: 4rem;
-  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-  opacity: 0; animation: fadeUp 0.7s ease forwards 1.1s;
+/* Epoch counter bottom right */
+.epoch-display {
+  position: absolute;
+  bottom: 3rem; right: 4rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards 1.2s;
 }
 
-.scroll-line {
-  width: 1px; height: 48px;
-  background: linear-gradient(to bottom, var(--accent), transparent);
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
-
-.scroll-lbl {
+.epoch-label {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem; color: var(--muted);
-  writing-mode: vertical-rl; letter-spacing: 0.2em; text-transform: uppercase;
+  font-size: 0.56rem;
+  color: var(--muted);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
 
-/* ── ABOUT STRIP ── */
+.epoch-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.4rem;
+  color: rgba(232,160,32,0.25);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+.loss-bar {
+  width: 120px;
+  height: 2px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loss-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  width: 0%;
+  transition: width 2s ease;
+}
+
+/* ─── ABOUT STRIP ─── */
 .about-strip {
   background: var(--bg2);
   border-top: 1px solid var(--border);
@@ -142,51 +285,116 @@
   display: grid;
   grid-template-columns: 1.1fr 1fr;
   gap: 5rem;
+  align-items: start;
+}
+
+/* Terminal block */
+.terminal-block {
+  background: #0d0d0d;
+  border: 1px solid rgba(232,160,32,0.15);
+  border-radius: 6px;
+  overflow: hidden;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  line-height: 1.7;
+}
+
+html[data-theme="light"] .terminal-block {
+  background: #1a1a1a;
+}
+
+.terminal-titlebar {
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 0.6rem 1rem;
+  display: flex;
   align-items: center;
+  gap: 0.5rem;
 }
 
-.about-h {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
-  font-weight: 700; line-height: 1.2; margin-bottom: 1.2rem;
+.tb-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+.tb-dot.red   { background: #ff5f57; }
+.tb-dot.yel   { background: #febc2e; }
+.tb-dot.grn   { background: #28c840; }
+
+.tb-title {
+  margin-left: auto;
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.1em;
 }
 
-.about-h em { color: var(--accent); font-style: italic; }
+.terminal-body { padding: 1.4rem 1.6rem; }
 
-.about-p { color: var(--muted); font-size: 0.95rem; margin-bottom: 0.9rem; line-height: 1.8; }
+.tl { margin-bottom: 0.15rem; }
+.tl .p  { color: #5cb87a; }
+.tl .k  { color: #cc99cd; }
+.tl .s  { color: #f0c674; }
+.tl .c  { color: rgba(255,255,255,0.25); font-style: italic; }
+.tl .v  { color: #89ddff; }
+.tl .n  { color: #e4ddd0; }
+.tl .acc{ color: var(--accent); }
+.tl.out { color: rgba(255,255,255,0.5); padding-left: 1.2rem; }
 
+/* Quick nav grid */
 .quick-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
 .ql {
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 1.3rem 1.5rem;
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--radius); text-decoration: none;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
   transition: all 0.3s;
 }
 
-.ql:hover { border-color: rgba(232,160,32,0.4); transform: translateY(-3px); }
+.ql:hover { border-color: rgba(232,160,32,0.4); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
 
 .ql-lbl {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem; color: var(--muted);
-  letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.25rem;
+  font-size: 0.58rem;
+  color: var(--muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
 }
 
-.ql-ttl { font-size: 0.95rem; color: var(--text); }
-
-.ql-arr { color: var(--accent); font-size: 1.1rem; transition: transform 0.25s; }
+.ql-ttl { font-size: 0.92rem; color: var(--text); }
+.ql-arr { color: var(--accent); font-size: 1rem; transition: transform 0.25s; }
 .ql:hover .ql-arr { transform: translate(3px,-3px); }
 
-@media (max-width: 900px) {
+/* Section title for about */
+.about-section-ttl {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.25;
+}
+.about-section-ttl em { color: var(--accent); font-style: italic; }
+
+@media (max-width: 1000px) {
   #hero { padding: 0 1.5rem; }
-  .hero-meta { left: 1.5rem; gap: 1.8rem; bottom: 5rem; }
-  .hero-scroll-hint { display: none; }
+  .hero-meta { left: 1.5rem; gap: 2rem; bottom: 5rem; }
+  .epoch-display { display: none; }
   .about-strip { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 3rem; }
+  .quick-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 600px) {
   .quick-grid { grid-template-columns: 1fr; }
-  .hero-watermark { font-size: 42vw; }
+  .conf-row { display: none; }
 }
 </style>
 </head>
@@ -209,36 +417,76 @@
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- ── HERO ── -->
 <section id="hero">
-  <div class="hero-watermark">AI</div>
-  <div class="hero-eyebrow">Available for opportunities &nbsp;·&nbsp; Pune, India</div>
-  <h1 class="hero-name">
-    Pandharinath
-    <span class="accent">Maske.</span>
-  </h1>
-  <div class="hero-typing-row">
-    <span class="typing-prefix">~/</span>
-    <span id="typing-text"></span>
-    <span class="typing-cursor"></span>
+  <canvas id="neural-canvas"></canvas>
+
+  <div class="hero-content">
+    <!-- System status -->
+    <div class="sys-bar">
+      <div class="sys-indicator">
+        <span class="sys-dot"></span> MODEL ONLINE
+      </div>
+      <div class="sys-divider"></div>
+      <div class="sys-indicator">
+        <span class="sys-dot amber"></span> VIIT PUNE · CS(AI) · 2027
+      </div>
+      <div class="sys-divider"></div>
+      <div class="sys-indicator">PUNE, IN</div>
+    </div>
+
+    <!-- Terminal prompt -->
+    <div class="terminal-line">
+      <span class="t-prompt">pandhari@ai</span>
+      <span class="t-path">:~/portfolio</span>
+      <span class="t-cmd">$ whoami</span>
+    </div>
+
+    <!-- Name -->
+    <h1 class="hero-name">
+      Pandharinath
+      <span class="accent">Maske.</span>
+    </h1>
+
+    <!-- Token stream -->
+    <div class="token-row">
+      <span class="token-label">output_tokens &gt;&gt;</span>
+      <span id="token-stream"></span>
+      <span class="token-cursor"></span>
+    </div>
+
+    <!-- Desc -->
+    <p class="hero-desc">
+      Building intelligent systems at the intersection of LLMs, multi-agent orchestration, and retrieval-augmented generation. CS(AI) @ VIIT Pune · Published at ETFI-2026 · LeetCode <span style="color:var(--accent)">1647</span>.
+    </p>
+
+    <!-- Confidence badges -->
+    <div class="conf-row">
+      <span class="conf-badge">LangGraph <span class="conf-val">0.97</span></span>
+      <span class="conf-badge">RAG <span class="conf-val">0.95</span></span>
+      <span class="conf-badge">PyTorch <span class="conf-val">0.91</span></span>
+      <span class="conf-badge">FastAPI <span class="conf-val">0.93</span></span>
+      <span class="conf-badge">Docker <span class="conf-val">0.89</span></span>
+    </div>
+
+    <!-- Buttons -->
+    <div class="hero-btns">
+      <a href="https://github.com/Pandharimaske" class="btn btn-primary" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" class="btn btn-ghost" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i> LinkedIn
+      </a>
+      <a href="https://leetcode.com/u/PandhariMaske1437/" class="btn btn-ghost" target="_blank" rel="noopener">
+        <i class="fas fa-code"></i> LeetCode
+      </a>
+      <a href="assets/Pandharinath_Maske_Resume.pdf" class="btn btn-ghost" download>
+        <i class="fas fa-download"></i> Resume
+      </a>
+    </div>
   </div>
-  <p class="hero-desc">
-    Building intelligent systems at the intersection of LLMs, multi-agent architectures, and RAG pipelines. CS (AI) @ VIIT Pune · Published at ETFI-2026.
-  </p>
-  <div class="hero-btns">
-    <a href="https://github.com/Pandharimaske" class="btn btn-primary" target="_blank" rel="noopener">
-      <i class="fab fa-github"></i> GitHub
-    </a>
-    <a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" class="btn btn-ghost" target="_blank" rel="noopener">
-      <i class="fab fa-linkedin"></i> LinkedIn
-    </a>
-    <a href="https://leetcode.com/u/PandhariMaske1437/" class="btn btn-ghost" target="_blank" rel="noopener">
-      <i class="fas fa-code"></i> LeetCode
-    </a>
-    <a href="assets/Pandharinath_Maske_Resume.pdf" class="btn btn-ghost" download>
-      <i class="fas fa-download"></i> Resume
-    </a>
-  </div>
+
+  <!-- Meta -->
   <div class="hero-meta">
     <div class="meta-item">
       <span class="meta-label">Degree</span>
@@ -253,37 +501,67 @@
       <span class="meta-val">2023 – 2027</span>
     </div>
   </div>
-  <div class="hero-scroll-hint">
-    <div class="scroll-line"></div>
-    <span class="scroll-lbl">scroll</span>
+
+  <!-- Epoch -->
+  <div class="epoch-display">
+    <span class="epoch-label">Training Progress</span>
+    <span class="epoch-val" id="epoch-counter">epoch: 0000</span>
+    <div class="loss-bar"><div class="loss-fill" id="loss-fill"></div></div>
   </div>
 </section>
 
-<!-- ABOUT STRIP -->
+<!-- ── ABOUT STRIP ── -->
 <div class="about-strip">
   <div class="reveal">
-    <h2 class="about-h">Engineer. Researcher.<br><em>Builder.</em></h2>
-    <p class="about-p">I work at the frontier of LLMs and agentic AI — designing systems that don't just respond, but reason, retrieve, and act.</p>
-    <p class="about-p">From multi-agent orchestration with LangGraph to semantic search and RAG pipelines, I build end-to-end — architecture to Docker deployment.</p>
-    <p class="about-p">Published at ETFI-2026 (DES Pune University) on Agentic AI for Interview Preparation.</p>
+    <h2 class="about-section-ttl">Engineer. Researcher.<br><em>Obsessed with AI.</em></h2>
+
+    <!-- Terminal code block -->
+    <div class="terminal-block">
+      <div class="terminal-titlebar">
+        <span class="tb-dot red"></span>
+        <span class="tb-dot yel"></span>
+        <span class="tb-dot grn"></span>
+        <span class="tb-title">about_me.py</span>
+      </div>
+      <div class="terminal-body">
+        <div class="tl"><span class="c"># Pandharinath Maske · AI Engineer</span></div>
+        <div class="tl">&nbsp;</div>
+        <div class="tl"><span class="k">class</span> <span class="acc">Engineer</span>:</div>
+        <div class="tl">&nbsp;&nbsp;<span class="k">def</span> <span class="v">__init__</span>(<span class="n">self</span>):</div>
+        <div class="tl">&nbsp;&nbsp;&nbsp;&nbsp;<span class="n">self</span>.<span class="acc">focus</span>  = [<span class="s">"LLMs"</span>, <span class="s">"Agentic AI"</span>, <span class="s">"RAG"</span>]</div>
+        <div class="tl">&nbsp;&nbsp;&nbsp;&nbsp;<span class="n">self</span>.<span class="acc">stack</span>  = [<span class="s">"LangGraph"</span>, <span class="s">"FastAPI"</span>, <span class="s">"Docker"</span>]</div>
+        <div class="tl">&nbsp;&nbsp;&nbsp;&nbsp;<span class="n">self</span>.<span class="acc">rating</span> = <span class="v">1647</span>  <span class="c"># LeetCode</span></div>
+        <div class="tl">&nbsp;&nbsp;&nbsp;&nbsp;<span class="n">self</span>.<span class="acc">paper</span>  = <span class="s">"ETFI-2026"</span></div>
+        <div class="tl">&nbsp;</div>
+        <div class="tl">&nbsp;&nbsp;<span class="k">def</span> <span class="v">build</span>(<span class="n">self</span>, <span class="n">idea</span>):</div>
+        <div class="tl">&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">return</span> <span class="acc">deploy</span>(<span class="acc">train</span>(<span class="acc">architect</span>(<span class="n">idea</span>)))</div>
+        <div class="tl">&nbsp;</div>
+        <div class="tl out">&gt;&gt;&gt; me = Engineer()</div>
+        <div class="tl out">&gt;&gt;&gt; me.build(<span class="s">"next great AI system"</span>)</div>
+        <div class="tl out" style="color:var(--accent)">'shipped to production ✓'</div>
+      </div>
+    </div>
   </div>
-  <div class="quick-grid reveal">
-    <a href="skills.html" class="ql">
-      <div><div class="ql-lbl">01</div><div class="ql-ttl">Skills</div></div>
-      <span class="ql-arr">↗</span>
-    </a>
-    <a href="projects.html" class="ql">
-      <div><div class="ql-lbl">02</div><div class="ql-ttl">Projects</div></div>
-      <span class="ql-arr">↗</span>
-    </a>
-    <a href="achievements.html" class="ql">
-      <div><div class="ql-lbl">03</div><div class="ql-ttl">Achievements</div></div>
-      <span class="ql-arr">↗</span>
-    </a>
-    <a href="contact.html" class="ql">
-      <div><div class="ql-lbl">✉</div><div class="ql-ttl">Contact</div></div>
-      <span class="ql-arr">↗</span>
-    </a>
+
+  <div class="reveal">
+    <div class="quick-grid">
+      <a href="skills.html" class="ql">
+        <div><div class="ql-lbl">01 · Skills</div><div class="ql-ttl">Tech Stack</div></div>
+        <span class="ql-arr">↗</span>
+      </a>
+      <a href="projects.html" class="ql">
+        <div><div class="ql-lbl">02 · Work</div><div class="ql-ttl">Projects</div></div>
+        <span class="ql-arr">↗</span>
+      </a>
+      <a href="achievements.html" class="ql">
+        <div><div class="ql-lbl">03 · Stats</div><div class="ql-ttl">Achievements</div></div>
+        <span class="ql-arr">↗</span>
+      </a>
+      <a href="contact.html" class="ql">
+        <div><div class="ql-lbl">04 · Hire</div><div class="ql-ttl">Contact</div></div>
+        <span class="ql-arr">↗</span>
+      </a>
+    </div>
   </div>
 </div>
 
@@ -299,5 +577,176 @@
 
 <button id="btt" title="Back to top"><i class="fas fa-arrow-up"></i></button>
 <script src="js/main.js"></script>
+<script>
+/* ── NEURAL NETWORK CANVAS ── */
+(function(){
+  const canvas = document.getElementById('neural-canvas');
+  const ctx = canvas.getContext('2d');
+  const isDark = () => document.documentElement.getAttribute('data-theme') !== 'light';
+
+  let W, H, nodes = [], animId;
+
+  const LAYER_SIZES = [4, 6, 6, 4, 2];
+  const NODE_R = 4;
+  const PULSE_SPEED = 0.008;
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+    buildNetwork();
+  }
+
+  function buildNetwork() {
+    nodes = [];
+    const layerCount = LAYER_SIZES.length;
+    const layerW = W / (layerCount + 1);
+
+    LAYER_SIZES.forEach((count, li) => {
+      const x = layerW * (li + 1);
+      for (let ni = 0; ni < count; ni++) {
+        const gap = H / (count + 1);
+        nodes.push({
+          x, y: gap * (ni + 1),
+          layer: li, idx: ni,
+          r: NODE_R,
+          alpha: 0.3 + Math.random() * 0.4,
+          pulseOffset: Math.random() * Math.PI * 2,
+        });
+      }
+    });
+  }
+
+  // edges: connect adjacent layers
+  function getEdges() {
+    const edges = [];
+    for (let li = 0; li < LAYER_SIZES.length - 1; li++) {
+      const from = nodes.filter(n => n.layer === li);
+      const to   = nodes.filter(n => n.layer === li + 1);
+      from.forEach(f => to.forEach(t => edges.push({ f, t, p: Math.random() })));
+    }
+    return edges;
+  }
+
+  let edges = [], t = 0;
+
+  function init() {
+    buildNetwork();
+    edges = getEdges();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    t += PULSE_SPEED;
+
+    const dark = isDark();
+    const nodeColor  = dark ? 'rgba(232,160,32,' : 'rgba(180,120,10,';
+    const edgeColor  = dark ? 'rgba(232,160,32,' : 'rgba(180,120,10,';
+
+    // Draw edges
+    edges.forEach(e => {
+      const pulse = (Math.sin(t * 3 + e.p * 10) + 1) / 2; // 0..1
+      const alpha = 0.04 + pulse * 0.12;
+      ctx.beginPath();
+      ctx.moveTo(e.f.x, e.f.y);
+      ctx.lineTo(e.t.x, e.t.y);
+      ctx.strokeStyle = `${edgeColor}${alpha})`;
+      ctx.lineWidth = 0.8;
+      ctx.stroke();
+
+      // Travelling signal dot
+      if (pulse > 0.85) {
+        const progress = (pulse - 0.85) / 0.15;
+        const sx = e.f.x + (e.t.x - e.f.x) * progress;
+        const sy = e.f.y + (e.t.y - e.f.y) * progress;
+        ctx.beginPath();
+        ctx.arc(sx, sy, 2, 0, Math.PI * 2);
+        ctx.fillStyle = `${nodeColor}0.9)`;
+        ctx.fill();
+      }
+    });
+
+    // Draw nodes
+    nodes.forEach(n => {
+      const glow = (Math.sin(t * 2 + n.pulseOffset) + 1) / 2;
+      const alpha = 0.25 + glow * 0.55;
+
+      // Glow
+      const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 4);
+      grad.addColorStop(0, `${nodeColor}${alpha * 0.6})`);
+      grad.addColorStop(1, `${nodeColor}0)`);
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r * 4, 0, Math.PI * 2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      // Core
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = `${nodeColor}${alpha})`;
+      ctx.fill();
+    });
+
+    animId = requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => {
+    cancelAnimationFrame(animId);
+    resize();
+    edges = getEdges();
+    draw();
+  });
+
+  // observe theme changes
+  new MutationObserver(() => {}).observe(document.documentElement, { attributes: true });
+
+  resize();
+  edges = getEdges();
+  draw();
+
+  // Loss bar animation
+  setTimeout(() => {
+    const fill = document.getElementById('loss-fill');
+    if (fill) fill.style.width = '73%';
+  }, 600);
+
+  // Epoch counter
+  const epochEl = document.getElementById('epoch-counter');
+  if (epochEl) {
+    let ep = 0;
+    const iv = setInterval(() => {
+      ep++;
+      epochEl.textContent = `epoch: ${String(ep).padStart(4,'0')}`;
+      if (ep >= 2026) clearInterval(iv);
+    }, 1);
+  }
+})();
+
+/* ── TOKEN STREAM ── */
+(function(){
+  const el = document.getElementById('token-stream');
+  if (!el) return;
+  const sequences = [
+    'AI Engineer · LLM Builder',
+    'Multi-Agent Architect',
+    'RAG Pipeline Designer',
+    'LangGraph Orchestrator',
+    'ML Researcher @ VIIT',
+  ];
+  let si = 0, ci = 0, deleting = false;
+
+  function tick() {
+    const seq = sequences[si];
+    if (!deleting) {
+      el.textContent = seq.slice(0, ++ci);
+      if (ci === seq.length) { deleting = true; setTimeout(tick, 2000); return; }
+    } else {
+      el.textContent = seq.slice(0, --ci);
+      if (ci === 0) { deleting = false; si = (si + 1) % sequences.length; }
+    }
+    setTimeout(tick, deleting ? 40 : 75);
+  }
+  setTimeout(tick, 1000);
+})();
+</script>
 </body>
 </html>
