@@ -77,6 +77,49 @@
     animation: fadeUp 0.7s ease forwards 0.8s;
   }
 
+  .hero-socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem 1.2rem;
+    margin-top: 1.4rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.95s;
+  }
+
+  .hero-socials a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.25s ease;
+  }
+
+  .hero-socials a:hover { color: var(--accent); }
+
+  .hero-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    max-width: 760px;
+    margin-top: 1.8rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 1.05s;
+  }
+
+  .highlight-pill {
+    padding: 0.55rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: rgba(255,255,255,0.03);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: #b8af9d;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
   .hero-meta {
     position: absolute;
     bottom: 3.5rem;
@@ -207,6 +250,7 @@
     .about-strip { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 2rem; }
     .about-right { grid-template-columns: 1fr; }
     .hero-bg-text { font-size: 40vw; }
+    .hero-highlights { margin-top: 1.4rem; }
   }
 </style>
 </head>
@@ -233,10 +277,22 @@
     Building intelligent systems at the intersection of LLMs, multi-agent architectures, and RAG pipelines. CS (AI) student at VIIT Pune · Published researcher · LeetCode 1647.
   </p>
   <div class="hero-btns">
-    <a href="https://github.com/Pandharimaske/Coffee_Shop_ChatBot" class="btn btn-primary" target="_blank">↗ Featured Project</a>
-    <a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" class="btn btn-ghost" target="_blank">LinkedIn</a>
-    <a href="https://leetcode.com/u/PandhariMaske1437/" class="btn btn-ghost" target="_blank">LeetCode</a>
+    <a href="https://github.com/Pandharimaske" class="btn btn-primary" target="_blank" rel="noopener noreferrer">↗ GitHub</a>
+    <a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://leetcode.com/u/PandhariMaske1437/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">LeetCode</a>
     <a href="mailto:pandharinath1437@gmail.com" class="btn btn-ghost">Email</a>
+  </div>
+  <div class="hero-socials">
+    <a href="https://x.com/PMaske20171" target="_blank" rel="noopener noreferrer">X / Twitter</a>
+    <a href="https://www.instagram.com/pandhari__7/" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="https://github.com/Pandharimaske/Coffee_Shop_ChatBot" target="_blank" rel="noopener noreferrer">Featured Repo</a>
+    <a href="https://github.com/Pandharimaske/LLM_Book_Recomender" target="_blank" rel="noopener noreferrer">Book Search Repo</a>
+  </div>
+  <div class="hero-highlights">
+    <span class="highlight-pill">LLM + Agentic Systems</span>
+    <span class="highlight-pill">RAG Pipelines</span>
+    <span class="highlight-pill">FastAPI & Docker Deployment</span>
+    <span class="highlight-pill">Research Presentation at ETFI 2026</span>
   </div>
   <div class="hero-meta">
     <div class="meta-item">
@@ -268,21 +324,21 @@
   <div class="about-right reveal">
     <a href="skills.html" class="quick-link">
       <div>
-        <div class="ql-label">Section 01</div>
-        <div class="ql-title">Skills</div>
+        <div class="ql-label">Capability Map</div>
+        <div class="ql-title">Core Skills</div>
       </div>
       <span class="ql-arrow">↗</span>
     </a>
     <a href="projects.html" class="quick-link">
       <div>
-        <div class="ql-label">Section 02</div>
+        <div class="ql-label">Selected Work</div>
         <div class="ql-title">Projects</div>
       </div>
       <span class="ql-arrow">↗</span>
     </a>
     <a href="achievements.html" class="quick-link">
       <div>
-        <div class="ql-label">Section 03</div>
+        <div class="ql-label">Proof of Work</div>
         <div class="ql-title">Achievements</div>
       </div>
       <span class="ql-arrow">↗</span>
@@ -302,6 +358,13 @@
   <div class="footer-contact">
     <a href="mailto:pandharinath1437@gmail.com">pandharinath1437@gmail.com</a>
     &nbsp;·&nbsp; +91-8010922929
+  </div>
+  <div class="footer-socials">
+    <a href="https://github.com/Pandharimaske" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://leetcode.com/u/PandhariMaske1437/" target="_blank" rel="noopener noreferrer">LeetCode</a>
+    <a href="https://x.com/PMaske20171" target="_blank" rel="noopener noreferrer">X</a>
+    <a href="https://www.instagram.com/pandhari__7/" target="_blank" rel="noopener noreferrer">Instagram</a>
   </div>
 </footer>
 
