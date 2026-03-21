@@ -4,145 +4,73 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content="Technical skills of Pandharinath Maske — LangGraph, RAG, PyTorch, FastAPI, Docker and more."/>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%23e8a020' font-family='serif' font-style='italic'>P</text></svg>"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%23f0a500' font-family='serif' font-style='italic'>P</text></svg>"/>
 <title>Skills — Pandharinath Maske</title>
 <link rel="stylesheet" href="css/style.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <script>(function(){const t=localStorage.getItem('pm-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
 <style>
-.skills-intro { max-width: 560px; color: var(--muted); font-size: 0.97rem; margin-bottom: 4rem; line-height: 1.85; }
-
-.block-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.63rem; color: var(--accent);
-  letter-spacing: 0.22em; text-transform: uppercase;
-  margin-bottom: 1.4rem;
-  display: flex; align-items: center; gap: 1rem;
-}
-.block-label::after { content:''; flex:1; height:1px; background:var(--border); }
-
+.skills-intro { max-width: 560px; color: var(--text2); font-size: 0.97rem; margin-bottom: 4rem; line-height: 1.85; }
 .skill-block { margin-bottom: 4.5rem; }
 
-/* ── Confidence bar cards ── */
-.conf-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
-}
+/* Confidence bar cards */
+.conf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1rem; }
 
 .conf-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.4rem 1.6rem;
-  transition: all 0.3s;
-}
-
-.conf-card:hover {
-  border-color: rgba(232,160,32,0.35);
-  transform: translateY(-3px);
-}
-
-.conf-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.7rem;
-}
-
-.conf-name { font-size: 0.92rem; color: var(--text); }
-
-.conf-score {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  color: var(--accent);
-  font-weight: 500;
-}
-
-.conf-bar-bg {
-  height: 4px;
-  background: rgba(255,255,255,0.06);
-  border-radius: 2px;
-  overflow: hidden;
-  margin-bottom: 0.4rem;
-}
-
-html[data-theme="light"] .conf-bar-bg {
-  background: rgba(0,0,0,0.08);
-}
-
-.conf-bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  border-radius: 2px;
-  width: 0%;
-  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.conf-sub {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem;
-  color: var(--muted);
-  letter-spacing: 0.08em;
-}
-
-/* ── Tag cloud ── */
-.tag-cloud { display: flex; flex-wrap: wrap; gap: 0.6rem; }
-
-/* ── Interest pills ── */
-.interest-row { display: flex; flex-wrap: wrap; gap: 0.8rem; }
-
-.int-pill {
-  display: flex; align-items: center; gap: 0.6rem;
-  padding: 0.65rem 1.3rem;
   background: var(--card); border: 1px solid var(--border);
-  border-radius: 100px; font-size: 0.85rem; color: var(--text);
-  transition: all 0.25s;
+  border-radius: var(--radius); padding: 1.4rem 1.6rem; transition: all 0.3s;
 }
-.int-pill:hover { border-color: rgba(232,160,32,0.4); color: var(--accent); }
-.int-dot { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; }
+.conf-card:hover { border-color: var(--border2); transform: translateY(-3px); box-shadow: 0 8px 24px var(--glow); }
 
-/* ── Model spec card (language cards) ── */
-.lang-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 1rem;
-}
+.conf-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.7rem; }
+.conf-name { font-size: 0.9rem; color: var(--text); }
+.conf-score { font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--gold); font-weight:500; }
+
+.conf-bar-bg { height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow:hidden; margin-bottom:0.4rem; }
+html[data-theme="light"] .conf-bar-bg { background: rgba(0,0,0,0.08); }
+.conf-bar-fill { height:100%; background: linear-gradient(90deg, var(--purple), var(--gold), var(--gold2)); border-radius:2px; width:0%; transition: width 1.3s cubic-bezier(0.4,0,0.2,1); }
+
+.conf-sub { font-family:'JetBrains Mono',monospace; font-size:0.58rem; color:var(--muted); letter-spacing:0.06em; }
+
+/* Lang cards */
+.lang-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 1rem; }
 
 .lang-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.6rem;
-  transition: all 0.3s;
-  position: relative; overflow: hidden;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.6rem; transition: all 0.3s; position: relative; overflow: hidden;
 }
-
 .lang-card::before {
-  content: '';
-  position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
-  background: linear-gradient(to bottom, var(--accent), var(--accent2));
-  transform: scaleY(0); transform-origin: top;
-  transition: transform 0.35s;
+  content:''; position:absolute; left:0; top:0; bottom:0; width:3px;
+  background: linear-gradient(to bottom, var(--gold), var(--purple));
+  transform:scaleY(0); transform-origin:top; transition:transform 0.35s;
 }
+.lang-card:hover::before { transform:scaleY(1); }
+.lang-card:hover { border-color: var(--border2); transform: translateX(5px); }
 
-.lang-card:hover::before { transform: scaleY(1); }
-.lang-card:hover { border-color: rgba(232,160,32,0.3); transform: translateX(5px); }
+.lang-icon { font-size:1.4rem; margin-bottom:0.7rem; }
+.lang-name { font-size:0.9rem; color:var(--text); margin-bottom:0.2rem; }
+.lang-use  { font-family:'JetBrains Mono',monospace; font-size:0.58rem; color:var(--muted); letter-spacing:0.06em; }
 
-.lang-icon { font-size: 1.5rem; margin-bottom: 0.7rem; }
-.lang-name { font-size: 0.95rem; color: var(--text); margin-bottom: 0.2rem; }
-.lang-use  { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--muted); letter-spacing: 0.06em; }
+.tag-cloud { display:flex; flex-wrap:wrap; gap:0.6rem; }
 
-@media (max-width: 600px) {
-  .conf-grid { grid-template-columns: 1fr; }
-  .lang-grid { grid-template-columns: 1fr 1fr; }
+.interest-row { display:flex; flex-wrap:wrap; gap:0.8rem; }
+.int-pill {
+  display:flex; align-items:center; gap:0.6rem;
+  padding:0.65rem 1.3rem;
+  background:var(--card); border:1px solid var(--border);
+  border-radius:100px; font-size:0.85rem; color:var(--text); transition:all 0.25s;
 }
+.int-pill:hover { border-color:var(--border2); color:var(--gold); }
+.int-dot { width:5px; height:5px; background:var(--gold); border-radius:50%; box-shadow:0 0 6px var(--gold); }
+
+@media(max-width:600px){ .conf-grid{grid-template-columns:1fr} .lang-grid{grid-template-columns:1fr 1fr} }
 </style>
 </head>
 <body>
+<div id="cursor"></div><div id="cursor-ring"></div><div id="scroll-progress"></div>
 
 <nav>
-  <a class="nav-logo" href="index.html">PM_</a>
+  <a class="nav-logo" href="index.html"><span class="nav-logo-dot"></span>PM_</a>
   <ul class="nav-center">
     <li><a href="index.html">Home</a></li>
     <li><a href="skills.html">Skills</a></li>
@@ -152,7 +80,7 @@ html[data-theme="light"] .conf-bar-bg {
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div class="nav-right">
-    <button class="theme-btn" id="theme-btn" title="Toggle theme"><i class="fas fa-moon"></i></button>
+    <button class="theme-btn" id="theme-btn"><i class="fas fa-moon"></i></button>
   </div>
 </nav>
 
@@ -163,95 +91,39 @@ html[data-theme="light"] .conf-bar-bg {
     <div class="section-line"></div>
   </div>
 
-  <p class="skills-intro reveal">Full-stack AI engineering — from optimised DSA in C++ to deploying production LLM pipelines on Docker. Confidence scores based on project depth and usage frequency.</p>
+  <p class="skills-intro reveal">Full-stack AI engineering — from optimised DSA in C++ to deploying production LLM pipelines. Confidence scores reflect project depth and real-world usage.</p>
 
-  <!-- Languages -->
   <div class="skill-block reveal">
     <div class="block-label">Languages</div>
     <div class="lang-grid">
-      <div class="lang-card">
-        <div class="lang-icon">🐍</div>
-        <div class="lang-name">Python</div>
-        <div class="lang-use">ML · APIs · Scripting</div>
-      </div>
-      <div class="lang-card">
-        <div class="lang-icon">⚡</div>
-        <div class="lang-name">C++</div>
-        <div class="lang-use">DSA · Competitive</div>
-      </div>
-      <div class="lang-card">
-        <div class="lang-icon">🔧</div>
-        <div class="lang-name">C</div>
-        <div class="lang-use">Systems · Low-level</div>
-      </div>
+      <div class="lang-card"><div class="lang-icon">🐍</div><div class="lang-name">Python</div><div class="lang-use">ML · APIs · Scripting</div></div>
+      <div class="lang-card"><div class="lang-icon">⚡</div><div class="lang-name">C++</div><div class="lang-use">DSA · Competitive</div></div>
+      <div class="lang-card"><div class="lang-icon">🔧</div><div class="lang-name">C</div><div class="lang-use">Systems · Low-level</div></div>
     </div>
   </div>
 
-  <!-- LLM & Agentic AI — with confidence bars -->
-  <div class="skill-block reveal">
-    <div class="block-label">LLM & Agentic AI</div>
+  <div class="skill-block">
+    <div class="block-label reveal">LLM & Agentic AI</div>
     <div class="conf-grid skill-conf-group">
-      <div class="conf-card" data-score="0.97">
-        <div class="conf-header"><span class="conf-name">LangGraph</span><span class="conf-score">0.97</span></div>
-        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="97"></div></div>
-        <div class="conf-sub">Multi-agent orchestration · State machines</div>
-      </div>
-      <div class="conf-card" data-score="0.95">
-        <div class="conf-header"><span class="conf-name">LangChain</span><span class="conf-score">0.95</span></div>
-        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="95"></div></div>
-        <div class="conf-sub">Chains · Tools · Memory</div>
-      </div>
-      <div class="conf-card" data-score="0.94">
-        <div class="conf-header"><span class="conf-name">RAG Pipelines</span><span class="conf-score">0.94</span></div>
-        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="94"></div></div>
-        <div class="conf-sub">Semantic retrieval · Reranking</div>
-      </div>
-      <div class="conf-card" data-score="0.88">
-        <div class="conf-header"><span class="conf-name">LlamaIndex</span><span class="conf-score">0.88</span></div>
-        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="88"></div></div>
-        <div class="conf-sub">Data indexing · Query engines</div>
-      </div>
-      <div class="conf-card" data-score="0.92">
-        <div class="conf-header"><span class="conf-name">Prompt Engineering</span><span class="conf-score">0.92</span></div>
-        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="92"></div></div>
-        <div class="conf-sub">CoT · Few-shot · System design</div>
-      </div>
-      <div class="conf-card" data-score="0.82">
-        <div class="conf-header"><span class="conf-name">n8n Automation</span><span class="conf-score">0.82</span></div>
-        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="82"></div></div>
-        <div class="conf-sub">Workflow automation · AI agents</div>
-      </div>
+      <div class="conf-card"><div class="conf-header"><span class="conf-name">LangGraph</span><span class="conf-score">0.97</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="97"></div></div><div class="conf-sub">Multi-agent · State machines · Routing</div></div>
+      <div class="conf-card"><div class="conf-header"><span class="conf-name">LangChain</span><span class="conf-score">0.95</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="95"></div></div><div class="conf-sub">Chains · Tools · Memory</div></div>
+      <div class="conf-card"><div class="conf-header"><span class="conf-name">RAG Pipelines</span><span class="conf-score">0.94</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="94"></div></div><div class="conf-sub">Semantic retrieval · Reranking · Eval</div></div>
+      <div class="conf-card"><div class="conf-header"><span class="conf-name">LlamaIndex</span><span class="conf-score">0.88</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="88"></div></div><div class="conf-sub">Data indexing · Query engines</div></div>
+      <div class="conf-card"><div class="conf-header"><span class="conf-name">Prompt Engineering</span><span class="conf-score">0.92</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="92"></div></div><div class="conf-sub">CoT · Few-shot · System design</div></div>
+      <div class="conf-card"><div class="conf-header"><span class="conf-name">n8n Automation</span><span class="conf-score">0.82</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="82"></div></div><div class="conf-sub">Workflow automation · AI agents</div></div>
     </div>
   </div>
 
-  <!-- ML/DL Frameworks — confidence bars -->
-  <div class="skill-block reveal">
-    <div class="block-label">ML / DL Frameworks</div>
+  <div class="skill-block">
+    <div class="block-label reveal">ML / DL Frameworks</div>
     <div class="conf-grid skill-conf-group">
-      <div class="conf-card">
-        <div class="conf-header"><span class="conf-name">PyTorch</span><span class="conf-score">0.91</span></div>
-        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="91"></div></div>
-        <div class="conf-sub">Neural nets · Training loops</div>
-      </div>
-      <div class="conf-card">
-        <div class="conf-header"><span class="conf-name">Scikit-learn</span><span class="conf-score">0.93</span></div>
-        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="93"></div></div>
-        <div class="conf-sub">Classical ML · Pipelines</div>
-      </div>
-      <div class="conf-card">
-        <div class="conf-header"><span class="conf-name">HuggingFace</span><span class="conf-score">0.89</span></div>
-        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="89"></div></div>
-        <div class="conf-sub">Transformers · Embeddings</div>
-      </div>
-      <div class="conf-card">
-        <div class="conf-header"><span class="conf-name">TensorFlow</span><span class="conf-score">0.80</span></div>
-        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="80"></div></div>
-        <div class="conf-sub">Model building · Keras API</div>
-      </div>
+      <div class="conf-card"><div class="conf-header"><span class="conf-name">PyTorch</span><span class="conf-score">0.91</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="91"></div></div><div class="conf-sub">Neural nets · Training loops · Custom models</div></div>
+      <div class="conf-card"><div class="conf-header"><span class="conf-name">Scikit-learn</span><span class="conf-score">0.93</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="93"></div></div><div class="conf-sub">Classical ML · Pipelines · Eval</div></div>
+      <div class="conf-card"><div class="conf-header"><span class="conf-name">HuggingFace</span><span class="conf-score">0.89</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="89"></div></div><div class="conf-sub">Transformers · Embeddings · Fine-tuning</div></div>
+      <div class="conf-card"><div class="conf-header"><span class="conf-name">TensorFlow</span><span class="conf-score">0.80</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="80"></div></div><div class="conf-sub">Model building · Keras API</div></div>
     </div>
   </div>
 
-  <!-- Vector DBs -->
   <div class="skill-block reveal">
     <div class="block-label">Vector Databases</div>
     <div class="tag-cloud">
@@ -261,34 +133,16 @@ html[data-theme="light"] .conf-bar-bg {
     </div>
   </div>
 
-  <!-- APIs & Infra — confidence bars -->
-  <div class="skill-block reveal">
-    <div class="block-label">APIs, Infra & Databases</div>
+  <div class="skill-block">
+    <div class="block-label reveal">APIs, Infra & MLOps</div>
     <div class="conf-grid skill-conf-group">
-      <div class="conf-card">
-        <div class="conf-header"><span class="conf-name">FastAPI</span><span class="conf-score">0.93</span></div>
-        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="93"></div></div>
-        <div class="conf-sub">REST APIs · Async · Streaming</div>
-      </div>
-      <div class="conf-card">
-        <div class="conf-header"><span class="conf-name">Docker</span><span class="conf-score">0.89</span></div>
-        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="89"></div></div>
-        <div class="conf-sub">Containers · Compose · Render</div>
-      </div>
-      <div class="conf-card">
-        <div class="conf-header"><span class="conf-name">Supabase / Postgres</span><span class="conf-score">0.85</span></div>
-        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="85"></div></div>
-        <div class="conf-sub">Auth · Realtime · Storage</div>
-      </div>
-      <div class="conf-card">
-        <div class="conf-header"><span class="conf-name">MLflow + W&B</span><span class="conf-score">0.83</span></div>
-        <div class="conf-bar-bg"><div class="conf-bar-fill" data-w="83"></div></div>
-        <div class="conf-sub">Experiment tracking · Viz</div>
-      </div>
+      <div class="conf-card"><div class="conf-header"><span class="conf-name">FastAPI</span><span class="conf-score">0.93</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="93"></div></div><div class="conf-sub">REST · Async · Streaming · SSE</div></div>
+      <div class="conf-card"><div class="conf-header"><span class="conf-name">Docker</span><span class="conf-score">0.89</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="89"></div></div><div class="conf-sub">Containers · Compose · Render deploy</div></div>
+      <div class="conf-card"><div class="conf-header"><span class="conf-name">Supabase / Postgres</span><span class="conf-score">0.85</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="85"></div></div><div class="conf-sub">Auth · Realtime · Storage · RLS</div></div>
+      <div class="conf-card"><div class="conf-header"><span class="conf-name">MLflow + W&B</span><span class="conf-score">0.83</span></div><div class="conf-bar-bg"><div class="conf-bar-fill" data-w="83"></div></div><div class="conf-sub">Experiment tracking · Versioning · Viz</div></div>
     </div>
   </div>
 
-  <!-- Interests -->
   <div class="skill-block reveal">
     <div class="block-label">Research Interests</div>
     <div class="interest-row">
@@ -302,34 +156,35 @@ html[data-theme="light"] .conf-bar-bg {
 </section>
 
 <footer>
-  <div class="footer-name">Pandharinath Maske © 2026</div>
+  <div class="footer-left">
+    <span class="footer-name">Pandharinath Maske © 2026</span>
+    <span class="footer-tagline">Building intelligent systems · Pune, India</span>
+  </div>
   <ul class="footer-socials">
     <li><a href="https://github.com/Pandharimaske" target="_blank" rel="noopener"><i class="fab fa-github"></i></a></li>
     <li><a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a></li>
+    <li><a href="https://x.com/PMaske20171" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a></li>
+    <li><a href="https://www.instagram.com/pandhari__7/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a></li>
     <li><a href="https://leetcode.com/u/PandhariMaske1437/" target="_blank" rel="noopener"><i class="fas fa-code"></i></a></li>
     <li><a href="mailto:pandharinath1437@gmail.com"><i class="fas fa-envelope"></i></a></li>
   </ul>
 </footer>
 
-<button id="btt" title="Back to top"><i class="fas fa-arrow-up"></i></button>
+<button id="btt"><i class="fas fa-arrow-up"></i></button>
 <script src="js/main.js"></script>
 <script>
-/* Animate confidence bars on scroll */
 (function(){
-  const obs = new IntersectionObserver((entries) => {
+  const obs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.querySelectorAll('.conf-bar-fill').forEach((bar, i) => {
-          setTimeout(() => {
-            bar.style.width = bar.dataset.w + '%';
-          }, i * 120);
+          setTimeout(() => { bar.style.width = bar.dataset.w + '%'; }, i * 110);
         });
         obs.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.2 });
-
-  document.querySelectorAll('.skill-conf-group, .conf-grid').forEach(g => obs.observe(g));
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.skill-conf-group').forEach(g => obs.observe(g));
 })();
 </script>
 </body>
