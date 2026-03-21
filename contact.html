@@ -3,117 +3,206 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="Contact Pandharinath Maske — AI Engineer & ML Researcher at VIIT Pune."/>
-<meta property="og:title" content="Contact — Pandharinath Maske"/>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%23e8a020' font-family='serif' font-style='italic'>P</text></svg>"/>
 <title>Contact — Pandharinath Maske</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%23f0a500' font-family='serif' font-style='italic'>P</text></svg>"/>
 <link rel="stylesheet" href="css/style.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <script>(function(){const t=localStorage.getItem('pm-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
 <style>
-.contact-layout {
-  display: grid;
-  grid-template-columns: 1fr 1.3fr;
-  gap: 5rem; align-items: start;
-  margin-top: 1rem;
+/* ── TERMINAL WINDOW ── */
+.terminal-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5rem;
+  min-height: 100vh;
+  justify-content: center;
 }
 
-.contact-left h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
-  font-weight: 700; margin-bottom: 1rem; line-height: 1.2;
-}
-
-.contact-left h2 em { color: var(--accent); font-style: italic; }
-.contact-left p { color: var(--muted); font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.8; }
-
-.contact-links { display: flex; flex-direction: column; gap: 1rem; }
-
-.contact-link-item {
-  display: flex; align-items: center; gap: 1rem;
-  padding: 1rem 1.4rem;
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--radius); text-decoration: none;
-  transition: all 0.3s;
-}
-
-.contact-link-item:hover { border-color: rgba(232,160,32,0.4); transform: translateX(4px); }
-
-.cli-icon {
-  width: 36px; height: 36px;
-  background: rgba(232,160,32,0.1);
-  border: 1px solid rgba(232,160,32,0.2);
-  border-radius: var(--radius);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--accent); font-size: 0.9rem; flex-shrink: 0;
-}
-
-.cli-text { display: flex; flex-direction: column; gap: 0.1rem; }
-
-.cli-label {
+.terminal-hint {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem; color: var(--muted);
-  letter-spacing: 0.15em; text-transform: uppercase;
+  font-size: 0.68rem; color: var(--muted);
+  letter-spacing: 0.12em; margin-bottom: 1.2rem;
+  text-align: center;
 }
 
-.cli-val { font-size: 0.88rem; color: var(--text); }
+.terminal-hint span { color: var(--gold); }
 
-/* Form */
-.contact-form {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 2.5rem;
-}
-
-.form-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.4rem; font-weight: 700; margin-bottom: 2rem;
-}
-
-.form-group { margin-bottom: 1.5rem; }
-
-.form-label {
-  display: block;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.62rem; color: var(--muted);
-  letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.5rem;
-}
-
-.form-input,
-.form-textarea {
+.terminal-win {
   width: 100%;
-  background: var(--bg); border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 0.75rem 1rem;
-  font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
-  color: var(--text);
-  transition: border-color 0.25s;
-  outline: none;
-}
-
-.form-input:focus,
-.form-textarea:focus { border-color: var(--accent); }
-
-.form-textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
-
-.form-status {
+  max-width: 820px;
+  background: #080810;
+  border: 1px solid rgba(240,165,0,0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(240,165,0,0.06), 0 0 80px rgba(240,165,0,0.04);
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.78rem; margin-top: 1rem;
-  letter-spacing: 0.06em; display: none;
 }
 
-.form-status.success { color: #5cb87a; display: block; }
-.form-status.error { color: #e86060; display: block; }
+html[data-theme="light"] .terminal-win {
+  background: #1a1a2e;
+  border-color: rgba(240,165,0,0.2);
+}
 
-/* Note about Formspree */
-.form-note {
+/* Window chrome */
+.term-chrome {
+  background: #0f0f1a;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 0.7rem 1rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+
+.term-dot { width: 11px; height: 11px; border-radius: 50%; }
+.term-dot.r { background: #ff5f57; box-shadow: 0 0 6px rgba(255,95,87,0.4); }
+.term-dot.y { background: #febc2e; box-shadow: 0 0 6px rgba(254,188,46,0.4); }
+.term-dot.g { background: #28c840; box-shadow: 0 0 6px rgba(40,200,64,0.4); }
+
+.term-title {
+  margin: 0 auto;
+  font-size: 0.65rem; color: rgba(255,255,255,0.22); letter-spacing: 0.1em;
+}
+
+/* Terminal body */
+.term-body {
+  padding: 1.2rem 1.4rem 0;
+  height: 480px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.term-body::-webkit-scrollbar { width: 3px; }
+.term-body::-webkit-scrollbar-thumb { background: rgba(240,165,0,0.2); border-radius: 2px; }
+
+/* ASCII art */
+.term-ascii {
+  color: rgba(240,165,0,0.5);
+  font-size: 0.52rem;
+  line-height: 1.2;
+  white-space: pre;
+  margin-bottom: 0.8rem;
+  user-select: none;
+}
+
+/* Output lines */
+.term-line {
+  font-size: 0.76rem; line-height: 1.75;
+  margin-bottom: 0.05rem;
+  color: rgba(232,224,213,0.85);
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.term-line.muted   { color: rgba(255,255,255,0.28); }
+.term-line.gold    { color: var(--gold); }
+.term-line.green   { color: #22c55e; }
+.term-line.purple  { color: #a855f7; }
+.term-line.cyan    { color: #67e8f9; }
+.term-line.error   { color: #ef4444; }
+.term-line.dim     { color: rgba(255,255,255,0.18); font-size:0.68rem; }
+.term-line.cmd     { color: rgba(255,255,255,0.9); }
+
+/* Prompt line at bottom */
+.term-input-row {
+  display: flex; align-items: center; gap: 0;
+  padding: 0.5rem 1.4rem 1.2rem;
+  position: sticky; bottom: 0;
+  background: #080810;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+.term-prompt-str {
+  font-size: 0.76rem; white-space: nowrap; user-select: none;
+  display: flex; align-items: center; gap: 0.2rem;
+}
+
+.term-ps-user  { color: #22c55e; }
+.term-ps-at    { color: rgba(255,255,255,0.3); }
+.term-ps-host  { color: #a855f7; }
+.term-ps-path  { color: var(--gold); }
+.term-ps-sep   { color: rgba(255,255,255,0.3); margin: 0 0.1rem; }
+
+#term-input {
+  background: transparent; border: none; outline: none;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem; color: var(--muted);
-  margin-top: 0.8rem; letter-spacing: 0.06em;
+  font-size: 0.76rem; color: rgba(232,224,213,0.9);
+  flex: 1; caret-color: var(--gold);
+  padding: 0 0.3rem;
 }
 
-@media (max-width: 900px) {
-  .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+/* hint below */
+.term-commands-hint {
+  max-width: 820px; width: 100%;
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+  margin-top: 1rem;
+  justify-content: center;
 }
+
+.cmd-chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.08em;
+  padding: 0.25rem 0.65rem;
+  background: rgba(240,165,0,0.06);
+  border: 1px solid rgba(240,165,0,0.14);
+  border-radius: 3px; color: var(--muted);
+  cursor: none; transition: all 0.2s; user-select: none;
+}
+
+.cmd-chip:hover { border-color: var(--gold); color: var(--gold); background: rgba(240,165,0,0.1); }
+
+/* Inline form inside terminal */
+.term-form {
+  background: rgba(240,165,0,0.04);
+  border: 1px solid rgba(240,165,0,0.12);
+  border-radius: 4px;
+  padding: 0.8rem 1rem;
+  margin: 0.4rem 0;
+}
+
+.tf-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.35rem; }
+
+.tf-label {
+  font-size: 0.68rem; color: var(--gold); width: 70px; flex-shrink: 0;
+}
+
+.tf-input {
+  background: transparent; border: none; border-bottom: 1px solid rgba(240,165,0,0.2);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem; color: var(--text);
+  outline: none; flex: 1; padding: 0.15rem 0;
+  transition: border-color 0.2s;
+}
+
+.tf-input:focus { border-color: var(--gold); }
+
+.tf-submit {
+  margin-top: 0.6rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem; color: #0b0b0b;
+  background: var(--gold);
+  border: none; border-radius: 3px;
+  padding: 0.4rem 1rem; cursor: none; transition: all 0.2s;
+}
+
+.tf-submit:hover { background: var(--gold2); }
+
+/* scan line effect */
+.terminal-win::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
+  border-radius: 12px;
+  z-index: 1;
+}
+
+.terminal-win { position: relative; }
+.term-body, .term-input-row { position: relative; z-index: 2; }
 </style>
 </head>
 <body>
@@ -130,83 +219,57 @@
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div class="nav-right">
-    <button class="theme-btn" id="theme-btn" title="Toggle theme"><i class="fas fa-moon"></i></button>
+    <button class="theme-btn" id="theme-btn"><i class="fas fa-moon"></i></button>
   </div>
 </nav>
 
-<section class="page-section">
-  <div class="section-header reveal">
-    <span class="section-num">05</span>
-    <h1 class="section-title">Contact</h1>
-    <div class="section-line"></div>
-  </div>
+<div class="page-section terminal-page">
+  <div class="terminal-hint">Type <span>help</span> to see commands · <span>hire</span> to send a message · <span>↑↓</span> for history</div>
 
-  <div class="contact-layout">
-    <div class="reveal">
-      <h2>Let's build<br><em>something great.</em></h2>
-      <p>Open to internships, research collaborations, project partnerships, or just a good conversation about LLMs and agentic AI.</p>
+  <div class="terminal-win">
+    <div class="term-chrome">
+      <div class="term-dot r"></div>
+      <div class="term-dot y"></div>
+      <div class="term-dot g"></div>
+      <span class="term-title">pandhari@ai — contact — zsh</span>
+    </div>
 
-      <div class="contact-links">
-        <a href="mailto:pandharinath1437@gmail.com" class="contact-link-item">
-          <div class="cli-icon"><i class="fas fa-envelope"></i></div>
-          <div class="cli-text">
-            <span class="cli-label">Email</span>
-            <span class="cli-val">pandharinath1437@gmail.com</span>
-          </div>
-        </a>
-        <a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" class="contact-link-item" target="_blank" rel="noopener">
-          <div class="cli-icon"><i class="fab fa-linkedin"></i></div>
-          <div class="cli-text">
-            <span class="cli-label">LinkedIn</span>
-            <span class="cli-val">pandharinath-maske</span>
-          </div>
-        </a>
-        <a href="https://github.com/Pandharimaske" class="contact-link-item" target="_blank" rel="noopener">
-          <div class="cli-icon"><i class="fab fa-github"></i></div>
-          <div class="cli-text">
-            <span class="cli-label">GitHub</span>
-            <span class="cli-val">Pandharimaske</span>
-          </div>
-        </a>
-        <a href="https://leetcode.com/u/PandhariMaske1437/" class="contact-link-item" target="_blank" rel="noopener">
-          <div class="cli-icon"><i class="fas fa-code"></i></div>
-          <div class="cli-text">
-            <span class="cli-label">LeetCode</span>
-            <span class="cli-val">PandhariMaske1437</span>
-          </div>
-        </a>
+    <div class="term-body" id="term-body">
+      <!-- ASCII art -->
+      <div class="term-ascii">
+ ____  __  ___  ____  ____  __    ____    ____  __    ____  ____
+(  _ \/ _\/ __)(_  _)(  _ \/ _\  (  _ \  (  _ \(  )  (  _ \(  __)
+ ) __/    /\__ \ )(    )   /    \  )   /   )   / )(    )___/ ) _)
+(__)  \_/\_/(___/(__) (__\_)\_/\_/(__\_)  (__\_)(__)  (__)  (____)
       </div>
     </div>
 
-    <div class="contact-form reveal">
-      <div class="form-title">Send a message</div>
-      <!-- Replace YOUR_FORM_ID with your Formspree form ID after signing up at formspree.io -->
-      <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-        <div class="form-group">
-          <label class="form-label" for="name">Name</label>
-          <input class="form-input" type="text" id="name" name="name" placeholder="Your name" required/>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="email">Email</label>
-          <input class="form-input" type="email" id="email" name="email" placeholder="your@email.com" required/>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="subject">Subject</label>
-          <input class="form-input" type="text" id="subject" name="subject" placeholder="What's this about?"/>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="message">Message</label>
-          <textarea class="form-textarea" id="message" name="message" placeholder="Tell me more..." required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">
-          <i class="fas fa-paper-plane"></i> Send Message
-        </button>
-        <div id="form-status" class="form-status"></div>
-        <p class="form-note">* Form powered by Formspree — replace YOUR_FORM_ID after signing up at formspree.io (free)</p>
-      </form>
+    <div class="term-input-row">
+      <div class="term-prompt-str">
+        <span class="term-ps-user">pandhari</span>
+        <span class="term-ps-at">@</span>
+        <span class="term-ps-host">ai</span>
+        <span class="term-ps-sep">:</span>
+        <span class="term-ps-path">~/contact</span>
+        <span class="term-ps-sep">$&nbsp;</span>
+      </div>
+      <input type="text" id="term-input" autocomplete="off" autocorrect="off" spellcheck="false" autofocus placeholder="type a command..."/>
     </div>
   </div>
-</section>
+
+  <div class="term-commands-hint">
+    <div class="cmd-chip" data-cmd="help">help</div>
+    <div class="cmd-chip" data-cmd="whoami">whoami</div>
+    <div class="cmd-chip" data-cmd="hire">hire</div>
+    <div class="cmd-chip" data-cmd="email">email</div>
+    <div class="cmd-chip" data-cmd="github">github</div>
+    <div class="cmd-chip" data-cmd="linkedin">linkedin</div>
+    <div class="cmd-chip" data-cmd="leetcode">leetcode</div>
+    <div class="cmd-chip" data-cmd="skills">skills</div>
+    <div class="cmd-chip" data-cmd="projects">projects</div>
+    <div class="cmd-chip" data-cmd="clear">clear</div>
+  </div>
+</div>
 
 <footer>
   <div class="footer-left">
@@ -223,7 +286,367 @@
   </ul>
 </footer>
 
-<button id="btt" title="Back to top"><i class="fas fa-arrow-up"></i></button>
+<button id="btt"><i class="fas fa-arrow-up"></i></button>
 <script src="js/main.js"></script>
+<script>
+// ── TERMINAL ENGINE ─────────────────────────────────────
+const body    = document.getElementById('term-body');
+const input   = document.getElementById('term-input');
+let history   = [];
+let histIdx   = -1;
+let hiring    = false;
+let hireData  = {};
+let hireStep  = 0;
+
+// ── COMMANDS ──────────────────────────────────────────
+const COMMANDS = {
+
+  help: () => [
+    { cls: 'gold',   text: 'Available commands:' },
+    { cls: '',       text: '' },
+    { cls: 'cyan',   text: '  whoami      →  About Pandharinath' },
+    { cls: 'cyan',   text: '  hire        →  Send me a message' },
+    { cls: 'cyan',   text: '  email       →  Copy email address' },
+    { cls: 'cyan',   text: '  github      →  Open GitHub profile' },
+    { cls: 'cyan',   text: '  linkedin    →  Open LinkedIn' },
+    { cls: 'cyan',   text: '  leetcode    →  Open LeetCode profile' },
+    { cls: 'cyan',   text: '  skills      →  Go to Skills page' },
+    { cls: 'cyan',   text: '  projects    →  Go to Projects page' },
+    { cls: 'cyan',   text: '  resume      →  Download resume' },
+    { cls: 'cyan',   text: '  clear       →  Clear terminal' },
+    { cls: '',       text: '' },
+    { cls: 'muted',  text: '  ↑ / ↓  to navigate command history' },
+    { cls: 'muted',  text: '  tab     to autocomplete' },
+  ],
+
+  whoami: () => [
+    { cls: '',       text: '' },
+    { cls: 'gold',   text: 'Pandharinath Maske' },
+    { cls: 'muted',  text: '──────────────────────────────────────' },
+    { cls: '',       text: 'Role       AI Engineer & ML Researcher' },
+    { cls: '',       text: 'University VIIT Pune · B.Tech CS (AI) · 2023–2027' },
+    { cls: '',       text: 'Focus      LLMs · Agentic AI · RAG Pipelines' },
+    { cls: '',       text: 'LeetCode   1647 peak · 700+ problems solved' },
+    { cls: '',       text: 'Published  ETFI-2026 · DES Pune University' },
+    { cls: '',       text: 'Stack      LangGraph · FastAPI · Docker · Pinecone' },
+    { cls: '',       text: '' },
+    { cls: 'green',  text: 'Status     Open to internships & collaborations ●' },
+    { cls: '',       text: '' },
+  ],
+
+  email: () => {
+    navigator.clipboard?.writeText('pandharinath1437@gmail.com').catch(()=>{});
+    return [
+      { cls: 'green', text: '✓ pandharinath1437@gmail.com' },
+      { cls: 'muted', text: '  Copied to clipboard.' },
+    ];
+  },
+
+  github: () => {
+    setTimeout(() => window.open('https://github.com/Pandharimaske', '_blank'), 400);
+    return [
+      { cls: 'cyan',  text: '→ Opening github.com/Pandharimaske ...' },
+    ];
+  },
+
+  linkedin: () => {
+    setTimeout(() => window.open('https://www.linkedin.com/in/pandharinath-maske-538381289/', '_blank'), 400);
+    return [
+      { cls: 'cyan',  text: '→ Opening LinkedIn profile ...' },
+    ];
+  },
+
+  leetcode: () => {
+    setTimeout(() => window.open('https://leetcode.com/u/PandhariMaske1437/', '_blank'), 400);
+    return [
+      { cls: 'cyan',  text: '→ Opening LeetCode · PandhariMaske1437 ...' },
+    ];
+  },
+
+  skills: () => {
+    setTimeout(() => window.location.href = 'skills.html', 600);
+    return [
+      { cls: 'cyan',  text: '→ Navigating to Skills Network ...' },
+    ];
+  },
+
+  projects: () => {
+    setTimeout(() => window.location.href = 'projects.html', 600);
+    return [
+      { cls: 'cyan',  text: '→ Opening Projects Notebook ...' },
+    ];
+  },
+
+  resume: () => {
+    setTimeout(() => {
+      const a = document.createElement('a');
+      a.href = 'assets/Pandharinath_Maske_Resume.pdf';
+      a.download = 'Pandharinath_Maske_Resume.pdf';
+      a.click();
+    }, 300);
+    return [
+      { cls: 'green', text: '↓ Downloading Pandharinath_Maske_Resume.pdf ...' },
+    ];
+  },
+
+  x: () => {
+    setTimeout(() => window.open('https://x.com/PMaske20171', '_blank'), 400);
+    return [{ cls: 'cyan', text: '→ Opening X / Twitter ...' }];
+  },
+
+  instagram: () => {
+    setTimeout(() => window.open('https://www.instagram.com/pandhari__7/', '_blank'), 400);
+    return [{ cls: 'cyan', text: '→ Opening Instagram ...' }];
+  },
+
+  hire: () => {
+    hiring = true;
+    hireStep = 0;
+    hireData = {};
+    return [
+      { cls: '',      text: '' },
+      { cls: 'gold',  text: 'pandhari.hire()  →  Initializing contact form...' },
+      { cls: '',      text: '' },
+      { cls: 'muted', text: '  I\'ll need 3 inputs. Press Enter after each.' },
+      { cls: '',      text: '' },
+      { cls: 'gold',  text: 'Your name: ' },
+    ];
+  },
+
+  clear: () => {
+    setTimeout(() => {
+      const lines = body.querySelectorAll('.term-line, .term-ascii');
+      lines.forEach(l => l.remove());
+    }, 10);
+    return [];
+  },
+};
+
+// Alias
+COMMANDS['ls']  = COMMANDS['help'];
+COMMANDS['cat'] = () => [{ cls: 'error', text: 'cat: permission denied — try `whoami` instead' }];
+COMMANDS['rm']  = () => [{ cls: 'error', text: 'rm: nice try. nothing gets deleted here.' }];
+COMMANDS['sudo']= () => [{ cls: 'error', text: 'sudo: you don\'t have root access to Pandhari.' }];
+COMMANDS['pwd'] = () => [{ cls: '',      text: '/home/pandhari/portfolio/contact' }];
+COMMANDS['date']= () => [{ cls: '',      text: new Date().toString() }];
+COMMANDS['ping']= () => [
+  { cls: 'muted', text: 'PING pandharinath@viit.ac.in' },
+  { cls: 'green', text: '64 bytes from pandhari: time=1ms ✓' },
+  { cls: 'muted', text: 'Response: available for opportunities' },
+];
+
+// ── RENDER OUTPUT ─────────────────────────────────────
+function printLines(lines) {
+  lines.forEach(({ cls, text, html }) => {
+    const div = document.createElement('div');
+    div.className = 'term-line' + (cls ? ' ' + cls : '');
+    if (html) div.innerHTML = html;
+    else div.textContent = text;
+    body.appendChild(div);
+  });
+  scrollToBottom();
+}
+
+function printPromptEcho(cmd) {
+  const div = document.createElement('div');
+  div.className = 'term-line cmd';
+  div.innerHTML = `<span style="color:#22c55e">pandhari</span><span style="color:rgba(255,255,255,0.3)">@</span><span style="color:#a855f7">ai</span><span style="color:rgba(255,255,255,0.3)">:</span><span style="color:var(--gold)">~/contact</span><span style="color:rgba(255,255,255,0.3)">$</span> ${escapeHtml(cmd)}`;
+  body.appendChild(div);
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function scrollToBottom() {
+  body.scrollTop = body.scrollHeight;
+}
+
+function blank() {
+  const d = document.createElement('div');
+  d.className = 'term-line';
+  d.textContent = '';
+  body.appendChild(d);
+}
+
+// ── HIRE FLOW ─────────────────────────────────────────
+const HIRE_STEPS = [
+  { key: 'name',    prompt: 'Your name: ',    label: 'name' },
+  { key: 'email',   prompt: 'Your email: ',   label: 'email' },
+  { key: 'message', prompt: 'Message: ',      label: 'message' },
+];
+
+function handleHireInput(val) {
+  if (!val.trim()) {
+    printLines([{ cls: 'error', text: 'Field cannot be empty. Try again.' }]);
+    printLines([{ cls: 'gold', text: HIRE_STEPS[hireStep].prompt }]);
+    return;
+  }
+
+  hireData[HIRE_STEPS[hireStep].key] = val;
+  hireStep++;
+
+  if (hireStep < HIRE_STEPS.length) {
+    printLines([{ cls: 'gold', text: HIRE_STEPS[hireStep].prompt }]);
+  } else {
+    // Submit
+    hiring = false;
+    blank();
+    printLines([
+      { cls: 'muted', text: 'Sending message...' },
+    ]);
+
+    // Send via Formspree (replace YOUR_FORM_ID)
+    fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        name: hireData.name,
+        email: hireData.email,
+        message: hireData.message,
+      })
+    }).then(r => {
+      if (r.ok) {
+        printLines([
+          { cls: 'green', text: '✓ Message sent successfully!' },
+          { cls: '',      text: '' },
+          { cls: '',      text: `  To:      pandharinath1437@gmail.com` },
+          { cls: '',      text: `  From:    ${hireData.name} <${hireData.email}>` },
+          { cls: 'muted', text: `  Preview: "${hireData.message.slice(0,60)}${hireData.message.length>60?'...':''}"` },
+          { cls: '',      text: '' },
+          { cls: 'gold',  text: "  I'll get back to you soon. Thanks for reaching out!" },
+          { cls: '',      text: '' },
+        ]);
+      } else {
+        // Show direct email fallback if Formspree not configured
+        printLines([
+          { cls: 'gold',  text: '→ Direct email (Formspree not configured yet):' },
+          { cls: '',      text: '' },
+          { cls: 'green', text: '  pandharinath1437@gmail.com' },
+          { cls: '',      text: `  Subject: Message from ${hireData.name}` },
+          { cls: '',      text: `  Body:    ${hireData.message.slice(0,80)}` },
+          { cls: '',      text: '' },
+          { cls: 'muted', text: '  (Tip: replace YOUR_FORM_ID in contact.html with Formspree ID)' },
+        ]);
+      }
+    }).catch(() => {
+      printLines([
+        { cls: 'gold',  text: '→ Email directly: pandharinath1437@gmail.com' },
+        { cls: '',      text: `  Message: "${hireData.message.slice(0,80)}"` },
+      ]);
+    });
+  }
+}
+
+// ── MAIN INPUT HANDLER ────────────────────────────────
+input.addEventListener('keydown', (e) => {
+
+  // History navigation
+  if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (histIdx < history.length - 1) {
+      histIdx++;
+      input.value = history[history.length - 1 - histIdx] || '';
+    }
+    return;
+  }
+
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    if (histIdx > 0) {
+      histIdx--;
+      input.value = history[history.length - 1 - histIdx] || '';
+    } else {
+      histIdx = -1;
+      input.value = '';
+    }
+    return;
+  }
+
+  // Tab completion
+  if (e.key === 'Tab') {
+    e.preventDefault();
+    const val = input.value.toLowerCase().trim();
+    if (!val) return;
+    const match = Object.keys(COMMANDS).find(c => c.startsWith(val));
+    if (match) input.value = match;
+    return;
+  }
+
+  if (e.key !== 'Enter') return;
+
+  const raw = input.value.trim();
+  input.value = '';
+  histIdx = -1;
+
+  printPromptEcho(raw || '');
+
+  if (!raw) { scrollToBottom(); return; }
+
+  // Add to history
+  if (raw && history[history.length-1] !== raw) history.push(raw);
+
+  // Hire flow
+  if (hiring) {
+    handleHireInput(raw);
+    return;
+  }
+
+  const cmd = raw.toLowerCase().split(' ')[0];
+
+  if (COMMANDS[cmd]) {
+    const output = COMMANDS[cmd]();
+    if (output && output.length) printLines(output);
+    if (cmd !== 'clear') blank();
+  } else {
+    printLines([
+      { cls: 'error', text: `bash: ${cmd}: command not found` },
+      { cls: 'muted', text: `Type 'help' to see available commands` },
+    ]);
+    blank();
+  }
+
+  scrollToBottom();
+});
+
+// Chip clicks
+document.querySelectorAll('.cmd-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    input.value = chip.dataset.cmd;
+    input.focus();
+    input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+  });
+});
+
+// Boot sequence
+function boot() {
+  const lines = [
+    { cls: 'muted', text: 'pandhari-ai v4.0.0 (LangGraph build, Pinecone kernel)', delay: 0 },
+    { cls: 'muted', text: 'Last login: ' + new Date().toDateString() + ' on ttys001', delay: 80 },
+    { cls: 'muted', text: '────────────────────────────────────────────────────', delay: 140 },
+    { cls: '',      text: '', delay: 180 },
+    { cls: 'gold',  text: 'Welcome. I\'m Pandharinath Maske — AI Engineer @ VIIT Pune.', delay: 220 },
+    { cls: '',      text: 'Open to internships · collaborations · hard problems.', delay: 300 },
+    { cls: '',      text: '', delay: 360 },
+    { cls: 'muted', text: 'Type \'help\' for commands, \'hire\' to get in touch.', delay: 400 },
+    { cls: '',      text: '', delay: 440 },
+  ];
+
+  lines.forEach(({ cls, text, delay }) => {
+    setTimeout(() => {
+      const d = document.createElement('div');
+      d.className = 'term-line' + (cls ? ' '+cls : '');
+      d.textContent = text;
+      body.appendChild(d);
+      scrollToBottom();
+    }, delay);
+  });
+}
+
+// Keep input focused
+document.querySelector('.terminal-win').addEventListener('click', () => input.focus());
+input.focus();
+boot();
+</script>
 </body>
 </html>
