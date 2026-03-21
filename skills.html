@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Technical expertise in LLMs, RAG, multi-agent systems, Python, FastAPI, Docker, and ML infrastructure."/>
+<meta name="theme-color" content="#0b0b0b"/>
+<meta property="og:title" content="Skills — Pandharinath Maske"/>
+<meta property="og:description" content="Technical expertise in LLMs, RAG systems, and AI infrastructure."/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23e8a020'>P</text></svg>"/>
 <title>Skills — Pandharinath Maske</title>
 <link rel="stylesheet" href="style.css"/>
 <style>
@@ -119,6 +126,63 @@
     border-radius: 50%;
   }
 
+  /* Animated Skill Bars */
+  .skill-bar-container {
+    margin-bottom: 3rem;
+  }
+
+  .skill-bar-item {
+    margin-bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .skill-bar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .skill-bar-name {
+    font-size: 0.95rem;
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  .skill-bar-level {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .skill-bar-bg {
+    width: 100%;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .skill-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    width: 0%;
+    border-radius: 3px;
+    transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .skill-bar-fill.animated {
+    animation: skillBarFill 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  @keyframes skillBarFill {
+    from { width: 0%; }
+    to { width: var(--fill-percentage, 80%); }
+  }
+
   @media (max-width: 768px) {
     .skills-grid { grid-template-columns: 1fr 1fr; }
   }
@@ -132,8 +196,10 @@
     <li><a href="index.html">Home</a></li>
     <li><a href="skills.html" class="active">Skills</a></li>
     <li><a href="projects.html">Projects</a></li>
+    <li><a href="blog.html">Blog</a></li>
     <li><a href="achievements.html">Achievements</a></li>
   </ul>
+  <button class="theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="Toggle dark/light theme">🌙</button>
 </nav>
 
 <section class="page-section">
@@ -146,6 +212,67 @@
   <p class="skills-intro reveal">
     Full-stack AI engineering — from writing optimised DSA in C++ to deploying production LLM pipelines on Docker. Here's what's in the toolkit.
   </p>
+
+  <!-- Proficiency Levels -->
+  <div class="skills-block">
+    <div class="skills-block-title reveal">Proficiency Levels</div>
+    <div class="skill-bar-container reveal">
+      <div class="skill-bar-item">
+        <div class="skill-bar-header">
+          <span class="skill-bar-name">Python & LLM Systems</span>
+          <span class="skill-bar-level">Expert</span>
+        </div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill" style="--fill-percentage: 95%"></div>
+        </div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header">
+          <span class="skill-bar-name">Machine Learning & Deep Learning</span>
+          <span class="skill-bar-level">Advanced</span>
+        </div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill" style="--fill-percentage: 85%"></div>
+        </div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header">
+          <span class="skill-bar-name">Backend & Deployment (FastAPI, Docker)</span>
+          <span class="skill-bar-level">Advanced</span>
+        </div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill" style="--fill-percentage: 80%"></div>
+        </div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header">
+          <span class="skill-bar-name">Competitive Programming (DSA)</span>
+          <span class="skill-bar-level">Advanced</span>
+        </div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill" style="--fill-percentage: 82%"></div>
+        </div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header">
+          <span class="skill-bar-name">Database & Cloud (Supabase, Pinecone)</span>
+          <span class="skill-bar-level">Intermediate</span>
+        </div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill" style="--fill-percentage: 70%"></div>
+        </div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header">
+          <span class="skill-bar-name">Web Development (HTML, CSS, JS)</span>
+          <span class="skill-bar-level">Intermediate</span>
+        </div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill" style="--fill-percentage: 65%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Languages -->
   <div class="skills-block">
@@ -273,5 +400,7 @@
   }, { threshold: 0.08 });
   reveals.forEach(el => obs.observe(el));
 </script>
+<button id="back-to-top" title="Back to top" aria-label="Back to top">↑</button>
+<script src="js/main.js"></script>
 </body>
 </html>

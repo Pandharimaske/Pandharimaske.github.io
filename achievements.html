@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Research publications, awards, and achievements in AI and LLM systems. Presented at ETFI 2026."/>
+<meta name="theme-color" content="#0b0b0b"/>
+<meta property="og:title" content="Achievements — Pandharinath Maske"/>
+<meta property="og:description" content="Research, awards, and professional achievements in AI systems and LLM research."/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23e8a020'>P</text></svg>"/>
 <title>Achievements — Pandharinath Maske</title>
 <link rel="stylesheet" href="style.css"/>
 <style>
@@ -180,8 +187,10 @@
     <li><a href="index.html">Home</a></li>
     <li><a href="skills.html">Skills</a></li>
     <li><a href="projects.html">Projects</a></li>
+    <li><a href="blog.html">Blog</a></li>
     <li><a href="achievements.html" class="active">Achievements</a></li>
   </ul>
+  <button class="theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="Toggle dark/light theme">🌙</button>
 </nav>
 
 <section class="page-section">
@@ -211,6 +220,11 @@
       <div class="stat-label">Published Paper</div>
       <div class="stat-sub">International Conference 2026</div>
     </div>
+  </div>
+
+  <div class="block-title reveal">GitHub Activity</div>
+  <div class="github-graph-container reveal">
+    <iframe src="https://ghchart.rnadom.net/e8a020/Pandharimaske" frameborder="0" scrolling="0"></iframe>
   </div>
 
   <div class="block-title reveal">Certifications</div>
@@ -291,5 +305,7 @@
   }, { threshold: 0.08 });
   reveals.forEach(el => obs.observe(el));
 </script>
+<button id="back-to-top" title="Back to top" aria-label="Back to top">↑</button>
+<script src="js/main.js"></script>
 </body>
 </html>

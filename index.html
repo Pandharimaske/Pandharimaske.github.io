@@ -3,6 +3,14 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="AI Engineer & LLM specialist. Building intelligent systems with multi-agent architectures and RAG pipelines. CS (AI) student at VIIT Pune with published research."/>
+<meta name="theme-color" content="#0b0b0b"/>
+<meta property="og:title" content="Pandharinath Maske — AI Engineer"/>
+<meta property="og:description" content="AI Engineer & LLM specialist building intelligent systems with multi-agent architectures and RAG pipelines."/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Pandharinath Maske — AI Engineer"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23e8a020'>P</text></svg>"/>
 <title>Pandharinath Maske — AI Engineer</title>
 <link rel="stylesheet" href="style.css"/>
 <style>
@@ -243,6 +251,155 @@
 
   .quick-link:hover .ql-arrow { transform: translate(3px, -3px); }
 
+  .testimonials-section {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 5rem 4rem;
+  }
+
+  .testimonials-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 3rem;
+    line-height: 1.2;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2rem;
+  }
+
+  .testimonial-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    transition: all 0.3s;
+  }
+
+  .testimonial-card:hover {
+    border-color: rgba(232,160,32,0.35);
+    transform: translateY(-4px);
+  }
+
+  .testimonial-quote {
+    font-size: 1rem;
+    color: #a09880;
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .testimonial-avatar {
+    width: 40px;
+    height: 40px;
+    background: rgba(232,160,32,0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  .testimonial-info h4 {
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+    font-weight: 500;
+  }
+
+  .testimonial-info p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .contact-form-section {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 5rem 4rem;
+  }
+
+  .contact-form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .contact-form-subtitle {
+    color: #8a8070;
+    font-size: 1rem;
+    margin-bottom: 3rem;
+    max-width: 600px;
+  }
+
+  .contact-form {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .form-group label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 0.9rem 1.2rem;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    transition: all 0.25s;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(232,160,32,0.15);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .form-honeypot {
+    display: none;
+  }
+
+  .form-submit {
+    align-self: flex-start;
+    margin-top: 1rem;
+  }
+
   @media (max-width: 768px) {
     #hero { padding: 0 1.5rem; }
     .hero-meta { left: 1.5rem; gap: 1.5rem; bottom: 5rem; }
@@ -262,8 +419,10 @@
     <li><a href="index.html" class="active">Home</a></li>
     <li><a href="skills.html">Skills</a></li>
     <li><a href="projects.html">Projects</a></li>
+    <li><a href="blog.html">Blog</a></li>
     <li><a href="achievements.html">Achievements</a></li>
   </ul>
+  <button class="theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="Toggle dark/light theme">🌙</button>
 </nav>
 
 <section id="hero">
@@ -353,6 +512,75 @@
   </div>
 </div>
 
+<section class="testimonials-section">
+  <h2 class="testimonials-title reveal">What Others Say</h2>
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal">
+      <p class="testimonial-quote">"Pandharinath's work on LLM systems is exceptional. His multi-agent architecture demonstrates deep technical understanding and practical expertise."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">👨‍🏫</div>
+        <div class="testimonial-info">
+          <h4>Prof. Name</h4>
+          <p>VIIT Pune · Advisor</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card reveal">
+      <p class="testimonial-quote">"The RAG pipeline implementation shows production-level thinking. Excellent attention to detail and deployment practices."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">👩‍💼</div>
+        <div class="testimonial-info">
+          <h4>Collaborator Name</h4>
+          <p>AI Research · Co-author</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card reveal">
+      <p class="testimonial-quote">"Strong competitive programmer with a focus on distributed systems and algorithms. Very reliable and detail-oriented."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">👨‍💻</div>
+        <div class="testimonial-info">
+          <h4>Peer Developer</h4>
+          <p>LeetCode · Community</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-form-section">
+  <h2 class="contact-form-title reveal">Get in Touch</h2>
+  <p class="contact-form-subtitle reveal">Have a project idea or want to collaborate? I'd love to hear from you.</p>
+  
+  <form class="contact-form reveal" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <div class="form-group">
+      <label for="name">Name *</label>
+      <input type="text" id="name" name="name" required/>
+    </div>
+    
+    <div class="form-group">
+      <label for="email">Email *</label>
+      <input type="email" id="email" name="email" required/>
+    </div>
+    
+    <div class="form-group">
+      <label for="subject">Subject *</label>
+      <input type="text" id="subject" name="subject" required/>
+    </div>
+    
+    <div class="form-group">
+      <label for="message">Message *</label>
+      <textarea id="message" name="message" required></textarea>
+    </div>
+    
+    <input type="text" name="_gotcha" class="form-honeypot"/>
+    
+    <button type="submit" class="btn btn-primary form-submit">Send Message</button>
+  </form>
+</section>
+
 <footer>
   <div class="footer-name">Pandharinath Maske</div>
   <div class="footer-contact">
@@ -380,5 +608,7 @@
   }, { threshold: 0.1 });
   reveals.forEach(el => obs.observe(el));
 </script>
+<button id="back-to-top" title="Back to top" aria-label="Back to top">↑</button>
+<script src="js/main.js"></script>
 </body>
 </html>
