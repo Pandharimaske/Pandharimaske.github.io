@@ -1,314 +1,201 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="Production-grade AI projects: Multi-agent systems, RAG pipelines, semantic search, MLOps. Every project deployed, not just built."/>
-<meta name="theme-color" content="#0b0b0b"/>
+<meta name="description" content="Projects by Pandharinath Maske — Multi-Agent AI, RAG, Semantic Search, MLOps."/>
 <meta property="og:title" content="Projects — Pandharinath Maske"/>
-<meta property="og:description" content="Production-grade AI projects from multi-agent orchestration to semantic search."/>
-<meta property="og:type" content="website"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23e8a020'>P</text></svg>"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%23e8a020' font-family='serif' font-style='italic'>P</text></svg>"/>
 <title>Projects — Pandharinath Maske</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="style.css"/>
-<script>
-  // Initialize theme BEFORE any rendering
-  (function() {
-    function getTheme() {
-      const saved = localStorage.getItem('theme');
-      if (saved) return saved;
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-    
-    const theme = getTheme();
-    document.documentElement.setAttribute('data-theme', theme);
-    document.documentElement.classList.toggle('dark', theme === 'dark');
-  })();
-</script>
+<link rel="stylesheet" href="css/style.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<script>(function(){const t=localStorage.getItem('pm-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
 <style>
-  .projects-intro {
-    max-width: 600px;
-    color: #8a8070;
-    font-size: 1rem;
-    margin-bottom: 4rem;
-  }
+.projects-intro { max-width: 560px; color: var(--muted); font-size: 0.98rem; margin-bottom: 3rem; line-height: 1.8; }
 
-  .projects-filter {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-    margin-bottom: 3rem;
-  }
+/* Filter bar */
+.filter-bar {
+  display: flex; gap: 0.6rem; flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
 
-  .filter-btn {
-    padding: 0.6rem 1.4rem;
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    border-radius: 20px;
-    cursor: pointer;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    transition: all 0.25s;
-  }
+.filter-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--muted); cursor: pointer;
+  transition: all 0.25s;
+}
 
-  .filter-btn:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
+.filter-btn:hover,
+.filter-btn.active {
+  background: rgba(232,160,32,0.1);
+  border-color: var(--accent);
+  color: var(--accent);
+}
 
-  .filter-btn.active {
-    background: var(--accent);
-    color: var(--bg);
-    border-color: var(--accent);
-  }
+/* Project grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 2rem; margin-bottom: 5rem;
+}
 
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-    gap: 2rem;
-    margin-bottom: 5rem;
-  }
+.project-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2.2rem;
+  position: relative; overflow: hidden;
+  transition: all 0.3s;
+  display: flex; flex-direction: column;
+}
 
-  .project-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 2.4rem;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s;
-    display: flex;
-    flex-direction: column;
-    opacity: 1;
-  }
+.project-card::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2), transparent);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.5s ease;
+}
 
-  .project-image {
-    width: 100%;
-    height: 200px;
-    background: linear-gradient(135deg, rgba(232,160,32,0.1) 0%, rgba(232,160,32,0.05) 100%);
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-    font-size: 3rem;
-    color: rgba(232,160,32,0.3);
-    border: 1px dashed var(--border);
-  }
+.project-card:hover::after { transform: scaleX(1); }
+.project-card:hover { border-color: rgba(232,160,32,0.35); transform: translateY(-6px); box-shadow: var(--shadow); }
 
-  .project-card::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2), transparent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.5s ease;
-  }
+.proj-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem; font-weight: 900; font-style: italic;
+  color: rgba(232,160,32,0.07);
+  line-height: 1; margin-bottom: 0.4rem; user-select: none;
+}
 
-  .project-card:hover::after { transform: scaleX(1); }
-  .project-card:hover { border-color: rgba(232,160,32,0.35); transform: translateY(-6px); }
+.proj-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; color: var(--muted);
+  letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.7rem;
+}
 
-  .project-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 4rem;
-    font-weight: 900;
-    font-style: italic;
-    color: rgba(232,160,32,0.08);
-    line-height: 1;
-    margin-bottom: 0.5rem;
-    user-select: none;
-  }
+.proj-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem; font-weight: 700; line-height: 1.3;
+  margin-bottom: 1rem; color: var(--text);
+}
 
-  .project-date {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--muted);
-    letter-spacing: 0.14em;
-    margin-bottom: 0.8rem;
-    text-transform: uppercase;
-  }
+.proj-bullets {
+  list-style: none; margin-bottom: 1.4rem; flex: 1;
+}
 
-  .project-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.35rem;
-    font-weight: 700;
-    line-height: 1.3;
-    margin-bottom: 1.2rem;
-    color: var(--text);
-  }
+.proj-bullets li {
+  font-size: 0.83rem; color: var(--muted);
+  padding: 0.35rem 0 0.35rem 1rem;
+  position: relative; line-height: 1.6;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
 
-  .project-highlights {
-    list-style: none;
-    margin-bottom: 1.5rem;
-    flex: 1;
-  }
+.proj-bullets li::before {
+  content: '→'; position: absolute; left: 0;
+  color: var(--accent); font-size: 0.68rem;
+}
 
-  .project-highlights li {
-    font-size: 0.85rem;
-    color: #8a8070;
-    padding: 0.4rem 0;
-    padding-left: 1rem;
-    position: relative;
-    line-height: 1.6;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-  }
+.proj-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.4rem; }
 
-  .project-highlights li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-size: 0.7rem;
-  }
+.proj-links { display: flex; gap: 0.8rem; margin-top: auto; }
 
-  .project-stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-bottom: 1.5rem;
-  }
+.proj-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem; color: var(--accent);
+  text-decoration: none; letter-spacing: 0.08em;
+  display: flex; align-items: center; gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid rgba(232,160,32,0.22);
+  border-radius: var(--radius);
+  transition: all 0.2s;
+}
 
-  .project-links {
-    display: flex;
-    gap: 1rem;
-    margin-top: auto;
-  }
+.proj-link:hover {
+  background: rgba(232,160,32,0.09);
+  border-color: rgba(232,160,32,0.5);
+}
 
-  .project-link {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--accent);
-    text-decoration: none;
-    letter-spacing: 0.1em;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.5rem 1rem;
-    border: 1px solid rgba(232,160,32,0.2);
-    border-radius: 2px;
-    transition: all 0.2s;
-  }
+/* Research */
+.research-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem; color: var(--accent);
+  letter-spacing: 0.22em; text-transform: uppercase;
+  margin-bottom: 1.4rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.research-label::after { content:''; flex:1; height:1px; background:var(--border); }
 
-  .project-link:hover {
-    background: rgba(232,160,32,0.08);
-    border-color: rgba(232,160,32,0.5);
-  }
+.research-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 2.5rem;
+  display: grid; grid-template-columns: auto 1fr; gap: 2.5rem;
+  align-items: start; transition: border-color 0.3s;
+}
 
-  .research-section-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--accent);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
+.research-card:hover { border-color: rgba(232,160,32,0.35); }
 
-  .research-section-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
+.research-badge {
+  background: rgba(232,160,32,0.07);
+  border: 1px solid rgba(232,160,32,0.22);
+  border-radius: var(--radius);
+  padding: 1rem 1.5rem; text-align: center; min-width: 100px;
+}
 
-  .research-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 2.5rem;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 3rem;
-    align-items: start;
-    transition: all 0.3s;
-  }
+.badge-year {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem; font-weight: 700; color: var(--accent); line-height: 1;
+}
 
-  .research-card:hover { border-color: rgba(232,160,32,0.35); }
+.badge-type {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.56rem; color: var(--muted);
+  letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.3rem;
+}
 
-  .research-badge {
-    background: rgba(232,160,32,0.08);
-    border: 1px solid rgba(232,160,32,0.25);
-    border-radius: 4px;
-    padding: 1.2rem 1.8rem;
-    text-align: center;
-    min-width: 110px;
-  }
+.research-venue {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem; color: var(--accent);
+  letter-spacing: 0.08em; margin-bottom: 0.6rem;
+}
 
-  .research-badge .year {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--accent);
-    line-height: 1;
-  }
+.research-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; font-weight: 700; margin-bottom: 0.7rem; line-height: 1.3;
+}
 
-  .research-badge .badge-type {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.58rem;
-    color: var(--muted);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin-top: 0.4rem;
-  }
+.research-desc { font-size: 0.86rem; color: var(--muted); margin-bottom: 0.8rem; line-height: 1.75; }
 
-  .research-venue {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    margin-bottom: 0.7rem;
-  }
+.research-authors {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; color: var(--muted); letter-spacing: 0.04em;
+}
 
-  .research-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-bottom: 0.8rem;
-    line-height: 1.3;
-  }
-
-  .research-desc {
-    font-size: 0.88rem;
-    color: #8a8070;
-    margin-bottom: 1rem;
-    line-height: 1.7;
-  }
-
-  .research-authors {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--muted);
-    letter-spacing: 0.05em;
-  }
-
-  @media (max-width: 768px) {
-    .projects-grid { grid-template-columns: 1fr; }
-    .research-card { grid-template-columns: 1fr; gap: 1.5rem; }
-  }
+@media (max-width: 900px) {
+  .projects-grid { grid-template-columns: 1fr; }
+  .research-card { grid-template-columns: 1fr; gap: 1.5rem; }
+}
 </style>
 </head>
 <body>
 
 <nav>
   <a class="nav-logo" href="index.html">PM_</a>
-  <ul class="nav-links">
+  <ul class="nav-center">
     <li><a href="index.html">Home</a></li>
     <li><a href="skills.html">Skills</a></li>
-    <li><a href="projects.html" class="active">Projects</a></li>
-    <li><a href="blog.html">Blog</a></li>
+    <li><a href="projects.html">Projects</a></li>
     <li><a href="achievements.html">Achievements</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
   </ul>
-  <button class="theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="Toggle dark/light theme"><i class="fas fa-moon"></i></button>
+  <div class="nav-right">
+    <button class="theme-btn" id="theme-btn" title="Toggle theme"><i class="fas fa-moon"></i></button>
+  </div>
 </nav>
 
 <section class="page-section">
@@ -318,101 +205,101 @@
     <div class="section-line"></div>
   </div>
 
-  <p class="projects-intro reveal">
-    Production-grade AI systems — from multi-agent orchestration to semantic search. Every project deployed, not just built.
-  </p>
+  <p class="projects-intro reveal">Production-grade AI systems — from multi-agent orchestration to semantic search. Every project deployed, not just built.</p>
 
-  <div class="projects-filter reveal">
-    <button class="filter-btn active" data-filter="all">All Projects</button>
-    <button class="filter-btn" data-filter="ai-agents">AI Agents</button>
-    <button class="filter-btn" data-filter="rag">RAG & Search</button>
+  <!-- Filter -->
+  <div class="filter-bar reveal">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="llm">LLM & Agents</button>
+    <button class="filter-btn" data-filter="search">Semantic Search</button>
     <button class="filter-btn" data-filter="mlops">MLOps</button>
   </div>
 
   <div class="projects-grid">
 
-    <div class="project-card reveal" data-category="ai-agents">
-      <div class="project-image">🤖</div>
-      <div class="project-num">01</div>
-      <div class="project-date">June 2025</div>
-      <div class="project-title">Multi-Agent Conversational AI System with Agentic RAG</div>
-      <ul class="project-highlights">
-        <li>Production-ready multi-agent system using LangGraph orchestrating specialized agents for order processing and menu queries</li>
-        <li>Agentic RAG pipeline with Pinecone vector DB for accurate retrieval from structured knowledge base</li>
-        <li>Dual-memory architecture — short-term conversation history + persistent user profiles in Supabase</li>
-        <li>FastAPI backend with real-time streaming, Docker containerized, deployed on Render</li>
+    <div class="project-card reveal" data-cat="llm">
+      <div class="proj-num">01</div>
+      <div class="proj-date">June 2025</div>
+      <div class="proj-title">Multi-Agent Conversational AI System with Agentic RAG</div>
+      <ul class="proj-bullets">
+        <li>LangGraph orchestrating specialized agents for order processing and menu queries</li>
+        <li>Agentic RAG pipeline with Pinecone vector DB for semantic retrieval</li>
+        <li>Dual-memory architecture — short-term history + persistent Supabase user profiles</li>
+        <li>FastAPI backend, real-time streaming, Docker + Render deployment</li>
       </ul>
-      <div class="project-stack">
+      <div class="proj-stack">
         <span class="stack-tag">Python</span>
         <span class="stack-tag">LangGraph</span>
         <span class="stack-tag">FastAPI</span>
         <span class="stack-tag">Pinecone</span>
         <span class="stack-tag">Docker</span>
         <span class="stack-tag">Supabase</span>
-        <span class="stack-tag">Render</span>
       </div>
-      <div class="project-links">
-        <a href="https://github.com/Pandharimaske/Coffee_Shop_ChatBot" class="project-link" target="_blank" rel="noopener noreferrer">↗ GitHub</a>
+      <div class="proj-links">
+        <a href="https://github.com/Pandharimaske/Coffee_Shop_ChatBot" class="proj-link" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i> GitHub
+        </a>
       </div>
     </div>
 
-    <div class="project-card reveal" data-category="rag">
-      <div class="project-image">🔍</div>
-      <div class="project-num">02</div>
-      <div class="project-date">May 2025</div>
-      <div class="project-title">Semantic Search Engine for Book Recommendations</div>
-      <ul class="project-highlights">
-        <li>Transformer-based embeddings for semantic understanding of natural language queries</li>
-        <li>ChromaDB with cosine distance metrics for vector similarity search</li>
-        <li>Interactive Gradio interface with real-time ranked recommendations and similarity scores</li>
+    <div class="project-card reveal" data-cat="search">
+      <div class="proj-num">02</div>
+      <div class="proj-date">May 2025</div>
+      <div class="proj-title">Semantic Search Engine for Book Recommendations</div>
+      <ul class="proj-bullets">
+        <li>Transformer-based embeddings for semantic NL query understanding</li>
+        <li>ChromaDB vector search with cosine distance metrics</li>
+        <li>Gradio interface with real-time ranked results and similarity scores</li>
       </ul>
-      <div class="project-stack">
+      <div class="proj-stack">
         <span class="stack-tag">Python</span>
         <span class="stack-tag">LangChain</span>
         <span class="stack-tag">ChromaDB</span>
         <span class="stack-tag">Gradio</span>
         <span class="stack-tag">Transformers</span>
       </div>
-      <div class="project-links">
-        <a href="https://github.com/Pandharimaske/LLM_Book_Recomender" class="project-link" target="_blank" rel="noopener noreferrer">↗ GitHub</a>
+      <div class="proj-links">
+        <a href="https://github.com/Pandharimaske/LLM_Book_Recomender" class="proj-link" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i> GitHub
+        </a>
       </div>
     </div>
 
-    <div class="project-card reveal" data-category="mlops">
-      <div class="project-image">📊</div>
-      <div class="project-num">03</div>
-      <div class="project-date">2025</div>
-      <div class="project-title">MLOps Project</div>
-      <ul class="project-highlights">
-        <li>End-to-end MLOps pipeline with experiment tracking, model versioning, and deployment</li>
-        <li>Integrated MLflow and Weights & Biases for monitoring and reproducibility</li>
+    <div class="project-card reveal" data-cat="mlops">
+      <div class="proj-num">03</div>
+      <div class="proj-date">2025</div>
+      <div class="proj-title">MLOps Pipeline Project</div>
+      <ul class="proj-bullets">
+        <li>End-to-end MLOps pipeline with experiment tracking and model versioning</li>
+        <li>MLflow + Weights & Biases integration for monitoring and reproducibility</li>
+        <li>Docker containerized for consistent deployment across environments</li>
       </ul>
-      <div class="project-stack">
+      <div class="proj-stack">
         <span class="stack-tag">Python</span>
         <span class="stack-tag">MLflow</span>
-        <span class="stack-tag">Docker</span>
         <span class="stack-tag">W&B</span>
+        <span class="stack-tag">Docker</span>
       </div>
-      <div class="project-links">
-        <a href="https://github.com/Pandharimaske/MLOPs_Project" class="project-link" target="_blank" rel="noopener noreferrer">↗ GitHub</a>
+      <div class="proj-links">
+        <a href="https://github.com/Pandharimaske/MLOPs_Project" class="proj-link" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i> GitHub
+        </a>
       </div>
     </div>
 
   </div>
 
   <!-- Research -->
-  <div class="research-section-title reveal">Research & Publications</div>
+  <div class="research-label reveal">Research & Publications</div>
   <div class="research-card reveal">
     <div class="research-badge">
-      <div class="year">2026</div>
+      <div class="badge-year">2026</div>
       <div class="badge-type">Paper</div>
     </div>
     <div>
       <div class="research-venue">ETFI-2026 · DES Pune University · International Conference on Emerging Technologies & Future Innovations</div>
       <div class="research-title">Agentic AI for Interview Preparation</div>
-      <p class="research-desc">
-        Proposed an AI-powered interview preparation system integrating resume analysis, multi-turn simulations, and personalized feedback loops. Demonstrated how agentic architectures can adapt dynamically to candidate knowledge gaps.
-      </p>
+      <p class="research-desc">Proposed an AI-powered interview preparation system integrating resume analysis, multi-turn simulations, and personalized feedback loops. Demonstrated how agentic architectures adapt dynamically to candidate knowledge gaps.</p>
       <div class="research-authors">
         Co-authored with Shubham Dahane, Aayush Bokde, Pranav Dhebe, Pranjal Pandit &nbsp;·&nbsp; Guided by Dr. Anuradha Yenkikar
       </div>
@@ -422,33 +309,16 @@
 </section>
 
 <footer>
-  <div class="footer-name">Pandharinath Maske</div>
-  <div class="footer-contact">
-    <a href="mailto:pandharinath1437@gmail.com">pandharinath1437@gmail.com</a>
-    &nbsp;·&nbsp; +91-8010922929
-  </div>
-  <div class="footer-socials">
-    <a href="https://github.com/Pandharimaske" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
-    <a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-    <a href="https://x.com/PMaske20171" target="_blank" rel="noopener noreferrer" title="X / Twitter"><i class="fab fa-x-twitter"></i></a>
-    <a href="https://www.instagram.com/pandhari__7/" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="fab fa-instagram"></i></a>
-    <a href="https://leetcode.com/u/PandhariMaske1437/" target="_blank" rel="noopener noreferrer" title="LeetCode"><i class="fas fa-code"></i></a>
-  </div>
+  <div class="footer-name">Pandharinath Maske © 2026</div>
+  <ul class="footer-socials">
+    <li><a href="https://github.com/Pandharimaske" target="_blank" rel="noopener"><i class="fab fa-github"></i></a></li>
+    <li><a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a></li>
+    <li><a href="https://leetcode.com/u/PandhariMaske1437/" target="_blank" rel="noopener"><i class="fas fa-code"></i></a></li>
+    <li><a href="mailto:pandharinath1437@gmail.com"><i class="fas fa-envelope"></i></a></li>
+  </ul>
 </footer>
 
-<script>
-  const reveals = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 100);
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  reveals.forEach(el => obs.observe(el));
-</script>
-<button id="back-to-top" title="Back to top" aria-label="Back to top">↑</button>
+<button id="btt" title="Back to top"><i class="fas fa-arrow-up"></i></button>
 <script src="js/main.js"></script>
 </body>
 </html>

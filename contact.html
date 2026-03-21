@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Contact Pandharinath Maske — AI Engineer & ML Researcher at VIIT Pune."/>
+<meta property="og:title" content="Contact — Pandharinath Maske"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%23e8a020' font-family='serif' font-style='italic'>P</text></svg>"/>
+<title>Contact — Pandharinath Maske</title>
+<link rel="stylesheet" href="css/style.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<script>(function(){const t=localStorage.getItem('pm-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
+<style>
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 5rem; align-items: start;
+  margin-top: 1rem;
+}
+
+.contact-left h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 700; margin-bottom: 1rem; line-height: 1.2;
+}
+
+.contact-left h2 em { color: var(--accent); font-style: italic; }
+.contact-left p { color: var(--muted); font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.8; }
+
+.contact-links { display: flex; flex-direction: column; gap: 1rem; }
+
+.contact-link-item {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem 1.4rem;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); text-decoration: none;
+  transition: all 0.3s;
+}
+
+.contact-link-item:hover { border-color: rgba(232,160,32,0.4); transform: translateX(4px); }
+
+.cli-icon {
+  width: 36px; height: 36px;
+  background: rgba(232,160,32,0.1);
+  border: 1px solid rgba(232,160,32,0.2);
+  border-radius: var(--radius);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent); font-size: 0.9rem; flex-shrink: 0;
+}
+
+.cli-text { display: flex; flex-direction: column; gap: 0.1rem; }
+
+.cli-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem; color: var(--muted);
+  letter-spacing: 0.15em; text-transform: uppercase;
+}
+
+.cli-val { font-size: 0.88rem; color: var(--text); }
+
+/* Form */
+.contact-form {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 2.5rem;
+}
+
+.form-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 700; margin-bottom: 2rem;
+}
+
+.form-group { margin-bottom: 1.5rem; }
+
+.form-label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; color: var(--muted);
+  letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.5rem;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+  color: var(--text);
+  transition: border-color 0.25s;
+  outline: none;
+}
+
+.form-input:focus,
+.form-textarea:focus { border-color: var(--accent); }
+
+.form-textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
+
+.form-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem; margin-top: 1rem;
+  letter-spacing: 0.06em; display: none;
+}
+
+.form-status.success { color: #5cb87a; display: block; }
+.form-status.error { color: #e86060; display: block; }
+
+/* Note about Formspree */
+.form-note {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem; color: var(--muted);
+  margin-top: 0.8rem; letter-spacing: 0.06em;
+}
+
+@media (max-width: 900px) {
+  .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">PM_</a>
+  <ul class="nav-center">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="achievements.html">Achievements</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-btn" id="theme-btn" title="Toggle theme"><i class="fas fa-moon"></i></button>
+  </div>
+</nav>
+
+<section class="page-section">
+  <div class="section-header reveal">
+    <span class="section-num">05</span>
+    <h1 class="section-title">Contact</h1>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="contact-layout">
+    <div class="reveal">
+      <h2>Let's build<br><em>something great.</em></h2>
+      <p>Open to internships, research collaborations, project partnerships, or just a good conversation about LLMs and agentic AI.</p>
+
+      <div class="contact-links">
+        <a href="mailto:pandharinath1437@gmail.com" class="contact-link-item">
+          <div class="cli-icon"><i class="fas fa-envelope"></i></div>
+          <div class="cli-text">
+            <span class="cli-label">Email</span>
+            <span class="cli-val">pandharinath1437@gmail.com</span>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" class="contact-link-item" target="_blank" rel="noopener">
+          <div class="cli-icon"><i class="fab fa-linkedin"></i></div>
+          <div class="cli-text">
+            <span class="cli-label">LinkedIn</span>
+            <span class="cli-val">pandharinath-maske</span>
+          </div>
+        </a>
+        <a href="https://github.com/Pandharimaske" class="contact-link-item" target="_blank" rel="noopener">
+          <div class="cli-icon"><i class="fab fa-github"></i></div>
+          <div class="cli-text">
+            <span class="cli-label">GitHub</span>
+            <span class="cli-val">Pandharimaske</span>
+          </div>
+        </a>
+        <a href="https://leetcode.com/u/PandhariMaske1437/" class="contact-link-item" target="_blank" rel="noopener">
+          <div class="cli-icon"><i class="fas fa-code"></i></div>
+          <div class="cli-text">
+            <span class="cli-label">LeetCode</span>
+            <span class="cli-val">PandhariMaske1437</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-form reveal">
+      <div class="form-title">Send a message</div>
+      <!-- Replace YOUR_FORM_ID with your Formspree form ID after signing up at formspree.io -->
+      <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="form-group">
+          <label class="form-label" for="name">Name</label>
+          <input class="form-input" type="text" id="name" name="name" placeholder="Your name" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-input" type="email" id="email" name="email" placeholder="your@email.com" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="subject">Subject</label>
+          <input class="form-input" type="text" id="subject" name="subject" placeholder="What's this about?"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="message">Message</label>
+          <textarea class="form-textarea" id="message" name="message" placeholder="Tell me more..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">
+          <i class="fas fa-paper-plane"></i> Send Message
+        </button>
+        <div id="form-status" class="form-status"></div>
+        <p class="form-note">* Form powered by Formspree — replace YOUR_FORM_ID after signing up at formspree.io (free)</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-name">Pandharinath Maske © 2026</div>
+  <ul class="footer-socials">
+    <li><a href="https://github.com/Pandharimaske" target="_blank" rel="noopener"><i class="fab fa-github"></i></a></li>
+    <li><a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a></li>
+    <li><a href="https://leetcode.com/u/PandhariMaske1437/" target="_blank" rel="noopener"><i class="fas fa-code"></i></a></li>
+    <li><a href="mailto:pandharinath1437@gmail.com"><i class="fas fa-envelope"></i></a></li>
+  </ul>
+</footer>
+
+<button id="btt" title="Back to top"><i class="fas fa-arrow-up"></i></button>
+<script src="js/main.js"></script>
+</body>
+</html>

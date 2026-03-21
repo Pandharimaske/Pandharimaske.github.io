@@ -1,630 +1,303 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="AI Engineer & LLM specialist. Building intelligent systems with multi-agent architectures and RAG pipelines. CS (AI) student at VIIT Pune with published research."/>
-<meta name="theme-color" content="#0b0b0b"/>
+<meta name="description" content="Pandharinath Maske — AI Engineer & ML Researcher. Building intelligent systems with LLMs, multi-agent architectures, and RAG pipelines."/>
 <meta property="og:title" content="Pandharinath Maske — AI Engineer"/>
-<meta property="og:description" content="AI Engineer & LLM specialist building intelligent systems with multi-agent architectures and RAG pipelines."/>
+<meta property="og:description" content="Building intelligent systems with LLMs, multi-agent architectures, and RAG pipelines. CS(AI) @ VIIT Pune."/>
 <meta property="og:type" content="website"/>
+<meta property="og:url" content="https://pandharimaske.github.io"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Pandharinath Maske — AI Engineer"/>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23e8a020'>P</text></svg>"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%23e8a020' font-family='serif' font-style='italic'>P</text></svg>"/>
 <title>Pandharinath Maske — AI Engineer</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="css/style.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <script>
-  // Initialize theme BEFORE any rendering
-  (function() {
-    function getTheme() {
-      const saved = localStorage.getItem('theme');
-      if (saved) return saved;
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-    
-    const theme = getTheme();
-    document.documentElement.setAttribute('data-theme', theme);
-    document.documentElement.classList.toggle('dark', theme === 'dark');
+  // Prevent theme flash
+  (function(){
+    const t = localStorage.getItem('pm-theme') ||
+      (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', t);
   })();
 </script>
 <style>
-  #hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 4rem;
-    position: relative;
-    overflow: hidden;
-  }
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 4rem;
+  position: relative;
+  overflow: hidden;
+}
 
-  .hero-bg-text {
-    position: absolute;
-    right: -60px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Playfair Display', serif;
-    font-size: 22vw;
-    font-weight: 900;
-    font-style: italic;
-    color: rgba(232,160,32,0.03);
-    line-height: 1;
-    pointer-events: none;
-    white-space: nowrap;
-    user-select: none;
-  }
+.hero-watermark {
+  position: absolute;
+  right: -40px; top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Playfair Display', serif;
+  font-size: 24vw; font-weight: 900; font-style: italic;
+  color: rgba(232,160,32,0.035);
+  line-height: 1; pointer-events: none;
+  white-space: nowrap; user-select: none;
+}
 
-  .hero-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--accent);
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    margin-bottom: 1.2rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.2s;
-  }
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem; color: var(--accent);
+  letter-spacing: 0.24em; text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  opacity: 0; animation: fadeUp 0.7s ease forwards 0.15s;
+}
 
-  .hero-name {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(3.2rem, 7.5vw, 7rem);
-    font-weight: 900;
-    line-height: 1.02;
-    letter-spacing: -0.03em;
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.4s;
-  }
+.hero-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 8vw, 7.5rem);
+  font-weight: 900; line-height: 1.02;
+  letter-spacing: -0.03em; margin-bottom: 1rem;
+  opacity: 0; animation: fadeUp 0.7s ease forwards 0.35s;
+}
 
-  .hero-name .line2 {
-    display: block;
-    color: var(--accent);
-    font-style: italic;
-  }
+.hero-name .accent { display: block; color: var(--accent); font-style: italic; }
 
-  .hero-desc {
-    max-width: 560px;
-    font-size: 1.05rem;
-    color: #a09880;
-    margin-bottom: 2.5rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.6s;
-  }
+.hero-typing-row {
+  display: flex; align-items: center; gap: 0.6rem;
+  margin-bottom: 1.6rem;
+  opacity: 0; animation: fadeUp 0.7s ease forwards 0.5s;
+}
 
-  .hero-btns {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.8s;
-  }
+.typing-prefix {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88rem; color: var(--muted);
+}
 
-  .hero-socials {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.85rem 1.2rem;
-    margin-top: 1.4rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.95s;
-  }
+#typing-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem; color: var(--accent); font-weight: 500;
+}
 
-  .hero-socials a {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: color 0.25s ease;
-  }
+.typing-cursor {
+  display: inline-block; width: 2px; height: 1.1em;
+  background: var(--accent); margin-left: 2px;
+  animation: blink 1s step-end infinite;
+  vertical-align: middle;
+}
 
-  .hero-socials a:hover { color: var(--accent); }
+@keyframes blink { 50% { opacity: 0; } }
 
-  .hero-highlights {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-    max-width: 760px;
-    margin-top: 1.8rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 1.05s;
-  }
+.hero-desc {
+  max-width: 540px; font-size: 1rem; color: var(--muted);
+  margin-bottom: 2.4rem; line-height: 1.8;
+  opacity: 0; animation: fadeUp 0.7s ease forwards 0.65s;
+}
 
-  .highlight-pill {
-    padding: 0.55rem 0.9rem;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    background: rgba(255,255,255,0.03);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    color: #b8af9d;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
+.hero-btns {
+  display: flex; gap: 0.8rem; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.7s ease forwards 0.8s;
+}
 
-  .hero-meta {
-    position: absolute;
-    bottom: 3.5rem;
-    left: 4rem;
-    display: flex;
-    gap: 3.5rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 1s;
-  }
+.hero-meta {
+  position: absolute; bottom: 3rem; left: 4rem;
+  display: flex; gap: 3rem;
+  opacity: 0; animation: fadeUp 0.7s ease forwards 1s;
+}
 
-  .meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
+.meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
 
-  .meta-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.62rem;
-    color: var(--muted);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
+.meta-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem; color: var(--muted);
+  letter-spacing: 0.2em; text-transform: uppercase;
+}
 
-  .meta-value { font-size: 0.95rem; color: var(--text); }
+.meta-val { font-size: 0.9rem; color: var(--text); }
 
-  .hero-scroll {
-    position: absolute;
-    bottom: 3rem;
-    right: 4rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.6rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 1.2s;
-  }
+.hero-scroll-hint {
+  position: absolute; bottom: 3rem; right: 4rem;
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  opacity: 0; animation: fadeUp 0.7s ease forwards 1.1s;
+}
 
-  .scroll-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.6rem;
-    color: var(--muted);
-    letter-spacing: 0.2em;
-    writing-mode: vertical-rl;
-    text-transform: uppercase;
-  }
+.scroll-line {
+  width: 1px; height: 48px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  animation: pulse 2s ease-in-out infinite;
+}
 
-  .scroll-line {
-    width: 1px;
-    height: 50px;
-    background: linear-gradient(to bottom, var(--accent), transparent);
-    animation: scrollPulse 2s ease-in-out infinite;
-  }
+@keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
 
-  @keyframes scrollPulse {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
-  }
+.scroll-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem; color: var(--muted);
+  writing-mode: vertical-rl; letter-spacing: 0.2em; text-transform: uppercase;
+}
 
-  .about-strip {
-    background: var(--bg2);
-    border-top: 1px solid var(--border);
-    padding: 5rem 4rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
+/* ── ABOUT STRIP ── */
+.about-strip {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: 6rem 4rem;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
 
-  .about-left h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 3vw, 2.5rem);
-    font-weight: 700;
-    margin-bottom: 1.2rem;
-    line-height: 1.2;
-  }
+.about-h {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 700; line-height: 1.2; margin-bottom: 1.2rem;
+}
 
-  .about-left h2 em { color: var(--accent); font-style: italic; }
+.about-h em { color: var(--accent); font-style: italic; }
 
-  .about-left p {
-    color: #8a8070;
-    font-size: 0.95rem;
-    margin-bottom: 1rem;
-  }
+.about-p { color: var(--muted); font-size: 0.95rem; margin-bottom: 0.9rem; line-height: 1.8; }
 
-  .about-right {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
+.quick-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+}
 
-  .quick-link {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.4rem 1.6rem;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    text-decoration: none;
-    transition: all 0.3s;
-  }
+.ql {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.3rem 1.5rem;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); text-decoration: none;
+  transition: all 0.3s;
+}
 
-  .quick-link:hover {
-    border-color: rgba(232,160,32,0.4);
-    transform: translateY(-3px);
-  }
+.ql:hover { border-color: rgba(232,160,32,0.4); transform: translateY(-3px); }
 
-  .ql-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--muted);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 0.3rem;
-  }
+.ql-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem; color: var(--muted);
+  letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.25rem;
+}
 
-  .ql-title { font-size: 1rem; color: var(--text); font-weight: 400; }
+.ql-ttl { font-size: 0.95rem; color: var(--text); }
 
-  .ql-arrow {
-    font-size: 1.2rem;
-    color: var(--accent);
-    transition: transform 0.25s;
-  }
+.ql-arr { color: var(--accent); font-size: 1.1rem; transition: transform 0.25s; }
+.ql:hover .ql-arr { transform: translate(3px,-3px); }
 
-  .quick-link:hover .ql-arrow { transform: translate(3px, -3px); }
-
-  .testimonials-section {
-    background: var(--bg2);
-    border-top: 1px solid var(--border);
-    padding: 5rem 4rem;
-  }
-
-  .testimonials-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 3vw, 2.5rem);
-    font-weight: 700;
-    margin-bottom: 3rem;
-    line-height: 1.2;
-  }
-
-  .testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 2rem;
-  }
-
-  .testimonial-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 2rem;
-    transition: all 0.3s;
-  }
-
-  .testimonial-card:hover {
-    border-color: rgba(232,160,32,0.35);
-    transform: translateY(-4px);
-  }
-
-  .testimonial-quote {
-    font-size: 1rem;
-    color: #a09880;
-    margin-bottom: 1.5rem;
-    line-height: 1.7;
-    font-style: italic;
-  }
-
-  .testimonial-author {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .testimonial-avatar {
-    width: 40px;
-    height: 40px;
-    background: rgba(232,160,32,0.15);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
-    flex-shrink: 0;
-  }
-
-  .testimonial-info h4 {
-    font-size: 0.95rem;
-    color: var(--text);
-    margin-bottom: 0.2rem;
-    font-weight: 500;
-  }
-
-  .testimonial-info p {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--accent);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .contact-form-section {
-    background: var(--bg2);
-    border-top: 1px solid var(--border);
-    padding: 5rem 4rem;
-  }
-
-  .contact-form-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 3vw, 2.5rem);
-    font-weight: 700;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-  }
-
-  .contact-form-subtitle {
-    color: #8a8070;
-    font-size: 1rem;
-    margin-bottom: 3rem;
-    max-width: 600px;
-  }
-
-  .contact-form {
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-
-  .form-group label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .form-group input,
-  .form-group textarea {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    padding: 0.9rem 1.2rem;
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.95rem;
-    transition: all 0.25s;
-  }
-
-  .form-group input:focus,
-  .form-group textarea:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 2px rgba(232,160,32,0.15);
-  }
-
-  .form-group textarea {
-    resize: vertical;
-    min-height: 120px;
-  }
-
-  .form-honeypot {
-    display: none;
-  }
-
-  .form-submit {
-    align-self: flex-start;
-    margin-top: 1rem;
-  }
-
-  @media (max-width: 768px) {
-    #hero { padding: 0 1.5rem; }
-    .hero-meta { left: 1.5rem; gap: 1.5rem; bottom: 5rem; }
-    .hero-scroll { display: none; }
-    .about-strip { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 2rem; }
-    .about-right { grid-template-columns: 1fr; }
-    .hero-bg-text { font-size: 40vw; }
-    .hero-highlights { margin-top: 1.4rem; }
-  }
+@media (max-width: 900px) {
+  #hero { padding: 0 1.5rem; }
+  .hero-meta { left: 1.5rem; gap: 1.8rem; bottom: 5rem; }
+  .hero-scroll-hint { display: none; }
+  .about-strip { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 3rem; }
+  .quick-grid { grid-template-columns: 1fr; }
+  .hero-watermark { font-size: 42vw; }
+}
 </style>
 </head>
 <body>
 
 <nav>
   <a class="nav-logo" href="index.html">PM_</a>
-  <ul class="nav-links">
-    <li><a href="index.html" class="active">Home</a></li>
+  <ul class="nav-center">
+    <li><a href="index.html">Home</a></li>
     <li><a href="skills.html">Skills</a></li>
     <li><a href="projects.html">Projects</a></li>
-    <li><a href="blog.html">Blog</a></li>
     <li><a href="achievements.html">Achievements</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
   </ul>
-  <button class="theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="Toggle dark/light theme"><i class="fas fa-moon"></i></button>
+  <div class="nav-right">
+    <button class="theme-btn" id="theme-btn" title="Toggle theme">
+      <i class="fas fa-moon"></i>
+    </button>
+  </div>
 </nav>
 
+<!-- HERO -->
 <section id="hero">
-  <div class="hero-bg-text">AI</div>
-  <div class="hero-tag">Available for Opportunities &nbsp;·&nbsp; Pune, India</div>
+  <div class="hero-watermark">AI</div>
+  <div class="hero-eyebrow">Available for opportunities &nbsp;·&nbsp; Pune, India</div>
   <h1 class="hero-name">
     Pandharinath
-    <span class="line2">Maske.</span>
+    <span class="accent">Maske.</span>
   </h1>
+  <div class="hero-typing-row">
+    <span class="typing-prefix">~/</span>
+    <span id="typing-text"></span>
+    <span class="typing-cursor"></span>
+  </div>
   <p class="hero-desc">
-    Building intelligent systems at the intersection of LLMs, multi-agent architectures, and RAG pipelines. CS (AI) student at VIIT Pune · Published researcher · LeetCode 1647.
+    Building intelligent systems at the intersection of LLMs, multi-agent architectures, and RAG pipelines. CS (AI) @ VIIT Pune · Published at ETFI-2026.
   </p>
   <div class="hero-btns">
-    <a href="https://github.com/Pandharimaske" class="btn btn-primary" target="_blank" rel="noopener noreferrer">↗ GitHub</a>
-    <a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-    <a href="https://leetcode.com/u/PandhariMaske1437/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">LeetCode</a>
-    <a href="mailto:pandharinath1437@gmail.com" class="btn btn-ghost">Email</a>
-  </div>
-  <div class="hero-socials">
-    <a href="https://x.com/PMaske20171" target="_blank" rel="noopener noreferrer">X / Twitter</a>
-    <a href="https://www.instagram.com/pandhari__7/" target="_blank" rel="noopener noreferrer">Instagram</a>
-    <a href="https://github.com/Pandharimaske/Coffee_Shop_ChatBot" target="_blank" rel="noopener noreferrer">Featured Repo</a>
-    <a href="https://github.com/Pandharimaske/LLM_Book_Recomender" target="_blank" rel="noopener noreferrer">Book Search Repo</a>
-  </div>
-  <div class="hero-highlights">
-    <span class="highlight-pill">LLM + Agentic Systems</span>
-    <span class="highlight-pill">RAG Pipelines</span>
-    <span class="highlight-pill">FastAPI & Docker Deployment</span>
-    <span class="highlight-pill">Research Presentation at ETFI 2026</span>
+    <a href="https://github.com/Pandharimaske" class="btn btn-primary" target="_blank" rel="noopener">
+      <i class="fab fa-github"></i> GitHub
+    </a>
+    <a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" class="btn btn-ghost" target="_blank" rel="noopener">
+      <i class="fab fa-linkedin"></i> LinkedIn
+    </a>
+    <a href="https://leetcode.com/u/PandhariMaske1437/" class="btn btn-ghost" target="_blank" rel="noopener">
+      <i class="fas fa-code"></i> LeetCode
+    </a>
+    <a href="assets/Pandharinath_Maske_Resume.pdf" class="btn btn-ghost" download>
+      <i class="fas fa-download"></i> Resume
+    </a>
   </div>
   <div class="hero-meta">
     <div class="meta-item">
       <span class="meta-label">Degree</span>
-      <span class="meta-value">B.Tech CS (AI)</span>
+      <span class="meta-val">B.Tech CS (AI)</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">CGPA</span>
-      <span class="meta-value">7.76 / 10</span>
+      <span class="meta-val">7.76 / 10</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Batch</span>
-      <span class="meta-value">2023 – 2027</span>
+      <span class="meta-val">2023 – 2027</span>
     </div>
   </div>
-  <div class="hero-scroll">
+  <div class="hero-scroll-hint">
     <div class="scroll-line"></div>
-    <span class="scroll-label">Scroll</span>
+    <span class="scroll-lbl">scroll</span>
   </div>
 </section>
 
+<!-- ABOUT STRIP -->
 <div class="about-strip">
-  <div class="about-left reveal">
-    <h2>Engineer. Researcher. <em>Builder.</em></h2>
-    <p>I work at the frontier of LLMs and agentic AI — designing systems that don't just respond, but reason, retrieve, and act.</p>
-    <p>From multi-agent orchestration with LangGraph to semantic search and RAG pipelines, I build things end-to-end — from architecture to Docker deployment.</p>
-    <p>Presented research at ETFI-2026 on AI-powered interview preparation systems.</p>
+  <div class="reveal">
+    <h2 class="about-h">Engineer. Researcher.<br><em>Builder.</em></h2>
+    <p class="about-p">I work at the frontier of LLMs and agentic AI — designing systems that don't just respond, but reason, retrieve, and act.</p>
+    <p class="about-p">From multi-agent orchestration with LangGraph to semantic search and RAG pipelines, I build end-to-end — architecture to Docker deployment.</p>
+    <p class="about-p">Published at ETFI-2026 (DES Pune University) on Agentic AI for Interview Preparation.</p>
   </div>
-  <div class="about-right reveal">
-    <a href="skills.html" class="quick-link">
-      <div>
-        <div class="ql-label">Capability Map</div>
-        <div class="ql-title">Core Skills</div>
-      </div>
-      <span class="ql-arrow">↗</span>
+  <div class="quick-grid reveal">
+    <a href="skills.html" class="ql">
+      <div><div class="ql-lbl">01</div><div class="ql-ttl">Skills</div></div>
+      <span class="ql-arr">↗</span>
     </a>
-    <a href="projects.html" class="quick-link">
-      <div>
-        <div class="ql-label">Selected Work</div>
-        <div class="ql-title">Projects</div>
-      </div>
-      <span class="ql-arrow">↗</span>
+    <a href="projects.html" class="ql">
+      <div><div class="ql-lbl">02</div><div class="ql-ttl">Projects</div></div>
+      <span class="ql-arr">↗</span>
     </a>
-    <a href="achievements.html" class="quick-link">
-      <div>
-        <div class="ql-label">Proof of Work</div>
-        <div class="ql-title">Achievements</div>
-      </div>
-      <span class="ql-arrow">↗</span>
+    <a href="achievements.html" class="ql">
+      <div><div class="ql-lbl">03</div><div class="ql-ttl">Achievements</div></div>
+      <span class="ql-arr">↗</span>
     </a>
-    <a href="mailto:pandharinath1437@gmail.com" class="quick-link">
-      <div>
-        <div class="ql-label">Get in touch</div>
-        <div class="ql-title">Contact</div>
-      </div>
-      <span class="ql-arrow">↗</span>
+    <a href="contact.html" class="ql">
+      <div><div class="ql-lbl">✉</div><div class="ql-ttl">Contact</div></div>
+      <span class="ql-arr">↗</span>
     </a>
   </div>
 </div>
 
-<section class="testimonials-section">
-  <h2 class="testimonials-title reveal">What Others Say</h2>
-  <div class="testimonials-grid">
-    <div class="testimonial-card reveal">
-      <p class="testimonial-quote">"Pandharinath's work on LLM systems is exceptional. His multi-agent architecture demonstrates deep technical understanding and practical expertise."</p>
-      <div class="testimonial-author">
-        <div class="testimonial-avatar">👨‍🏫</div>
-        <div class="testimonial-info">
-          <h4>Prof. Name</h4>
-          <p>VIIT Pune · Advisor</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="testimonial-card reveal">
-      <p class="testimonial-quote">"The RAG pipeline implementation shows production-level thinking. Excellent attention to detail and deployment practices."</p>
-      <div class="testimonial-author">
-        <div class="testimonial-avatar">👩‍💼</div>
-        <div class="testimonial-info">
-          <h4>Collaborator Name</h4>
-          <p>AI Research · Co-author</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="testimonial-card reveal">
-      <p class="testimonial-quote">"Strong competitive programmer with a focus on distributed systems and algorithms. Very reliable and detail-oriented."</p>
-      <div class="testimonial-author">
-        <div class="testimonial-avatar">👨‍💻</div>
-        <div class="testimonial-info">
-          <h4>Peer Developer</h4>
-          <p>LeetCode · Community</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="contact-form-section">
-  <h2 class="contact-form-title reveal">Get in Touch</h2>
-  <p class="contact-form-subtitle reveal">Have a project idea or want to collaborate? I'd love to hear from you.</p>
-  
-  <form class="contact-form reveal" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-    <div class="form-group">
-      <label for="name">Name *</label>
-      <input type="text" id="name" name="name" required/>
-    </div>
-    
-    <div class="form-group">
-      <label for="email">Email *</label>
-      <input type="email" id="email" name="email" required/>
-    </div>
-    
-    <div class="form-group">
-      <label for="subject">Subject *</label>
-      <input type="text" id="subject" name="subject" required/>
-    </div>
-    
-    <div class="form-group">
-      <label for="message">Message *</label>
-      <textarea id="message" name="message" required></textarea>
-    </div>
-    
-    <input type="text" name="_gotcha" class="form-honeypot"/>
-    
-    <button type="submit" class="btn btn-primary form-submit">Send Message</button>
-  </form>
-</section>
-
 <footer>
-  <div class="footer-name">Pandharinath Maske</div>
-  <div class="footer-contact">
-    <a href="mailto:pandharinath1437@gmail.com">pandharinath1437@gmail.com</a>
-    &nbsp;·&nbsp; +91-8010922929
-  </div>
-  <div class="footer-socials">
-    <a href="https://github.com/Pandharimaske" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
-    <a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-    <a href="https://x.com/PMaske20171" target="_blank" rel="noopener noreferrer" title="X / Twitter"><i class="fab fa-x-twitter"></i></a>
-    <a href="https://www.instagram.com/pandhari__7/" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="fab fa-instagram"></i></a>
-    <a href="https://leetcode.com/u/PandhariMaske1437/" target="_blank" rel="noopener noreferrer" title="LeetCode"><i class="fas fa-code"></i></a>
-  </div>
+  <div class="footer-name">Pandharinath Maske © 2026</div>
+  <ul class="footer-socials">
+    <li><a href="https://github.com/Pandharimaske" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a></li>
+    <li><a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin"></i></a></li>
+    <li><a href="https://leetcode.com/u/PandhariMaske1437/" target="_blank" rel="noopener" title="LeetCode"><i class="fas fa-code"></i></a></li>
+    <li><a href="mailto:pandharinath1437@gmail.com" title="Email"><i class="fas fa-envelope"></i></a></li>
+  </ul>
 </footer>
 
-<script>
-  const reveals = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 100);
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => obs.observe(el));
-</script>
-<button id="back-to-top" title="Back to top" aria-label="Back to top">↑</button>
+<button id="btt" title="Back to top"><i class="fas fa-arrow-up"></i></button>
 <script src="js/main.js"></script>
 </body>
 </html>

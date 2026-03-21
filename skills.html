@@ -1,221 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="Technical expertise in LLMs, RAG, multi-agent systems, Python, FastAPI, Docker, and ML infrastructure."/>
-<meta name="theme-color" content="#0b0b0b"/>
+<meta name="description" content="Technical skills of Pandharinath Maske — Python, C++, LangChain, LangGraph, RAG, PyTorch, FastAPI, Docker and more."/>
 <meta property="og:title" content="Skills — Pandharinath Maske"/>
-<meta property="og:description" content="Technical expertise in LLMs, RAG systems, and AI infrastructure."/>
-<meta property="og:type" content="website"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23e8a020'>P</text></svg>"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%23e8a020' font-family='serif' font-style='italic'>P</text></svg>"/>
 <title>Skills — Pandharinath Maske</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="style.css"/>
-<script>
-  // Initialize theme BEFORE any rendering
-  (function() {
-    function getTheme() {
-      const saved = localStorage.getItem('theme');
-      if (saved) return saved;
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-    
-    const theme = getTheme();
-    document.documentElement.setAttribute('data-theme', theme);
-    document.documentElement.classList.toggle('dark', theme === 'dark');
-  })();
-</script>
+<link rel="stylesheet" href="css/style.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<script>(function(){const t=localStorage.getItem('pm-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
 <style>
-  .skills-intro {
-    max-width: 600px;
-    color: #8a8070;
-    font-size: 1rem;
-    margin-bottom: 4rem;
-  }
+.skills-intro { max-width: 560px; color: var(--muted); font-size: 0.98rem; margin-bottom: 4rem; line-height: 1.8; }
 
-  .skills-block {
-    margin-bottom: 5rem;
-  }
+.skill-block { margin-bottom: 4rem; }
 
-  .skills-block-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--accent);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
+.block-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem; color: var(--accent);
+  letter-spacing: 0.22em; text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.block-label::after { content:''; flex:1; height:1px; background:var(--border); }
 
-  .skills-block-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
+.skill-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
 
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1.2rem;
-  }
+.sk-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.6rem;
+  transition: all 0.3s;
+  position: relative; overflow: hidden;
+}
 
-  .skill-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 1.6rem;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
+.sk-card::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: var(--accent);
+  transform: scaleY(0); transform-origin: top;
+  transition: transform 0.3s;
+}
 
-  .skill-card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 2px;
-    background: var(--accent);
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform 0.3s;
-  }
+.sk-card:hover::before { transform: scaleY(1); }
+.sk-card:hover { border-color: rgba(232,160,32,0.3); transform: translateX(4px); }
 
-  .skill-card:hover::before { transform: scaleY(1); }
-  .skill-card:hover { border-color: rgba(232,160,32,0.3); transform: translateX(4px); }
+.sk-name { font-size: 0.92rem; color: var(--text); margin-bottom: 0.25rem; }
+.sk-sub { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--muted); letter-spacing: 0.06em; }
 
-  .skill-card-name {
-    font-size: 0.95rem;
-    color: var(--text);
-    margin-bottom: 0.3rem;
-    font-weight: 400;
-  }
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 0.6rem; }
 
-  .skill-card-sub {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.62rem;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-  }
+.interest-row { display: flex; flex-wrap: wrap; gap: 0.8rem; }
 
-  /* Big tag cloud section */
-  .tag-cloud {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-  }
+.int-pill {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.7rem 1.3rem;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 100px; font-size: 0.85rem; color: var(--text);
+  transition: all 0.25s;
+}
 
-  /* Areas of interest */
-  .interests-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
+.int-pill:hover { border-color: rgba(232,160,32,0.4); color: var(--accent); }
+.int-dot { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; }
 
-  .interest-pill {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.7rem 1.2rem;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    font-size: 0.85rem;
-    color: var(--text);
-    transition: all 0.25s;
-  }
-
-  .interest-pill:hover {
-    border-color: rgba(232,160,32,0.4);
-    color: var(--accent);
-  }
-
-  .interest-dot {
-    width: 6px; height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
-  }
-
-  /* Animated Skill Bars */
-  .skill-bar-container {
-    margin-bottom: 3rem;
-  }
-
-  .skill-bar-item {
-    margin-bottom: 2.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .skill-bar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .skill-bar-name {
-    font-size: 0.95rem;
-    color: var(--text);
-    font-weight: 400;
-  }
-
-  .skill-bar-level {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .skill-bar-bg {
-    width: 100%;
-    height: 6px;
-    background: var(--border);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-
-  .skill-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    width: 0%;
-    border-radius: 3px;
-    transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  .skill-bar-fill.animated {
-    animation: skillBarFill 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  }
-
-  @keyframes skillBarFill {
-    from { width: 0%; }
-    to { width: var(--fill-percentage, 80%); }
-  }
-
-  @media (max-width: 768px) {
-    .skills-grid { grid-template-columns: 1fr 1fr; }
-  }
+@media (max-width: 600px) {
+  .skill-cards { grid-template-columns: 1fr 1fr; }
+}
 </style>
 </head>
 <body>
 
 <nav>
   <a class="nav-logo" href="index.html">PM_</a>
-  <ul class="nav-links">
+  <ul class="nav-center">
     <li><a href="index.html">Home</a></li>
-    <li><a href="skills.html" class="active">Skills</a></li>
+    <li><a href="skills.html">Skills</a></li>
     <li><a href="projects.html">Projects</a></li>
-    <li><a href="blog.html">Blog</a></li>
     <li><a href="achievements.html">Achievements</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
   </ul>
-  <button class="theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="Toggle dark/light theme"><i class="fas fa-moon"></i></button>
+  <div class="nav-right">
+    <button class="theme-btn" id="theme-btn" title="Toggle theme"><i class="fas fa-moon"></i></button>
+  </div>
 </nav>
 
 <section class="page-section">
@@ -225,94 +97,20 @@
     <div class="section-line"></div>
   </div>
 
-  <p class="skills-intro reveal">
-    Full-stack AI engineering — from writing optimised DSA in C++ to deploying production LLM pipelines on Docker. Here's what's in the toolkit.
-  </p>
+  <p class="skills-intro reveal">Full-stack AI engineering — from optimised DSA in C++ to deploying production LLM pipelines on Docker. Here's the complete toolkit.</p>
 
-  <!-- Proficiency Levels -->
-  <div class="skills-block">
-    <div class="skills-block-title reveal">Proficiency Levels</div>
-    <div class="skill-bar-container reveal">
-      <div class="skill-bar-item">
-        <div class="skill-bar-header">
-          <span class="skill-bar-name">Python & LLM Systems</span>
-          <span class="skill-bar-level">Expert</span>
-        </div>
-        <div class="skill-bar-bg">
-          <div class="skill-bar-fill" style="--fill-percentage: 95%"></div>
-        </div>
-      </div>
-      <div class="skill-bar-item">
-        <div class="skill-bar-header">
-          <span class="skill-bar-name">Machine Learning & Deep Learning</span>
-          <span class="skill-bar-level">Advanced</span>
-        </div>
-        <div class="skill-bar-bg">
-          <div class="skill-bar-fill" style="--fill-percentage: 85%"></div>
-        </div>
-      </div>
-      <div class="skill-bar-item">
-        <div class="skill-bar-header">
-          <span class="skill-bar-name">Backend & Deployment (FastAPI, Docker)</span>
-          <span class="skill-bar-level">Advanced</span>
-        </div>
-        <div class="skill-bar-bg">
-          <div class="skill-bar-fill" style="--fill-percentage: 80%"></div>
-        </div>
-      </div>
-      <div class="skill-bar-item">
-        <div class="skill-bar-header">
-          <span class="skill-bar-name">Competitive Programming (DSA)</span>
-          <span class="skill-bar-level">Advanced</span>
-        </div>
-        <div class="skill-bar-bg">
-          <div class="skill-bar-fill" style="--fill-percentage: 82%"></div>
-        </div>
-      </div>
-      <div class="skill-bar-item">
-        <div class="skill-bar-header">
-          <span class="skill-bar-name">Database & Cloud (Supabase, Pinecone)</span>
-          <span class="skill-bar-level">Intermediate</span>
-        </div>
-        <div class="skill-bar-bg">
-          <div class="skill-bar-fill" style="--fill-percentage: 70%"></div>
-        </div>
-      </div>
-      <div class="skill-bar-item">
-        <div class="skill-bar-header">
-          <span class="skill-bar-name">Web Development (HTML, CSS, JS)</span>
-          <span class="skill-bar-level">Intermediate</span>
-        </div>
-        <div class="skill-bar-bg">
-          <div class="skill-bar-fill" style="--fill-percentage: 65%"></div>
-        </div>
-      </div>
+  <div class="skill-block reveal">
+    <div class="block-label">Languages</div>
+    <div class="skill-cards reveal-stagger">
+      <div class="sk-card"><div class="sk-name">Python</div><div class="sk-sub">Primary · ML, APIs, scripting</div></div>
+      <div class="sk-card"><div class="sk-name">C++</div><div class="sk-sub">DSA · Competitive programming</div></div>
+      <div class="sk-card"><div class="sk-name">C</div><div class="sk-sub">Systems · Low-level</div></div>
     </div>
   </div>
 
-  <!-- Languages -->
-  <div class="skills-block">
-    <div class="skills-block-title reveal">Languages</div>
-    <div class="skills-grid">
-      <div class="skill-card reveal">
-        <div class="skill-card-name">Python</div>
-        <div class="skill-card-sub">Primary · ML, APIs, scripting</div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-card-name">C++</div>
-        <div class="skill-card-sub">DSA, competitive programming</div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-card-name">C</div>
-        <div class="skill-card-sub">Systems, low-level</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ML / DL -->
-  <div class="skills-block">
-    <div class="skills-block-title reveal">ML / DL Frameworks</div>
-    <div class="tag-cloud reveal">
+  <div class="skill-block reveal">
+    <div class="block-label">ML / DL Frameworks</div>
+    <div class="tag-cloud">
       <span class="tag">PyTorch</span>
       <span class="tag">TensorFlow</span>
       <span class="tag">Scikit-learn</span>
@@ -320,10 +118,9 @@
     </div>
   </div>
 
-  <!-- LLM & Agentic AI -->
-  <div class="skills-block">
-    <div class="skills-block-title reveal">LLM & Agentic AI</div>
-    <div class="tag-cloud reveal">
+  <div class="skill-block reveal">
+    <div class="block-label">LLM & Agentic AI</div>
+    <div class="tag-cloud">
       <span class="tag">LangChain</span>
       <span class="tag">LangGraph</span>
       <span class="tag">LlamaIndex</span>
@@ -334,40 +131,36 @@
     </div>
   </div>
 
-  <!-- Vector DBs -->
-  <div class="skills-block">
-    <div class="skills-block-title reveal">Vector Databases</div>
-    <div class="tag-cloud reveal">
+  <div class="skill-block reveal">
+    <div class="block-label">Vector Databases</div>
+    <div class="tag-cloud">
       <span class="tag">Pinecone</span>
       <span class="tag">ChromaDB</span>
       <span class="tag">FAISS</span>
     </div>
   </div>
 
-  <!-- APIs & Frameworks -->
-  <div class="skills-block">
-    <div class="skills-block-title reveal">APIs & Frameworks</div>
-    <div class="tag-cloud reveal">
+  <div class="skill-block reveal">
+    <div class="block-label">APIs & Frameworks</div>
+    <div class="tag-cloud">
       <span class="tag">FastAPI</span>
       <span class="tag">REST APIs</span>
       <span class="tag">Gradio</span>
     </div>
   </div>
 
-  <!-- Databases -->
-  <div class="skills-block">
-    <div class="skills-block-title reveal">Databases</div>
-    <div class="tag-cloud reveal">
+  <div class="skill-block reveal">
+    <div class="block-label">Databases</div>
+    <div class="tag-cloud">
       <span class="tag">MySQL</span>
       <span class="tag">MongoDB</span>
       <span class="tag">Supabase</span>
     </div>
   </div>
 
-  <!-- MLOps & Tools -->
-  <div class="skills-block">
-    <div class="skills-block-title reveal">MLOps & Tools</div>
-    <div class="tag-cloud reveal">
+  <div class="skill-block reveal">
+    <div class="block-label">MLOps & Cloud</div>
+    <div class="tag-cloud">
       <span class="tag">Docker</span>
       <span class="tag">Git</span>
       <span class="tag">MLflow</span>
@@ -377,46 +170,28 @@
     </div>
   </div>
 
-  <!-- Areas of Interest -->
-  <div class="skills-block">
-    <div class="skills-block-title reveal">Areas of Interest</div>
-    <div class="interests-row reveal">
-      <div class="interest-pill"><span class="interest-dot"></span>Large Language Models</div>
-      <div class="interest-pill"><span class="interest-dot"></span>Retrieval-Augmented Generation</div>
-      <div class="interest-pill"><span class="interest-dot"></span>Multi-Agent Systems</div>
-      <div class="interest-pill"><span class="interest-dot"></span>MLOps</div>
+  <div class="skill-block reveal">
+    <div class="block-label">Areas of Interest</div>
+    <div class="interest-row">
+      <div class="int-pill"><span class="int-dot"></span>Large Language Models</div>
+      <div class="int-pill"><span class="int-dot"></span>Retrieval-Augmented Generation</div>
+      <div class="int-pill"><span class="int-dot"></span>Multi-Agent Systems</div>
+      <div class="int-pill"><span class="int-dot"></span>MLOps</div>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="footer-name">Pandharinath Maske</div>
-  <div class="footer-contact">
-    <a href="mailto:pandharinath1437@gmail.com">pandharinath1437@gmail.com</a>
-    &nbsp;·&nbsp; +91-8010922929
-  </div>
-  <div class="footer-socials">
-    <a href="https://github.com/Pandharimaske" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
-    <a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-    <a href="https://x.com/PMaske20171" target="_blank" rel="noopener noreferrer" title="X / Twitter"><i class="fab fa-x-twitter"></i></a>
-    <a href="https://www.instagram.com/pandhari__7/" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="fab fa-instagram"></i></a>
-    <a href="https://leetcode.com/u/PandhariMaske1437/" target="_blank" rel="noopener noreferrer" title="LeetCode"><i class="fas fa-code"></i></a>
-  </div>
+  <div class="footer-name">Pandharinath Maske © 2026</div>
+  <ul class="footer-socials">
+    <li><a href="https://github.com/Pandharimaske" target="_blank" rel="noopener"><i class="fab fa-github"></i></a></li>
+    <li><a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a></li>
+    <li><a href="https://leetcode.com/u/PandhariMaske1437/" target="_blank" rel="noopener"><i class="fas fa-code"></i></a></li>
+    <li><a href="mailto:pandharinath1437@gmail.com"><i class="fas fa-envelope"></i></a></li>
+  </ul>
 </footer>
 
-<script>
-  const reveals = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  reveals.forEach(el => obs.observe(el));
-</script>
-<button id="back-to-top" title="Back to top" aria-label="Back to top">↑</button>
+<button id="btt" title="Back to top"><i class="fas fa-arrow-up"></i></button>
 <script src="js/main.js"></script>
 </body>
 </html>

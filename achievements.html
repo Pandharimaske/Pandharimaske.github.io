@@ -1,212 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="Research publications, awards, and achievements in AI and LLM systems. Presented at ETFI 2026."/>
-<meta name="theme-color" content="#0b0b0b"/>
+<meta name="description" content="Achievements of Pandharinath Maske — LeetCode 1647, 700+ problems, ETFI-2026 publication, certifications."/>
 <meta property="og:title" content="Achievements — Pandharinath Maske"/>
-<meta property="og:description" content="Research, awards, and professional achievements in AI systems and LLM research."/>
-<meta property="og:type" content="website"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23e8a020'>P</text></svg>"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%23e8a020' font-family='serif' font-style='italic'>P</text></svg>"/>
 <title>Achievements — Pandharinath Maske</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="style.css"/>
-<script>
-  // Initialize theme BEFORE any rendering
-  (function() {
-    function getTheme() {
-      const saved = localStorage.getItem('theme');
-      if (saved) return saved;
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-    
-    const theme = getTheme();
-    document.documentElement.setAttribute('data-theme', theme);
-    document.documentElement.classList.toggle('dark', theme === 'dark');
-  })();
-</script>
+<link rel="stylesheet" href="css/style.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<script>(function(){const t=localStorage.getItem('pm-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
 <style>
-  .achieve-intro {
-    max-width: 600px;
-    color: #8a8070;
-    font-size: 1rem;
-    margin-bottom: 4rem;
-  }
+.achieve-intro { max-width: 560px; color: var(--muted); font-size: 0.98rem; margin-bottom: 4rem; line-height: 1.8; }
 
-  .stats-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-bottom: 5rem;
-  }
+.block-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem; color: var(--accent);
+  letter-spacing: 0.22em; text-transform: uppercase;
+  margin-bottom: 1.4rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.block-label::after { content:''; flex:1; height:1px; background:var(--border); }
 
-  .stat-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 2.5rem 2rem;
-    text-align: center;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
+/* Stats */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem; margin-bottom: 5rem;
+}
 
-  .stat-card::before {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    transform: scaleX(0);
-    transition: transform 0.4s;
-  }
+.stat-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2.5rem 2rem; text-align: center;
+  transition: all 0.3s; position: relative; overflow: hidden;
+}
 
-  .stat-card:hover::before { transform: scaleX(1); }
-  .stat-card:hover { border-color: rgba(232,160,32,0.35); transform: translateY(-4px); }
+.stat-card::before {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  transform: scaleX(0); transition: transform 0.4s;
+}
 
-  .stat-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
-    font-weight: 900;
-    color: var(--accent);
-    line-height: 1;
-    margin-bottom: 0.5rem;
-  }
+.stat-card:hover::before { transform: scaleX(1); }
+.stat-card:hover { border-color: rgba(232,160,32,0.35); transform: translateY(-4px); }
 
-  .stat-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--muted);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.2rem; font-weight: 900; color: var(--accent);
+  line-height: 1; margin-bottom: 0.5rem;
+}
 
-  .stat-sub { font-size: 0.8rem; color: #6a6050; margin-top: 0.4rem; }
+.stat-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; color: var(--muted);
+  letter-spacing: 0.18em; text-transform: uppercase;
+}
 
-  .block-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--accent);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
+.stat-sub { font-size: 0.78rem; color: var(--muted); margin-top: 0.35rem; opacity: 0.8; }
 
-  .block-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
+/* Certs */
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1rem; margin-bottom: 5rem;
+}
 
-  .certs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 1rem;
-    margin-bottom: 5rem;
-  }
+.cert-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.4rem 1.6rem;
+  transition: all 0.25s;
+}
 
-  .cert-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 1.5rem 1.6rem;
-    transition: all 0.25s;
-  }
+.cert-card:hover { border-color: rgba(232,160,32,0.3); transform: translateY(-3px); }
 
-  .cert-card:hover { border-color: rgba(232,160,32,0.3); transform: translateY(-3px); }
+.cert-issuer {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem; color: var(--accent);
+  letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.45rem;
+}
 
-  .cert-issuer {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.6rem;
-    color: var(--accent);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-  }
+.cert-name { font-size: 0.88rem; color: var(--text); line-height: 1.4; }
 
-  .cert-name { font-size: 0.9rem; color: var(--text); line-height: 1.4; }
+/* Interests */
+.interests-row { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 5rem; }
 
-  .interests-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-    margin-bottom: 5rem;
-  }
+.int-pill {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.7rem 1.3rem;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 100px; font-size: 0.85rem; color: var(--text);
+  transition: all 0.25s;
+}
 
-  .interest-item {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    padding: 0.8rem 1.4rem;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    font-size: 0.88rem;
-    color: var(--text);
-    transition: all 0.25s;
-  }
+.int-pill:hover { border-color: rgba(232,160,32,0.4); color: var(--accent); }
+.int-dot { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; }
 
-  .interest-item:hover { border-color: rgba(232,160,32,0.4); color: var(--accent); }
-  .interest-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; flex-shrink: 0; }
+/* CTA */
+.cta-strip {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 2rem; flex-wrap: wrap;
+}
 
-  .contact-strip {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
+.cta-h {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; font-weight: 700; margin-bottom: 0.4rem;
+}
+.cta-h em { color: var(--accent); font-style: italic; }
+.cta-sub { font-size: 0.88rem; color: var(--muted); }
+.cta-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-  .contact-left h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-  }
-
-  .contact-left h2 em { color: var(--accent); font-style: italic; }
-  .contact-left p { font-size: 0.88rem; color: var(--muted); }
-  .contact-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
-
-  .contact-note {
-    margin-top: 1rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    color: #918775;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  @media (max-width: 768px) {
-    .stats-row { grid-template-columns: 1fr; }
-    .certs-grid { grid-template-columns: 1fr; }
-    .contact-strip { flex-direction: column; align-items: flex-start; }
-  }
+@media (max-width: 700px) {
+  .stats-row { grid-template-columns: 1fr; }
+  .certs-grid { grid-template-columns: 1fr 1fr; }
+  .cta-strip { flex-direction: column; align-items: flex-start; }
+}
 </style>
 </head>
 <body>
 
 <nav>
   <a class="nav-logo" href="index.html">PM_</a>
-  <ul class="nav-links">
+  <ul class="nav-center">
     <li><a href="index.html">Home</a></li>
     <li><a href="skills.html">Skills</a></li>
     <li><a href="projects.html">Projects</a></li>
+    <li><a href="achievements.html">Achievements</a></li>
     <li><a href="blog.html">Blog</a></li>
-    <li><a href="achievements.html" class="active">Achievements</a></li>
+    <li><a href="contact.html">Contact</a></li>
   </ul>
-  <button class="theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="Toggle dark/light theme"><i class="fas fa-moon"></i></button>
+  <div class="nav-right">
+    <button class="theme-btn" id="theme-btn" title="Toggle theme"><i class="fas fa-moon"></i></button>
+  </div>
 </nav>
 
 <section class="page-section">
@@ -216,112 +144,83 @@
     <div class="section-line"></div>
   </div>
 
-  <p class="achieve-intro reveal">
-    Numbers that tell the story — competitive programming, published research, and learning that never stopped.
-  </p>
+  <p class="achieve-intro reveal">Numbers that tell the story — competitive programming, published research, and learning that never stopped.</p>
 
-  <div class="stats-row">
-    <div class="stat-card reveal">
-      <div class="stat-number">700+</div>
-      <div class="stat-label">LeetCode Problems</div>
-      <div class="stat-sub">Solved across all difficulty levels</div>
+  <div class="stats-row reveal-stagger">
+    <div class="stat-card">
+      <div class="stat-num">700+</div>
+      <div class="stat-lbl">LeetCode Problems</div>
+      <div class="stat-sub">All difficulty levels</div>
     </div>
-    <div class="stat-card reveal">
-      <div class="stat-number">1647</div>
-      <div class="stat-label">Highest Rating</div>
-      <div class="stat-sub">40+ contests participated</div>
+    <div class="stat-card">
+      <div class="stat-num">1647</div>
+      <div class="stat-lbl">Highest Rating</div>
+      <div class="stat-sub">40+ contests</div>
     </div>
-    <div class="stat-card reveal">
-      <div class="stat-number">ETFI</div>
-      <div class="stat-label">Published Paper</div>
+    <div class="stat-card">
+      <div class="stat-num">ETFI</div>
+      <div class="stat-lbl">Published Paper</div>
       <div class="stat-sub">International Conference 2026</div>
     </div>
   </div>
 
-  <div class="block-title reveal">GitHub Activity</div>
-  <div class="github-graph-container reveal">
-    <iframe src="https://ghchart.rnadom.net/e8a020/Pandharimaske" frameborder="0" scrolling="0"></iframe>
-  </div>
-
-  <div class="block-title reveal">Certifications</div>
-  <div class="certs-grid">
-    <div class="cert-card reveal">
+  <div class="block-label reveal">Certifications</div>
+  <div class="certs-grid reveal-stagger">
+    <div class="cert-card">
       <div class="cert-issuer">Andrew Ng · Stanford</div>
       <div class="cert-name">Machine Learning Specialization</div>
     </div>
-    <div class="cert-card reveal">
+    <div class="cert-card">
       <div class="cert-issuer">Andrew Ng · DeepLearning.AI</div>
       <div class="cert-name">Deep Learning Specialization</div>
     </div>
-    <div class="cert-card reveal">
+    <div class="cert-card">
       <div class="cert-issuer">Hugging Face</div>
       <div class="cert-name">AI Agents Fundamentals</div>
     </div>
-    <div class="cert-card reveal">
+    <div class="cert-card">
       <div class="cert-issuer">LangChain Academy</div>
       <div class="cert-name">Introduction to LangGraph</div>
     </div>
-    <div class="cert-card reveal">
+    <div class="cert-card">
       <div class="cert-issuer">Hugging Face</div>
       <div class="cert-name">Fundamentals of MCP</div>
     </div>
   </div>
 
-  <div class="block-title reveal">Areas of Interest</div>
-  <div class="interests-grid reveal">
-    <div class="interest-item"><span class="interest-dot"></span>Large Language Models</div>
-    <div class="interest-item"><span class="interest-dot"></span>Retrieval-Augmented Generation</div>
-    <div class="interest-item"><span class="interest-dot"></span>Multi-Agent Systems</div>
-    <div class="interest-item"><span class="interest-dot"></span>MLOps</div>
-    <div class="interest-item"><span class="interest-dot"></span>Competitive Programming</div>
+  <div class="block-label reveal">Areas of Interest</div>
+  <div class="interests-row reveal">
+    <div class="int-pill"><span class="int-dot"></span>Large Language Models</div>
+    <div class="int-pill"><span class="int-dot"></span>Retrieval-Augmented Generation</div>
+    <div class="int-pill"><span class="int-dot"></span>Multi-Agent Systems</div>
+    <div class="int-pill"><span class="int-dot"></span>MLOps</div>
+    <div class="int-pill"><span class="int-dot"></span>Competitive Programming</div>
   </div>
 
-  <div class="contact-strip reveal">
-    <div class="contact-left">
-      <h2>Let's <em>connect.</em></h2>
-      <p>Open to internships, collaborations, research discussions, and AI engineering opportunities.</p>
-      <div class="contact-note">Active across professional, coding, and social platforms</div>
+  <div class="cta-strip reveal">
+    <div>
+      <div class="cta-h">Let's <em>connect.</em></div>
+      <div class="cta-sub">Open to internships, collaborations, and interesting problems.</div>
     </div>
-    <div class="contact-btns">
-      <a href="mailto:pandharinath1437@gmail.com" class="btn btn-primary">↗ Email Me</a>
-      <a href="https://github.com/Pandharimaske" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a href="https://leetcode.com/u/PandhariMaske1437/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">LeetCode</a>
-      <a href="https://x.com/PMaske20171" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">X</a>
-      <a href="https://www.instagram.com/pandhari__7/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <div class="cta-btns">
+      <a href="contact.html" class="btn btn-primary"><i class="fas fa-envelope"></i> Contact Me</a>
+      <a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" class="btn btn-ghost" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      <a href="https://github.com/Pandharimaske" class="btn btn-ghost" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
     </div>
   </div>
-
 </section>
 
 <footer>
-  <div class="footer-name">Pandharinath Maske</div>
-  <div class="footer-contact">
-    <a href="mailto:pandharinath1437@gmail.com">pandharinath1437@gmail.com</a>
-    &nbsp;·&nbsp; +91-8010922929
-  </div>
-  <div class="footer-socials">
-    <a href="https://github.com/Pandharimaske" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
-    <a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-    <a href="https://x.com/PMaske20171" target="_blank" rel="noopener noreferrer" title="X / Twitter"><i class="fab fa-x-twitter"></i></a>
-    <a href="https://www.instagram.com/pandhari__7/" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="fab fa-instagram"></i></a>
-    <a href="https://leetcode.com/u/PandhariMaske1437/" target="_blank" rel="noopener noreferrer" title="LeetCode"><i class="fas fa-code"></i></a>
-  </div>
+  <div class="footer-name">Pandharinath Maske © 2026</div>
+  <ul class="footer-socials">
+    <li><a href="https://github.com/Pandharimaske" target="_blank" rel="noopener"><i class="fab fa-github"></i></a></li>
+    <li><a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a></li>
+    <li><a href="https://leetcode.com/u/PandhariMaske1437/" target="_blank" rel="noopener"><i class="fas fa-code"></i></a></li>
+    <li><a href="mailto:pandharinath1437@gmail.com"><i class="fas fa-envelope"></i></a></li>
+  </ul>
 </footer>
 
-<script>
-  const reveals = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 100);
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  reveals.forEach(el => obs.observe(el));
-</script>
-<button id="back-to-top" title="Back to top" aria-label="Back to top">↑</button>
+<button id="btt" title="Back to top"><i class="fas fa-arrow-up"></i></button>
 <script src="js/main.js"></script>
 </body>
 </html>
