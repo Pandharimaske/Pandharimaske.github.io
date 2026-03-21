@@ -1,34 +1,20 @@
 // Theme toggle
 const themeToggle = document.getElementById('theme-toggle');
 const htmlElement = document.documentElement;
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
 function setTheme(theme) {
   htmlElement.setAttribute('data-theme', theme);
   localStorage.setItem('theme', theme);
-  themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
-}
-
-function initTheme() {
-  const savedTheme = localStorage.getItem('theme');
-  const theme = savedTheme || (prefersDark.matches ? 'dark' : 'light');
-  setTheme(theme);
+  if (themeToggle) {
+    themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+  }
 }
 
 themeToggle?.addEventListener('click', () => {
-  const currentTheme = htmlElement.getAttribute('data-theme');
+  const currentTheme = htmlElement.getAttribute('data-theme') || 'dark';
   const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
   setTheme(newTheme);
 });
-
-// Listen for system theme changes
-prefersDark.addEventListener('change', (e) => {
-  if (!localStorage.getItem('theme')) {
-    setTheme(e.matches ? 'dark' : 'light');
-  }
-});
-
-initTheme();
 
 // Scroll reveal
 const revealObserver = new IntersectionObserver((entries) => {

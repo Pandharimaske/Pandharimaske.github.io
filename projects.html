@@ -12,6 +12,15 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23e8a020'>P</text></svg>"/>
 <title>Projects — Pandharinath Maske</title>
 <link rel="stylesheet" href="style.css"/>
+<script>
+  // Initialize theme before rendering
+  (function() {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
 <style>
   .projects-intro {
     max-width: 600px;
@@ -340,8 +349,8 @@
       </div>
     </div>
 
-    <div class="project-caimage">🔍</div>
-      <div class="project-rd reveal" data-category="rag">
+    <div class="project-card reveal" data-category="rag">
+      <div class="project-image">🔍</div>
       <div class="project-num">02</div>
       <div class="project-date">May 2025</div>
       <div class="project-title">Semantic Search Engine for Book Recommendations</div>
@@ -362,8 +371,8 @@
       </div>
     </div>
 
-    <div class="project-caimage">📊</div>
-      <div class="project-rd reveal" data-category="mlops">
+    <div class="project-card reveal" data-category="mlops">
+      <div class="project-image">📊</div>
       <div class="project-num">03</div>
       <div class="project-date">2025</div>
       <div class="project-title">MLOps Project</div>
@@ -412,11 +421,11 @@
     &nbsp;·&nbsp; +91-8010922929
   </div>
   <div class="footer-socials">
-    <a href="https://github.com/Pandharimaske" target="_blank" rel="noopener noreferrer">GitHub</a>
-    <a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-    <a href="https://leetcode.com/u/PandhariMaske1437/" target="_blank" rel="noopener noreferrer">LeetCode</a>
-    <a href="https://x.com/PMaske20171" target="_blank" rel="noopener noreferrer">X</a>
-    <a href="https://www.instagram.com/pandhari__7/" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="https://github.com/Pandharimaske" target="_blank" rel="noopener noreferrer" title="GitHub">🐙</a>
+    <a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener noreferrer" title="LinkedIn">💼</a>
+    <a href="https://x.com/PMaske20171" target="_blank" rel="noopener noreferrer" title="X / Twitter">𝕏</a>
+    <a href="https://www.instagram.com/pandhari__7/" target="_blank" rel="noopener noreferrer" title="Instagram">📸</a>
+    <a href="https://leetcode.com/u/PandhariMaske1437/" target="_blank" rel="noopener noreferrer" title="LeetCode">💻</a>
   </div>
 </footer>
 

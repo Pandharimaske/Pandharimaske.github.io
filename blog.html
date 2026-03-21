@@ -12,6 +12,15 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23e8a020'>P</text></svg>"/>
 <title>Blog — Pandharinath Maske</title>
 <link rel="stylesheet" href="style.css"/>
+<script>
+  // Initialize theme before rendering
+  (function() {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
 <style>
   .blog-intro {
     max-width: 600px;
@@ -166,10 +175,11 @@
 <footer>
   <div class="footer-name reveal">Pandharinath Maske © 2026</div>
   <div class="footer-links reveal">
-    <a href="https://github.com/Pandharimaske" target="_blank" rel="noopener noreferrer">GitHub</a>
-    <a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-    <a href="https://x.com/PMaske20171" target="_blank" rel="noopener noreferrer">Twitter</a>
-    <a href="mailto:pandharinath1437@gmail.com">Email</a>
+    <a href="https://github.com/Pandharimaske" target="_blank" rel="noopener noreferrer" title="GitHub">🐙</a>
+    <a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener noreferrer" title="LinkedIn">💼</a>
+    <a href="https://x.com/PMaske20171" target="_blank" rel="noopener noreferrer" title="X / Twitter">𝕏</a>
+    <a href="https://www.instagram.com/pandhari__7/" target="_blank" rel="noopener noreferrer" title="Instagram">📸</a>
+    <a href="https://leetcode.com/u/PandhariMaske1437/" target="_blank" rel="noopener noreferrer" title="LeetCode">💻</a>
   </div>
 </footer>
 
