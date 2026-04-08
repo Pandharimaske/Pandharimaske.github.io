@@ -3,374 +3,154 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="Projects by Pandharinath Maske — Jupyter Notebook style."/>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%23f0a500' font-family='serif' font-style='italic'>P</text></svg>"/>
-<title>Projects — Pandharinath Maske</title>
+<meta name="description" content="AI Experiments by Pandharinath Maske — Hybrid Report Layout."/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%2300f2ff' font-family='serif' font-style='italic'>P</text></svg>"/>
+<title>Experiments — Pandharinath Maske</title>
 <link rel="stylesheet" href="css/style.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <script>(function(){const t=localStorage.getItem('pm-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
 <style>
-/* ── NOTEBOOK SHELL ── */
-.nb-shell {
-  background: #0e0e16;
-  border: 1px solid rgba(240,165,0,0.1);
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(240,165,0,0.05);
+/* ── EXPERIMENT REPORT LAYOUT ── */
+.project-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8rem;
+  padding-bottom: 5rem;
+}
+
+.exp-card {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .exp-card { grid-template-columns: 1fr; gap: 3rem; }
+}
+
+/* Metadata Block */
+.exp-meta {
+  padding: 2.5rem;
+  border-left: 1px solid var(--border);
+  background: linear-gradient(90deg, rgba(0, 242, 255, 0.03), transparent);
+  position: relative;
+}
+
+.exp-meta::before {
+  content: '';
+  position: absolute; top: 0; left: -1px; width: 1px; height: 40px;
+  background: var(--amber); box-shadow: 0 0 10px var(--amber);
+}
+
+.exp-id {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem; color: var(--amber);
+  letter-spacing: 0.3em; text-transform: uppercase;
+  margin-bottom: 1.2rem; display: block; opacity: 0.8;
+}
+
+.exp-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 800;
+  line-height: 1.1; margin-bottom: 1.2rem;
+  letter-spacing: -0.04em;
+  color: var(--text);
+}
+
+.exp-subtitle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem; color: var(--text2);
+  margin-bottom: 2rem; text-transform: uppercase;
+  display: flex; gap: 1rem; align-items: center;
+  flex-wrap: wrap;
+}
+
+.exp-desc {
+  font-size: 1.05rem; color: var(--text2);
+  line-height: 1.8; margin-bottom: 2.5rem;
+  max-width: 600px;
+}
+
+/* Code & Tech Block */
+.exp-tech {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1.2rem;
   margin-bottom: 3rem;
 }
 
-html[data-theme="light"] .nb-shell { background: #fafaf8; border-color: rgba(240,165,0,0.15); }
-
-/* Toolbar */
-.nb-toolbar {
-  background: #13131e;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  padding: 0 1rem;
-  display: flex;
-  align-items: center;
-  height: 44px;
-  gap: 0;
+.tech-item {
+  padding: 1.2rem;
+  background: rgba(10, 10, 21, 0.4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: all 0.3s;
 }
+.tech-item:hover { border-color: var(--amber); background: rgba(var(--amber-rgb), 0.03); }
 
-html[data-theme="light"] .nb-toolbar { background: #f0ede8; border-color: rgba(0,0,0,0.08); }
+.tech-key { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; color: var(--muted); text-transform: uppercase; margin-bottom: 0.4rem; display: block; }
+.tech-val { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--amber); font-weight: 600; }
 
-.nb-menu {
-  display: flex; gap: 0; list-style: none;
-}
-
-.nb-menu li {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.78rem;
-  color: #8a8070;
-  padding: 0 0.8rem;
-  height: 44px;
-  display: flex; align-items: center;
-  cursor: none;
-  transition: color 0.2s, background 0.2s;
+/* IDE Window Style */
+.ide-window {
+  background: #05050a;
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 50px 120px rgba(0,0,0,0.7);
   position: relative;
+  transition: transform 0.4s ease;
+}
+.ide-window:hover { transform: translateY(-5px); }
+
+.ide-header {
+  padding: 0.8rem 1.2rem;
+  background: #0a0a15;
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
 }
 
-.nb-menu li:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+.ide-dots { display: flex; gap: 0.5rem; }
+.idot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid var(--border); }
+.ide-tab { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--text2); letter-spacing: 0.05em; }
 
-.nb-divider { width: 1px; height: 20px; background: rgba(255,255,255,0.07); margin: 0 0.5rem; }
-
-.nb-run-btn {
-  display: flex; align-items: center; gap: 0.4rem;
-  padding: 0.3rem 0.9rem;
-  background: rgba(240,165,0,0.1);
-  border: 1px solid rgba(240,165,0,0.2);
-  border-radius: 3px;
+pre.ide-code {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.68rem; color: var(--gold);
-  cursor: none; transition: all 0.2s;
-  margin-left: 0.5rem;
-}
-
-.nb-run-btn:hover { background: rgba(240,165,0,0.18); border-color: var(--gold); }
-
-.nb-kernel-status {
-  margin-left: auto;
-  display: flex; align-items: center; gap: 0.6rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem; color: #6b6358;
-  letter-spacing: 0.08em;
-}
-
-.kernel-dot {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 6px var(--green);
-}
-
-.kernel-dot.busy {
-  background: var(--gold);
-  box-shadow: 0 0 6px var(--gold);
-  animation: pulse-k 0.6s ease-in-out infinite alternate;
-}
-
-@keyframes pulse-k { to { opacity: 0.4; } }
-
-/* Filename bar */
-.nb-filename {
-  background: #0e0e16;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  padding: 0.5rem 1.5rem;
-  display: flex; align-items: center; gap: 0.8rem;
-}
-
-html[data-theme="light"] .nb-filename { background: #fafaf8; border-color: rgba(0,0,0,0.05); }
-
-.nb-filename-text {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.78rem; color: var(--text2);
-}
-
-.nb-filename-text .nb-ext { color: var(--muted); }
-
-.nb-saved {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em;
-}
-
-/* ── CELLS ── */
-.nb-cells { padding: 0.8rem 0; }
-
-.nb-cell {
-  display: flex;
-  padding: 0.3rem 1rem 0.3rem 0;
-  position: relative;
-  transition: background 0.2s;
-}
-
-.nb-cell:hover { background: rgba(240,165,0,0.02); }
-.nb-cell.active { background: rgba(240,165,0,0.03); }
-.nb-cell.active .nb-cell-bar { background: var(--gold); }
-
-.nb-cell-bar {
-  width: 3px; flex-shrink: 0;
-  margin-right: 0;
+  font-size: 0.8rem; line-height: 1.9;
+  padding: 2rem; margin: 0; overflow-x: auto;
+  color: #e2e8f0;
   background: transparent;
-  border-radius: 2px;
-  transition: background 0.25s;
 }
 
-.nb-counter {
+/* Syntax Highlighting */
+.kw { color: #c084fc; font-weight: 500; }
+.fn { color: var(--cyan); }
+.str { color: #5eead4; }
+.cm { color: rgba(255,255,255,0.25); font-style: italic; }
+.var { color: var(--text); }
+.cls { color: #a78bfa; font-weight: 600; }
+.num { color: var(--amber); font-weight: 600; }
+
+/* Result Hud */
+.exp-result {
+  margin-top: 1rem;
+  padding: 1.8rem;
+  background: linear-gradient(135deg, rgba(var(--amber-rgb), 0.03), transparent);
+  border: 1px dashed var(--border-amber);
+  border-radius: var(--radius);
+}
+
+.res-header {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  color: var(--muted);
-  width: 80px; flex-shrink: 0;
-  padding: 0.6rem 0.5rem 0.6rem 1rem;
-  text-align: right;
-  line-height: 1.2;
-  user-select: none;
-  align-self: flex-start;
-  padding-top: 1rem;
+  font-size: 0.65rem; color: var(--muted);
+  margin-bottom: 1.2rem; display: flex; justify-content: space-between;
+  text-transform: uppercase; letter-spacing: 0.1em;
 }
 
-.nb-counter.running { color: var(--gold); }
-
-.nb-cell-inner { flex: 1; min-width: 0; padding: 0.4rem 1rem 0.4rem 0.8rem; }
-
-/* Markdown cell */
-.nb-md {
-  padding: 0.6rem 0;
-}
-
-.nb-md h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.6rem; font-weight: 700;
-  color: var(--text); margin-bottom: 0.4rem; line-height: 1.2;
-}
-
-.nb-md h3 {
+.res-body {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem; color: var(--gold);
-  letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.5rem;
-}
-
-.nb-md p { font-size: 0.9rem; color: var(--text2); line-height: 1.75; }
-
-.nb-md .badge-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem; }
-
-.nb-badge {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem; padding: 0.2rem 0.6rem;
-  border-radius: 3px; letter-spacing: 0.06em;
-}
-
-.nb-badge.green  { background: rgba(34,197,94,0.12);  border: 1px solid rgba(34,197,94,0.25);  color: #22c55e; }
-.nb-badge.gold   { background: rgba(240,165,0,0.12);  border: 1px solid rgba(240,165,0,0.25);  color: var(--gold); }
-.nb-badge.purple { background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.25); color: var(--purple2); }
-.nb-badge.blue   { background: rgba(103,232,249,0.1); border: 1px solid rgba(103,232,249,0.2); color: #67e8f9; }
-
-/* Code cell */
-.nb-code-wrap {
-  background: rgba(0,0,0,0.3);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 4px;
-  overflow: hidden;
-  position: relative;
-}
-
-html[data-theme="light"] .nb-code-wrap { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.1); }
-
-.nb-code-header {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0.5rem 0.8rem;
-  background: rgba(255,255,255,0.02);
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-}
-
-.nb-code-lang {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em;
-}
-
-.nb-exec-btn {
-  display: flex; align-items: center; gap: 0.35rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.62rem; color: var(--gold);
-  background: transparent; border: none; cursor: none;
-  transition: all 0.2s; padding: 0.2rem 0.5rem;
-  border-radius: 3px;
-}
-
-.nb-exec-btn:hover { background: rgba(240,165,0,0.1); }
-
-pre.nb-code {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.73rem;
-  line-height: 1.75;
-  padding: 1rem 1.2rem;
-  margin: 0;
-  overflow-x: auto;
-  color: #e8e0d5;
-}
-
-/* syntax tokens */
-pre .kw  { color: #c084fc; }
-pre .fn  { color: #67e8f9; }
-pre .str { color: #fbbf24; }
-pre .cm  { color: rgba(255,255,255,0.28); font-style: italic; }
-pre .num { color: #f0a500; }
-pre .var { color: #e8e0d5; }
-pre .cls { color: #f0a500; font-weight: 600; }
-pre .dec { color: #f472b6; }
-pre .op  { color: #a855f7; }
-
-/* Output cell */
-.nb-output {
-  margin-top: 0.5rem;
-  border: 1px solid rgba(255,255,255,0.05);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.nb-output-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem; color: var(--muted);
-  padding: 0.35rem 0.8rem;
-  background: rgba(255,255,255,0.02);
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  letter-spacing: 0.1em;
-}
-
-.nb-output-body {
-  padding: 1rem 1.2rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  line-height: 1.7;
-  color: var(--text2);
-}
-
-.nb-output-body .ok    { color: #22c55e; }
-.nb-output-body .warn  { color: var(--gold); }
-.nb-output-body .info  { color: #67e8f9; }
-.nb-output-body .val   { color: var(--text); }
-
-/* Architecture diagram inside output */
-.arch-diagram {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  flex-wrap: wrap;
-  margin: 0.5rem 0;
-}
-
-.arch-node {
-  display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
-}
-
-.arch-box {
-  padding: 0.4rem 0.7rem;
-  border-radius: 4px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem;
-  text-align: center;
-  line-height: 1.3;
-  min-width: 80px;
-}
-
-.arch-box.input    { background: rgba(168,85,247,0.15); border: 1px solid rgba(168,85,247,0.35); color: var(--purple2); }
-.arch-box.process  { background: rgba(240,165,0,0.12);  border: 1px solid rgba(240,165,0,0.3);   color: var(--gold); }
-.arch-box.storage  { background: rgba(103,232,249,0.1); border: 1px solid rgba(103,232,249,0.25); color: #67e8f9; }
-.arch-box.output   { background: rgba(34,197,94,0.12);  border: 1px solid rgba(34,197,94,0.3);   color: #22c55e; }
-
-.arch-arrow {
-  font-size: 1rem; color: var(--muted);
-  padding: 0 0.3rem;
-  align-self: center;
-}
-
-/* Separator cell */
-.nb-sep {
-  height: 1px;
-  background: rgba(255,255,255,0.04);
-  margin: 0.5rem 1.5rem;
-}
-
-/* execution animation */
-@keyframes exec-flash {
-  0%   { background: rgba(240,165,0,0.12); }
-  100% { background: transparent; }
-}
-
-.nb-cell.executing { animation: exec-flash 0.4s ease; }
-
-/* Research notebook */
-.nb-paper-cell .nb-output-body {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.85rem; color: var(--text2);
-  line-height: 1.8;
-}
-
-.nb-paper-cell .paper-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.1rem; font-weight: 700; color: var(--text);
-  margin-bottom: 0.5rem;
-}
-
-.nb-paper-cell .paper-venue {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.62rem; color: var(--gold); letter-spacing: 0.1em;
-  margin-bottom: 0.6rem;
-}
-
-.nb-paper-cell .paper-authors {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem; color: var(--muted); margin-top: 0.6rem;
-}
-
-/* Links inside nb */
-.nb-link {
-  display: inline-flex; align-items: center; gap: 0.4rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.68rem; color: var(--gold);
-  text-decoration: none;
-  padding: 0.35rem 0.75rem;
-  border: 1px solid rgba(240,165,0,0.2);
-  border-radius: 3px;
-  transition: all 0.2s;
-  margin-top: 0.6rem;
-}
-.nb-link:hover { background: rgba(240,165,0,0.08); border-color: rgba(240,165,0,0.45); }
-
-/* Progress bar in output */
-.nb-progress { margin: 0.3rem 0; }
-.nb-progress-label {
-  font-size: 0.62rem; color: var(--muted); margin-bottom: 0.25rem;
-  display: flex; justify-content: space-between;
-}
-.nb-progress-bar { height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
-.nb-progress-fill { height: 100%; border-radius: 2px; transition: width 1.2s ease; width: 0%; }
-
-@media (max-width: 700px) {
-  .nb-menu { display: none; }
-  .nb-counter { width: 50px; font-size: 0.58rem; }
-  pre.nb-code { font-size: 0.65rem; }
-  .arch-diagram { gap: 0.3rem; }
-  .arch-box { min-width: 60px; font-size: 0.55rem; }
+  font-size: 0.75rem; color: var(--amber);
 }
 </style>
 </head>
@@ -378,11 +158,11 @@ pre .op  { color: #a855f7; }
 <div id="cursor"></div><div id="cursor-ring"></div><div id="scroll-progress"></div>
 
 <nav>
-  <a class="nav-logo" href="index.html"><span class="nav-logo-dot"></span>PM_</a>
+  <a class="nav-logo" href="index.html"><span>P</span>M_</a>
   <ul class="nav-center">
     <li><a href="index.html">Home</a></li>
     <li><a href="skills.html">Skills</a></li>
-    <li><a href="projects.html">Projects</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
     <li><a href="achievements.html">Achievements</a></li>
     <li><a href="blog.html">Blog</a></li>
     <li><a href="contact.html">Contact</a></li>
@@ -395,367 +175,158 @@ pre .op  { color: #a855f7; }
 <section class="page-section">
   <div class="section-header reveal">
     <span class="section-num">02</span>
-    <h1 class="section-title">Projects</h1>
+    <h1 class="section-title">Experiments</h1>
     <div class="section-line"></div>
   </div>
 
-  <!-- ══════════════════════════════════════════
-       NOTEBOOK SHELL
-  ══════════════════════════════════════════ -->
-  <div class="nb-shell reveal">
-
-    <!-- Toolbar -->
-    <div class="nb-toolbar">
-      <ul class="nb-menu">
-        <li>File</li><li>Edit</li><li>View</li><li>Insert</li><li>Kernel</li><li>Help</li>
-      </ul>
-      <div class="nb-divider"></div>
-      <button class="nb-run-btn" id="run-all-btn">
-        <i class="fas fa-play" style="font-size:0.6rem"></i> Run All
-      </button>
-      <div class="nb-kernel-status">
-        <span class="kernel-dot" id="kernel-dot"></span>
-        <span id="kernel-label">Python 3 | Idle</span>
-      </div>
-    </div>
-
-    <!-- Filename -->
-    <div class="nb-filename">
-      <i class="fas fa-book" style="color:var(--gold);font-size:0.8rem"></i>
-      <span class="nb-filename-text">pandharinath_maske_projects<span class="nb-ext">.ipynb</span></span>
-      <span class="nb-saved">Last checkpoint: just now</span>
-    </div>
-
-    <!-- CELLS -->
-    <div class="nb-cells" id="nb-cells">
-
-      <!-- ─── CELL 0 — Notebook header ─── -->
-      <div class="nb-cell active" data-cell="0">
-        <div class="nb-cell-bar"></div>
-        <div class="nb-counter" id="ctr-0">[&nbsp;]:</div>
-        <div class="nb-cell-inner">
-          <div class="nb-md">
-            <h3>📁 Pandharinath Maske · AI Engineering Portfolio</h3>
-            <p>Production-grade AI systems — from multi-agent orchestration to semantic search. Every notebook cell below is a real deployed project.</p>
-            <div class="badge-row">
-              <span class="nb-badge green">● 3 Deployed Systems</span>
-              <span class="nb-badge gold">● LangGraph · RAG · MLOps</span>
-              <span class="nb-badge purple">● ETFI-2026 Published</span>
-            </div>
-          </div>
+  <div class="project-grid reveal-stagger">
+    
+    <!-- Experiment 01: Coffee Shop Chatbot -->
+    <div class="exp-card tilt-hover">
+      <div class="exp-meta">
+        <span class="exp-id">Experiment #001</span>
+        <h2 class="exp-title">Agentic RAG Orchestration</h2>
+        <div class="exp-subtitle">
+          <span>Multi-Agent System</span>
+          <span>·</span>
+          <span>Production Pipeline</span>
         </div>
-      </div>
-
-      <div class="nb-sep"></div>
-
-      <!-- ─── CELL 1 — Project 1 setup ─── -->
-      <div class="nb-cell" data-cell="1">
-        <div class="nb-cell-bar"></div>
-        <div class="nb-counter" id="ctr-1">[&nbsp;]:</div>
-        <div class="nb-cell-inner">
-          <div class="nb-md">
-            <h2>01 — Conversational AI with Agentic RAG</h2>
-            <h3>☕ Coffee Shop Domain · Multi-Agent System · June 2025</h3>
-            <p>Production-ready multi-agent system. LangGraph orchestrates 3 specialized agents with dynamic routing, dual-memory architecture, and Pinecone-backed semantic retrieval.</p>
-          </div>
+        <p class="exp-desc">
+          Architected a sophisticated multi-agent orchestration layer using LangGraph. Features a dual-memory architecture that distinguishes between short-term conversational context and long-term user preferences, with a Pinecone-backed retrieval engine.
+        </p>
+        <div class="exp-tech">
+          <div class="tech-item"><span class="tech-key">Orchestration</span><span class="tech-val">LangGraph</span></div>
+          <div class="tech-item"><span class="tech-key">Vector Store</span><span class="tech-val">Pinecone</span></div>
+          <div class="tech-item"><span class="tech-key">LTM Engine</span><span class="tech-val">Supabase</span></div>
+          <div class="tech-item"><span class="tech-key">Streaming</span><span class="tech-val">SSE / FastAPI</span></div>
         </div>
+        <a href="https://github.com/Pandharimaske/Coffee_Shop_ChatBot" class="btn btn-primary" target="_blank">View Registry</a>
       </div>
+      
+      <div class="ide-window tilt-hover">
+        <div class="ide-header">
+          <div class="ide-dots"><div class="idot"></div><div class="idot"></div><div class="idot"></div></div>
+          <div class="ide-tab">orchestrator.py</div>
+          <div style="width:24px"></div>
+        </div>
+<pre class="ide-code">
+<span class="kw">from</span> langgraph.graph <span class="kw">import</span> <span class="fn">StateGraph</span>
 
-      <!-- ─── CELL 2 — Project 1 code ─── -->
-      <div class="nb-cell" data-cell="2">
-        <div class="nb-cell-bar"></div>
-        <div class="nb-counter" id="ctr-2">[&nbsp;]:</div>
-        <div class="nb-cell-inner">
-          <div class="nb-code-wrap">
-            <div class="nb-code-header">
-              <span class="nb-code-lang">python</span>
-              <button class="nb-exec-btn" data-target="2"><i class="fas fa-play" style="font-size:0.55rem"></i> Execute</button>
-            </div>
-<pre class="nb-code"><span class="cm"># ── Coffee Shop Agentic RAG System ──────────────────────────────</span>
-<span class="kw">from</span> <span class="var">langgraph.graph</span> <span class="kw">import</span> <span class="fn">StateGraph</span>, <span class="fn">END</span>
-<span class="kw">from</span> <span class="var">langchain_pinecone</span> <span class="kw">import</span> <span class="fn">PineconeVectorStore</span>
-<span class="kw">from</span> <span class="var">fastapi</span> <span class="kw">import</span> <span class="fn">FastAPI</span>
-<span class="kw">from</span> <span class="var">supabase</span> <span class="kw">import</span> <span class="fn">create_client</span>
-
-<span class="cm"># Agent state with dual-memory architecture</span>
 <span class="kw">class</span> <span class="cls">AgentState</span>(TypedDict):
-    messages:       <span class="fn">list</span>[<span class="var">BaseMessage</span>]
-    short_term:     <span class="fn">list</span>        <span class="cm"># In-session conversation history</span>
-    user_profile:   <span class="fn">dict</span>        <span class="cm"># Persistent Supabase long-term memory</span>
-    retrieved_docs: <span class="fn">list</span>        <span class="cm"># Pinecone RAG context</span>
-    agent_type:     <span class="fn">str</span>         <span class="cm"># Router decision output</span>
+    messages: <span class="fn">list</span>[<span class="var">BaseMessage</span>]
+    user_context: <span class="fn">dict</span>
+    retrieved_docs: <span class="fn">list</span>
 
-<span class="cm"># Build LangGraph state machine</span>
+<span class="cm"># Define the Agentic Graph</span>
 <span class="var">graph</span> = <span class="fn">StateGraph</span>(<span class="cls">AgentState</span>)
-<span class="var">graph</span>.<span class="fn">add_node</span>(<span class="str">"router"</span>,        <span class="var">router_agent</span>)
-<span class="var">graph</span>.<span class="fn">add_node</span>(<span class="str">"order_agent"</span>,   <span class="var">order_processing_agent</span>)
-<span class="var">graph</span>.<span class="fn">add_node</span>(<span class="str">"menu_agent"</span>,    <span class="var">menu_query_agent</span>)
-<span class="var">graph</span>.<span class="fn">add_node</span>(<span class="str">"rag_retriever"</span>, <span class="var">agentic_rag_node</span>)
-<span class="var">graph</span>.<span class="fn">add_conditional_edges</span>(<span class="str">"router"</span>, <span class="var">route_decision</span>)
+<span class="var">graph</span>.<span class="fn">add_node</span>(<span class="str">"router"</span>, <span class="var">router_node</span>)
+<span class="var">graph</span>.<span class="fn">add_node</span>(<span class="str">"rag"</span>, <span class="var">retrieval_node</span>)
 
-<span class="var">app</span> = <span class="fn">FastAPI</span>()
-<span class="var">pipeline</span> = <span class="var">graph</span>.<span class="fn">compile</span>()
-<span class="fn">print</span>(<span class="str">"✓ System compiled | Agents: 3 | Memory: dual | Status: deployed"</span>)</pre>
-          </div>
-
-          <!-- Output -->
-          <div class="nb-output" id="out-2" style="display:none">
-            <div class="nb-output-label">Out [2]:</div>
-            <div class="nb-output-body">
-              <div class="ok">✓ System compiled | Agents: 3 | Memory: dual | Status: deployed</div>
-              <br>
-              <div class="info">Architecture trace:</div>
-              <div class="arch-diagram" style="margin-top:0.6rem;flex-wrap:wrap;gap:0.3rem;align-items:center">
-                <div class="arch-node"><div class="arch-box input">User Query</div></div>
-                <div class="arch-arrow">→</div>
-                <div class="arch-node"><div class="arch-box process">Router<br>Agent</div></div>
-                <div class="arch-arrow">→</div>
-                <div class="arch-node"><div class="arch-box process">RAG<br>Retriever</div></div>
-                <div class="arch-arrow">→</div>
-                <div class="arch-node"><div class="arch-box storage">Pinecone<br>Vector DB</div></div>
-                <div class="arch-arrow">→</div>
-                <div class="arch-node"><div class="arch-box process">Order/<br>Menu Agent</div></div>
-                <div class="arch-arrow">→</div>
-                <div class="arch-node"><div class="arch-box storage">Supabase<br>Memory</div></div>
-                <div class="arch-arrow">→</div>
-                <div class="arch-node"><div class="arch-box output">SSE<br>Response</div></div>
-              </div>
-              <br>
-              <div class="nb-progress">
-                <div class="nb-progress-label"><span>Deployment status</span><span class="ok">Live on Render</span></div>
-                <div class="nb-progress-bar"><div class="nb-progress-fill" style="width:100%;background:linear-gradient(90deg,#22c55e,#4ade80)"></div></div>
-              </div>
-              <div style="margin-top:0.8rem;display:flex;gap:0.6rem;flex-wrap:wrap">
-                <a href="https://github.com/Pandharimaske/Coffee_Shop_ChatBot" class="nb-link" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="nb-sep"></div>
-
-      <!-- ─── CELL 3 — Project 2 ─── -->
-      <div class="nb-cell" data-cell="3">
-        <div class="nb-cell-bar"></div>
-        <div class="nb-counter" id="ctr-3">[&nbsp;]:</div>
-        <div class="nb-cell-inner">
-          <div class="nb-md">
-            <h2>02 — LLM-Powered Book Recommendation Engine</h2>
-            <h3>📚 Semantic Search · Transformer Embeddings · May 2025</h3>
-            <p>Recommendation engine using transformer-based semantic embeddings and ChromaDB. Goes beyond keyword matching — understands intent, context, and meaning.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- ─── CELL 4 — Project 2 code ─── -->
-      <div class="nb-cell" data-cell="4">
-        <div class="nb-cell-bar"></div>
-        <div class="nb-counter" id="ctr-4">[&nbsp;]:</div>
-        <div class="nb-cell-inner">
-          <div class="nb-code-wrap">
-            <div class="nb-code-header">
-              <span class="nb-code-lang">python</span>
-              <button class="nb-exec-btn" data-target="4"><i class="fas fa-play" style="font-size:0.55rem"></i> Execute</button>
-            </div>
-<pre class="nb-code"><span class="cm"># ── Semantic Book Recommendation Engine ─────────────────────────</span>
-<span class="kw">from</span> <span class="var">langchain_community.vectorstores</span> <span class="kw">import</span> <span class="fn">Chroma</span>
-<span class="kw">from</span> <span class="var">sentence_transformers</span> <span class="kw">import</span> <span class="fn">SentenceTransformer</span>
-<span class="kw">import</span> <span class="var">gradio</span> <span class="kw">as</span> <span class="var">gr</span>
-
-<span class="cm"># Load transformer-based embeddings</span>
-<span class="var">embedder</span> = <span class="fn">SentenceTransformer</span>(<span class="str">"all-MiniLM-L6-v2"</span>)
-
-<span class="kw">def</span> <span class="fn">semantic_search</span>(<span class="var">query</span>: <span class="fn">str</span>, <span class="var">k</span>: <span class="fn">int</span> = <span class="num">5</span>):
-    <span class="cm">"""Retrieve k most semantically similar books."""</span>
-    <span class="var">query_embedding</span> = <span class="var">embedder</span>.<span class="fn">encode</span>(<span class="var">query</span>)
-    <span class="var">results</span> = <span class="var">vectorstore</span>.<span class="fn">similarity_search_with_score</span>(
-        <span class="var">query</span>, <span class="var">k</span>=<span class="var">k</span>, <span class="var">distance_metric</span>=<span class="str">"cosine"</span>
-    )
-    <span class="kw">return</span> [(doc.<span class="var">page_content</span>, <span class="num">1</span> - score) <span class="kw">for</span> doc, score <span class="kw">in</span> <span class="var">results</span>]
-
-<span class="cm"># Launch Gradio UI</span>
-<span class="var">demo</span> = <span class="var">gr</span>.<span class="fn">Interface</span>(
-    <span class="var">fn</span>=<span class="var">semantic_search</span>,
-    <span class="var">inputs</span>=<span class="var">gr</span>.<span class="fn">Textbox</span>(<span class="var">placeholder</span>=<span class="str">"Describe the book you're looking for..."</span>),
-    <span class="var">outputs</span>=<span class="var">gr</span>.<span class="fn">Dataframe</span>(<span class="var">headers</span>=[<span class="str">"Book"</span>, <span class="str">"Similarity Score"</span>])
+<span class="var">graph</span>.<span class="fn">add_edge</span>(<span class="fn">START</span>, <span class="str">"router"</span>)
+<span class="var">graph</span>.<span class="fn">add_conditional_edges</span>(
+    <span class="str">"router"</span>, 
+    <span class="var">route_decision</span>, 
+    {<span class="str">"search"</span>: <span class="str">"rag"</span>, <span class="str">"end"</span>: <span class="fn">END</span>}
 )
-<span class="var">demo</span>.<span class="fn">launch</span>()</pre>
-          </div>
-
-          <div class="nb-output" id="out-4" style="display:none">
-            <div class="nb-output-label">Out [4]:</div>
-            <div class="nb-output-body">
-              <div class="ok">Running on local URL: http://127.0.0.1:7860</div>
-              <br>
-              <div class="info">Sample query: "dystopian novel about surveillance and totalitarianism"</div>
-              <br>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem">
-                <div style="display:grid;grid-template-columns:1fr auto;gap:1rem;border-bottom:1px solid rgba(255,255,255,0.05);padding:0.3rem 0"><span class="val">1984 — George Orwell</span><span class="ok">0.967</span></div>
-                <div style="display:grid;grid-template-columns:1fr auto;gap:1rem;border-bottom:1px solid rgba(255,255,255,0.05);padding:0.3rem 0"><span class="val">Brave New World — Huxley</span><span class="ok">0.944</span></div>
-                <div style="display:grid;grid-template-columns:1fr auto;gap:1rem;border-bottom:1px solid rgba(255,255,255,0.05);padding:0.3rem 0"><span class="val">The Handmaid's Tale — Atwood</span><span class="warn">0.921</span></div>
-                <div style="display:grid;grid-template-columns:1fr auto;gap:1rem;padding:0.3rem 0"><span class="val">Fahrenheit 451 — Bradbury</span><span class="warn">0.908</span></div>
-              </div>
-              <br>
-              <div class="nb-progress">
-                <div class="nb-progress-label"><span>Vector index size</span><span class="info">7,000+ books</span></div>
-                <div class="nb-progress-bar"><div class="nb-progress-fill" style="width:72%;background:linear-gradient(90deg,var(--purple),#a855f7)"></div></div>
-              </div>
-              <div style="margin-top:0.8rem">
-                <a href="https://github.com/Pandharimaske/LLM_Book_Recomender" class="nb-link" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
-              </div>
-            </div>
-          </div>
+</pre>
+        <div class="exp-result">
+          <div class="res-header"><span>Telemetry: Active</span><span>94.2% Relevance Score</span></div>
+          <div class="res-body">✓ Kernel convergence. Multi-agent routing stable.</div>
         </div>
       </div>
+    </div>
 
-      <div class="nb-sep"></div>
-
-      <!-- ─── CELL 5 — Project 3 ─── -->
-      <div class="nb-cell" data-cell="5">
-        <div class="nb-cell-bar"></div>
-        <div class="nb-counter" id="ctr-5">[&nbsp;]:</div>
-        <div class="nb-cell-inner">
-          <div class="nb-md">
-            <h2>03 — End-to-End MLOps Pipeline</h2>
-            <h3>⚙️ Experiment Tracking · Model Versioning · CI/CD · 2025</h3>
-            <p>Production-ready MLOps pipeline demonstrating the full model lifecycle — from experiment tracking to containerized deployment.</p>
-          </div>
+    <!-- Experiment 02: Book Recommender -->
+    <div class="exp-card tilt-hover">
+      <div class="exp-meta">
+        <span class="exp-id">Experiment #002</span>
+        <h2 class="exp-title">Semantic Search Engine</h2>
+        <div class="exp-subtitle">
+          <span>Vector Embeddings</span>
+          <span>·</span>
+          <span>Latent Discovery</span>
+        </div>
+        <p class="exp-desc">
+          Recommendation engine leveraging transformer-based embeddings (all-MiniLM-L6-v2) to map book descriptions into high-dimensional vector space. Optimized for semantic proximity over keyword matching.
+        </p>
+        <div class="exp-tech">
+          <div class="tech-item"><span class="tech-key">Model</span><span class="tech-val">all-MiniLM-L6-v2</span></div>
+          <div class="tech-item"><span class="tech-key">Interface</span><span class="tech-val">Gradio HUD</span></div>
+          <div class="tech-item"><span class="tech-key">Metric</span><span class="tech-val">Cosine Similarity</span></div>
+          <div class="tech-item"><span class="tech-key">Recall</span><span class="tech-val">Precision @ K: 0.88</span></div>
+        </div>
+        <a href="https://github.com/Pandharimaske/LLM_Book_Recomender" class="btn btn-ghost" target="_blank">View Registry</a>
+      </div>
+      
+      <div class="ide-window tilt-hover">
+        <div class="ide-header">
+          <div class="ide-dots"><div class="idot"></div><div class="idot"></div><div class="idot"></div></div>
+          <div class="ide-tab">recommender.py</div>
+          <div style="width:24px"></div>
+        </div>
+<pre class="ide-code">
+<span class="kw">def</span> <span class="fn">semantic_search</span>(<span class="var">query</span>: <span class="fn">str</span>, <span class="var">k</span>=<span class="num">5</span>):
+    <span class="cm"># Map query to latent space</span>
+    <span class="var">query_vec</span> = <span class="var">model</span>.<span class="fn">encode</span>(<span class="var">query</span>)
+    
+    <span class="var">hits</span> = <span class="var">vectorstore</span>.<span class="fn">search</span>(
+        <span class="var">query_vec</span>, 
+        <span class="var">limit</span>=<span class="var">k</span>
+    )
+    <span class="kw">return</span> [h.<span class="var">metadata</span> <span class="kw">for</span> h <span class="kw">in</span> <span class="var">hits</span>]
+</pre>
+        <div class="exp-result">
+          <div class="res-header"><span>Latency: 24ms</span><span>Recall@10: 0.91</span></div>
+          <div class="res-body">✓ Top Latent Proximity: "1984" -> "Brave New World" (0.97)</div>
         </div>
       </div>
+    </div>
 
-      <!-- ─── CELL 6 — Project 3 code ─── -->
-      <div class="nb-cell" data-cell="6">
-        <div class="nb-cell-bar"></div>
-        <div class="nb-counter" id="ctr-6">[&nbsp;]:</div>
-        <div class="nb-cell-inner">
-          <div class="nb-code-wrap">
-            <div class="nb-code-header">
-              <span class="nb-code-lang">python</span>
-              <button class="nb-exec-btn" data-target="6"><i class="fas fa-play" style="font-size:0.55rem"></i> Execute</button>
-            </div>
-<pre class="nb-code"><span class="cm"># ── MLOps Pipeline with Full Experiment Tracking ─────────────────</span>
-<span class="kw">import</span> <span class="var">mlflow</span>
-<span class="kw">import</span> <span class="var">wandb</span>
-<span class="kw">from</span> <span class="var">sklearn.pipeline</span> <span class="kw">import</span> <span class="fn">Pipeline</span>
-
-<span class="cm"># Initialize experiment tracking</span>
-<span class="var">mlflow</span>.<span class="fn">set_experiment</span>(<span class="str">"pandhari_mlops_v2"</span>)
-<span class="var">wandb</span>.<span class="fn">init</span>(<span class="var">project</span>=<span class="str">"mlops-pipeline"</span>, <span class="var">config</span>=<span class="var">hyperparams</span>)
-
-<span class="kw">with</span> <span class="var">mlflow</span>.<span class="fn">start_run</span>() <span class="kw">as</span> <span class="var">run</span>:
-    <span class="cm"># Log parameters, metrics, artifacts</span>
-    <span class="var">mlflow</span>.<span class="fn">log_params</span>(<span class="var">hyperparams</span>)
-    <span class="var">model</span>.<span class="fn">fit</span>(<span class="var">X_train</span>, <span class="var">y_train</span>)
-    <span class="var">metrics</span> = <span class="fn">evaluate</span>(<span class="var">model</span>, <span class="var">X_val</span>, <span class="var">y_val</span>)
-    <span class="var">mlflow</span>.<span class="fn">log_metrics</span>(<span class="var">metrics</span>)
+    <!-- Experiment 03: MLOps Pipeline -->
+    <div class="exp-card tilt-hover">
+      <div class="exp-meta">
+        <span class="exp-id">Experiment #003</span>
+        <h2 class="exp-title">Industrial MLOps Pipeline</h2>
+        <div class="exp-subtitle">
+          <span>Systems DevOps</span>
+          <span>·</span>
+          <span>Model Lifecycle</span>
+        </div>
+        <p class="exp-desc">
+          A production-ready pipeline demonstrating the full model lifecycle. Integrated experiment tracking with MLflow, automated model versioning, and containerized deployment via Docker.
+        </p>
+        <div class="exp-tech">
+          <div class="tech-item"><span class="tech-key">Tracking</span><span class="tech-val">MLflow / W&B</span></div>
+          <div class="tech-item"><span class="tech-key">Container</span><span class="tech-val">Docker (v2.1)</span></div>
+          <div class="tech-item"><span class="tech-key">Registry</span><span class="tech-val">Model Versioning</span></div>
+          <div class="tech-item"><span class="tech-key">Infra</span><span class="tech-val">GitHub Actions</span></div>
+        </div>
+        <a href="https://github.com/Pandharimaske/CreditRisk-MLSystem" class="btn btn-ghost" target="_blank">View Registry</a>
+      </div>
+      
+      <div class="ide-window tilt-hover">
+        <div class="ide-header">
+          <div class="ide-dots"><div class="idot"></div><div class="idot"></div><div class="idot"></div></div>
+          <div class="ide-tab">mlops_pipeline.py</div>
+          <div style="width:24px"></div>
+        </div>
+<pre class="ide-code">
+<span class="kw">with</span> <span class="var">mlflow</span>.<span class="fn">start_run</span>():
+    <span class="var">model</span> = <span class="cls">XGBClassifier</span>().<span class="fn">fit</span>(<span class="var">X_train</span>, <span class="var">y_train</span>)
+    
+    <span class="var">acc</span> = <span class="fn">accuracy_score</span>(<span class="var">y_test</span>, <span class="var">y_pred</span>)
+    <span class="var">mlflow</span>.<span class="fn">log_metric</span>(<span class="str">"accuracy"</span>, <span class="var">acc</span>)
+    
     <span class="var">mlflow</span>.<span class="fn">sklearn</span>.<span class="fn">log_model</span>(<span class="var">model</span>, <span class="str">"model"</span>)
-
-<span class="cm"># Register best model & containerize</span>
-<span class="var">mlflow</span>.<span class="fn">register_model</span>(<span class="str">f"runs:/{run.info.run_id}/model"</span>, <span class="str">"production_model"</span>)
-<span class="fn">print</span>(<span class="str">f"✓ Model registered | run_id: {run.info.run_id[:8]}..."</span>)</pre>
-          </div>
-
-          <div class="nb-output" id="out-6" style="display:none">
-            <div class="nb-output-label">Out [6]:</div>
-            <div class="nb-output-body">
-              <div class="ok">✓ Model registered | run_id: a8f2c1d3...</div>
-              <br>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem">
-                <div style="color:var(--muted);margin-bottom:0.4rem">Experiment summary:</div>
-                <div style="display:grid;grid-template-columns:1fr auto;gap:1rem;padding:0.25rem 0"><span>accuracy</span><span class="ok">0.9247</span></div>
-                <div style="display:grid;grid-template-columns:1fr auto;gap:1rem;padding:0.25rem 0"><span>f1_score</span><span class="ok">0.9103</span></div>
-                <div style="display:grid;grid-template-columns:1fr auto;gap:1rem;padding:0.25rem 0"><span>training_time</span><span class="info">4m 23s</span></div>
-                <div style="display:grid;grid-template-columns:1fr auto;gap:1rem;padding:0.25rem 0"><span>docker_image</span><span class="warn">pandhari/mlops:v2.1</span></div>
-              </div>
-              <br>
-              <div class="nb-progress">
-                <div class="nb-progress-label"><span>Pipeline stages completed</span><span class="ok">5 / 5</span></div>
-                <div class="nb-progress-bar"><div class="nb-progress-fill" style="width:100%;background:linear-gradient(90deg,#67e8f9,#22c55e)"></div></div>
-              </div>
-              <div style="margin-top:0.8rem">
-                <a href="https://github.com/Pandharimaske/MLOPs_Project" class="nb-link" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
-              </div>
-            </div>
-          </div>
+</pre>
+        <div class="exp-result">
+          <div class="res-header"><span>Convergence: True</span><span>Accuracy: 92.4%</span></div>
+          <div class="res-body">✓ Model registered. Serving artifacts via Docker registry.</div>
         </div>
       </div>
+    </div>
 
-      <div class="nb-sep"></div>
-
-      <!-- ─── CELL 7 — Research ─── -->
-      <div class="nb-cell nb-paper-cell" data-cell="7">
-        <div class="nb-cell-bar"></div>
-        <div class="nb-counter" id="ctr-7">[&nbsp;]:</div>
-        <div class="nb-cell-inner">
-          <div class="nb-code-wrap">
-            <div class="nb-code-header">
-              <span class="nb-code-lang">markdown</span>
-              <button class="nb-exec-btn" data-target="7"><i class="fas fa-play" style="font-size:0.55rem"></i> Execute</button>
-            </div>
-<pre class="nb-code"><span class="cm">## 📄 Research Publication — ETFI-2026</span>
-
-<span class="cm">**Title:** Agentic AI for Interview Preparation</span>
-<span class="cm">**Venue:** International Conference on Emerging Technologies</span>
-<span class="cm">          & Future Innovations (ETFI-2026)</span>
-<span class="cm">**Host:**  DES Pune University · February 2026</span>
-
-<span class="cm">**Abstract:** Proposed an AI-powered interview prep system</span>
-<span class="cm">integrating resume analysis, multi-turn simulations, and</span>
-<span class="cm">personalized feedback using agentic architectures.</span>
-
-<span class="cm">**Authors:** Pandharinath Maske, Shubham Dahane, Aayush Bokde,</span>
-<span class="cm">            Pranav Dhebe, Pranjal Pandit</span>
-<span class="cm">**Advisor:** Dr. Anuradha Yenkikar</span></pre>
-          </div>
-
-          <div class="nb-output" id="out-7" style="display:none">
-            <div class="nb-output-label">Out [7]: rendered markdown</div>
-            <div class="nb-output-body">
-              <div class="paper-venue">ETFI-2026 · DES Pune University · International Conference on Emerging Technologies & Future Innovations</div>
-              <div class="paper-title">Agentic AI for Interview Preparation</div>
-              <div style="font-size:0.88rem;color:var(--text2);line-height:1.8">Proposed an AI-powered interview preparation system integrating resume analysis, multi-turn simulations, and personalized feedback loops using agentic architectures that adapt dynamically to candidate knowledge gaps.</div>
-              <div class="paper-authors">Pandharinath Maske · Shubham Dahane · Aayush Bokde · Pranav Dhebe · Pranjal Pandit · Dr. Anuradha Yenkikar</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ─── CELL 8 — Footer cell ─── -->
-      <div class="nb-cell" data-cell="8">
-        <div class="nb-cell-bar"></div>
-        <div class="nb-counter" id="ctr-8">[&nbsp;]:</div>
-        <div class="nb-cell-inner">
-          <div class="nb-code-wrap">
-            <div class="nb-code-header">
-              <span class="nb-code-lang">python</span>
-              <button class="nb-exec-btn" data-target="8"><i class="fas fa-play" style="font-size:0.55rem"></i> Execute</button>
-            </div>
-<pre class="nb-code"><span class="fn">print</span>(<span class="str">f"""
-╔══════════════════════════════════════════╗
-║  Pandharinath Maske · AI Engineer        ║
-║  github.com/Pandharimaske                ║
-║  pandharinath1437@gmail.com              ║
-║  Open to internships & collaborations    ║
-╚══════════════════════════════════════════╝
-"""</span>)</pre>
-          </div>
-
-          <div class="nb-output" id="out-8" style="display:none">
-            <div class="nb-output-label">Out [8]:</div>
-            <div class="nb-output-body" style="color:var(--gold);white-space:pre;font-family:'JetBrains Mono',monospace;font-size:0.7rem">╔══════════════════════════════════════════╗
-║  Pandharinath Maske · AI Engineer        ║
-║  github.com/Pandharimaske                ║
-║  pandharinath1437@gmail.com              ║
-║  Open to internships &amp; collaborations    ║
-╚══════════════════════════════════════════╝</div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /nb-cells -->
-  </div><!-- /nb-shell -->
-
+  </div>
 </section>
 
 <footer>
@@ -768,116 +339,12 @@ pre .op  { color: #a855f7; }
     <li><a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a></li>
     <li><a href="https://x.com/PMaske20171" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a></li>
     <li><a href="https://www.instagram.com/pandhari__7/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a></li>
-    <li><a href="https://leetcode.com/u/PandhariMaske1437/" target="_blank" rel="noopener"><i class="fas fa-code"></i></a></li>
     <li><a href="mailto:pandharinath1437@gmail.com"><i class="fas fa-envelope"></i></a></li>
   </ul>
 </footer>
 
 <button id="btt"><i class="fas fa-arrow-up"></i></button>
 <script src="js/main.js"></script>
-<script>
-// ── NOTEBOOK EXECUTION ENGINE ──────────────────────
-const EXEC_DELAY = 80; // ms per cell
-let execCount = 1;
-let isRunning = false;
-
-// Cells with outputs
-const EXECUTABLE_CELLS = [2, 4, 6, 7, 8];
-
-function setKernelBusy(busy) {
-  const dot   = document.getElementById('kernel-dot');
-  const label = document.getElementById('kernel-label');
-  dot.className   = 'kernel-dot' + (busy ? ' busy' : '');
-  label.textContent = busy ? 'Python 3 | Busy' : 'Python 3 | Idle';
-}
-
-function execCell(cellNum, delay) {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      const cell    = document.querySelector(`[data-cell="${cellNum}"]`);
-      const ctr     = document.getElementById(`ctr-${cellNum}`);
-      const output  = document.getElementById(`out-${cellNum}`);
-
-      if (!cell) { resolve(); return; }
-
-      cell.classList.add('active', 'executing');
-      if (ctr) { ctr.textContent = `[*]:`; ctr.classList.add('running'); }
-
-      setTimeout(() => {
-        if (ctr) { ctr.textContent = `[${execCount++}]:`; ctr.classList.remove('running'); }
-        cell.classList.remove('executing');
-
-        if (output) {
-          output.style.display = 'block';
-          // animate progress bars
-          output.querySelectorAll('.nb-progress-fill[style*="width:0%"]').forEach(bar => {
-            const target = bar.getAttribute('data-w') || bar.style.width;
-          });
-          // trigger progress bars
-          output.querySelectorAll('.nb-progress-fill').forEach(bar => {
-            const w = bar.style.width;
-            bar.style.width = '0%';
-            setTimeout(() => { bar.style.width = w; }, 100);
-          });
-        }
-        resolve();
-      }, 600 + Math.random() * 400);
-    }, delay);
-  });
-}
-
-async function runAll() {
-  if (isRunning) return;
-  isRunning = true;
-  execCount = 1;
-  setKernelBusy(true);
-
-  // Hide all outputs first
-  document.querySelectorAll('.nb-output').forEach(o => o.style.display = 'none');
-  document.querySelectorAll('.nb-counter').forEach(c => { c.textContent = '[  ]:'; c.classList.remove('running'); });
-
-  // Execute cells sequentially
-  let delay = 0;
-  for (const cellNum of EXECUTABLE_CELLS) {
-    await execCell(cellNum, delay);
-    delay += 200;
-  }
-
-  setKernelBusy(false);
-  isRunning = false;
-}
-
-// Run all button
-document.getElementById('run-all-btn').addEventListener('click', runAll);
-
-// Individual execute buttons
-document.querySelectorAll('.nb-exec-btn').forEach(btn => {
-  btn.addEventListener('click', async () => {
-    if (isRunning) return;
-    const target = parseInt(btn.dataset.target);
-    isRunning = true;
-    setKernelBusy(true);
-
-    // Hide this output
-    const output = document.getElementById(`out-${target}`);
-    if (output) output.style.display = 'none';
-
-    await execCell(target, 0);
-    setKernelBusy(false);
-    isRunning = false;
-  });
-});
-
-// Cell click to activate
-document.querySelectorAll('.nb-cell').forEach(cell => {
-  cell.addEventListener('click', () => {
-    document.querySelectorAll('.nb-cell').forEach(c => c.classList.remove('active'));
-    cell.classList.add('active');
-  });
-});
-
-// Auto run on load after delay
-setTimeout(runAll, 1200);
-</script>
+<script src="js/ai-widget.js"></script>
 </body>
 </html>

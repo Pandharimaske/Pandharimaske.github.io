@@ -12,6 +12,25 @@
 <title>Pandharinath Maske — AI Engineer</title>
 <link rel="stylesheet" href="css/style.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Pandharinath Maske",
+  "jobTitle": "AI Engineer & ML Researcher",
+  "url": "https://pandharimaske.github.io",
+  "sameAs": [
+    "https://github.com/Pandharimaske",
+    "https://www.linkedin.com/in/pandharinath-maske-538381289/",
+    "https://x.com/PMaske20171"
+  ],
+  "knowsAbout": ["Artificial Intelligence", "Machine Learning", "Large Language Models", "Generative AI", "RAG", "Agentic AI"],
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Vishwakarma Institute of Information Technology, Pune"
+  }
+}
+</script>
 <script>
 (function(){
   const t=localStorage.getItem('pm-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
@@ -24,129 +43,81 @@
 #hero {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.1fr 0.9fr;
   align-items: center;
-  padding: 0 3.5rem;
+  padding: 0 4rem;
   padding-top: 5rem;
   position: relative;
   overflow: hidden;
-  gap: 4rem;
+  gap: 2rem;
 }
 
-#neural-canvas {
-  position: absolute; inset: 0; z-index: 0; opacity: 0.6;
+.data-drift-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: radial-gradient(circle at 20% 30%, rgba(var(--purple-rgb), 0.03), transparent 50%),
+              radial-gradient(circle at 80% 70%, rgba(var(--cyan-rgb), 0.03), transparent 50%);
 }
 
-/* ── SPOTLIGHT ── */
 #hero-spotlight {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: radial-gradient(600px circle at 50% 50%, rgba(240,165,0,0.06), transparent 70%);
+  background: radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), rgba(var(--amber-rgb), 0.04), transparent 80%);
   transition: background 0.1s;
-}
-
-.hero-grid-bg {
-  position: absolute; inset: 0; z-index: 0;
-  background-image:
-    linear-gradient(rgba(240,165,0,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(240,165,0,0.025) 1px, transparent 1px);
-  background-size: 80px 80px;
-}
-
-/* Floating math symbols */
-.math-float {
-  position: absolute;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
-  color: rgba(240,165,0,0.12);
-  pointer-events: none;
-  animation: float-math 8s ease-in-out infinite;
-  z-index: 1;
-  user-select: none;
-}
-
-@keyframes float-math {
-  0%,100% { transform: translateY(0) rotate(0deg); opacity: 0.08; }
-  33%     { transform: translateY(-18px) rotate(3deg); opacity: 0.18; }
-  66%     { transform: translateY(8px) rotate(-2deg); opacity: 0.1; }
 }
 
 /* ── HERO LEFT ── */
 .hero-left {
-  position: relative; z-index: 2;
+  position: relative; z-index: 10;
   display: flex; flex-direction: column;
 }
 
 .hero-status {
   display: flex; align-items: center; gap: 1rem;
-  margin-bottom: 1.8rem;
-  opacity: 0; animation: fadeUp 0.6s ease forwards 0.1s;
+  margin-bottom: 2rem;
 }
 
 .status-pill {
-  display: flex; align-items: center; gap: 0.45rem;
-  padding: 0.3rem 0.85rem;
-  background: rgba(34,197,94,0.08);
-  border: 1px solid rgba(34,197,94,0.2);
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  background: rgba(var(--green-rgb), 0.04);
+  border: 1px solid rgba(var(--green-rgb), 0.15);
   border-radius: 100px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem; color: #22c55e; letter-spacing: 0.1em;
-}
-
-.status-dot {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: #22c55e; box-shadow: 0 0 6px #22c55e;
-  animation: pulse-green 2s ease-in-out infinite;
+  font-size: 0.6rem; color: var(--green); letter-spacing: 0.15em;
 }
 
 .hero-location {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem; color: var(--muted); letter-spacing: 0.12em;
+  font-size: 0.65rem; color: var(--muted); letter-spacing: 0.15em;
+  text-transform: uppercase;
 }
 
-/* Terminal prompt line */
 .hero-prompt {
-  display: flex; align-items: center; gap: 0.4rem;
-  margin-bottom: 0.8rem;
-  opacity: 0; animation: fadeUp 0.6s ease forwards 0.25s;
-}
-
-.prompt-user { font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:#22c55e; }
-.prompt-at   { font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--muted); }
-.prompt-host { font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--purple2); }
-.prompt-path { font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--gold); }
-.prompt-cmd  { font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--text); }
-
-/* Hero name */
-.hero-name {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(3rem, 5.5vw, 5.8rem);
-  font-weight: 900; line-height: 0.98;
-  letter-spacing: -0.03em;
+  display: flex; align-items: center; gap: 0.5rem;
   margin-bottom: 1rem;
-  opacity: 0; animation: fadeUp 0.7s ease forwards 0.4s;
+}
+.prompt-path { color: var(--amber) !important; }
+
+/* Name Typography */
+.hero-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(3.5rem, 7vw, 6.5rem);
+  font-weight: 800; line-height: 0.95;
+  letter-spacing: -0.05em;
+  margin-bottom: 1.5rem;
 }
 
 .hero-name .line1 { display: block; color: var(--text); }
 .hero-name .line2 {
-  display: block; color: var(--gold); font-style: italic;
-  text-shadow: 0 0 60px rgba(240,165,0,0.3);
+  display: block; color: var(--amber); font-style: italic;
+  text-shadow: 0 0 40px rgba(var(--amber-rgb), 0.25);
 }
 
-/* Token row */
 .token-row {
-  display: flex; align-items: center; gap: 0.6rem;
-  margin-bottom: 1.6rem;
-  opacity: 0; animation: fadeUp 0.6s ease forwards 0.55s;
+  display: flex; align-items: center; gap: 0.8rem;
+  margin-bottom: 2rem;
 }
-
-.token-label { font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:var(--muted); }
-#token-stream { font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--gold); font-weight:500; }
-
-.token-cursor {
-  display: inline-block; width:8px; height:15px;
-  background:var(--gold); margin-left:2px; vertical-align:middle;
-  animation:blink 1s step-end infinite; border-radius:1px;
-}
+#token-stream { color: var(--amber); }
+.token-cursor { background: var(--amber); }
 @keyframes blink { 50%{opacity:0} }
 
 /* Desc */
@@ -165,17 +136,17 @@
 
 .cbadge {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem; letter-spacing: 0.06em;
-  padding: 0.25rem 0.65rem;
-  border-radius: 3px;
-  background: rgba(240,165,0,0.06);
-  border: 1px solid rgba(240,165,0,0.15);
+  font-size: 0.6rem; letter-spacing: 0.08em;
+  padding: 0.35rem 0.8rem;
+  border-radius: 4px;
+  background: rgba(var(--amber-rgb), 0.04);
+  border: 1px solid rgba(var(--amber-rgb), 0.1);
   color: var(--text2);
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.cbadge span { color: var(--gold); font-weight: 500; }
-.cbadge:hover { border-color: var(--gold); color: var(--gold); }
+.cbadge span { color: var(--amber); font-weight: 700; }
+.cbadge:hover { border-color: var(--amber); color: #fff; background: rgba(var(--amber-rgb), 0.08); transform: translateY(-3px); }
 
 /* Buttons */
 .hero-btns {
@@ -223,24 +194,21 @@
 .avatar-circle {
   width: 220px; height: 220px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #0d0d1a 0%, #13131f 50%, #0a0a14 100%);
-  border: 1px solid rgba(240,165,0,0.25);
+  background: linear-gradient(135deg, #050510 0%, #0a0a1a 100%);
+  border: 1px solid rgba(var(--amber-rgb), 0.2);
   display: flex; align-items: center; justify-content: center;
   position: relative;
-  box-shadow:
-    0 0 0 1px rgba(240,165,0,0.08),
-    0 0 40px rgba(240,165,0,0.08),
-    inset 0 0 40px rgba(124,58,237,0.06);
+  box-shadow: 0 0 50px rgba(var(--amber-rgb), 0.05), inset 0 0 30px rgba(var(--cyan-rgb), 0.03);
 }
 
 .avatar-initials {
-  font-family: 'Playfair Display', serif;
-  font-size: 5rem; font-weight: 900; font-style: italic;
-  background: linear-gradient(135deg, var(--gold), var(--gold2), var(--gold3));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  font-family: 'Outfit', sans-serif;
+  font-size: 5rem; font-weight: 800;
+  background-image: linear-gradient(135deg, var(--cyan), var(--purple));
+  -webkit-background-clip: text;
   background-clip: text;
-  filter: drop-shadow(0 0 20px rgba(240,165,0,0.4));
-  line-height: 1;
+  color: transparent;
+  filter: drop-shadow(0 0 15px rgba(var(--amber-rgb), 0.3));
 }
 
 /* Stats around avatar */
@@ -261,8 +229,8 @@
 .astat:hover { border-color: var(--border2); transform: translateY(-2px); }
 
 .astat-val {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.5rem; font-weight: 900; color: var(--gold);
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.6rem; font-weight: 800; color: var(--amber);
   line-height: 1; margin-bottom: 0.25rem;
 }
 
@@ -332,11 +300,12 @@ html[data-theme="light"] .terminal-block { background: #1a1a24; }
 .about-right-content { display: flex; flex-direction: column; gap: 1.5rem; }
 
 .about-headline {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.7rem, 2.5vw, 2.3rem);
-  font-weight: 700; line-height: 1.2; margin-bottom: 0.5rem;
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 800; line-height: 1.1; margin-bottom: 1rem;
+  letter-spacing: -0.03em;
 }
-.about-headline em { color: var(--gold); font-style: italic; }
+.about-headline em { color: var(--amber); font-style: italic; text-shadow: 0 0 30px rgba(var(--amber-rgb), 0.2); }
 
 .about-desc { font-size: 0.92rem; color: var(--text2); line-height: 1.85; }
 
@@ -370,7 +339,100 @@ html[data-theme="light"] .terminal-block { background: #1a1a24; }
 
 .loss-container { display: flex; flex-direction: column; gap: 0.3rem; }
 .loss-bar-bg { width: 100px; height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow:hidden; }
-.loss-bar-fill { height:100%; background: linear-gradient(90deg, var(--purple), var(--gold)); width:0%; transition: width 2s ease; border-radius:2px; }
+.loss-bar-fill { height:100%; background: linear-gradient(90deg, var(--cyan), var(--amber)); width:0%; transition: width 2.5s cubic-bezier(0.4, 0, 0.2, 1); border-radius:2px; }
+
+.hero-grid-bg {
+    position: absolute; inset: 0;
+    background-image: 
+      radial-gradient(circle at 50% 50%, rgba(0, 242, 255, 0.05), transparent 70%),
+      linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px);
+    background-size: 100% 100%, 80px 80px, 80px 80px;
+    z-index: 1;
+  }
+
+  /* ── NEURAL CORE (Sphere) ── */
+  .neural-core-wrap {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px; height: 400px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .neural-core {
+    width: 100%; height: 100%;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+
+  .core-ring {
+    position: absolute;
+    border: 1px solid rgba(0, 242, 255, 0.15);
+    border-radius: 50%;
+    animation: spin-slow var(--d) linear infinite;
+  }
+  .core-ring.r1 { width: 220px; height: 220px; --d: 20s; border-color: rgba(0, 242, 255, 0.1); }
+  .core-ring.r2 { width: 300px; height: 300px; --d: 30s; border-color: rgba(124, 58, 237, 0.1); border-style: dashed; }
+  .core-ring.r3 { width: 380px; height: 380px; --d: 40s; border-style: dotted; }
+
+  .core-center {
+    width: 140px; height: 140px;
+    background: radial-gradient(circle, var(--amber) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(15px);
+    animation: core-pulse 6s ease-in-out infinite;
+    opacity: 0.4;
+  }
+
+  @keyframes core-pulse { 0%,100%{transform:scale(1); opacity:0.4} 50%{transform:scale(1.2); opacity:0.7} }
+
+  /* ── SYSTEM MONITOR (HUD) ── */
+  .sys-monitor {
+    position: absolute; top: 1.5rem; right: 3.5rem;
+    background: rgba(8, 8, 14, 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.8rem 1rem;
+    width: 200px;
+    z-index: 10;
+    opacity: 0; animation: fadeIn 1s ease forwards 1.5s;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .sm-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; font-size: 0.58rem; }
+  .sm-key { color: var(--text2); text-transform: uppercase; letter-spacing: 0.1em; }
+  .sm-val { color: var(--amber); }
+  .sm-bar-bg { width: 100%; height: 3px; background: rgba(255, 255, 255, 0.05); margin-top: 0.3rem; border-radius: 2px; overflow: hidden; }
+  .sm-bar-fill { height: 100%; background: var(--amber); border-radius: 2px; transition: width 0.5s ease; box-shadow: 0 0 10px var(--amber); }
+  .sm-title { font-size: 0.65rem; color: var(--text); margin-bottom: 1rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 0.6rem; display: flex; align-items: center; gap: 0.6rem; }
+  .sm-dot { width: 6px; height: 6px; background: var(--amber); border-radius: 50%; box-shadow: 0 0 10px var(--amber); animation: pulse-amber 2s infinite; }
+
+  @keyframes pulse-amber { 0%,100%{opacity:1; transform: scale(1);} 50%{opacity:0.4; transform: scale(1.3);} }
+
+  /* Hero HUD floats */
+  .hud-float {
+    position: absolute;
+    padding: 0.6rem 1rem;
+    background: rgba(10, 10, 21, 0.4);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--text2);
+    z-index: 5;
+    animation: float 6s ease-in-out infinite var(--del);
+    display: flex; flex-direction: column; gap: 0.2rem;
+  }
+  .hud-float span { color: var(--amber); font-weight: 700; }
+
+  @media (max-width: 1000px) {
+    .sys-monitor, .hud-float, .neural-core-wrap { display: none; }
+  }
+</style>
 
 @media (max-width: 1000px) {
   #hero {
@@ -419,9 +481,54 @@ html[data-theme="light"] .terminal-block { background: #1a1a24; }
 
 <!-- ── HERO ── -->
 <section id="hero">
-  <canvas id="neural-canvas"></canvas>
-  <div id="hero-spotlight"></div>
   <div class="hero-grid-bg"></div>
+
+  <!-- Neural Core -->
+  <div class="neural-core-wrap">
+    <div class="neural-core">
+      <div class="core-center"></div>
+      <div class="core-ring r1"></div>
+      <div class="core-ring r2"></div>
+      <div class="core-ring r3"></div>
+    </div>
+  </div>
+
+  <!-- System HUD -->
+  <div class="sys-monitor">
+    <div class="sm-title"><span class="sm-dot"></span> NEURAL_KERNEL_4.0</div>
+    <div class="sm-row"><span class="sm-key">Node Status</span><span class="sm-val">STABLE</span></div>
+    <div class="sm-row"><span class="sm-key">Latent Dims</span><span class="sm-val">1536d</span></div>
+    <div class="sm-row">
+      <div style="width:100%">
+        <div class="sm-row"><span class="sm-key">Compute Load</span><span class="sm-val" id="sm-load-val">24%</span></div>
+        <div class="sm-bar-bg"><div class="sm-bar-fill" id="sm-load-bar" style="width:24%"></div></div>
+      </div>
+    </div>
+    <div class="sm-row" style="margin-top:0.4rem">
+      <div style="width:100%">
+        <div class="sm-row"><span class="sm-key">Context Persistence</span><span class="sm-val">ACTIVE</span></div>
+        <div class="sm-bar-bg"><div class="sm-bar-fill" style="width:85%; background:var(--purple)"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HUD Float Elements -->
+  <div class="hud-float tilt-hover" style="top:25%; left:10%; --del:0s">
+    <span class="hud-tag">Orchestration</span>
+    <div>Agent Type: <span>LangGraph</span></div>
+  </div>
+  <div class="hud-float tilt-hover" style="top:75%; left:13%; --del:1.2s">
+    <span class="hud-tag">Memory</span>
+    <div>LTM Registry: <span>Supabase</span></div>
+  </div>
+  <div class="hud-float tilt-hover" style="top:18%; left:62%; --del:0.5s">
+    <span class="hud-tag">Retrieval</span>
+    <div>Vector DB: <span>Pinecone</span></div>
+  </div>
+  <div class="hud-float tilt-hover" style="top:68%; left:68%; --del:2s">
+    <span class="hud-tag">Performance</span>
+    <div>Inference: <span>42ms</span></div>
+  </div>
 
   <!-- Floating math -->
   <span class="math-float" style="top:15%;left:55%;animation-delay:0s">∇L(θ)</span>
@@ -460,7 +567,7 @@ html[data-theme="light"] .terminal-block { background: #1a1a24; }
     </div>
 
     <p class="hero-desc">
-      Building intelligent systems that <em style="color:var(--gold)">reason, retrieve, and act</em> — from multi-agent orchestration with LangGraph to production RAG pipelines. CS(AI) @ VIIT Pune · Published at ETFI-2026.
+      Building intelligent systems that <em style="color:var(--amber)">reason, retrieve, and act</em> — from multi-agent orchestration with LangGraph to production RAG pipelines. CS(AI) @ VIIT Pune · Published at ETFI-2026.
     </p>
 
     <div class="conf-badges">
@@ -482,8 +589,8 @@ html[data-theme="light"] .terminal-block { background: #1a1a24; }
       <a href="projects.html" class="btn btn-ghost">
         <i class="fas fa-rocket"></i> Projects
       </a>
-      <a href="assets/Pandharinath_Maske_Resume.pdf" class="btn btn-purple" download>
-        <i class="fas fa-download"></i> Resume
+      <a href="assets/Pandharinath_Maske_Resume.pdf" class="btn btn-ghost" style="border-color:rgba(var(--purple-rgb), 0.3); color:var(--text2)" download>
+        <i class="fas fa-download"></i> Dossier
       </a>
     </div>
   </div>
@@ -519,18 +626,18 @@ html[data-theme="light"] .terminal-block { background: #1a1a24; }
   </div>
 
   <!-- Epoch strip -->
-  <div class="epoch-strip">
+  <div class="epoch-strip tilt-hover">
     <div class="epoch-item">
       <span class="epoch-lbl">Batch</span>
-      <span class="epoch-val">2023–2027</span>
+      <span class="epoch-val">24 Epochs</span>
     </div>
     <div class="epoch-item">
       <span class="epoch-lbl">CGPA</span>
-      <span class="epoch-val">7.76 / 10</span>
+      <span class="epoch-val">7.76 Score</span>
     </div>
     <div class="epoch-item loss-container">
-      <span class="epoch-lbl">Progress</span>
-      <div class="loss-bar-bg"><div class="loss-bar-fill" id="loss-fill"></div></div>
+      <span class="epoch-lbl">Converging...</span>
+      <div class="loss-bar-bg"><div class="loss-bar-fill" id="loss-fill" style="background:var(--amber)"></div></div>
     </div>
   </div>
 </section>
@@ -586,9 +693,9 @@ html[data-theme="light"] .terminal-block { background: #1a1a24; }
           <div><div class="ql-lbl">03 · Stats</div><div class="ql-ttl">Achievements</div></div>
           <span class="ql-arr">↗</span>
         </a>
-        <a href="contact.html" class="ql">
-          <div><div class="ql-lbl">04 · Hire</div><div class="ql-ttl">Let's Talk</div></div>
-          <span class="ql-arr">↗</span>
+        <a href="contact.html" class="ql" style="background:rgba(var(--amber-rgb), 0.05); border-color:rgba(var(--amber-rgb), 0.2)">
+          <div><div class="ql-lbl">04 · Hire</div><div class="ql-ttl">Handshake</div></div>
+          <span class="ql-arr" style="color:var(--amber)">↗</span>
         </a>
       </div>
     </div>
@@ -613,6 +720,7 @@ html[data-theme="light"] .terminal-block { background: #1a1a24; }
 <button id="btt" title="Back to top"><i class="fas fa-arrow-up"></i></button>
 
 <script src="js/main.js"></script>
+<script src="js/ai-widget.js"></script>
 <script>
 /* ── NEURAL CANVAS ── */
 (function(){
@@ -707,6 +815,16 @@ html[data-theme="light"] .terminal-block { background: #1a1a24; }
 
   // Loss bar
   setTimeout(() => { const f = document.getElementById('loss-fill'); if(f) f.style.width='76%'; }, 800);
+
+  // System Monitor Jitter
+  setInterval(() => {
+    const loadBar = document.getElementById('sm-load-bar');
+    const loadVal = document.getElementById('sm-load-val');
+    if (!loadBar || !loadVal) return;
+    const newVal = Math.floor(40 + Math.random() * 15);
+    loadBar.style.width = newVal + '%';
+    loadVal.textContent = newVal + '%';
+  }, 3000);
 })();
 
 /* ── SPOTLIGHT ── */

@@ -3,33 +3,35 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Skills — Pandharinath Maske</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%23f0a500' font-family='serif' font-style='italic'>P</text></svg>"/>
+<title>Skills Network — Pandharinath Maske</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%2300f2ff' font-family='serif' font-style='italic'>P</text></svg>"/>
 <link rel="stylesheet" href="css/style.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <script>(function(){const t=localStorage.getItem('pm-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
 <style>
-.skills-intro { max-width:580px; color:var(--text2); font-size:0.97rem; margin-bottom:1.5rem; line-height:1.85; }
+.skills-intro { max-width:600px; color:var(--text2); font-size:1.05rem; margin-bottom:2rem; line-height:1.8; }
 
 /* ── NETWORK LEGEND ── */
 .net-legend {
   display:flex; gap:1.5rem; flex-wrap:wrap;
-  margin-bottom:1.5rem;
+  margin-bottom:2rem;
   font-family:'JetBrains Mono',monospace;
-  font-size:0.62rem; color:var(--muted); letter-spacing:0.08em;
+  font-size:0.6rem; color:var(--muted); letter-spacing:0.1em;
+  text-transform: uppercase;
 }
-.net-legend-item { display:flex; align-items:center; gap:0.5rem; }
-.nl-dot { width:10px;height:10px;border-radius:50%; }
+.net-legend-item { display:flex; align-items:center; gap:0.6rem; }
+.nl-dot { width:8px;height:8px;border-radius:50%; box-shadow: 0 0 5px currentColor; }
 
 /* ── MAIN NETWORK CANVAS ── */
 #skill-net-wrap {
   position:relative;
-  width:100%; height:520px;
-  background:var(--card);
+  width:100%; height:550px;
+  background: rgba(8, 8, 14, 0.4);
+  backdrop-filter: blur(10px);
   border:1px solid var(--border);
-  border-radius:var(--radius);
+  border-radius:var(--radius-lg);
   overflow:hidden;
-  margin-bottom:2rem;
+  margin-bottom:2.5rem;
 }
 
 #skill-canvas { width:100%; height:100%; }
@@ -37,98 +39,118 @@
 /* Floating tooltip */
 #skill-tooltip {
   position:absolute;
-  background: rgba(8,8,14,0.95);
-  border:1px solid var(--border2);
+  background: rgba(2, 2, 5, 0.9);
+  border:1px solid var(--cyan);
   border-radius:var(--radius);
-  padding:0.8rem 1.1rem;
+  padding:1rem 1.2rem;
   font-family:'JetBrains Mono',monospace;
-  font-size:0.68rem;
+  font-size:0.7rem;
   color:var(--text);
   pointer-events:none;
   opacity:0;
-  transition:opacity 0.2s;
-  max-width:220px;
+  transition:opacity 0.2s, transform 0.2s;
+  max-width:260px;
   z-index:10;
   line-height:1.6;
-  backdrop-filter:blur(12px);
+  backdrop-filter:blur(15px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(0, 242, 255, 0.1);
 }
 
-#skill-tooltip .tt-name { color:var(--gold); font-size:0.78rem; font-weight:600; margin-bottom:0.3rem; }
-#skill-tooltip .tt-layer { color:var(--purple2); font-size:0.6rem; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:0.4rem; }
-#skill-tooltip .tt-conf { display:flex; align-items:center; gap:0.5rem; margin-top:0.4rem; }
-#skill-tooltip .tt-bar { flex:1; height:3px; background:rgba(255,255,255,0.08); border-radius:2px; overflow:hidden; }
-#skill-tooltip .tt-fill { height:100%; background:linear-gradient(90deg,var(--purple),var(--gold)); border-radius:2px; }
+#skill-tooltip .tt-name { color:var(--amber); font-size:0.85rem; font-weight:800; margin-bottom:0.4rem; font-family: 'Outfit'; }
+#skill-tooltip .tt-layer { color:var(--purple); font-size:0.55rem; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:0.6rem; }
+#skill-tooltip .tt-conf { display:flex; align-items:center; gap:0.6rem; margin-top:0.8rem; }
+#skill-tooltip .tt-bar { flex:1; height:2px; background:rgba(255,255,255,0.05); border-radius:1px; overflow:hidden; }
+#skill-tooltip .tt-fill { height:100%; background:var(--amber); border-radius:1px; box-shadow: 0 0 8px var(--amber); }
 
 /* ── LAYER LABELS ── */
 .layer-labels {
-  display:flex; justify-content:space-around;
-  margin-bottom:3rem;
-  padding:0 1rem;
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+  margin-bottom:4rem;
 }
 
 .layer-lbl {
-  display:flex; flex-direction:column; align-items:center; gap:0.4rem;
-  text-align:center;
+  padding: 1.2rem;
+  background: rgba(10, 10, 21, 0.4);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  display:flex; flex-direction:column; gap:0.4rem;
+  transition: all 0.3s;
 }
+.layer-lbl:hover { border-color: rgba(var(--amber-rgb), 0.2); background: rgba(var(--amber-rgb), 0.02); }
 
-.ll-num { font-family:'JetBrains Mono',monospace; font-size:0.55rem; color:var(--gold); letter-spacing:0.18em; }
-.ll-name { font-size:0.82rem; color:var(--text2); }
+.ll-num { font-family:'JetBrains Mono',monospace; font-size:0.55rem; color:var(--amber); letter-spacing:0.2em; text-transform: uppercase; }
+.ll-name { font-family: 'Outfit'; font-size:1.1rem; font-weight: 700; color:var(--text); }
 .ll-count { font-family:'JetBrains Mono',monospace; font-size:0.58rem; color:var(--muted); }
 
-/* ── SELECTED SKILL PANEL ── */
+/* ── SELECTED SKILL PANEL (HUD STYLE) ── */
 #skill-panel {
   background:var(--card);
+  backdrop-filter: blur(20px);
+  border:1px solid var(--border2);
+  border-radius:var(--radius-lg);
+  padding:2.5rem;
+  display:none;
+  margin-bottom:3rem;
+  animation:fadeUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+#skill-panel::after {
+  content: ''; position: absolute; top:0; left:0; width:100%; height:1px;
+  background: linear-gradient(90deg, transparent, var(--amber), transparent);
+}
+
+#skill-panel.visible { display:flex; gap:3rem; align-items:flex-start; flex-wrap:wrap; }
+
+.sp-left { flex:1.2; min-width:280px; }
+.sp-name { font-family:'Outfit', sans-serif; font-size:2.5rem; font-weight:800; color:var(--text); margin-bottom:0.4rem; letter-spacing: -0.03em;}
+.sp-layer { font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:var(--amber); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:1.2rem; }
+.sp-desc { font-size:1.05rem; color:var(--text2); line-height:1.85; margin-bottom:1.5rem; }
+.sp-conf-row { display:flex; align-items:center; gap:1.2rem; }
+.sp-conf-label { font-family:'JetBrains Mono',monospace; font-size:0.6rem; color:var(--muted); text-transform: uppercase; width:80px; }
+.sp-conf-bar { flex:1; height:6px; background:rgba(255,255,255,0.05); border-radius:3px; overflow:hidden; }
+.sp-conf-fill { height:100%; background:var(--amber); border-radius:3px; box-shadow: 0 0 15px var(--amber); transition:width 1s cubic-bezier(0.19, 1, 0.22, 1); }
+.sp-conf-val { font-family:'JetBrains Mono',monospace; font-size:0.85rem; color:var(--amber); font-weight:800; width: 45px; text-align: right; }
+
+.sp-right { flex: 0.8; display:flex; flex-direction:column; gap:0.8rem; min-width:220px; }
+.sp-used-label { font-family:'JetBrains Mono',monospace; font-size:0.6rem; color:var(--muted); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:0.5rem; }
+.sp-project-pill {
+  display:flex; align-items:center; gap:0.8rem;
+  padding:0.8rem 1.2rem;
+  background:rgba(0, 242, 255, 0.03);
   border:1px solid var(--border);
   border-radius:var(--radius);
-  padding:1.8rem 2rem;
-  display:none;
-  margin-bottom:2rem;
-  animation:fadeUp 0.3s ease;
+  font-size:0.85rem; color:var(--text2);
+  text-decoration:none; transition:all 0.3s;
 }
-
-#skill-panel.visible { display:flex; gap:2rem; align-items:flex-start; flex-wrap:wrap; }
-
-.sp-left { flex:1; min-width:200px; }
-.sp-name { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; color:var(--gold); margin-bottom:0.3rem; }
-.sp-layer { font-family:'JetBrains Mono',monospace; font-size:0.62rem; color:var(--purple2); letter-spacing:0.16em; text-transform:uppercase; margin-bottom:0.8rem; }
-.sp-desc { font-size:0.88rem; color:var(--text2); line-height:1.75; margin-bottom:1rem; }
-.sp-conf-row { display:flex; align-items:center; gap:1rem; }
-.sp-conf-label { font-family:'JetBrains Mono',monospace; font-size:0.62rem; color:var(--muted); width:80px; }
-.sp-conf-bar { flex:1; height:5px; background:rgba(255,255,255,0.06); border-radius:3px; overflow:hidden; }
-.sp-conf-fill { height:100%; background:linear-gradient(90deg,var(--purple),var(--gold),var(--gold2)); border-radius:3px; transition:width 0.8s cubic-bezier(0.4,0,0.2,1); }
-.sp-conf-val { font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:var(--gold); font-weight:600; }
-
-.sp-right { display:flex; flex-direction:column; gap:0.6rem; min-width:180px; }
-.sp-used-label { font-family:'JetBrains Mono',monospace; font-size:0.58rem; color:var(--muted); letter-spacing:0.14em; text-transform:uppercase; margin-bottom:0.2rem; }
-.sp-project-pill {
-  display:flex; align-items:center; gap:0.6rem;
-  padding:0.55rem 0.9rem;
-  background:rgba(240,165,0,0.06);
-  border:1px solid rgba(240,165,0,0.15);
-  border-radius:var(--radius);
-  font-size:0.78rem; color:var(--text2);
-  text-decoration:none; transition:all 0.2s;
-}
-.sp-project-pill:hover { border-color:var(--gold); color:var(--gold); }
-.sp-project-pill i { font-size:0.7rem; color:var(--gold); }
+.sp-project-pill:hover { border-color:var(--cyan); color:var(--cyan); transform: translateX(5px); }
+.sp-project-pill i { font-size:0.6rem; color:var(--cyan); }
 
 .sp-close {
   background:transparent; border:1px solid var(--border);
   color:var(--muted); border-radius:var(--radius);
-  padding:0.3rem 0.7rem; font-family:'JetBrains Mono',monospace;
-  font-size:0.6rem; cursor:none; transition:all 0.2s; letter-spacing:0.08em;
+  padding:0.5rem 1rem; font-family:'JetBrains Mono',monospace;
+  font-size:0.6rem; cursor:none; transition:all 0.3s; letter-spacing:0.1em;
+  text-transform: uppercase;
 }
-.sp-close:hover { border-color:var(--gold); color:var(--gold); }
+.sp-close:hover { border-color:var(--amber); color:var(--amber); background: rgba(var(--amber-rgb), 0.05); }
+
+@media (max-width: 700px) {
+  #skill-net-wrap { height: 400px; }
+  .layer-labels { grid-template-columns: 1fr 1fr; }
+}
 </style>
 </head>
 <body>
 <div id="cursor"></div><div id="cursor-ring"></div><div id="scroll-progress"></div>
 
 <nav>
-  <a class="nav-logo" href="index.html"><span class="nav-logo-dot"></span>PM_</a>
+  <a class="nav-logo" href="index.html"><span>P</span>M_</a>
   <ul class="nav-center">
     <li><a href="index.html">Home</a></li>
-    <li><a href="skills.html">Skills</a></li>
+    <li><a href="skills.html" class="active">Skills</a></li>
     <li><a href="projects.html">Projects</a></li>
     <li><a href="achievements.html">Achievements</a></li>
     <li><a href="blog.html">Blog</a></li>
@@ -142,36 +164,35 @@
 <section class="page-section">
   <div class="section-header reveal">
     <span class="section-num">01</span>
-    <h1 class="section-title">Skills Network</h1>
+    <h1 class="section-title">Telemetry</h1>
     <div class="section-line"></div>
   </div>
 
-  <p class="skills-intro reveal">Each node is a skill. Each layer is a category. Connections show how they work together in my projects. <strong style="color:var(--gold)">Click any node</strong> to explore depth, confidence, and where I've used it.</p>
+  <p class="skills-intro reveal">Mapping cross-functional expertise across the AI stack. Each node represents a core competency; connections define systemic integration. <strong style="color:var(--cyan)">Initialize node</strong> to view technical depth.</p>
 
   <div class="net-legend reveal">
-    <div class="net-legend-item"><span class="nl-dot" style="background:#f472b6"></span> Languages</div>
-    <div class="net-legend-item"><span class="nl-dot" style="background:#f0a500"></span> LLM & Agentic AI</div>
-    <div class="net-legend-item"><span class="nl-dot" style="background:#a855f7"></span> ML / DL</div>
-    <div class="net-legend-item"><span class="nl-dot" style="background:#67e8f9"></span> Vector DB & APIs</div>
-    <div class="net-legend-item"><span class="nl-dot" style="background:#22c55e"></span> Infra & MLOps</div>
+    <div class="net-legend-item"><span class="nl-dot" style="background:var(--amber); color:var(--amber)"></span> Mastery</div>
+    <div class="net-legend-item"><span class="nl-dot" style="background:#00f2ff; color:#00f2ff"></span> Execution</div>
+    <div class="net-legend-item"><span class="nl-dot" style="background:#7c3aed; color:#7c3aed"></span> Orchestration</div>
+    <div class="net-legend-item"><span class="nl-dot" style="background:#00ff9d; color:#00ff9d"></span> Infrastructure</div>
   </div>
 
   <!-- Selected skill panel -->
-  <div id="skill-panel">
+  <div id="skill-panel" class="tilt-hover">
     <div class="sp-left">
       <div class="sp-name" id="sp-name">—</div>
       <div class="sp-layer" id="sp-layer">—</div>
       <div class="sp-desc" id="sp-desc">—</div>
       <div class="sp-conf-row">
-        <span class="sp-conf-label">Confidence</span>
+        <span class="sp-conf-label">Proficiency</span>
         <div class="sp-conf-bar"><div class="sp-conf-fill" id="sp-fill" style="width:0%"></div></div>
         <span class="sp-conf-val" id="sp-val">—</span>
       </div>
     </div>
     <div class="sp-right">
-      <div class="sp-used-label">Used in</div>
+      <div class="sp-used-label">System Implementation</div>
       <div id="sp-projects"></div>
-      <button class="sp-close" id="sp-close" style="margin-top:0.5rem">✕ Close</button>
+      <button class="sp-close" id="sp-close" style="margin-top:1rem">Initialize Shutdown</button>
     </div>
   </div>
 
@@ -181,21 +202,21 @@
     <div id="skill-tooltip">
       <div class="tt-name" id="tt-name"></div>
       <div class="tt-layer" id="tt-layer"></div>
-      <div id="tt-desc" style="margin-bottom:0.3rem"></div>
+      <div id="tt-desc" style="margin-bottom:0.5rem; font-size: 0.65rem; color: var(--text2)"></div>
       <div class="tt-conf">
-        <span style="color:var(--muted);font-size:0.6rem">conf</span>
+        <span style="color:var(--muted);font-size:0.55rem; text-transform: uppercase;">depth</span>
         <div class="tt-bar"><div class="tt-fill" id="tt-fill"></div></div>
-        <span id="tt-val" style="color:var(--gold)"></span>
+        <span id="tt-val" style="color:var(--amber); font-weight: 800;"></span>
       </div>
     </div>
   </div>
 
   <div class="layer-labels reveal">
-    <div class="layer-lbl"><span class="ll-num">L1</span><span class="ll-name">Languages</span><span class="ll-count">3 nodes</span></div>
-    <div class="layer-lbl"><span class="ll-num">L2</span><span class="ll-name">LLM & Agents</span><span class="ll-count">7 nodes</span></div>
-    <div class="layer-lbl"><span class="ll-num">L3</span><span class="ll-name">ML / DL</span><span class="ll-count">4 nodes</span></div>
-    <div class="layer-lbl"><span class="ll-num">L4</span><span class="ll-name">Vector & APIs</span><span class="ll-count">5 nodes</span></div>
-    <div class="layer-lbl"><span class="ll-num">L5</span><span class="ll-name">Infra & MLOps</span><span class="ll-count">5 nodes</span></div>
+    <div class="layer-lbl tilt-hover"><span class="ll-num">STACK_01</span><span class="ll-name">Execution</span><span class="ll-count">Neural base</span></div>
+    <div class="layer-lbl tilt-hover"><span class="ll-num">STACK_02</span><span class="ll-name">Orchestration</span><span class="ll-count">Agentic logic</span></div>
+    <div class="layer-lbl tilt-hover"><span class="ll-num">STACK_03</span><span class="ll-name">Intelligence</span><span class="ll-count">Model training</span></div>
+    <div class="layer-lbl tilt-hover"><span class="ll-num">STACK_04</span><span class="ll-name">Storage</span><span class="ll-count">Vector context</span></div>
+    <div class="layer-lbl tilt-hover"><span class="ll-num">STACK_05</span><span class="ll-name">Infra / MLOps</span><span class="ll-count">Lifecycle</span></div>
   </div>
 
 </section>
@@ -210,72 +231,56 @@
     <li><a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a></li>
     <li><a href="https://x.com/PMaske20171" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a></li>
     <li><a href="https://www.instagram.com/pandhari__7/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a></li>
-    <li><a href="https://leetcode.com/u/PandhariMaske1437/" target="_blank" rel="noopener"><i class="fas fa-code"></i></a></li>
     <li><a href="mailto:pandharinath1437@gmail.com"><i class="fas fa-envelope"></i></a></li>
   </ul>
 </footer>
 
 <button id="btt"><i class="fas fa-arrow-up"></i></button>
 <script src="js/main.js"></script>
+<script src="js/ai-widget.js"></script>
 <script>
-// ── SKILL DATA ──────────────────────────────
+// ── SKILL DATA (Updated Colors to Cyan/Purple) ──────────────────────────────
 const SKILLS = [
-  // Layer 0 — Languages
-  { id:'python',    label:'Python',     layer:0, conf:0.97, color:'#f472b6', desc:'Primary language for all ML, API, and scripting work. Every project I build starts here.', projects:['Coffee Shop AI','Book Recommender','MLOps Pipeline'] },
-  { id:'cpp',       label:'C++',        layer:0, conf:0.88, color:'#f472b6', desc:'Used for DSA, competitive programming. LeetCode 1647 rating built in C++.', projects:['LeetCode 700+'] },
-  { id:'c',         label:'C',          layer:0, conf:0.78, color:'#f472b6', desc:'Systems programming and low-level concepts from coursework.', projects:[] },
+  // Layer 0 — Execution (Languages)
+  { id:'python',    label:'Python',     layer:0, conf:0.97, color:'#ffaa00', desc:'Foundational language for AI/ML and production backends.', projects:['Coffee Shop AI','Book Recommender','MLOps Pipeline'] },
+  { id:'cpp',       label:'C++',        layer:0, conf:0.88, color:'#00f2ff', desc:'Algorithms and competitive engineering. LeetCode 1647 rank.', projects:['LeetCode 700+'] },
+  
+  // Layer 1 — Orchestration (Agents)
+  { id:'langgraph',  label:'LangGraph',      layer:1, conf:0.97, color:'#ffaa00', desc:'Direct acyclic graph orchestration for multi-agent systems.', projects:['Coffee Shop AI'] },
+  { id:'langchain',  label:'LangChain',      layer:1, conf:0.95, color:'#7c3aed', desc:'Modular framework for LLM-powered applications.', projects:['Coffee Shop AI','Book Recommender'] },
+  { id:'rag',        label:'RAG',            layer:1, conf:0.94, color:'#ffaa00', desc:'Sophisticated retrieval-augmented generation architectures.', projects:['Coffee Shop AI','Book Recommender'] },
+  { id:'prompt',     label:'Prompt Eng',     layer:1, conf:0.92, color:'#7c3aed', desc:'System instruction design and optimization patterns.', projects:['Coffee Shop AI','ETFI Paper'] },
+  
+  // Layer 2 — Intelligence (ML/DL)
+  { id:'pytorch',    label:'PyTorch',    layer:2, conf:0.91, color:'#70faff', desc:'Tensor computation and neural network training.', projects:['ETFI Paper'] },
+  { id:'sklearn',    label:'Sklearn',    layer:2, conf:0.93, color:'#70faff', desc:'Traditional machine learning and data science pipelines.', projects:['MLOps Pipeline'] },
+  { id:'hf',         label:'HuggingFace',layer:2, conf:0.89, color:'#70faff', desc:'State-of-the-art transformer models and tokenization.', projects:['Book Recommender'] },
 
-  // Layer 1 — LLM & Agents
-  { id:'langgraph',  label:'LangGraph',      layer:1, conf:0.97, color:'#f0a500', desc:'State machine orchestration for multi-agent systems. Core of my Coffee Shop AI project.', projects:['Coffee Shop AI'] },
-  { id:'langchain',  label:'LangChain',      layer:1, conf:0.95, color:'#f0a500', desc:'Chains, tools, memory abstractions. Used in both RAG projects.', projects:['Coffee Shop AI','Book Recommender'] },
-  { id:'rag',        label:'RAG',            layer:1, conf:0.94, color:'#f0a500', desc:'Full retrieval-augmented generation pipelines from scratch — chunking, embedding, retrieval, generation.', projects:['Coffee Shop AI','Book Recommender'] },
-  { id:'llama',      label:'LlamaIndex',     layer:1, conf:0.88, color:'#f0a500', desc:'Data indexing and query engines for complex document retrieval tasks.', projects:[] },
-  { id:'prompt',     label:'Prompting',      layer:1, conf:0.92, color:'#f0a500', desc:'System prompt design, CoT, few-shot, structured output, ReAct patterns.', projects:['Coffee Shop AI','ETFI Paper'] },
-  { id:'n8n',        label:'n8n',            layer:1, conf:0.82, color:'#f0a500', desc:'Workflow automation and AI agent pipelines without code.', projects:[] },
-  { id:'mcp',        label:'MCP',            layer:1, conf:0.80, color:'#f0a500', desc:'Model Context Protocol for connecting AI models to external tools and data sources.', projects:[] },
+  // Layer 3 — Storage (Vector)
+  { id:'pinecone',   label:'Pinecone',   layer:3, conf:0.93, color:'#a855f7', desc:'High-throughput cloud vector database for enterprise RAG.', projects:['Coffee Shop AI'] },
+  { id:'chromadb',   label:'ChromaDB',   layer:3, conf:0.90, color:'#a855f7', desc:'Open-source local vector store for document search.', projects:['Book Recommender'] },
+  { id:'fastapi',    label:'FastAPI',    layer:3, conf:0.93, color:'#a855f7', desc:'Asynchronous high-performance web frameworks.', projects:['Coffee Shop AI'] },
 
-  // Layer 2 — ML/DL
-  { id:'pytorch',    label:'PyTorch',    layer:2, conf:0.91, color:'#a855f7', desc:'Neural network building, custom training loops, model fine-tuning.', projects:['ETFI Paper'] },
-  { id:'sklearn',    label:'Sklearn',    layer:2, conf:0.93, color:'#a855f7', desc:'Classical ML — pipelines, cross-validation, feature engineering, evaluation.', projects:['MLOps Pipeline'] },
-  { id:'hf',         label:'HuggingFace',layer:2, conf:0.89, color:'#a855f7', desc:'Transformers, tokenizers, sentence-transformers for embeddings in RAG.', projects:['Book Recommender','Coffee Shop AI'] },
-  { id:'tf',         label:'TensorFlow', layer:2, conf:0.80, color:'#a855f7', desc:'Keras API for model prototyping and deep learning coursework.', projects:[] },
-
-  // Layer 3 — Vector & APIs
-  { id:'pinecone',   label:'Pinecone',   layer:3, conf:0.93, color:'#67e8f9', desc:'Production vector database. Used for semantic retrieval in Coffee Shop AI RAG pipeline.', projects:['Coffee Shop AI'] },
-  { id:'chromadb',   label:'ChromaDB',   layer:3, conf:0.90, color:'#67e8f9', desc:'Local vector store for Book Recommender semantic search.', projects:['Book Recommender'] },
-  { id:'faiss',      label:'FAISS',      layer:3, conf:0.82, color:'#67e8f9', desc:'Facebook AI similarity search for fast in-memory vector retrieval.', projects:[] },
-  { id:'fastapi',    label:'FastAPI',    layer:3, conf:0.93, color:'#67e8f9', desc:'Async REST API backend with SSE streaming for real-time chat in Coffee Shop AI.', projects:['Coffee Shop AI'] },
-  { id:'gradio',     label:'Gradio',     layer:3, conf:0.88, color:'#67e8f9', desc:'Rapid ML interface for Book Recommender demo — ranked results with similarity scores.', projects:['Book Recommender'] },
-
-  // Layer 4 — Infra & MLOps
-  { id:'docker',     label:'Docker',     layer:4, conf:0.89, color:'#22c55e', desc:'Containerised all deployments. Coffee Shop AI runs fully Dockerized on Render.', projects:['Coffee Shop AI','MLOps Pipeline'] },
-  { id:'supabase',   label:'Supabase',   layer:4, conf:0.85, color:'#22c55e', desc:'Persistent user profiles and long-term memory storage in Coffee Shop AI.', projects:['Coffee Shop AI'] },
-  { id:'mlflow',     label:'MLflow',     layer:4, conf:0.83, color:'#22c55e', desc:'Experiment tracking, model versioning, artifact management in MLOps pipeline.', projects:['MLOps Pipeline'] },
-  { id:'wandb',      label:'W&B',        layer:4, conf:0.81, color:'#22c55e', desc:'Training visualisation, hyperparameter tracking, gradient monitoring.', projects:['MLOps Pipeline'] },
-  { id:'git',        label:'Git',        layer:4, conf:0.94, color:'#22c55e', desc:'Version control across all projects. GitHub profile: Pandharimaske.', projects:['All Projects'] },
+  // Layer 4 — Infrastructure
+  { id:'docker',     label:'Docker',     layer:4, conf:0.89, color:'#00ff9d', desc:'Containerization and environment reproducibility.', projects:['Coffee Shop AI','MLOps Pipeline'] },
+  { id:'mlflow',     label:'MLflow',     layer:4, conf:0.83, color:'#00ff9d', desc:'Experiment tracking and model lifecycle management.', projects:['MLOps Pipeline'] },
+  { id:'git',        label:'Git',        layer:4, conf:0.94, color:'#00ff9d', desc:'Version control and distributed engineering workflows.', projects:['All Projects'] },
 ];
 
-// Edges — which skills activate together
 const EDGES = [
   ['python','langgraph'],['python','langchain'],['python','rag'],['python','fastapi'],
   ['python','pytorch'],['python','sklearn'],['python','hf'],
-  ['cpp','python'],
-  ['langgraph','rag'],['langgraph','fastapi'],['langgraph','supabase'],['langgraph','pinecone'],
+  ['langgraph','rag'],['langgraph','fastapi'],['langgraph','pinecone'],
   ['langchain','rag'],['langchain','chromadb'],['langchain','hf'],
-  ['rag','pinecone'],['rag','chromadb'],['rag','faiss'],['rag','hf'],
-  ['prompt','langgraph'],['prompt','rag'],
-  ['mcp','langgraph'],
-  ['pytorch','hf'],['pytorch','mlflow'],['pytorch','wandb'],
-  ['sklearn','mlflow'],['sklearn','wandb'],
+  ['rag','pinecone'],['rag','chromadb'],['rag','hf'],
+  ['pytorch','hf'],['pytorch','mlflow'],
+  ['sklearn','mlflow'],
   ['hf','chromadb'],['hf','pinecone'],
-  ['fastapi','docker'],['fastapi','supabase'],
-  ['docker','mlflow'],['docker','supabase'],
-  ['mlflow','wandb'],
-  ['gradio','chromadb'],['gradio','hf'],
-  ['llama','rag'],['llama','pinecone'],
+  ['fastapi','docker'],
+  ['docker','mlflow']
 ];
 
-// ── CANVAS LAYOUT ──────────────────────────────
+// ── CANVAS LAYOUT (Refined for Command Center) ──────────────────────────────
 const wrap    = document.getElementById('skill-net-wrap');
 const canvas  = document.getElementById('skill-canvas');
 const ctx     = canvas.getContext('2d');
@@ -285,7 +290,7 @@ const panel   = document.getElementById('skill-panel');
 let W, H, nodes = {}, hoveredId = null, selectedId = null, animT = 0, raf;
 
 const LAYER_COUNT = 5;
-const NODE_R = 10;
+const NODE_R = 11;
 
 function layoutNodes() {
   W = canvas.width  = wrap.offsetWidth;
@@ -297,11 +302,8 @@ function layoutNodes() {
     const sameLayer = SKILLS.filter(x => x.layer === s.layer);
     const ni = sameLayer.indexOf(s);
     const count = sameLayer.length;
-    const x = layerX(s.layer);
-    const y = H * (ni + 1) / (count + 1);
     nodes[s.id] = {
-      ...s, x, y,
-      vx: 0, vy: 0,
+      ...s, x: layerX(s.layer), y: H * (ni + 1) / (count + 1),
       phase: Math.random() * Math.PI * 2,
     };
   });
@@ -318,7 +320,7 @@ function getConnected(id) {
 
 function draw() {
   ctx.clearRect(0, 0, W, H);
-  animT += 0.012;
+  animT += 0.015;
 
   const hov = hoveredId;
   const sel = selectedId;
@@ -329,80 +331,69 @@ function draw() {
   EDGES.forEach(([a, b]) => {
     const na = nodes[a], nb = nodes[b];
     if (!na || !nb) return;
-
     const isActive = activeId && (a === activeId || b === activeId);
-    const fade = activeId && !isActive ? 0.03 : (isActive ? 0.7 : 0.08);
+    const fade = activeId && !isActive ? 0.02 : (isActive ? 0.6 : 0.08);
 
     ctx.beginPath();
     ctx.moveTo(na.x, na.y);
     ctx.lineTo(nb.x, nb.y);
-    ctx.strokeStyle = isActive
-      ? `rgba(240,165,0,${fade})`
-      : `rgba(255,255,255,${fade})`;
-    ctx.lineWidth = isActive ? 1.5 : 0.7;
-    if (isActive) { ctx.shadowBlur = 6; ctx.shadowColor = 'rgba(240,165,0,0.4)'; }
+    ctx.strokeStyle = isActive ? na.color : `rgba(255,255,255,${fade})`;
+    ctx.lineWidth = isActive ? 1.5 : 0.8;
+    if (isActive) { ctx.shadowBlur = 10; ctx.shadowColor = na.color; }
     ctx.stroke();
     ctx.shadowBlur = 0;
 
-    // animated signal on active edges
     if (isActive) {
-      const prog = ((animT * 0.8 + SKILLS.findIndex(s=>s.id===a)*0.3) % 1);
-      const sx = na.x + (nb.x - na.x) * prog;
-      const sy = na.y + (nb.y - na.y) * prog;
-      ctx.beginPath(); ctx.arc(sx, sy, 2.5, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(240,165,0,0.9)`;
-      ctx.shadowBlur = 8; ctx.shadowColor = '#f0a500';
-      ctx.fill(); ctx.shadowBlur = 0;
+      const prog = (animT * 0.6 % 1);
+      ctx.beginPath(); 
+      ctx.arc(na.x + (nb.x - na.x) * prog, na.y + (nb.y - na.y) * prog, 2, 0, Math.PI*2);
+      ctx.fillStyle = na.color; ctx.shadowBlur = 8; ctx.shadowColor = na.color; ctx.fill(); 
+      ctx.shadowBlur = 0;
     }
   });
 
   // ── NODES ──
   SKILLS.forEach(s => {
     const n = nodes[s.id];
-    const pulse = (Math.sin(animT * 1.5 + n.phase) + 1) / 2;
     const isHov = s.id === hov;
     const isSel = s.id === sel;
     const isConn = connected.has(s.id);
     const isDim  = activeId && !isHov && !isSel && !isConn;
 
-    const r = isSel ? NODE_R + 5 : isHov ? NODE_R + 3 : NODE_R;
-    const alpha = isDim ? 0.2 : (isSel || isHov ? 1 : 0.7 + pulse * 0.3);
+    const r = isSel ? NODE_R + 6 : isHov ? NODE_R + 3 : NODE_R;
+    const alpha = isDim ? 0.15 : (isSel || isHov ? 1 : 0.7);
 
-    // Glow halo
     if (!isDim) {
-      const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 3.5);
-      grd.addColorStop(0, `${s.color}${Math.round((isSel?0.35:0.15)*255).toString(16).padStart(2,'0')}`);
-      grd.addColorStop(1, `${s.color}00`);
-      ctx.beginPath(); ctx.arc(n.x, n.y, r * 3.5, 0, Math.PI*2);
-      ctx.fillStyle = grd; ctx.fill();
+       ctx.beginPath(); ctx.arc(n.x, n.y, r * 2.5, 0, Math.PI*2);
+       const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 2.5);
+       grd.addColorStop(0, `${s.color}22`);
+       grd.addColorStop(1, `${s.color}00`);
+       ctx.fillStyle = grd; ctx.fill();
     }
 
-    // Core circle
     ctx.beginPath(); ctx.arc(n.x, n.y, r, 0, Math.PI*2);
-    ctx.fillStyle = isDim ? '#111' : `${s.color}${Math.round(alpha*255).toString(16).padStart(2,'0')}`;
-    ctx.strokeStyle = isDim ? 'rgba(255,255,255,0.06)' : s.color;
-    ctx.lineWidth = isSel ? 2.5 : 1.5;
-    if (isSel) { ctx.shadowBlur = 18; ctx.shadowColor = s.color; }
+    ctx.fillStyle = isDim ? '#050510' : `${s.color}${Math.round(alpha*255).toString(16).padStart(2,'0')}`;
+    ctx.strokeStyle = isDim ? 'rgba(255,255,255,0.1)' : s.color;
+    ctx.lineWidth = isSel ? 3 : 1.5;
+    if (isSel) { ctx.shadowBlur = 20; ctx.shadowColor = s.color; }
     ctx.fill(); ctx.stroke(); ctx.shadowBlur = 0;
 
-    // Label
-    if (!isDim || isConn) {
-      ctx.font = `${isSel||isHov?600:400} ${isSel?11:10}px DM Sans, sans-serif`;
-      ctx.fillStyle = isDim ? 'rgba(255,255,255,0.2)' : (isSel ? s.color : 'rgba(232,224,213,0.85)');
+    if (!isDim) {
+      ctx.font = `600 ${isSel?11:10}px 'JetBrains Mono'`;
+      ctx.fillStyle = isSel ? s.color : 'rgba(255,255,255,0.6)';
       ctx.textAlign = 'center';
-      ctx.fillText(s.label, n.x, n.y + r + 13);
+      ctx.fillText(s.label, n.x, n.y + r + 15);
     }
   });
 
   raf = requestAnimationFrame(draw);
 }
 
-// ── INTERACTION ──────────────────────────────
+// Interaction logic...
 function getNodeAt(mx, my) {
   for (const s of SKILLS) {
     const n = nodes[s.id];
-    const dist = Math.hypot(mx - n.x, my - n.y);
-    if (dist <= NODE_R + 6) return s;
+    if (Math.hypot(mx - n.x, my - n.y) <= NODE_R + 8) return s;
   }
   return null;
 }
@@ -412,33 +403,19 @@ canvas.addEventListener('mousemove', (e) => {
   const mx = (e.clientX - r.left) * (W / r.width);
   const my = (e.clientY - r.top)  * (H / r.height);
   const hit = getNodeAt(mx, my);
-
   hoveredId = hit ? hit.id : null;
 
   if (hit) {
-    canvas.style.cursor = 'none';
     document.getElementById('tt-name').textContent  = hit.label;
-    document.getElementById('tt-layer').textContent = ['Languages','LLM & Agents','ML / DL','Vector & APIs','Infra & MLOps'][hit.layer];
+    document.getElementById('tt-layer').textContent = ['Execution Layer','Orchestration Layer','Intelligence Layer','Storage Layer','Infrastructure Layer'][hit.layer];
     document.getElementById('tt-desc').textContent  = hit.desc;
     document.getElementById('tt-fill').style.width  = (hit.conf * 100) + '%';
     document.getElementById('tt-val').textContent   = hit.conf.toFixed(2);
     tooltip.style.opacity = '1';
-
-    // Position tooltip avoiding edges
-    let tx = e.clientX - r.left + 16;
-    let ty = e.clientY - r.top  - 10;
-    if (tx + 230 > W) tx = e.clientX - r.left - 230;
-    if (ty + 120 > H) ty = H - 130;
-    tooltip.style.left = tx + 'px';
-    tooltip.style.top  = ty + 'px';
+    tooltip.style.transform = `translate(${e.clientX - r.left + 20}px, ${e.clientY - r.top - 20}px)`;
   } else {
     tooltip.style.opacity = '0';
   }
-});
-
-canvas.addEventListener('mouseleave', () => {
-  hoveredId = null;
-  tooltip.style.opacity = '0';
 });
 
 canvas.addEventListener('click', (e) => {
@@ -447,50 +424,33 @@ canvas.addEventListener('click', (e) => {
   const my = (e.clientY - r.top)  * (H / r.height);
   const hit = getNodeAt(mx, my);
 
-  if (!hit) { selectedId = null; panel.classList.remove('visible'); return; }
-  if (selectedId === hit.id) { selectedId = null; panel.classList.remove('visible'); return; }
+  if (!hit || selectedId === hit.id) { selectedId = null; panel.classList.remove('visible'); return; }
 
   selectedId = hit.id;
-  tooltip.style.opacity = '0';
-
-  // Populate panel
   document.getElementById('sp-name').textContent  = hit.label;
-  document.getElementById('sp-layer').textContent = ['L1 · Languages','L2 · LLM & Agents','L3 · ML / DL','L4 · Vector & APIs','L5 · Infra & MLOps'][hit.layer];
+  document.getElementById('sp-layer').textContent = `STACK_0${hit.layer+1} · ${['Execution','Orchestration','Intelligence','Storage','Infra'][hit.layer]}`;
   document.getElementById('sp-desc').textContent  = hit.desc;
   document.getElementById('sp-val').textContent   = hit.conf.toFixed(2);
-  setTimeout(() => {
-    document.getElementById('sp-fill').style.width = (hit.conf * 100) + '%';
-  }, 50);
+  document.getElementById('sp-fill').style.width = '0%';
+  setTimeout(() => { document.getElementById('sp-fill').style.width = (hit.conf * 100) + '%'; }, 50);
 
   const projWrap = document.getElementById('sp-projects');
   projWrap.innerHTML = '';
-  if (hit.projects.length === 0) {
-    projWrap.innerHTML = '<span style="font-size:0.78rem;color:var(--muted)">Coursework & exploration</span>';
-  } else {
-    hit.projects.forEach(p => {
-      const a = document.createElement('div');
-      a.className = 'sp-project-pill';
-      a.innerHTML = `<i class="fas fa-circle-dot"></i> ${p}`;
-      projWrap.appendChild(a);
-    });
-  }
+  if (hit.projects.length === 0) projWrap.innerHTML = '<span style="color:var(--muted);font-size:0.75rem">Telemetry logged in academic environment.</span>';
+  else hit.projects.forEach(p => {
+    const d = document.createElement('div');
+    d.className = 'sp-project-pill';
+    d.innerHTML = `<i class="fas fa-microchip"></i> ${p}`;
+    projWrap.appendChild(d);
+  });
 
   panel.classList.add('visible');
-  panel.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  panel.scrollIntoView({ behavior:'smooth', block:'center' });
 });
 
-document.getElementById('sp-close').addEventListener('click', () => {
-  selectedId = null;
-  panel.classList.remove('visible');
-});
+document.getElementById('sp-close').addEventListener('click', () => { selectedId = null; panel.classList.remove('visible'); });
 
-// ── INIT ──────────────────────────────────────
-function init() {
-  layoutNodes();
-  cancelAnimationFrame(raf);
-  draw();
-}
-
+function init() { layoutNodes(); cancelAnimationFrame(raf); draw(); }
 window.addEventListener('resize', init);
 init();
 </script>

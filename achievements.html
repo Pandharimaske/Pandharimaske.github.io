@@ -4,246 +4,240 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Achievements — Pandharinath Maske</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%23f0a500' font-family='serif' font-style='italic'>P</text></svg>"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%2300f2ff' font-family='serif' font-style='italic'>P</text></svg>"/>
 <link rel="stylesheet" href="css/style.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <script>(function(){const t=localStorage.getItem('pm-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
 <style>
-.achieve-intro { max-width:580px; color:var(--text2); font-size:0.97rem; margin-bottom:3rem; line-height:1.85; }
+.achieve-intro { max-width:600px; color:var(--text2); font-size:1.05rem; margin-bottom:3rem; line-height:1.8; }
 
 /* ── TRAINING RUN CARD ── */
 .training-card {
-  background:var(--card);
+  background: rgba(8, 8, 14, 0.4);
+  backdrop-filter: blur(10px);
   border:1px solid var(--border);
-  border-radius:var(--radius);
+  border-radius:var(--radius-lg);
   overflow:hidden;
-  margin-bottom:2.5rem;
+  margin-bottom:3rem;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.5);
 }
 
 .tc-header {
-  padding:1.4rem 2rem;
+  padding:2rem 2.5rem;
   border-bottom:1px solid var(--border);
-  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem;
+  background: rgba(var(--amber-rgb), 0.02);
 }
 
-.tc-title-wrap { display:flex; flex-direction:column; gap:0.3rem; }
-.tc-label { font-family:'JetBrains Mono',monospace; font-size:0.58rem; color:var(--gold); letter-spacing:0.2em; text-transform:uppercase; }
-.tc-title { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; }
+.tc-title-wrap { display:flex; flex-direction:column; gap:0.4rem; }
+.tc-label { font-family:'JetBrains Mono',monospace; font-size:0.6rem; color:var(--amber); letter-spacing:0.2em; text-transform:uppercase; opacity: 0.9; }
+.tc-title { font-family:'Outfit',sans-serif; font-size:2rem; font-weight:800; letter-spacing: -0.04em; color: var(--text); }
 
-.tc-metrics { display:flex; gap:1rem; flex-wrap:wrap; }
+.tc-metrics { display:flex; gap:1.2rem; flex-wrap:wrap; }
 
 .tc-metric {
-  display:flex; flex-direction:column; align-items:center; gap:0.15rem;
-  padding:0.6rem 1rem;
-  background:rgba(240,165,0,0.05);
-  border:1px solid rgba(240,165,0,0.12);
+  display:flex; flex-direction:column; align-items:center; gap:0.2rem;
+  padding:0.7rem 1.2rem;
+  background:rgba(var(--amber-rgb), 0.04);
+  border: 1px solid rgba(var(--amber-rgb), 0.15);
   border-radius:var(--radius);
-  min-width:70px;
+  min-width:100px;
 }
 
-.tm-val { font-family:'JetBrains Mono',monospace; font-size:1.1rem; color:var(--gold); font-weight:600; line-height:1; }
-.tm-lbl { font-family:'JetBrains Mono',monospace; font-size:0.5rem; color:var(--muted); letter-spacing:0.14em; text-transform:uppercase; text-align:center; }
+.tm-val { font-family:'Outfit',monospace; font-size:1.4rem; color:var(--amber); font-weight:800; line-height:1; }
+.tm-lbl { font-family:'JetBrains Mono',monospace; font-size:0.55rem; color:var(--muted); letter-spacing:0.15em; text-transform:uppercase; text-align:center; }
 
-.tc-body { padding:1.5rem 2rem; }
+.tc-body { padding:2rem 2.5rem; }
 
-/* ── JOURNEY CHART (the main showpiece) ── */
+/* ── JOURNEY CHART ── */
 #journey-wrap {
   position:relative;
-  width:100%; height:340px;
-  margin-bottom:1rem;
+  width:100%; height:380px;
+  margin-bottom:1.5rem;
 }
 
 #journey-canvas { width:100%; height:100%; }
 
 .journey-legend {
-  display:flex; gap:1.5rem; flex-wrap:wrap;
+  display:flex; gap:2rem; flex-wrap:wrap;
   font-family:'JetBrains Mono',monospace;
-  font-size:0.6rem; color:var(--muted); letter-spacing:0.08em;
+  font-size:0.62rem; color:var(--muted); letter-spacing:0.1em;
   margin-bottom:1.5rem;
+  text-transform: uppercase;
 }
 
-.jl-item { display:flex; align-items:center; gap:0.4rem; }
-.jl-line { width:20px; height:2px; border-radius:1px; }
+.jl-item { display:flex; align-items:center; gap:0.6rem; }
+.jl-line { width:24px; height:2px; border-radius:1px; }
 
 /* Hover tooltip on chart */
 #journey-tooltip {
   position:absolute;
-  background:rgba(8,8,14,0.95);
-  border:1px solid var(--border2);
+  background:rgba(2, 2, 5, 0.98);
+  border:1px solid var(--amber);
   border-radius:var(--radius);
-  padding:0.7rem 1rem;
+  padding:1.2rem;
   font-family:'JetBrains Mono',monospace;
-  font-size:0.66rem;
+  font-size:0.7rem;
   color:var(--text);
   pointer-events:none;
   opacity:0;
-  transition:opacity 0.15s;
+  transition:opacity 0.2s;
   z-index:10;
-  backdrop-filter:blur(10px);
-  min-width:160px;
+  backdrop-filter:blur(15px);
+  min-width:240px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 }
 
-.jt-title { color:var(--gold); font-size:0.72rem; font-weight:600; margin-bottom:0.4rem; }
-.jt-row { display:flex; justify-content:space-between; gap:1.5rem; margin-bottom:0.15rem; }
-.jt-key { color:var(--muted); }
+.jt-title { color:var(--amber); font-size:1rem; font-weight:800; margin-bottom:0.6rem; font-family: 'Outfit'; }
+.jt-row { display:flex; justify-content:space-between; gap:2rem; margin-bottom:0.4rem; }
+.jt-key { color:var(--muted); font-size: 0.6rem; text-transform: uppercase; }
 .jt-val { color:var(--text); }
 
-/* ── CHECKPOINTS (milestone events on timeline) ── */
+/* ── CHECKPOINTS ── */
 .checkpoints {
-  display:flex; gap:0; margin-bottom:3rem;
+  display:flex; gap:0.5rem; margin-bottom:4rem;
   position:relative;
-}
-
-.checkpoints::before {
-  content:'';
-  position:absolute;
-  left:0; right:0; top:18px;
-  height:1px;
-  background:linear-gradient(90deg, transparent, var(--border2), transparent);
+  justify-content: space-between;
 }
 
 .checkpoint {
-  flex:1; display:flex; flex-direction:column; align-items:center; gap:0.6rem;
+  flex:1; display:flex; flex-direction:column; align-items:center; gap:0.8rem;
   position:relative;
   cursor:none;
 }
 
 .cp-dot {
-  width:36px; height:36px;
+  width:44px; height:44px;
   border-radius:50%;
-  background:var(--card);
-  border:2px solid var(--border);
+  background:var(--bg2);
+  border:1px solid var(--glass-border);
   display:flex; align-items:center; justify-content:center;
-  font-size:0.9rem;
-  transition:all 0.3s;
+  font-size:1.2rem;
+  transition:all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position:relative; z-index:1;
 }
 
 .checkpoint:hover .cp-dot {
-  border-color:var(--gold);
-  background:rgba(240,165,0,0.12);
-  transform:scale(1.2);
-  box-shadow:0 0 16px rgba(240,165,0,0.3);
+  border-color:var(--amber);
+  background:rgba(var(--amber-rgb), 0.1);
+  transform:scale(1.25) translateY(-8px);
+  box-shadow:0 15px 40px rgba(var(--amber-rgb), 0.2);
 }
 
 .cp-label {
   font-family:'JetBrains Mono',monospace;
-  font-size:0.58rem; color:var(--muted); letter-spacing:0.1em;
+  font-size:0.55rem; color:var(--muted); letter-spacing:0.15em;
   text-transform:uppercase; text-align:center;
   transition:color 0.3s;
 }
 
-.checkpoint:hover .cp-label { color:var(--gold); }
+.checkpoint:hover .cp-label { color:var(--amber); }
 
-.cp-date {
-  font-size:0.75rem; color:var(--text2); text-align:center;
-  font-weight:500;
-}
+.cp-date { font-family: 'Outfit'; font-size:0.85rem; color:var(--text2); text-align:center; font-weight:600; }
 
-/* ── STAT CARDS (styled as model eval metrics) ── */
+/* ── STAT CARDS ── */
 .eval-grid {
   display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
-  gap:1rem;
-  margin-bottom:3rem;
+  grid-template-columns:repeat(auto-fill, minmax(220px,1fr));
+  gap:1.5rem;
+  margin-bottom:4rem;
 }
 
 .eval-card {
-  background:var(--card);
+  background:rgba(10, 10, 21, 0.4);
   border:1px solid var(--border);
   border-radius:var(--radius);
-  padding:1.6rem 1.8rem;
-  transition:all 0.3s;
+  padding:2rem;
+  transition:all 0.4s ease;
   position:relative; overflow:hidden;
 }
 
 .eval-card::before {
   content:'';
-  position:absolute; top:0; left:0; right:0; height:2px;
-  background:linear-gradient(90deg, var(--purple), var(--gold));
-  transform:scaleX(0); transform-origin:left;
-  transition:transform 0.4s;
+  position:absolute; top:0; left:0; width:100%; height:1px;
+  background: linear-gradient(90deg, transparent, var(--amber), transparent);
+  transform: scaleX(0); transition: transform 0.6s ease;
 }
 
 .eval-card:hover::before { transform:scaleX(1); }
-.eval-card:hover { border-color:var(--border2); transform:translateY(-3px); }
+.eval-card:hover { border-color:var(--amber); transform:translateY(-8px); box-shadow: 0 20px 60px rgba(var(--amber-rgb), 0.1); }
 
 .ec-metric {
   font-family:'JetBrains Mono',monospace;
-  font-size:0.56rem; color:var(--gold); letter-spacing:0.18em;
-  text-transform:uppercase; margin-bottom:0.4rem;
+  font-size:0.55rem; color:var(--amber); letter-spacing:0.2em;
+  text-transform:uppercase; margin-bottom:0.6rem;
 }
 
 .ec-val {
-  font-family:'Playfair Display',serif;
-  font-size:2.2rem; font-weight:900; color:var(--text);
-  line-height:1; margin-bottom:0.3rem;
+  font-family:'Outfit',sans-serif;
+  font-size:2.5rem; font-weight:800; color:var(--text);
+  line-height:1; margin-bottom:0.6rem;
 }
 
-.ec-desc { font-size:0.78rem; color:var(--muted); line-height:1.5; }
+.ec-desc { font-size:0.85rem; color:var(--text2); line-height:1.6; }
 
-/* ── CERTS (as training data sources) ── */
+/* ── CERTS ── */
 .training-data-label {
   font-family:'JetBrains Mono',monospace;
-  font-size:0.6rem; color:var(--gold);
-  letter-spacing:0.22em; text-transform:uppercase;
-  margin-bottom:1.2rem;
-  display:flex; align-items:center; gap:1rem;
+  font-size:0.65rem; color:var(--amber);
+  letter-spacing:0.3em; text-transform:uppercase;
+  margin-bottom:1.5rem;
+  display:flex; align-items:center; gap:1.5rem;
 }
-.training-data-label::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,var(--border2),transparent); }
+.training-data-label::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,var(--border),transparent); }
 
-.cert-rows { display:flex; flex-direction:column; gap:0.7rem; margin-bottom:3rem; }
+.cert-rows { display:flex; flex-direction:column; gap:1rem; margin-bottom:4rem; }
 
 .cert-row {
-  display:flex; align-items:center; gap:1rem;
-  padding:1rem 1.4rem;
-  background:var(--card); border:1px solid var(--border);
-  border-radius:var(--radius); transition:all 0.25s;
+  display:flex; align-items:center; gap:1.5rem;
+  padding:1.2rem 1.8rem;
+  background:rgba(10, 10, 21, 0.3); border:1px solid var(--border);
+  border-radius:var(--radius); transition:all 0.3s;
 }
 
-.cert-row:hover { border-color:var(--border2); transform:translateX(4px); }
+.cert-row:hover { border-color:var(--cyan); transform:translateX(8px); background: rgba(0, 242, 255, 0.02); }
 
 .cr-icon {
-  width:32px; height:32px;
-  background:rgba(240,165,0,0.08);
-  border:1px solid rgba(240,165,0,0.18);
+  width:40px; height:40px;
+  background:rgba(0, 242, 255, 0.05);
+  border:1px solid var(--border);
   border-radius:var(--radius);
   display:flex; align-items:center; justify-content:center;
-  font-size:0.8rem; color:var(--gold); flex-shrink:0;
+  font-size:1.1rem; color:var(--amber); flex-shrink:0;
 }
 
 .cr-info { flex:1; }
-.cr-name { font-size:0.88rem; color:var(--text); margin-bottom:0.15rem; }
-.cr-issuer { font-family:'JetBrains Mono',monospace; font-size:0.6rem; color:var(--muted); letter-spacing:0.06em; }
+.cr-name { font-family: 'Outfit'; font-size:1.05rem; font-weight: 700; color:var(--text); margin-bottom:0.2rem; }
+.cr-issuer { font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:var(--text2); letter-spacing:0.05em; }
 
 .cr-badge {
   font-family:'JetBrains Mono',monospace;
   font-size:0.55rem; color:var(--green);
-  background:rgba(34,197,94,0.08);
-  border:1px solid rgba(34,197,94,0.2);
-  border-radius:100px; padding:0.2rem 0.6rem;
-  letter-spacing:0.1em; text-transform:uppercase; white-space:nowrap;
+  background:rgba(0, 255, 157, 0.05);
+  border:1px solid rgba(0, 255, 157, 0.2);
+  border-radius:4px; padding:0.3rem 0.8rem;
+  letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;
 }
 
 /* CTA */
 .cta-strip {
-  background:var(--card); border:1px solid var(--border);
-  border-radius:var(--radius); padding:2.5rem 2rem;
+  background: rgba(8, 8, 14, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border2);
+  border-radius:var(--radius-lg); padding:3rem;
   display:flex; justify-content:space-between; align-items:center;
-  gap:2rem; flex-wrap:wrap;
+  gap:3rem; flex-wrap:wrap;
 }
 
-.cta-h { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; margin-bottom:0.4rem; }
-.cta-h em { color:var(--gold); font-style:italic; }
-.cta-sub { font-size:0.88rem; color:var(--text2); }
-.cta-btns { display:flex; gap:1rem; flex-wrap:wrap; }
+.cta-h { font-family:'Outfit',sans-serif; font-size:2rem; font-weight:800; margin-bottom:0.5rem; letter-spacing: -0.02em; }
+.cta-h span { color:var(--amber); }
+.cta-sub { font-size:1rem; color:var(--text2); }
 
-@media(max-width:700px){
+@media(max-width:800px){
   .eval-grid{grid-template-columns:1fr 1fr}
-  .cta-strip{flex-direction:column;align-items:flex-start}
+  .cta-strip{flex-direction:column;align-items:flex-start; padding: 2rem;}
   .tc-header{flex-direction:column;align-items:flex-start}
-  .checkpoints{flex-wrap:wrap;gap:1rem}
-  .checkpoints::before{display:none}
+  .checkpoints{display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;}
 }
 </style>
 </head>
@@ -251,12 +245,12 @@
 <div id="cursor"></div><div id="cursor-ring"></div><div id="scroll-progress"></div>
 
 <nav>
-  <a class="nav-logo" href="index.html"><span class="nav-logo-dot"></span>PM_</a>
+  <a class="nav-logo" href="index.html"><span>P</span>M_</a>
   <ul class="nav-center">
     <li><a href="index.html">Home</a></li>
     <li><a href="skills.html">Skills</a></li>
     <li><a href="projects.html">Projects</a></li>
-    <li><a href="achievements.html">Achievements</a></li>
+    <li><a href="achievements.html" class="active">Achievements</a></li>
     <li><a href="blog.html">Blog</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
@@ -268,24 +262,24 @@
 <section class="page-section">
   <div class="section-header reveal">
     <span class="section-num">03</span>
-    <h1 class="section-title">Training Run</h1>
+    <h1 class="section-title">Telemetry</h1>
     <div class="section-line"></div>
   </div>
 
-  <p class="achieve-intro reveal">Every career is a training run. This one started in 2023 and is still converging. Hover the chart to read the checkpoints.</p>
+  <p class="achieve-intro reveal">Synthesizing milestones across the career training run. Every data point represents a completed epoch in my technical evolution.</p>
 
   <!-- ── JOURNEY TRAINING CHART ── -->
   <div class="training-card reveal">
     <div class="tc-header">
       <div class="tc-title-wrap">
-        <span class="tc-label">model: pandharinath_maske · optimizer: curiosity · epochs: 3yrs</span>
-        <span class="tc-title">Learning Curve — 2023 → 2026</span>
+        <span class="tc-label">ENV_MODEL: P_MASKE · OPTIMIZER: ITERATIVE_LEARNING</span>
+        <span class="tc-title">Conversion Metrics v1.4 (2023-2026)</span>
       </div>
       <div class="tc-metrics">
         <div class="tc-metric"><span class="tm-val">1647</span><span class="tm-lbl">Peak Rating</span></div>
         <div class="tc-metric"><span class="tm-val">700+</span><span class="tm-lbl">LC Solved</span></div>
         <div class="tc-metric"><span class="tm-val">ETFI</span><span class="tm-lbl">Published</span></div>
-        <div class="tc-metric"><span class="tm-val">3</span><span class="tm-lbl">AI Systems</span></div>
+        <div class="tc-metric"><span class="tm-val">4</span><span class="tm-lbl">AI Systems</span></div>
       </div>
     </div>
     <div class="tc-body">
@@ -293,121 +287,112 @@
         <canvas id="journey-canvas"></canvas>
         <div id="journey-tooltip">
           <div class="jt-title" id="jt-title"></div>
-          <div class="jt-row"><span class="jt-key">Skills</span><span class="jt-val" id="jt-skills"></span></div>
-          <div class="jt-row"><span class="jt-key">LeetCode</span><span class="jt-val" id="jt-lc"></span></div>
-          <div class="jt-row"><span class="jt-key">Projects</span><span class="jt-val" id="jt-proj"></span></div>
+          <div class="jt-row"><span class="jt-key">Core Stack</span><span class="jt-val" id="jt-skills"></span></div>
+          <div class="jt-row"><span class="jt-key">Competitive</span><span class="jt-val" id="jt-lc"></span></div>
+          <div class="jt-row"><span class="jt-key">Deployments</span><span class="jt-val" id="jt-proj"></span></div>
         </div>
       </div>
       <div class="journey-legend">
-        <div class="jl-item"><span class="jl-line" style="background:#f0a500"></span> Skill level</div>
-        <div class="jl-item"><span class="jl-line" style="background:#a855f7"></span> LeetCode rating</div>
-        <div class="jl-item"><span class="jl-line" style="background:#22c55e;border-top:1px dashed #22c55e"></span> Project output</div>
-        <div class="jl-item"><span style="width:8px;height:8px;background:#f0a500;border-radius:50%;display:inline-block;box-shadow:0 0 6px #f0a500"></span> Checkpoint</div>
+        <div class="jl-item"><span class="jl-line" style="background:var(--amber)"></span> Proficiency</div>
+        <div class="jl-item"><span class="jl-line" style="background:var(--purple)"></span> Competitive Rank</div>
+        <div class="jl-item"><span class="jl-line" style="background:var(--cyan);border-top:1px dashed var(--cyan)"></span> System Throughput</div>
+        <div class="jl-item"><span style="width:10px;height:10px;background:var(--amber);border-radius:50%;display:inline-block;box-shadow:0 0 12px var(--amber)"></span> Checkpoint</div>
       </div>
     </div>
   </div>
 
   <!-- ── MILESTONE CHECKPOINTS ── -->
   <div class="checkpoints reveal-stagger">
-    <div class="checkpoint"><div class="cp-dot">🎓</div><div class="cp-date">Aug 2023</div><div class="cp-label">Enrolled<br>VIIT</div></div>
-    <div class="checkpoint"><div class="cp-dot">⚡</div><div class="cp-date">Jan 2024</div><div class="cp-label">First 100<br>LeetCode</div></div>
-    <div class="checkpoint"><div class="cp-dot">🤖</div><div class="cp-date">Jun 2024</div><div class="cp-label">First ML<br>Project</div></div>
-    <div class="checkpoint"><div class="cp-dot">📦</div><div class="cp-date">Oct 2024</div><div class="cp-label">First Docker<br>Deploy</div></div>
-    <div class="checkpoint"><div class="cp-dot">🧠</div><div class="cp-date">Feb 2025</div><div class="cp-label">LangChain<br>Deep Dive</div></div>
-    <div class="checkpoint"><div class="cp-dot">🚀</div><div class="cp-date">May 2025</div><div class="cp-label">Book Rec<br>Shipped</div></div>
-    <div class="checkpoint"><div class="cp-dot">🤝</div><div class="cp-date">Jun 2025</div><div class="cp-label">Coffee AI<br>Production</div></div>
-    <div class="checkpoint"><div class="cp-dot">📄</div><div class="cp-date">Feb 2026</div><div class="cp-label">ETFI-2026<br>Published</div></div>
+    <div class="checkpoint"><div class="cp-dot">🎓</div><div class="cp-date">Aug 2023</div><div class="cp-label">Initialize<br>VIIT Pune</div></div>
+    <div class="checkpoint"><div class="cp-dot">⚡</div><div class="cp-date">Jan 2024</div><div class="cp-label">Rank 100<br>LeetCode Hit</div></div>
+    <div class="checkpoint"><div class="cp-dot">🤖</div><div class="cp-date">Jun 2024</div><div class="cp-label">Neural<br>First Build</div></div>
+    <div class="checkpoint"><div class="cp-dot">📦</div><div class="cp-date">Oct 2024</div><div class="cp-label">Docker<br>Orchestration</div></div>
+    <div class="checkpoint"><div class="cp-dot">🧠</div><div class="cp-date">Feb 2025</div><div class="cp-label">Agentic<br>Research</div></div>
+    <div class="checkpoint"><div class="cp-dot">🚀</div><div class="cp-date">May 2025</div><div class="cp-label">RecSys<br>Live</div></div>
+    <div class="checkpoint"><div class="cp-dot">🤝</div><div class="cp-date">Jun 2025</div><div class="cp-label">ChatBot<br>Production</div></div>
+    <div class="checkpoint"><div class="cp-dot">📄</div><div class="cp-date">Feb 2026</div><div class="cp-label">ETFI-2026<br>Publication</div></div>
   </div>
 
   <!-- ── EVAL METRICS ── -->
-  <div class="block-label reveal">Evaluation Metrics</div>
+  <div class="block-label reveal">System Evaluation</div>
   <div class="eval-grid reveal-stagger">
     <div class="eval-card">
-      <div class="ec-metric">accuracy</div>
+      <div class="ec-metric">hit_rate</div>
       <div class="ec-val">700+</div>
-      <div class="ec-desc">LeetCode problems solved across all difficulty levels</div>
+      <div class="ec-desc">Problems solved on LeetCode across all categories.</div>
     </div>
     <div class="eval-card">
-      <div class="ec-metric">peak_score</div>
+      <div class="ec-metric">peak_rating</div>
       <div class="ec-val">1647</div>
-      <div class="ec-desc">Highest LeetCode contest rating · 40+ contests participated</div>
+      <div class="ec-desc">Highest competitive contest rating established in 2025.</div>
     </div>
     <div class="eval-card">
       <div class="ec-metric">publications</div>
       <div class="ec-val">ETFI</div>
-      <div class="ec-desc">International Conference · DES Pune University · 2026</div>
+      <div class="ec-desc">International Conference on Emerging Tech & Future Innovations.</div>
     </div>
     <div class="eval-card">
-      <div class="ec-metric">deployed</div>
-      <div class="ec-val">3+</div>
-      <div class="ec-desc">Production AI systems — shipped, containerized, live</div>
+      <div class="ec-metric">deployments</div>
+      <div class="ec-val">4</div>
+      <div class="ec-desc">Production-grade AI systems successfully containerized and deployed.</div>
     </div>
     <div class="eval-card">
       <div class="ec-metric">cgpa</div>
       <div class="ec-val">7.76</div>
-      <div class="ec-desc">B.Tech CS (AI) · VIIT Pune · Batch 2023–2027</div>
+      <div class="ec-desc">B.Tech CS (AI) · VIIT Pune · 2023–2027.</div>
     </div>
     <div class="eval-card">
-      <div class="ec-metric">certifications</div>
+      <div class="ec-metric">certs</div>
       <div class="ec-val">5</div>
-      <div class="ec-desc">Stanford, DeepLearning.AI, HuggingFace, LangChain Academy</div>
+      <div class="ec-desc">Verified deep learning and agentic AI specializations.</div>
     </div>
   </div>
 
   <!-- ── CERTS AS TRAINING DATA ── -->
-  <div class="training-data-label reveal">Training Data Sources</div>
+  <div class="training-data-label reveal">Dataset Verification</div>
   <div class="cert-rows reveal">
     <div class="cert-row">
-      <div class="cr-icon"><i class="fas fa-graduation-cap"></i></div>
+      <div class="cr-icon"><i class="fas fa-microchip"></i></div>
       <div class="cr-info">
         <div class="cr-name">Machine Learning Specialization</div>
-        <div class="cr-issuer">Andrew Ng · Stanford University</div>
+        <div class="cr-issuer">Stanford University · Andrew Ng</div>
       </div>
-      <span class="cr-badge">✓ Completed</span>
+      <span class="cr-badge">Verified</span>
     </div>
     <div class="cert-row">
       <div class="cr-icon"><i class="fas fa-brain"></i></div>
       <div class="cr-info">
         <div class="cr-name">Deep Learning Specialization</div>
-        <div class="cr-issuer">Andrew Ng · DeepLearning.AI</div>
+        <div class="cr-issuer">DeepLearning.AI · Andrew Ng</div>
       </div>
-      <span class="cr-badge">✓ Completed</span>
+      <span class="cr-badge">Verified</span>
     </div>
     <div class="cert-row">
       <div class="cr-icon"><i class="fas fa-robot"></i></div>
       <div class="cr-info">
-        <div class="cr-name">AI Agents Fundamentals</div>
+        <div class="cr-name">AI Agents & RAG Fundamentals</div>
         <div class="cr-issuer">Hugging Face</div>
       </div>
-      <span class="cr-badge">✓ Completed</span>
+      <span class="cr-badge">Verified</span>
     </div>
     <div class="cert-row">
-      <div class="cr-icon"><i class="fas fa-diagram-project"></i></div>
+      <div class="cr-icon"><i class="fas fa-code-branch"></i></div>
       <div class="cr-info">
-        <div class="cr-name">Introduction to LangGraph</div>
+        <div class="cr-name">LangGraph Academy</div>
         <div class="cr-issuer">LangChain Academy</div>
       </div>
-      <span class="cr-badge">✓ Completed</span>
-    </div>
-    <div class="cert-row">
-      <div class="cr-icon"><i class="fas fa-plug"></i></div>
-      <div class="cr-info">
-        <div class="cr-name">Fundamentals of MCP</div>
-        <div class="cr-issuer">Hugging Face</div>
-      </div>
-      <span class="cr-badge">✓ Completed</span>
+      <span class="cr-badge">Verified</span>
     </div>
   </div>
 
-  <!-- CTA -->
   <div class="cta-strip reveal">
     <div>
-      <div class="cta-h">Model still <em>training.</em></div>
-      <div class="cta-sub">Open to internships, collaborations, and hard problems.</div>
+      <div class="cta-h">System still <span>Converging.</span></div>
+      <div class="cta-sub">Seeking challenging AI/ML opportunities and internships.</div>
     </div>
     <div class="cta-btns">
-      <a href="contact.html" class="btn btn-primary"><i class="fas fa-envelope"></i> Contact Me</a>
-      <a href="projects.html" class="btn btn-ghost"><i class="fas fa-rocket"></i> See Projects</a>
+      <a href="contact.html" class="btn btn-primary">Initialize Link</a>
+      <a href="projects.html" class="btn btn-ghost">Systems Registry</a>
     </div>
   </div>
 </section>
@@ -422,44 +407,36 @@
     <li><a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a></li>
     <li><a href="https://x.com/PMaske20171" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a></li>
     <li><a href="https://www.instagram.com/pandhari__7/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a></li>
-    <li><a href="https://leetcode.com/u/PandhariMaske1437/" target="_blank" rel="noopener"><i class="fas fa-code"></i></a></li>
     <li><a href="mailto:pandharinath1437@gmail.com"><i class="fas fa-envelope"></i></a></li>
   </ul>
 </footer>
 
 <button id="btt"><i class="fas fa-arrow-up"></i></button>
 <script src="js/main.js"></script>
+<script src="js/ai-widget.js"></script>
 <script>
-// ── JOURNEY CHART ─────────────────────────────
+// ── JOURNEY CHART (Updated for Cyan/Purple) ─────────────────────────────
 (function(){
   const wrap    = document.getElementById('journey-wrap');
   const canvas  = document.getElementById('journey-canvas');
   const ctx     = canvas.getContext('2d');
   const tooltip = document.getElementById('journey-tooltip');
 
-  // Real data points — his actual journey
   const EPOCHS = [
-    { label:'Aug 2023',  t:0,    skill:0.10, lc:0.05, proj:0.00, event:'Started VIIT · CS (AI)',      skills:'C, Python basics', lc_str:'—',    proj_str:'0' },
-    { label:'Oct 2023',  t:0.07, skill:0.18, lc:0.12, proj:0.00, event:'First DSA grind begins',       skills:'C++, arrays, DP',  lc_str:'~50',  proj_str:'0' },
-    { label:'Jan 2024',  t:0.14, skill:0.28, lc:0.22, proj:0.05, event:'100 LC problems hit',          skills:'Python, graphs',   lc_str:'100',  proj_str:'1' },
-    { label:'Apr 2024',  t:0.22, skill:0.38, lc:0.35, proj:0.10, event:'ML coursework (Andrew Ng)',    skills:'ML, NumPy, pandas',lc_str:'200',  proj_str:'1' },
-    { label:'Jun 2024',  t:0.30, skill:0.50, lc:0.45, proj:0.20, event:'First ML project shipped',     skills:'Sklearn, PyTorch', lc_str:'300',  proj_str:'1' },
-    { label:'Sep 2024',  t:0.40, skill:0.60, lc:0.55, proj:0.25, event:'Deep Learning Specialization', skills:'PyTorch, CNNs',    lc_str:'400',  proj_str:'2' },
-    { label:'Oct 2024',  t:0.46, skill:0.65, lc:0.62, proj:0.30, event:'First Docker deployment',      skills:'Docker, FastAPI',  lc_str:'450',  proj_str:'2' },
-    { label:'Jan 2025',  t:0.54, skill:0.74, lc:0.70, proj:0.35, event:'LangChain deep dive begins',   skills:'LangChain, HuggingFace', lc_str:'550', proj_str:'2' },
-    { label:'Feb 2025',  t:0.57, skill:0.78, lc:0.73, proj:0.40, event:'RAG pipeline first build',     skills:'RAG, Pinecone, ChromaDB', lc_str:'580', proj_str:'2' },
-    { label:'May 2025',  t:0.65, skill:0.84, lc:0.78, proj:0.60, event:'📚 Book Recommender shipped',  skills:'LangChain, Gradio, ChromaDB', lc_str:'620', proj_str:'3' },
-    { label:'Jun 2025',  t:0.72, skill:0.90, lc:0.82, proj:0.80, event:'☕ Coffee Shop AI — Production',skills:'LangGraph, Supabase, SSE', lc_str:'650', proj_str:'3' },
-    { label:'Aug 2025',  t:0.80, skill:0.92, lc:0.88, proj:0.82, event:'700+ problems milestone',      skills:'Advanced graphs, DP', lc_str:'700+', proj_str:'3' },
-    { label:'Oct 2025',  t:0.87, skill:0.94, lc:0.91, proj:0.84, event:'LeetCode rating 1647 peak',    skills:'Contest optimization', lc_str:'1647 peak', proj_str:'3' },
-    { label:'Feb 2026',  t:0.94, skill:0.96, lc:0.91, proj:0.90, event:'📄 ETFI-2026 Published',       skills:'Research writing, Agentic AI', lc_str:'1647', proj_str:'4' },
-    { label:'Mar 2026',  t:1.00, skill:0.97, lc:0.91, proj:0.93, event:'Still converging... 🔥',       skills:'MCP, n8n, advanced RAG', lc_str:'1647+', proj_str:'4+' },
+    { label:'Aug 23',  t:0,    skill:0.10, lc:0.05, proj:0.00, event:'Initialize VIIT', skills:'C, Python', lc_str:'—', proj_str:'0' },
+    { label:'Oct 23',  t:0.07, skill:0.18, lc:0.12, proj:0.00, event:'DSA Pipeline Start', skills:'C++, Arrays', lc_str:'50', proj_str:'0' },
+    { label:'Jan 24',  t:0.14, skill:0.28, lc:0.22, proj:0.05, event:'100 LC Epoch', skills:'Python, Graphs', lc_str:'100', proj_str:'1' },
+    { label:'Jun 24',  t:0.30, skill:0.50, lc:0.45, proj:0.20, event:'Neural First Build', skills:'Sklearn, PyTorch', lc_str:'300', proj_str:'1' },
+    { label:'Oct 24',  t:0.46, skill:0.65, lc:0.62, proj:0.30, event:'Container Ops', skills:'Docker, FastAPI', lc_str:'450', proj_str:'2' },
+    { label:'Feb 25',  t:0.57, skill:0.78, lc:0.73, proj:0.40, event:'RAG Research', skills:'Pinecone, Chroma', lc_str:'580', proj_str:'2' },
+    { label:'May 25',  t:0.65, skill:0.84, lc:0.78, proj:0.60, event:'RecSys Deployed', skills:'LangChain, Gradio', lc_str:'620', proj_str:'3' },
+    { label:'Jun 25',  t:0.72, skill:0.90, lc:0.82, proj:0.80, event:'production_chatbot_v1', skills:'LangGraph, Supabase', lc_str:'650', proj_str:'3' },
+    { label:'Feb 26',  t:0.94, skill:0.96, lc:0.91, proj:0.90, event:'ETFI-2026 Publication', skills:'Reserach, Agentic AI', lc_str:'1647', proj_str:'4' },
+    { label:'Mar 26',  t:1.00, skill:0.97, lc:0.91, proj:0.93, event:'Converging...', skills:'MCP, n8n', lc_str:'1647+', proj_str:'4+' },
   ];
 
-  const MILESTONES = [0, 4, 5, 9, 10, 11, 13, 14];
-
   let W, H;
-  const PAD = { top:20, right:24, bottom:38, left:44 };
+  const PAD = { top:30, right:30, bottom:40, left:50 };
 
   function resize() {
     W = canvas.width  = wrap.offsetWidth;
@@ -472,13 +449,13 @@
 
   function drawCurve(data, key, color, dashed) {
     ctx.beginPath();
-    if (dashed) ctx.setLineDash([5,4]); else ctx.setLineDash([]);
+    if (dashed) ctx.setLineDash([6,5]); else ctx.setLineDash([]);
     data.forEach((d,i) => {
       const x = toX(d.t), y = toY(d[key]);
       i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
     });
-    ctx.strokeStyle = color; ctx.lineWidth = 2.2;
-    ctx.shadowBlur = 6; ctx.shadowColor = color;
+    ctx.strokeStyle = color; ctx.lineWidth = 2.5;
+    ctx.shadowBlur = 10; ctx.shadowColor = color;
     ctx.stroke(); ctx.shadowBlur = 0; ctx.setLineDash([]);
   }
 
@@ -487,90 +464,47 @@
 
     // Grid
     for (let i=0; i<=4; i++) {
-      const y = PAD.top + i * (H - PAD.top - PAD.bottom) / 4;
-      ctx.beginPath(); ctx.moveTo(PAD.left, y); ctx.lineTo(W-PAD.right, y);
-      ctx.strokeStyle='rgba(255,255,255,0.05)'; ctx.lineWidth=1; ctx.setLineDash([3,5]); ctx.stroke(); ctx.setLineDash([]);
-      ctx.font='9px JetBrains Mono,monospace'; ctx.fillStyle='#6b6358';
-      ctx.textAlign='right'; ctx.fillText(((4-i)*25)+'%', PAD.left-5, y+3);
+        const y = PAD.top + i * (H - PAD.top - PAD.bottom) / 4;
+        ctx.beginPath(); ctx.moveTo(PAD.left, y); ctx.lineTo(W-PAD.right, y);
+        ctx.strokeStyle='rgba(255,255,255,0.05)'; ctx.setLineDash([2,4]); ctx.stroke(); ctx.setLineDash([]);
     }
 
-    // Year labels
-    ['2023','2024','2025','2026'].forEach((yr,i) => {
-      const x = toX(i/3);
-      ctx.font='9px JetBrains Mono,monospace'; ctx.fillStyle='#6b6358'; ctx.textAlign='center';
-      ctx.fillText(yr, x, H-6);
-    });
-
-    // Filled area under skill curve
-    ctx.beginPath();
-    EPOCHS.forEach((d,i) => {
-      const x = toX(d.t), y = toY(d.skill);
-      i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
-    });
-    ctx.lineTo(toX(1), H-PAD.bottom); ctx.lineTo(toX(0), H-PAD.bottom); ctx.closePath();
-    const grad = ctx.createLinearGradient(0, PAD.top, 0, H);
-    grad.addColorStop(0, 'rgba(240,165,0,0.12)');
-    grad.addColorStop(1, 'rgba(240,165,0,0)');
-    ctx.fillStyle = grad; ctx.fill();
-
     // Curves
-    drawCurve(EPOCHS, 'skill', '#f0a500');
-    drawCurve(EPOCHS, 'lc',    '#a855f7');
-    drawCurve(EPOCHS, 'proj',  '#22c55e', true);
+    drawCurve(EPOCHS, 'skill', '#ffaa00'); // Amber
+    drawCurve(EPOCHS, 'lc',    '#7c3aed'); // Purple
+    drawCurve(EPOCHS, 'proj',  '#00f2ff', true); // Cyan
 
-    // Milestone dots
-    MILESTONES.forEach(idx => {
-      const d = EPOCHS[idx];
-      const x = toX(d.t), y = toY(d.skill);
-      ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI*2);
-      ctx.fillStyle = '#f0a500'; ctx.shadowBlur=10; ctx.shadowColor='#f0a500'; ctx.fill(); ctx.shadowBlur=0;
-      ctx.strokeStyle='#08080e'; ctx.lineWidth=2; ctx.stroke();
+    // Nodes
+    EPOCHS.forEach(d => {
+        const x = toX(d.t), y = toY(d.skill);
+        ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI*2);
+        ctx.fillStyle = '#ffaa00'; ctx.fill();
     });
   }
-
-  // Hover
-  let lastIdx = -1;
 
   wrap.addEventListener('mousemove', e => {
     const r = wrap.getBoundingClientRect();
     const mx = e.clientX - r.left;
-    const my = e.clientY - r.top;
-
-    // find nearest epoch
-    let best = -1, bestDist = 999;
-    EPOCHS.forEach((d,i) => {
-      const x = toX(d.t);
-      const dist = Math.abs(mx - x);
-      if (dist < bestDist) { bestDist=dist; best=i; }
+    let best = -1, bestDist = 1000;
+    EPOCHS.forEach((d,i)=>{
+        const dist = Math.abs(mx - toX(d.t));
+        if(dist < bestDist){ bestDist=dist; best=i;}
     });
 
-    if (best !== lastIdx && bestDist < 40) {
-      lastIdx = best;
-      const d = EPOCHS[best];
-
-      document.getElementById('jt-title').textContent  = d.event;
-      document.getElementById('jt-skills').textContent = d.skills;
-      document.getElementById('jt-lc').textContent     = d.lc_str;
-      document.getElementById('jt-proj').textContent   = d.proj_str + ' projects';
-
-      tooltip.style.opacity = '1';
-      let tx = toX(d.t) + 12;
-      if (tx + 180 > W) tx = toX(d.t) - 192;
-      tooltip.style.left = tx + 'px';
-      tooltip.style.top  = (toY(d.skill) - 60) + 'px';
-
-      // Draw hover indicator
-      draw();
-      const x = toX(d.t);
-      ctx.beginPath(); ctx.moveTo(x, PAD.top); ctx.lineTo(x, H-PAD.bottom);
-      ctx.strokeStyle='rgba(240,165,0,0.25)'; ctx.lineWidth=1; ctx.setLineDash([3,4]); ctx.stroke(); ctx.setLineDash([]);
+    if(bestDist < 50){
+        const d = EPOCHS[best];
+        document.getElementById('jt-title').textContent = d.event;
+        document.getElementById('jt-skills').textContent = d.skills;
+        document.getElementById('jt-lc').textContent = d.lc_str;
+        document.getElementById('jt-proj').textContent = d.proj_str;
+        tooltip.style.opacity = '1';
+        tooltip.style.left = (toX(d.t) + 15) + 'px';
+        tooltip.style.top = (toY(d.skill) - 80) + 'px';
+        if(toX(d.t) + 260 > W) tooltip.style.left = (toX(d.t) - 260) + 'px';
     }
   });
 
-  wrap.addEventListener('mouseleave', () => {
-    lastIdx=-1; tooltip.style.opacity='0'; draw();
-  });
-
+  wrap.addEventListener('mouseleave', () => tooltip.style.opacity = '0');
   window.addEventListener('resize', resize);
   resize();
 })();
