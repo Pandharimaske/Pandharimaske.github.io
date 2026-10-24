@@ -3,348 +3,119 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="AI Experiments by Pandharinath Maske — Hybrid Report Layout."/>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%2300f2ff' font-family='serif' font-style='italic'>P</text></svg>"/>
-<title>Experiments — Pandharinath Maske</title>
+<meta name="description" content="Projects by Pandharinath Maske: Merry's Way, RubricTrace and RiskLens."/>
+<title>Projects — Pandharinath Maske</title>
 <link rel="stylesheet" href="css/style.css"/>
+<link rel="stylesheet" href="css/theme.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <script>(function(){const t=localStorage.getItem('pm-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
 <style>
-/* ── EXPERIMENT REPORT LAYOUT ── */
-.project-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 8rem;
-  padding-bottom: 5rem;
-}
-
-.exp-card {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 5rem;
-  align-items: start;
-}
-
-@media (max-width: 1100px) {
-  .exp-card { grid-template-columns: 1fr; gap: 3rem; }
-}
-
-/* Metadata Block */
-.exp-meta {
-  padding: 2.5rem;
-  border-left: 1px solid var(--border);
-  background: linear-gradient(90deg, rgba(0, 242, 255, 0.03), transparent);
-  position: relative;
-}
-
-.exp-meta::before {
-  content: '';
-  position: absolute; top: 0; left: -1px; width: 1px; height: 40px;
-  background: var(--amber); box-shadow: 0 0 10px var(--amber);
-}
-
-.exp-id {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem; color: var(--amber);
-  letter-spacing: 0.3em; text-transform: uppercase;
-  margin-bottom: 1.2rem; display: block; opacity: 0.8;
-}
-
-.exp-title {
-  font-family: 'Outfit', sans-serif;
-  font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 800;
-  line-height: 1.1; margin-bottom: 1.2rem;
-  letter-spacing: -0.04em;
-  color: var(--text);
-}
-
-.exp-subtitle {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem; color: var(--text2);
-  margin-bottom: 2rem; text-transform: uppercase;
-  display: flex; gap: 1rem; align-items: center;
-  flex-wrap: wrap;
-}
-
-.exp-desc {
-  font-size: 1.05rem; color: var(--text2);
-  line-height: 1.8; margin-bottom: 2.5rem;
-  max-width: 600px;
-}
-
-/* Code & Tech Block */
-.exp-tech {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 1.2rem;
-  margin-bottom: 3rem;
-}
-
-.tech-item {
-  padding: 1.2rem;
-  background: rgba(10, 10, 21, 0.4);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  transition: all 0.3s;
-}
-.tech-item:hover { border-color: var(--amber); background: rgba(var(--amber-rgb), 0.03); }
-
-.tech-key { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; color: var(--muted); text-transform: uppercase; margin-bottom: 0.4rem; display: block; }
-.tech-val { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--amber); font-weight: 600; }
-
-/* IDE Window Style */
-.ide-window {
-  background: #05050a;
-  border: 1px solid var(--border2);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: 0 50px 120px rgba(0,0,0,0.7);
-  position: relative;
-  transition: transform 0.4s ease;
-}
-.ide-window:hover { transform: translateY(-5px); }
-
-.ide-header {
-  padding: 0.8rem 1.2rem;
-  background: #0a0a15;
-  border-bottom: 1px solid var(--border);
-  display: flex; justify-content: space-between; align-items: center;
-}
-
-.ide-dots { display: flex; gap: 0.5rem; }
-.idot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid var(--border); }
-.ide-tab { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--text2); letter-spacing: 0.05em; }
-
-pre.ide-code {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem; line-height: 1.9;
-  padding: 2rem; margin: 0; overflow-x: auto;
-  color: #e2e8f0;
-  background: transparent;
-}
-
-/* Syntax Highlighting */
-.kw { color: #c084fc; font-weight: 500; }
-.fn { color: var(--cyan); }
-.str { color: #5eead4; }
-.cm { color: rgba(255,255,255,0.25); font-style: italic; }
-.var { color: var(--text); }
-.cls { color: #a78bfa; font-weight: 600; }
-.num { color: var(--amber); font-weight: 600; }
-
-/* Result Hud */
-.exp-result {
-  margin-top: 1rem;
-  padding: 1.8rem;
-  background: linear-gradient(135deg, rgba(var(--amber-rgb), 0.03), transparent);
-  border: 1px dashed var(--border-amber);
-  border-radius: var(--radius);
-}
-
-.res-header {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem; color: var(--muted);
-  margin-bottom: 1.2rem; display: flex; justify-content: space-between;
-  text-transform: uppercase; letter-spacing: 0.1em;
-}
-
-.res-body {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem; color: var(--amber);
-}
+.ptabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;margin-bottom:3rem}
+.ptab{text-align:left;padding:1.1rem 1.3rem;border:1px solid var(--border2);border-radius:var(--radius-lg);background:transparent;color:var(--text);font:inherit;transition:.25s}
+.ptab:hover{border-color:var(--amber)}
+.ptab[aria-selected="true"]{background:var(--card);border-color:var(--amber);box-shadow:0 0 0 3px rgba(var(--amber-rgb),.15)}
+.ptab strong{display:block;font-family:'Instrument Serif',serif;font-weight:400;font-size:1.8rem;line-height:1.1}
+.ptab span{font-size:.85rem;color:var(--text2)}
+.stage{animation:fadeUp .45s both}
+.stage h2{font-size:clamp(2.8rem,6vw,4.8rem);line-height:1;margin:.3rem 0 .8rem}
+.stage .sub{font-size:1.15rem;color:var(--text2);max-width:640px;margin-bottom:1.2rem}
+.lane-t{font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:2rem 0 .6rem}
+.flow{display:flex;gap:1.7rem;overflow-x:auto;padding:.3rem .2rem 1rem}
+.step{position:relative;flex:1 0 150px;padding:.9rem 1rem;border:1px solid var(--border2);border-radius:var(--radius);background:var(--card);font-size:.86rem;line-height:1.45;color:var(--text2)}
+.step b{display:block;font:500 .7rem 'JetBrains Mono',monospace;color:var(--amber);margin-bottom:.35rem}
+.step:not(:last-child)::after{content:'→';position:absolute;right:-1.35rem;top:50%;transform:translateY(-50%);color:var(--amber)}
+.two{display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)}
+.two h4{font:500 .75rem 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin:0 0 .8rem}
+.two ul{padding-left:1.1rem;margin:0;color:var(--text2)}.two li{margin:.6rem 0}
+.big{margin-bottom:1.3rem}.big b{display:block;font-family:'Instrument Serif',serif;font-weight:400;font-size:3rem;line-height:1}.big span{font-size:.85rem;color:var(--muted)}
+.note{font-size:.82rem;color:var(--muted);margin-top:1.5rem}
+@media(max-width:800px){.flow{flex-direction:column;overflow:visible}.step:not(:last-child)::after{content:'↓';right:auto;left:1rem;top:auto;bottom:-1.45rem;transform:none}.two{grid-template-columns:1fr;gap:2rem}}
 </style>
 </head>
 <body>
-<div id="cursor"></div><div id="cursor-ring"></div><div id="scroll-progress"></div>
-
 <nav>
-  <a class="nav-logo" href="index.html"><span>P</span>M_</a>
+  <a class="nav-logo" href="index.html">Pandhari.</a>
   <ul class="nav-center">
     <li><a href="index.html">Home</a></li>
-    <li><a href="skills.html">Skills</a></li>
     <li><a href="projects.html" class="active">Projects</a></li>
     <li><a href="achievements.html">Achievements</a></li>
-    <li><a href="blog.html">Blog</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
-  <div class="nav-right">
-    <button class="theme-btn" id="theme-btn"><i class="fas fa-moon"></i></button>
-  </div>
+  <div class="nav-right"><button class="theme-btn" id="theme-btn"><i class="fas fa-moon"></i></button></div>
 </nav>
 
 <section class="page-section">
-  <div class="section-header reveal">
-    <span class="section-num">02</span>
-    <h1 class="section-title">Experiments</h1>
-    <div class="section-line"></div>
-  </div>
-
-  <div class="project-grid reveal-stagger">
-    
-    <!-- Experiment 01: Coffee Shop Chatbot -->
-    <div class="exp-card tilt-hover">
-      <div class="exp-meta">
-        <span class="exp-id">Experiment #001</span>
-        <h2 class="exp-title">Agentic RAG Orchestration</h2>
-        <div class="exp-subtitle">
-          <span>Multi-Agent System</span>
-          <span>·</span>
-          <span>Production Pipeline</span>
-        </div>
-        <p class="exp-desc">
-          Architected a sophisticated multi-agent orchestration layer using LangGraph. Features a dual-memory architecture that distinguishes between short-term conversational context and long-term user preferences, with a Pinecone-backed retrieval engine.
-        </p>
-        <div class="exp-tech">
-          <div class="tech-item"><span class="tech-key">Orchestration</span><span class="tech-val">LangGraph</span></div>
-          <div class="tech-item"><span class="tech-key">Vector Store</span><span class="tech-val">Pinecone</span></div>
-          <div class="tech-item"><span class="tech-key">LTM Engine</span><span class="tech-val">Supabase</span></div>
-          <div class="tech-item"><span class="tech-key">Streaming</span><span class="tech-val">SSE / FastAPI</span></div>
-        </div>
-        <a href="https://github.com/Pandharimaske/Coffee_Shop_ChatBot" class="btn btn-primary" target="_blank">View Registry</a>
-      </div>
-      
-      <div class="ide-window tilt-hover">
-        <div class="ide-header">
-          <div class="ide-dots"><div class="idot"></div><div class="idot"></div><div class="idot"></div></div>
-          <div class="ide-tab">orchestrator.py</div>
-          <div style="width:24px"></div>
-        </div>
-<pre class="ide-code">
-<span class="kw">from</span> langgraph.graph <span class="kw">import</span> <span class="fn">StateGraph</span>
-
-<span class="kw">class</span> <span class="cls">AgentState</span>(TypedDict):
-    messages: <span class="fn">list</span>[<span class="var">BaseMessage</span>]
-    user_context: <span class="fn">dict</span>
-    retrieved_docs: <span class="fn">list</span>
-
-<span class="cm"># Define the Agentic Graph</span>
-<span class="var">graph</span> = <span class="fn">StateGraph</span>(<span class="cls">AgentState</span>)
-<span class="var">graph</span>.<span class="fn">add_node</span>(<span class="str">"router"</span>, <span class="var">router_node</span>)
-<span class="var">graph</span>.<span class="fn">add_node</span>(<span class="str">"rag"</span>, <span class="var">retrieval_node</span>)
-
-<span class="var">graph</span>.<span class="fn">add_edge</span>(<span class="fn">START</span>, <span class="str">"router"</span>)
-<span class="var">graph</span>.<span class="fn">add_conditional_edges</span>(
-    <span class="str">"router"</span>, 
-    <span class="var">route_decision</span>, 
-    {<span class="str">"search"</span>: <span class="str">"rag"</span>, <span class="str">"end"</span>: <span class="fn">END</span>}
-)
-</pre>
-        <div class="exp-result">
-          <div class="res-header"><span>Telemetry: Active</span><span>94.2% Relevance Score</span></div>
-          <div class="res-body">✓ Kernel convergence. Multi-agent routing stable.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Experiment 02: Book Recommender -->
-    <div class="exp-card tilt-hover">
-      <div class="exp-meta">
-        <span class="exp-id">Experiment #002</span>
-        <h2 class="exp-title">Semantic Search Engine</h2>
-        <div class="exp-subtitle">
-          <span>Vector Embeddings</span>
-          <span>·</span>
-          <span>Latent Discovery</span>
-        </div>
-        <p class="exp-desc">
-          Recommendation engine leveraging transformer-based embeddings (all-MiniLM-L6-v2) to map book descriptions into high-dimensional vector space. Optimized for semantic proximity over keyword matching.
-        </p>
-        <div class="exp-tech">
-          <div class="tech-item"><span class="tech-key">Model</span><span class="tech-val">all-MiniLM-L6-v2</span></div>
-          <div class="tech-item"><span class="tech-key">Interface</span><span class="tech-val">Gradio HUD</span></div>
-          <div class="tech-item"><span class="tech-key">Metric</span><span class="tech-val">Cosine Similarity</span></div>
-          <div class="tech-item"><span class="tech-key">Recall</span><span class="tech-val">Precision @ K: 0.88</span></div>
-        </div>
-        <a href="https://github.com/Pandharimaske/LLM_Book_Recomender" class="btn btn-ghost" target="_blank">View Registry</a>
-      </div>
-      
-      <div class="ide-window tilt-hover">
-        <div class="ide-header">
-          <div class="ide-dots"><div class="idot"></div><div class="idot"></div><div class="idot"></div></div>
-          <div class="ide-tab">recommender.py</div>
-          <div style="width:24px"></div>
-        </div>
-<pre class="ide-code">
-<span class="kw">def</span> <span class="fn">semantic_search</span>(<span class="var">query</span>: <span class="fn">str</span>, <span class="var">k</span>=<span class="num">5</span>):
-    <span class="cm"># Map query to latent space</span>
-    <span class="var">query_vec</span> = <span class="var">model</span>.<span class="fn">encode</span>(<span class="var">query</span>)
-    
-    <span class="var">hits</span> = <span class="var">vectorstore</span>.<span class="fn">search</span>(
-        <span class="var">query_vec</span>, 
-        <span class="var">limit</span>=<span class="var">k</span>
-    )
-    <span class="kw">return</span> [h.<span class="var">metadata</span> <span class="kw">for</span> h <span class="kw">in</span> <span class="var">hits</span>]
-</pre>
-        <div class="exp-result">
-          <div class="res-header"><span>Latency: 24ms</span><span>Recall@10: 0.91</span></div>
-          <div class="res-body">✓ Top Latent Proximity: "1984" -> "Brave New World" (0.97)</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Experiment 03: MLOps Pipeline -->
-    <div class="exp-card tilt-hover">
-      <div class="exp-meta">
-        <span class="exp-id">Experiment #003</span>
-        <h2 class="exp-title">Industrial MLOps Pipeline</h2>
-        <div class="exp-subtitle">
-          <span>Systems DevOps</span>
-          <span>·</span>
-          <span>Model Lifecycle</span>
-        </div>
-        <p class="exp-desc">
-          A production-ready pipeline demonstrating the full model lifecycle. Integrated experiment tracking with MLflow, automated model versioning, and containerized deployment via Docker.
-        </p>
-        <div class="exp-tech">
-          <div class="tech-item"><span class="tech-key">Tracking</span><span class="tech-val">MLflow / W&B</span></div>
-          <div class="tech-item"><span class="tech-key">Container</span><span class="tech-val">Docker (v2.1)</span></div>
-          <div class="tech-item"><span class="tech-key">Registry</span><span class="tech-val">Model Versioning</span></div>
-          <div class="tech-item"><span class="tech-key">Infra</span><span class="tech-val">GitHub Actions</span></div>
-        </div>
-        <a href="https://github.com/Pandharimaske/CreditRisk-MLSystem" class="btn btn-ghost" target="_blank">View Registry</a>
-      </div>
-      
-      <div class="ide-window tilt-hover">
-        <div class="ide-header">
-          <div class="ide-dots"><div class="idot"></div><div class="idot"></div><div class="idot"></div></div>
-          <div class="ide-tab">mlops_pipeline.py</div>
-          <div style="width:24px"></div>
-        </div>
-<pre class="ide-code">
-<span class="kw">with</span> <span class="var">mlflow</span>.<span class="fn">start_run</span>():
-    <span class="var">model</span> = <span class="cls">XGBClassifier</span>().<span class="fn">fit</span>(<span class="var">X_train</span>, <span class="var">y_train</span>)
-    
-    <span class="var">acc</span> = <span class="fn">accuracy_score</span>(<span class="var">y_test</span>, <span class="var">y_pred</span>)
-    <span class="var">mlflow</span>.<span class="fn">log_metric</span>(<span class="str">"accuracy"</span>, <span class="var">acc</span>)
-    
-    <span class="var">mlflow</span>.<span class="fn">sklearn</span>.<span class="fn">log_model</span>(<span class="var">model</span>, <span class="str">"model"</span>)
-</pre>
-        <div class="exp-result">
-          <div class="res-header"><span>Convergence: True</span><span>Accuracy: 92.4%</span></div>
-          <div class="res-body">✓ Model registered. Serving artifacts via Docker registry.</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
+  <div class="section-header"><span class="section-num">01</span><h1 class="section-title">Projects</h1><div class="section-line"></div></div>
+  <div class="ptabs" id="ptabs" role="tablist"></div>
+  <div id="stage"></div>
 </section>
 
 <footer>
-  <div class="footer-left">
-    <span class="footer-name">Pandharinath Maske © 2026</span>
-    <span class="footer-tagline">Building intelligent systems · Pune, India</span>
-  </div>
+  <div><span class="footer-name">Pandharinath Maske © 2026</span><span class="footer-tagline">Pune, India</span></div>
   <ul class="footer-socials">
     <li><a href="https://github.com/Pandharimaske" target="_blank" rel="noopener"><i class="fab fa-github"></i></a></li>
     <li><a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a></li>
-    <li><a href="https://x.com/PMaske20171" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a></li>
-    <li><a href="https://www.instagram.com/pandhari__7/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a></li>
     <li><a href="mailto:pandharinath1437@gmail.com"><i class="fas fa-envelope"></i></a></li>
   </ul>
 </footer>
-
 <button id="btt"><i class="fas fa-arrow-up"></i></button>
 <script src="js/main.js"></script>
-<script src="js/ai-widget.js"></script>
+<script>
+const P = {
+  'merrys-way': {
+    name: "Merry's Way", tab: 'AI assistant and data analyst for coffee shops', date: 'Jun 2025 – Present',
+    sub: 'A two-sided AI platform: an ordering assistant for customers and a business analyst for shop owners, running as two independent pipelines on one backend.',
+    repo: 'https://github.com/Pandharimaske/Multi-Agent-Commerce-Platform-for-Coffee-Shop',
+    lanes: [
+      { t: 'Customer assistant', s: ['Customer message', 'Memory of preferences and allergies', 'Menu search and recommendations', 'Prices and allergen filter, in code', 'Customer approves', 'Order and payment'] },
+      { t: 'Owner analyst', s: ['Question in plain English', 'Asks to clarify if ambiguous', 'Writes SQL', 'Runs read-only on anonymised views', 'Retries itself on errors', 'Answer, with chart or table'] }
+    ],
+    dec: ['Prices and allergen filtering are done in code, not by the LLM.', 'Saving memory and taking payment both wait for the customer\'s approval.', 'The analyst can only read, and only from anonymised views, so customers\' personal data never reaches the model.', 'It declines off-topic requests and any request to change data.'],
+    res: [['92.8%', 'of owner questions answered correctly in 153 test runs, up from 86.9%'], ['0/54', 'attack prompts got through']],
+    note: 'LangGraph · FastAPI · Supabase pgvector · React · Docker · Render · Vercel'
+  },
+  'rubrictrace': {
+    name: 'RubricTrace', tab: 'Handwritten exam grader', date: 'Sept 2026 – Present',
+    sub: 'A self-hosted grader for scanned handwritten exams. The AI does the first pass; the teacher stays in control.',
+    repo: 'https://github.com/Pandharimaske/RubricTrace',
+    lanes: [
+      { t: 'Grading pipeline', s: ['Teacher defines the exam once', 'Bulk upload of scanned papers', 'Vision model reads each page', 'Objective answers: fixed rules. The rest: LLM vs rubric', 'Unsure answers go to the teacher', 'Mark and reasoning for every answer'] }
+    ],
+    dec: ['Blank pages are skipped, answers spanning pages are merged, and illegible ones are flagged.', 'Changing how strict the review threshold is re-sorts existing grades without re-grading.', 'Teacher decisions are never overwritten by a re-grade.'],
+    res: [['0.94', 'agreement with teacher marks (QWK, 1.0 = perfect) on multiple-choice questions'], ['96.9%', 'of multiple-choice marks identical to the teacher\'s']],
+    note: 'Tested on a public dataset of 50 students with teacher marks (1,000 multiple-choice records). FastAPI · React · Pydantic · PostgreSQL'
+  },
+  'risklens': {
+    name: 'RiskLens', tab: 'Insurance claim MLOps pipeline', date: 'March 2025',
+    sub: 'An end-to-end pipeline that predicts vehicle insurance claim likelihood, from raw data to a deployed API.',
+    repo: 'https://github.com/Pandharimaske/CreditRisk-MLSystem',
+    lanes: [
+      { t: 'Pipeline', s: ['Data from AWS S3', 'Schema validation', 'XGBoost and LightGBM, tuned with Optuna', 'New model must beat the current one', 'Promoted in MLflow registry', 'Docker image to ECR, run on EC2', 'FastAPI prediction endpoint'] }
+    ],
+    dec: ['A new model replaces the current one only if it beats it on AUC by more than 0.005.', 'Data and parameters are versioned with DVC, and runs are tracked on DagsHub with SHAP charts.', 'Every push to main builds the image, pushes it to AWS ECR and redeploys on EC2.', 'Claims are rare, so training data is rebalanced with SMOTEENN.'],
+    res: [['0.91', 'AUC-ROC (1.0 = perfect separation of claims from non-claims)'], ['0.79 → 0.86', 'F1 score before and after tuning and resampling']],
+    note: 'XGBoost · LightGBM · Optuna · MLflow · DVC · SHAP · FastAPI · Docker · GitHub Actions · AWS (S3, ECR, EC2)'
+  }
+};
+const tabs = document.getElementById('ptabs'), stage = document.getElementById('stage');
+function show(id) {
+  const p = P[id]; if (!p) return;
+  tabs.querySelectorAll('.ptab').forEach(b => b.setAttribute('aria-selected', b.dataset.id === id));
+  history.replaceState(null, '', '#' + id);
+  stage.innerHTML = `<div class="stage">
+    <span class="eyebrow">${p.date}</span><h2>${p.name}</h2><p class="sub">${p.sub}</p>
+    <a class="btn btn-primary" href="${p.repo}" target="_blank" rel="noopener"><i class="fab fa-github"></i> View code</a>
+    ${p.lanes.map(l => `<div class="lane-t">${p.lanes.length > 1 ? l.t : 'How it works'}</div><div class="flow">${l.s.map((s, i) => `<div class="step"><b>${String(i + 1).padStart(2, '0')}</b>${s}</div>`).join('')}</div>`).join('')}
+    <div class="two"><div><h4>Key decisions</h4><ul>${p.dec.map(d => `<li>${d}</li>`).join('')}</ul></div>
+    <div><h4>Results</h4>${p.res.map(r => `<div class="big"><b>${r[0]}</b><span>${r[1]}</span></div>`).join('')}</div></div>
+    <p class="note">${p.note}</p></div>`;
+}
+Object.entries(P).forEach(([id, p]) => {
+  const b = document.createElement('button'); b.className = 'ptab'; b.dataset.id = id; b.setAttribute('role', 'tab');
+  b.innerHTML = `<strong>${p.name}</strong><span>${p.tab}</span>`;
+  b.onclick = () => show(id); tabs.appendChild(b);
+});
+show(P[location.hash.slice(1)] ? location.hash.slice(1) : 'merrys-way');
+</script>
 </body>
 </html>

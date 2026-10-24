@@ -85,7 +85,7 @@
       'RAG Pipeline Designer',
       'LangGraph Orchestrator',
       'ML Researcher @ VIIT',
-      'Problem Solver · 700+ LC',
+      'Problem Solver · 800+ LC',
     ];
     let si = 0, ci = 0, del = false;
     function tick() {

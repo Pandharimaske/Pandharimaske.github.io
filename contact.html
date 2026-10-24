@@ -3,381 +3,59 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Command Line — Pandharinath Maske</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80' fill='%2300f2ff' font-family='serif' font-style='italic'>P</text></svg>"/>
+<meta name="description" content="Contact Pandharinath Maske for AI/ML internships and roles."/>
+<title>Contact — Pandharinath Maske</title>
 <link rel="stylesheet" href="css/style.css"/>
+<link rel="stylesheet" href="css/theme.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <script>(function(){const t=localStorage.getItem('pm-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
-<style>
-/* ── TERMINAL WINDOW (Neural Console Style) ── */
-.terminal-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 8rem 2rem 5rem;
-  min-height: calc(100vh - 80px);
-  justify-content: flex-start;
-  position: relative;
-}
-
-.terminal-header-info {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.handshake-status { 
-  font-family:'JetBrains Mono'; 
-  font-size: 0.6rem; 
-  color: var(--amber); 
-  letter-spacing: 0.25em; 
-  text-transform: uppercase; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center;
-  gap: 0.8rem; 
-  margin-bottom: 1rem;
-}
-
-.terminal-win {
-  width: 100%;
-  max-width: 900px;
-  background: rgba(5, 5, 10, 0.85);
-  backdrop-filter: blur(25px);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: 0 50px 120px rgba(0,0,0,0.8), 0 0 40px rgba(var(--amber-rgb), 0.05);
-  font-family: 'JetBrains Mono', monospace;
-  position: relative;
-}
-
-/* scan line effect */
-.terminal-win::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 1px,
-    rgba(0,0,0,0.05) 1px,
-    rgba(0,0,0,0.05) 2px
-  );
-  pointer-events: none;
-  z-index: 10;
-}
-
-.terminal-header {
-  padding: 1rem 1.5rem;
-  background: rgba(var(--amber-rgb), 0.05);
-  border-bottom: 1px solid var(--glass-border);
-  display: flex; gap: 0.8rem; align-items: center;
-}
-.tb-dot { width: 12px; height: 12px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); }
-.tb-dot.r { background: #ff5f57; } .tb-dot.y { background: #febc2e; } .tb-dot.g { background: #28c840; }
-.tb-title { margin-left: auto; font-family: 'JetBrains Mono'; font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
-
-.term-body {
-  padding: 2rem;
-  height: 480px;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-  position: relative;
-  z-index: 2;
-}
-
-.term-body::-webkit-scrollbar { width: 4px; }
-.term-body::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
-
-/* ASCII */
-.term-ascii {
-  color: var(--amber);
-  font-size: 0.55rem;
-  line-height: 1.2;
-  white-space: pre;
-  margin-bottom: 2rem;
-  opacity: 0.9;
-  filter: drop-shadow(0 0 8px rgba(var(--amber-rgb), 0.3));
-}
-
-/* Lines */
-.term-line {
-  font-size: 0.9rem; line-height: 1.8;
-  margin-bottom: 0.5rem;
-  color: #e2e8f0;
-  white-space: pre-wrap;
-}
-
-.term-line.cyan    { color: var(--cyan); text-shadow: 0 0 10px rgba(0, 242, 255, 0.3); }
-.term-line.amber   { color: var(--amber); text-shadow: 0 0 10px rgba(var(--amber-rgb), 0.3); }
-.term-line.purple  { color: #c6a0f6; }
-.term-line.green   { color: #a6da95; }
-.term-line.error   { color: #ed8796; }
-.term-line.muted   { color: var(--muted); }
-.term-line.cmd     { color: #fff; font-weight: 600; }
-
-/* Prompt */
-.term-input-row {
-  display: flex; align-items: center; gap: 0.8rem;
-  padding: 1.2rem 2rem;
-  background: rgba(var(--amber-rgb), 0.02);
-  border-top: 1px solid var(--glass-border);
-  position: relative; z-index: 5;
-}
-
-.term-prompt-str {
-  font-size: 0.9rem; white-space: nowrap; user-select: none;
-  font-weight: 700;
-}
-.term-ps-user { color: var(--amber); }
-.term-ps-host { color: var(--cyan); }
-
-#term-input {
-  background: transparent; border: none; outline: none;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.9rem; color: #fff;
-  flex: 1; caret-color: var(--amber);
-}
-
-/* Command Chips */
-.term-commands-hint {
-  max-width: 900px; width: 100%;
-  display: flex; flex-wrap: wrap; gap: 1rem;
-  margin-top: 2rem;
-  justify-content: center;
-}
-
-.cmd-chip {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem; letter-spacing: 0.1em;
-  padding: 0.6rem 1.2rem;
-  background: rgba(var(--amber-rgb), 0.03);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius); color: var(--muted);
-  cursor: pointer; transition: all 0.3s;
-  text-transform: uppercase;
-}
-.cmd-chip:hover { border-color: var(--amber); color: var(--amber); background: rgba(var(--amber-rgb), 0.08); transform: translateY(-3px); }
-
-@media (max-width: 700px) {
-    .term-body { height: 400px; padding: 1rem; }
-    .term-ascii { font-size: 0.35rem; }
-    .term-line { font-size: 0.8rem; }
-}
-</style>
 </head>
 <body>
-<div id="cursor"></div><div id="cursor-ring"></div><div id="scroll-progress"></div>
-
 <nav>
-  <a class="nav-logo" href="index.html"><span>P</span>M_</a>
+  <a class="nav-logo" href="index.html">Pandhari.</a>
   <ul class="nav-center">
     <li><a href="index.html">Home</a></li>
-    <li><a href="skills.html">Skills</a></li>
     <li><a href="projects.html">Projects</a></li>
     <li><a href="achievements.html">Achievements</a></li>
-    <li><a href="blog.html">Blog</a></li>
     <li><a href="contact.html" class="active">Contact</a></li>
   </ul>
-  <div class="nav-right">
-    <button class="theme-btn" id="theme-btn"><i class="fas fa-moon"></i></button>
-  </div>
+  <div class="nav-right"><button class="theme-btn" id="theme-btn"><i class="fas fa-moon"></i></button></div>
 </nav>
 
-<div class="terminal-page reveal">
-  <div class="terminal-header-info">
-    <div class="handshake-status"><i class="fas fa-signal"></i> Neural Link Active</div>
-    <h1 class="section-title" style="font-size: 2.5rem;">Console__</h1>
+<section class="page-section">
+  <div class="section-header"><span class="section-num">04</span><h1 class="section-title">Contact</h1><div class="section-line"></div></div>
+  <p class="lead">I'm looking for AI/ML engineering internships and roles. Email is the fastest way to reach me.</p>
+
+  <div class="rows">
+    <div class="row"><b>Email</b><a href="mailto:pandharinath1437@gmail.com" style="color:var(--amber)">pandharinath1437@gmail.com</a></div>
+    <div class="row"><b>LinkedIn</b><a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener" style="color:var(--amber)">pandharinath-maske →</a></div>
+    <div class="row"><b>GitHub</b><a href="https://github.com/Pandharimaske" target="_blank" rel="noopener" style="color:var(--amber)">Pandharimaske →</a></div>
+    <div class="row"><b>Resume</b><a href="assets/Pandharinath_Maske_Resume.pdf" download style="color:var(--amber)">Download PDF →</a></div>
   </div>
 
-  <div class="terminal-win tilt-hover">
-    <div class="terminal-header">
-      <div class="tb-dot r"></div><div class="tb-dot y"></div><div class="tb-dot g"></div>
-      <span class="tb-title">system_host: pandhari_maske — telemetry</span>
-    </div>
-
-    <div class="term-body" id="term-body">
-      <div class="term-ascii">
-    __    ____     ______ ____  _   __ _____ ____  __    ______
-   /  |  /  _/    / ____// __ \/ | / // ___// __ \/ /   / ____/
-  / /| | / /     / /    / / / /  |/ / \__ \/ / / / /   / __/   
- / ___ |/ /     / /___ / /_/ / /|  / ___/ / /_/ / /___/ /___   
-/_/  |_/___/    \____/ \____/_/ |_/ /____/\____/_____/_____/   
-      </div>
-    </div>
-
-    <div class="term-input-row">
-      <div class="term-prompt-str">
-        <span class="term-ps-host">neural</span><span style="color:rgba(255,255,255,0.2)">:</span><span class="term-ps-user">pandhari</span><span style="color:var(--amber)"> $</span>
-      </div>
-      <input type="text" id="term-input" autocomplete="off" autocorrect="off" spellcheck="false" autofocus placeholder="input_cmd..."/>
-    </div>
-  </div>
-
-  <div class="term-commands-hint">
-    <div class="cmd-chip" data-cmd="help">help</div>
-    <div class="cmd-chip" data-cmd="whoami">whoami</div>
-    <div class="cmd-chip" data-cmd="hire">hire</div>
-    <div class="cmd-chip" data-cmd="github">github</div>
-    <div class="cmd-chip" data-cmd="resume">resume</div>
-    <div class="cmd-chip" data-cmd="clear">clear</div>
-  </div>
-</div>
+  <div class="rows-label">Or write a note</div>
+  <form id="mail-form" style="max-width:560px">
+    <input class="field" id="f-name" placeholder="Your name" required/>
+    <textarea class="field" id="f-msg" rows="5" placeholder="Your message" required></textarea>
+    <button class="btn btn-primary" type="submit">Open in my email app</button>
+  </form>
+</section>
 
 <footer>
-  <div class="footer-left">
-    <span class="footer-name">Pandharinath Maske © 2026</span>
-    <span class="footer-tagline">Building intelligent systems · Pune, India</span>
-  </div>
+  <div><span class="footer-name">Pandharinath Maske © 2026</span><span class="footer-tagline">Pune, India</span></div>
   <ul class="footer-socials">
     <li><a href="https://github.com/Pandharimaske" target="_blank" rel="noopener"><i class="fab fa-github"></i></a></li>
     <li><a href="https://www.linkedin.com/in/pandharinath-maske-538381289/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a></li>
-    <li><a href="https://x.com/PMaske20171" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a></li>
-    <li><a href="https://www.instagram.com/pandhari__7/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a></li>
-    <li><a href="mailto:pandharinath1437@gmail.com"><i class="fas fa-envelope"></i></a></li>
   </ul>
 </footer>
-
 <button id="btt"><i class="fas fa-arrow-up"></i></button>
 <script src="js/main.js"></script>
-<script src="js/ai-widget.js"></script>
 <script>
-// ── NEURAL CONSOLE ENGINE ─────────────────────────────────────
-const body    = document.getElementById('term-body');
-const input   = document.getElementById('term-input');
-let history   = [];
-let histIdx   = -1;
-let hiring    = false;
-let hireData  = {};
-let hireStep  = 0;
-
-const COMMANDS = {
-  help: () => [
-    { cls: 'amber',   text: 'Available subroutines:' },
-    { cls: '',       text: '' },
-    { cls: 'cyan', text: '  whoami      →  Subject telemetry' },
-    { cls: 'cyan', text: '  hire        →  Establish handshake' },
-    { cls: 'cyan', text: '  email       →  Fetch comms address' },
-    { cls: 'cyan', text: '  github      →  Access repository' },
-    { cls: 'cyan', text: '  linkedin    →  Professional link' },
-    { cls: 'cyan', text: '  resume      →  Download dossier' },
-    { cls: 'cyan', text: '  clear       →  Purge buffer' },
-  ],
-
-  whoami: () => [
-    { cls: '',       text: '' },
-    { cls: 'amber',   text: 'SYSTEM_ENTITY: PANDHARINATH MASKE' },
-    { cls: 'muted',  text: '──────────────────────────────────' },
-    { cls: '',       text: 'Architecture: B.Tech CS (AI) · VIIT' },
-    { cls: '',       text: 'Logic_Gate:   LLMs · Agents · RAG' },
-    { cls: '',       text: 'LC_Hash:      1647 peak · 700+ solved' },
-    { cls: '',       text: 'Status:       AVAILABLE_FOR_SYNERGY' },
-    { cls: '',       text: '' },
-  ],
-
-  email: () => {
-    navigator.clipboard?.writeText('pandharinath1437@gmail.com');
-    return [{ cls: 'green', text: '✓ [pandharinath1437@gmail.com] cached to clipboard.' }];
-  },
-
-  github: () => { window.open('https://github.com/Pandharimaske', '_blank'); return [{ cls: 'amber', text: 'Opening Registry...' }]; },
-  linkedin: () => { window.open('https://www.linkedin.com/in/pandharinath-maske-538381289/', '_blank'); return [{ cls: 'amber', text: 'Syncing LinkedIn...' }]; },
-  
-  resume: () => {
-    const a = document.createElement('a');
-    a.href = 'assets/Pandharinath_Maske_Resume.pdf';
-    a.download = 'Pandharinath_Maske_Resume.pdf';
-    a.click();
-    return [{ cls: 'green', text: 'Downloading System Dossier...' }];
-  },
-
-  hire: () => {
-    hiring = true; hireStep = 0; hireData = {};
-    return [
-      { cls: 'amber', text: 'HANDSHAKE INITIALIZED.' },
-      { cls: 'muted', text: 'Provide identity nodes:' },
-      { cls: '', text: '' },
-      { cls: 'amber', text: 'INPUT_ID (Name): ' },
-    ];
-  },
-
-  clear: () => { 
-    body.innerHTML = '<div class="term-ascii">    __    ____     ______ ____  _   __ _____ ____  __    ______\n   /  |  /  _/    / ____// __ \\/ | / // ___// __ \\/ /   / ____/\n  / /| | / /     / /    / / / /  |/ / \\__ \\/ / / / /   / __/   \n / ___ |/ /     / /___ / /_/ / /|  / ___/ / /_/ / /___/ /___   \n/_/  |_/___/    \\____/ \\____/_/ |_/ /____/\\____/_____/_____/   </div>'; 
-    return []; 
-  }
-};
-
-function printLines(lines) {
-  lines.forEach(({ cls, text }) => {
-    const div = document.createElement('div');
-    div.className = 'term-line' + (cls ? ' ' + cls : '');
-    div.textContent = text;
-    body.appendChild(div);
-  });
-  body.scrollTop = body.scrollHeight;
-}
-
-const HIRE_STEPS = [
-  { key: 'name',    prompt: 'INPUT_EMAIL: ' },
-  { key: 'email',   prompt: 'INPUT_MESSAGE: ' },
-  { key: 'message', prompt: 'TRANSMITTING...' }
-];
-
-function handleHireInput(val) {
-  if (!val.trim()) { printLines([{ cls: 'error', text: 'NULL_INPUT_ERROR. Try again.' }]); return; }
-  hireData[hireStep === 0 ? 'name' : hireStep === 1 ? 'email' : 'message'] = val;
-  if (hireStep < 2) {
-    printLines([{ cls: 'amber', text: HIRE_STEPS[hireStep].prompt }]);
-    hireStep++;
-  } else {
-    hiring = false;
-    printLines([{ cls: 'green', text: '✓ DATA_PACKET_SENT. SYNC_COMPLETE.' }]);
-    printLines([{ cls: 'muted', text: `From: ${hireData.name} <${hireData.email}>` }]);
-  }
-}
-
-input.addEventListener('keydown', (e) => {
-  if (e.key !== 'Enter') return;
-  const raw = input.value.trim();
-  input.value = '';
-  
-  const echo = document.createElement('div');
-  echo.className = 'term-line cmd';
-  echo.innerHTML = `<span style="color:var(--amber)">pandhari</span><span style="color:var(--muted)"> $</span> ${raw}`;
-  body.appendChild(echo);
-
-  if (!raw) return;
-  if (hiring) { handleHireInput(raw); return; }
-
-  const cmd = raw.toLowerCase().split(' ')[0];
-  if (COMMANDS[cmd]) {
-    printLines(COMMANDS[cmd]());
-  } else {
-    printLines([{ cls: 'error', text: `UNKNOWN_COMMAND: ${cmd}` }]);
-  }
-  body.scrollTop = body.scrollHeight;
+document.getElementById('mail-form').addEventListener('submit',function(e){
+  e.preventDefault();
+  var n=document.getElementById('f-name').value, m=document.getElementById('f-msg').value;
+  location.href='mailto:pandharinath1437@gmail.com?subject='+encodeURIComponent('Portfolio message from '+n)+'&body='+encodeURIComponent(m+'\n\n— '+n);
 });
-
-document.querySelectorAll('.cmd-chip').forEach(chip => {
-  chip.addEventListener('click', () => {
-    input.value = chip.dataset.cmd;
-    input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
-  });
-});
-
-function boot() {
-  const lines = [
-    { cls: 'muted', text: 'Neural-Console v4.2.1 [Kernel: 6.8.0-pm]' },
-    { cls: 'muted', text: 'Syncing with host...' },
-    { cls: 'green', text: '✓ CONNECTION_STABLE' },
-    { cls: '',      text: '' },
-    { cls: 'amber',  text: 'Ready for inquiry.' },
-    { cls: '',      text: '' },
-  ];
-  lines.forEach((l, i) => setTimeout(() => printLines([l]), i * 200));
-}
-
-document.querySelector('.terminal-win').addEventListener('click', () => input.focus());
-boot();
 </script>
 </body>
 </html>
